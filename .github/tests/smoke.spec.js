@@ -18,6 +18,15 @@ test("auth aliases, admin controls, and lock flow", async ({ page }) => {
   await page.fill("#authNameInput", "Hanna");
   await page.click("#authUnlockBtn");
   await expect(page.locator("body")).toHaveAttribute("data-role", "student");
+  await expect(page.locator("#recallOptions .recall-option")).toHaveCount(4);
+
+  await page.click("#submitAnswerBtn");
+  await expect(page.locator("#recallFeedback")).toContainText("Select an option before submitting");
+
+  await page.locator("#recallOptions .recall-option input").first().check();
+  await page.click("#submitAnswerBtn");
+  await expect(page.locator("#flashAttemptMeta")).toContainText("Status: Submitted");
+  await expect(page.locator("#rateGoodBtn")).toBeEnabled();
 
   await page.click("#switchUserBtn");
   await expect(page.locator("body")).toHaveAttribute("data-role", "locked");
