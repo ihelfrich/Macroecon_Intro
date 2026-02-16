@@ -1741,6 +1741,23 @@
       gap: 10px;
     }
 
+    .macro-visual-stage {
+      position: relative;
+      display: grid;
+      gap: 10px;
+      isolation: isolate;
+    }
+
+    .macro-particle-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 2;
+      opacity: 0.94;
+    }
+
     .macro-presets {
       display: flex;
       gap: 8px;
@@ -1884,10 +1901,17 @@
       padding: 8px;
       display: grid;
       gap: 8px;
+      transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease;
     }
 
     .macro-chart-card.hidden {
       display: none;
+    }
+
+    .macro-chart-card.shift-active {
+      border-color: #d4a258;
+      box-shadow: 0 14px 30px rgba(122, 76, 25, 0.2);
+      transform: translateY(-2px);
     }
 
     .macro-chart-head {
@@ -2807,6 +2831,12 @@
       .hero::after {
         transform: none !important;
       }
+      .macro-chart-card {
+        transition: none !important;
+      }
+      .macro-particle-canvas {
+        display: none !important;
+      }
     }
 
     @media print {
@@ -3376,101 +3406,105 @@
         </div>
 
         <div class="macro-panel">
-          <div class="macro-metrics">
-            <div class="macro-metric"><span>Output \(Y\)</span><strong id="macroOutputLevel">0.0</strong></div>
-            <div class="macro-metric"><span>Price Level \(P\)</span><strong id="macroPriceLevel">0.0</strong></div>
-            <div class="macro-metric"><span>Nominal Rate \(i\)</span><strong id="macroNominalRate">0.0%</strong></div>
-            <div class="macro-metric"><span>Real Rate \(r\)</span><strong id="macroRealRate">0.0%</strong></div>
-            <div class="macro-metric"><span>Unemployment \(u\)</span><strong id="macroUnemploymentRate">0.0%</strong></div>
-            <div class="macro-metric"><span>Inflation \(\pi\)</span><strong id="macroInflationRate">0.0%</strong></div>
-            <div class="macro-metric"><span>Rate Wedge \((i-\pi^e)-r\)</span><strong id="macroRateGap">0.0</strong></div>
-            <div class="macro-metric"><span>Regime Signal</span><strong id="macroRegimeTag">Baseline</strong></div>
-          </div>
+          <div class="macro-visual-stage">
+            <canvas id="macroParticleCanvas" class="macro-particle-canvas" aria-hidden="true"></canvas>
 
-          <div class="macro-chart-grid" id="macroChartGrid" data-layout="2x2">
-            <article class="macro-chart-card" data-chart="adas">
-              <div class="macro-chart-head">
-                <h3>AD-AS</h3>
-                <span id="macroAdasTag">Output-Price</span>
-              </div>
-              <svg id="macroAdasSvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="AD-AS linked graph">
-                <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
-                <g id="macroAdasGrid"></g>
-                <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
-                <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
-                <text x="602" y="338" font-size="12" fill="#433326">Output Y</text>
-                <text x="16" y="20" font-size="12" fill="#433326">Price P</text>
-                <path id="macroAdasBaseAd" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
-                <path id="macroAdasBaseSras" d="" fill="none" stroke="#9ab6c5" stroke-width="2" stroke-dasharray="6 5"></path>
-                <path id="macroAdPath" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
-                <path id="macroSrasPath" d="" fill="none" stroke="#1f5a67" stroke-width="3"></path>
-                <line id="macroAdasBaseLras" x1="0" y1="0" x2="0" y2="0" stroke="#9f7d4a" stroke-width="1.7" stroke-dasharray="5 4"></line>
-                <line id="macroAdasLras" x1="0" y1="0" x2="0" y2="0" stroke="#7f5f2b" stroke-width="2.1"></line>
-                <circle id="macroAdasEqPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
-                <text id="macroAdasEqLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">E1</text>
-              </svg>
-            </article>
+            <div class="macro-metrics">
+              <div class="macro-metric"><span>Output \(Y\)</span><strong id="macroOutputLevel">0.0</strong></div>
+              <div class="macro-metric"><span>Price Level \(P\)</span><strong id="macroPriceLevel">0.0</strong></div>
+              <div class="macro-metric"><span>Nominal Rate \(i\)</span><strong id="macroNominalRate">0.0%</strong></div>
+              <div class="macro-metric"><span>Real Rate \(r\)</span><strong id="macroRealRate">0.0%</strong></div>
+              <div class="macro-metric"><span>Unemployment \(u\)</span><strong id="macroUnemploymentRate">0.0%</strong></div>
+              <div class="macro-metric"><span>Inflation \(\pi\)</span><strong id="macroInflationRate">0.0%</strong></div>
+              <div class="macro-metric"><span>Rate Wedge \((i-\pi^e)-r\)</span><strong id="macroRateGap">0.0</strong></div>
+              <div class="macro-metric"><span>Regime Signal</span><strong id="macroRegimeTag">Baseline</strong></div>
+            </div>
 
-            <article class="macro-chart-card" data-chart="money">
-              <div class="macro-chart-head">
-                <h3>Money Market</h3>
-                <span id="macroMoneyTag">Liquidity</span>
-              </div>
-              <svg id="macroMoneySvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="Money market linked graph">
-                <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
-                <g id="macroMoneyGrid"></g>
-                <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
-                <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
-                <text x="522" y="338" font-size="12" fill="#433326">Real Balances</text>
-                <text x="16" y="20" font-size="12" fill="#433326">Nominal i</text>
-                <line id="macroMoneyBaseSupply" x1="0" y1="0" x2="0" y2="0" stroke="#9f7d4a" stroke-width="2" stroke-dasharray="6 5"></line>
-                <path id="macroMoneyBaseDemand" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
-                <line id="macroMoneySupply" x1="0" y1="0" x2="0" y2="0" stroke="#7f5f2b" stroke-width="2.4"></line>
-                <path id="macroMoneyDemand" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
-                <circle id="macroMoneyEqPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
-                <text id="macroMoneyEqLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">i1</text>
-              </svg>
-            </article>
+            <div class="macro-chart-grid" id="macroChartGrid" data-layout="2x2">
+              <article class="macro-chart-card" data-chart="adas">
+                <div class="macro-chart-head">
+                  <h3>AD-AS</h3>
+                  <span id="macroAdasTag">Output-Price</span>
+                </div>
+                <svg id="macroAdasSvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="AD-AS linked graph">
+                  <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
+                  <g id="macroAdasGrid"></g>
+                  <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
+                  <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
+                  <text x="602" y="338" font-size="12" fill="#433326">Output Y</text>
+                  <text x="16" y="20" font-size="12" fill="#433326">Price P</text>
+                  <path id="macroAdasBaseAd" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
+                  <path id="macroAdasBaseSras" d="" fill="none" stroke="#9ab6c5" stroke-width="2" stroke-dasharray="6 5"></path>
+                  <path id="macroAdPath" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
+                  <path id="macroSrasPath" d="" fill="none" stroke="#1f5a67" stroke-width="3"></path>
+                  <line id="macroAdasBaseLras" x1="0" y1="0" x2="0" y2="0" stroke="#9f7d4a" stroke-width="1.7" stroke-dasharray="5 4"></line>
+                  <line id="macroAdasLras" x1="0" y1="0" x2="0" y2="0" stroke="#7f5f2b" stroke-width="2.1"></line>
+                  <circle id="macroAdasEqPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
+                  <text id="macroAdasEqLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">E1</text>
+                </svg>
+              </article>
 
-            <article class="macro-chart-card" data-chart="loanable">
-              <div class="macro-chart-head">
-                <h3>Loanable Funds</h3>
-                <span id="macroLfTag">Saving-Investment</span>
-              </div>
-              <svg id="macroLfSvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="Loanable funds linked graph">
-                <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
-                <g id="macroLfGrid"></g>
-                <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
-                <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
-                <text x="534" y="338" font-size="12" fill="#433326">Funds Q</text>
-                <text x="16" y="20" font-size="12" fill="#433326">Real r</text>
-                <path id="macroLfBaseSupply" d="" fill="none" stroke="#9ab6c5" stroke-width="2" stroke-dasharray="6 5"></path>
-                <path id="macroLfBaseDemand" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
-                <path id="macroLfSupply" d="" fill="none" stroke="#1f5a67" stroke-width="3"></path>
-                <path id="macroLfDemand" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
-                <circle id="macroLfEqPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
-                <text id="macroLfEqLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">r1</text>
-              </svg>
-            </article>
+              <article class="macro-chart-card" data-chart="money">
+                <div class="macro-chart-head">
+                  <h3>Money Market</h3>
+                  <span id="macroMoneyTag">Liquidity</span>
+                </div>
+                <svg id="macroMoneySvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="Money market linked graph">
+                  <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
+                  <g id="macroMoneyGrid"></g>
+                  <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
+                  <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
+                  <text x="522" y="338" font-size="12" fill="#433326">Real Balances</text>
+                  <text x="16" y="20" font-size="12" fill="#433326">Nominal i</text>
+                  <line id="macroMoneyBaseSupply" x1="0" y1="0" x2="0" y2="0" stroke="#9f7d4a" stroke-width="2" stroke-dasharray="6 5"></line>
+                  <path id="macroMoneyBaseDemand" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
+                  <line id="macroMoneySupply" x1="0" y1="0" x2="0" y2="0" stroke="#7f5f2b" stroke-width="2.4"></line>
+                  <path id="macroMoneyDemand" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
+                  <circle id="macroMoneyEqPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
+                  <text id="macroMoneyEqLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">i1</text>
+                </svg>
+              </article>
 
-            <article class="macro-chart-card" data-chart="phillips">
-              <div class="macro-chart-head">
-                <h3>Inflation-Unemployment</h3>
-                <span id="macroPcTag">Expectations</span>
-              </div>
-              <svg id="macroPcSvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="Inflation and unemployment linked graph">
-                <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
-                <g id="macroPcGrid"></g>
-                <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
-                <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
-                <text x="492" y="338" font-size="12" fill="#433326">Unemployment u</text>
-                <text x="16" y="20" font-size="12" fill="#433326">Inflation π</text>
-                <path id="macroPcBasePath" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
-                <path id="macroPcPath" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
-                <circle id="macroPcPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
-                <text id="macroPcLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">π1</text>
-              </svg>
-            </article>
+              <article class="macro-chart-card" data-chart="loanable">
+                <div class="macro-chart-head">
+                  <h3>Loanable Funds</h3>
+                  <span id="macroLfTag">Saving-Investment</span>
+                </div>
+                <svg id="macroLfSvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="Loanable funds linked graph">
+                  <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
+                  <g id="macroLfGrid"></g>
+                  <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
+                  <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
+                  <text x="534" y="338" font-size="12" fill="#433326">Funds Q</text>
+                  <text x="16" y="20" font-size="12" fill="#433326">Real r</text>
+                  <path id="macroLfBaseSupply" d="" fill="none" stroke="#9ab6c5" stroke-width="2" stroke-dasharray="6 5"></path>
+                  <path id="macroLfBaseDemand" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
+                  <path id="macroLfSupply" d="" fill="none" stroke="#1f5a67" stroke-width="3"></path>
+                  <path id="macroLfDemand" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
+                  <circle id="macroLfEqPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
+                  <text id="macroLfEqLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">r1</text>
+                </svg>
+              </article>
+
+              <article class="macro-chart-card" data-chart="phillips">
+                <div class="macro-chart-head">
+                  <h3>Inflation-Unemployment</h3>
+                  <span id="macroPcTag">Expectations</span>
+                </div>
+                <svg id="macroPcSvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="Inflation and unemployment linked graph">
+                  <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
+                  <g id="macroPcGrid"></g>
+                  <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
+                  <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
+                  <text x="492" y="338" font-size="12" fill="#433326">Unemployment u</text>
+                  <text x="16" y="20" font-size="12" fill="#433326">Inflation π</text>
+                  <path id="macroPcBasePath" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
+                  <path id="macroPcPath" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
+                  <circle id="macroPcPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
+                  <text id="macroPcLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">π1</text>
+                </svg>
+              </article>
+            </div>
           </div>
         </div>
       </div>
@@ -5215,6 +5249,7 @@
     const macroRegimeTag = document.getElementById("macroRegimeTag");
     const macroNarrative = document.getElementById("macroNarrative");
     const macroChartGrid = document.getElementById("macroChartGrid");
+    const macroParticleCanvas = document.getElementById("macroParticleCanvas");
     const macroChartCards = [...document.querySelectorAll(".macro-chart-card")];
     const macroPresetBtns = [...document.querySelectorAll(".macro-preset")];
 
@@ -5386,6 +5421,16 @@
       pairMode: "adas_money"
     };
 
+    const MACRO_INPUT_NUMERIC_KEYS = [
+      "demandShift",
+      "supplyShift",
+      "moneySupplyShift",
+      "moneyDemandShift",
+      "savingShift",
+      "investmentShift",
+      "expectedInflation"
+    ];
+
     const MACRO_LINK_LAYOUTS = {
       "2x2": ["adas", "money", "loanable", "phillips"],
       adas_money: ["adas", "money"],
@@ -5416,7 +5461,23 @@
       pcPi: { min: -1, max: 10 }
     };
 
+    const MACRO_ANIMATION = {
+      minMs: 280,
+      maxMs: 760,
+      baselineMs: 320,
+      particleThreshold: 8,
+      emphasisThreshold: 20
+    };
+
     let macroLinkState = { ...MACRO_LINK_DEFAULT_STATE };
+    let macroLastInputState = { ...MACRO_LINK_DEFAULT_STATE };
+    let macroRenderedState = null;
+    let macroTransitionFrame = null;
+    let macroChartFlashTimer = null;
+    let macroParticleCtx = null;
+    let macroParticles = [];
+    let macroParticleFrame = null;
+    let macroParticleLastTs = 0;
 
     const ARENA_TYPES = ["gdp", "deflator", "labor", "saving", "real_rate", "elasticity"];
     const ARENA_TYPE_LABELS = {
@@ -7480,6 +7541,205 @@
       safeWrite(STORAGE.macroLink, macroLinkState);
     }
 
+    function macroMotionReduced() {
+      return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    }
+
+    function macroEaseInOutQuad(t) {
+      return t < 0.5
+        ? (2 * t * t)
+        : (1 - (Math.pow(-2 * t + 2, 2) / 2));
+    }
+
+    function macroInterpolateNumber(start, end, t) {
+      return start + ((end - start) * t);
+    }
+
+    function macroInterpolateCore(start, end, t) {
+      const frame = {};
+      Object.keys(end).forEach((key) => {
+        const fromValue = start[key];
+        const toValue = end[key];
+        if (typeof fromValue === "number" && typeof toValue === "number" && Number.isFinite(fromValue) && Number.isFinite(toValue)) {
+          frame[key] = macroInterpolateNumber(fromValue, toValue, t);
+        } else {
+          frame[key] = toValue;
+        }
+      });
+      return frame;
+    }
+
+    function macroInterpolateState(start, end, t) {
+      return {
+        baseline: macroInterpolateCore(start.baseline, end.baseline, t),
+        current: macroInterpolateCore(start.current, end.current, t)
+      };
+    }
+
+    function macroInputDeltaMagnitude(prevInput, nextInput) {
+      const prev = sanitizeMacroLinkState(prevInput);
+      const next = sanitizeMacroLinkState(nextInput);
+      const expectedInflationDelta = Math.abs(next.expectedInflation - prev.expectedInflation) * 7;
+      const shiftDelta = MACRO_INPUT_NUMERIC_KEYS
+        .filter((key) => key !== "expectedInflation")
+        .reduce((sum, key) => sum + Math.abs((next[key] || 0) - (prev[key] || 0)), 0);
+      return shiftDelta + expectedInflationDelta;
+    }
+
+    function resizeMacroParticleCanvas() {
+      if (!macroParticleCanvas) return;
+      const rect = macroParticleCanvas.getBoundingClientRect();
+      const width = Math.max(1, Math.round(rect.width));
+      const height = Math.max(1, Math.round(rect.height));
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      const pixelWidth = Math.round(width * dpr);
+      const pixelHeight = Math.round(height * dpr);
+      if (macroParticleCanvas.width !== pixelWidth || macroParticleCanvas.height !== pixelHeight) {
+        macroParticleCanvas.width = pixelWidth;
+        macroParticleCanvas.height = pixelHeight;
+      }
+      if (!macroParticleCtx) {
+        macroParticleCtx = macroParticleCanvas.getContext("2d");
+      }
+      if (!macroParticleCtx) return;
+      macroParticleCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      macroParticleCtx.clearRect(0, 0, width, height);
+    }
+
+    function clearMacroParticleCanvas() {
+      if (!macroParticleCanvas || !macroParticleCtx) return;
+      const width = Math.max(1, Math.round(macroParticleCanvas.width / Math.max(1, window.devicePixelRatio || 1)));
+      const height = Math.max(1, Math.round(macroParticleCanvas.height / Math.max(1, window.devicePixelRatio || 1)));
+      macroParticleCtx.clearRect(0, 0, width, height);
+    }
+
+    function stopMacroParticleLoop(clear = false) {
+      if (macroParticleFrame) {
+        window.cancelAnimationFrame(macroParticleFrame);
+        macroParticleFrame = null;
+      }
+      macroParticleLastTs = 0;
+      if (clear) {
+        macroParticles = [];
+        clearMacroParticleCanvas();
+      }
+    }
+
+    function renderMacroParticlesFrame(ts) {
+      if (!macroParticleCanvas || !macroParticleCtx || !macroParticles.length) {
+        stopMacroParticleLoop(true);
+        return;
+      }
+      const dt = macroParticleLastTs ? Math.min(34, ts - macroParticleLastTs) : 16;
+      macroParticleLastTs = ts;
+      const width = Math.max(1, Math.round(macroParticleCanvas.width / Math.max(1, window.devicePixelRatio || 1)));
+      const height = Math.max(1, Math.round(macroParticleCanvas.height / Math.max(1, window.devicePixelRatio || 1)));
+      macroParticleCtx.clearRect(0, 0, width, height);
+
+      const nextParticles = [];
+      macroParticles.forEach((particle) => {
+        const life = particle.life + dt;
+        const ratio = life / particle.ttl;
+        if (ratio >= 1) return;
+        const drag = Math.max(0.93, 1 - (0.0017 * dt));
+        const vx = particle.vx * drag;
+        const vy = (particle.vy * drag) + (0.003 * dt);
+        const x = particle.x + (vx * dt * 0.065);
+        const y = particle.y + (vy * dt * 0.065);
+        const alpha = particle.alpha * Math.pow(1 - ratio, 1.1);
+
+        macroParticleCtx.beginPath();
+        macroParticleCtx.fillStyle = `rgba(${particle.color[0]}, ${particle.color[1]}, ${particle.color[2]}, ${alpha.toFixed(4)})`;
+        macroParticleCtx.arc(x, y, particle.size, 0, Math.PI * 2);
+        macroParticleCtx.fill();
+
+        nextParticles.push({
+          ...particle,
+          x,
+          y,
+          vx,
+          vy,
+          life
+        });
+      });
+
+      macroParticles = nextParticles;
+      if (!macroParticles.length) {
+        stopMacroParticleLoop(true);
+        return;
+      }
+      macroParticleFrame = window.requestAnimationFrame(renderMacroParticlesFrame);
+    }
+
+    function startMacroParticleLoop() {
+      if (macroParticleFrame) return;
+      macroParticleFrame = window.requestAnimationFrame(renderMacroParticlesFrame);
+    }
+
+    function spawnMacroParticles(fromState, toState, intensity = 0) {
+      if (!macroParticleCanvas || macroMotionReduced() || intensity < MACRO_ANIMATION.particleThreshold) return;
+      resizeMacroParticleCanvas();
+      if (!macroParticleCtx) return;
+
+      const canvasRect = macroParticleCanvas.getBoundingClientRect();
+      if (canvasRect.width < 10 || canvasRect.height < 10) return;
+      const visibleCards = macroChartCards.filter((card) => !card.classList.contains("hidden"));
+      if (!visibleCards.length) return;
+
+      const sourceState = fromState || toState;
+      const outputDelta = toState.current.yEq - sourceState.current.yEq;
+      const inflationDelta = toState.current.piActual - sourceState.current.piActual;
+      const rateDelta = toState.current.iEq - sourceState.current.iEq;
+      const biasX = Math.sign(outputDelta || 0);
+      const biasY = -Math.sign(inflationDelta || 0);
+      const warmPalette = [[205, 58, 58], [224, 141, 75], [255, 213, 120]];
+      const coolPalette = [[29, 104, 134], [66, 150, 178], [142, 199, 212]];
+      const palette = inflationDelta >= 0 ? warmPalette : coolPalette;
+      const particlesPerCard = clamp(Math.round(5 + (intensity / 6)), 6, 14);
+
+      const burst = [];
+      visibleCards.forEach((card) => {
+        const cardRect = card.getBoundingClientRect();
+        const originX = (cardRect.left - canvasRect.left) + (cardRect.width / 2);
+        const originY = (cardRect.top - canvasRect.top) + (cardRect.height / 2.1);
+        for (let i = 0; i < particlesPerCard; i += 1) {
+          const speed = 0.12 + (Math.random() * 0.5) + (intensity * 0.004);
+          const angle = (Math.random() * Math.PI * 2) + (biasX * 0.32) - (biasY * 0.14);
+          const color = randomChoice(palette);
+          burst.push({
+            x: originX + ((Math.random() - 0.5) * 20),
+            y: originY + ((Math.random() - 0.5) * 16),
+            vx: (Math.cos(angle) * speed) + (biasX * 0.35) + (Math.sign(rateDelta || 0) * 0.08),
+            vy: (Math.sin(angle) * speed) + (biasY * 0.18),
+            size: 1.4 + (Math.random() * 2.4),
+            alpha: 0.3 + (Math.random() * 0.34),
+            ttl: 460 + (Math.random() * 430),
+            life: 0,
+            color
+          });
+        }
+      });
+
+      macroParticles = macroParticles.concat(burst).slice(-280);
+      startMacroParticleLoop();
+    }
+
+    function flashMacroShiftCards(intensity = 0) {
+      if (!macroChartCards.length || macroMotionReduced() || intensity < MACRO_ANIMATION.particleThreshold) return;
+      macroChartCards.forEach((card) => {
+        if (!card.classList.contains("hidden")) {
+          card.classList.add("shift-active");
+        }
+      });
+      if (macroChartFlashTimer) {
+        window.clearTimeout(macroChartFlashTimer);
+      }
+      const duration = clamp(260 + (intensity * 8), 300, 760);
+      macroChartFlashTimer = window.setTimeout(() => {
+        macroChartCards.forEach((card) => card.classList.remove("shift-active"));
+      }, duration);
+    }
+
     function macroMapX(value, axis) {
       const usable = MACRO_CHART.width - MACRO_CHART.marginLeft - MACRO_CHART.marginRight;
       return MACRO_CHART.marginLeft + ((clamp(value, axis.min, axis.max) - axis.min) / (axis.max - axis.min)) * usable;
@@ -7646,12 +7906,13 @@
       };
     }
 
-    function computeMacroLinkState() {
+    function computeMacroLinkState(inputState = macroLinkState) {
+      const safeInput = sanitizeMacroLinkState(inputState);
       const baseline = computeMacroLinkCore({
         ...MACRO_LINK_DEFAULT_STATE,
-        expectedInflation: macroLinkState.expectedInflation
+        expectedInflation: safeInput.expectedInflation
       });
-      const current = computeMacroLinkCore(macroLinkState);
+      const current = computeMacroLinkCore(safeInput);
       return { baseline, current };
     }
 
@@ -7667,6 +7928,9 @@
       });
       if (macroPairMode) {
         macroPairMode.disabled = layoutMode !== "1x2";
+      }
+      if (macroParticleCanvas) {
+        window.requestAnimationFrame(resizeMacroParticleCanvas);
       }
     }
 
@@ -7898,8 +8162,74 @@
       }
     }
 
-    function updateMacroLinkStudio(readControls = true) {
+    function cancelMacroTransitionAnimation() {
+      if (!macroTransitionFrame) return;
+      window.cancelAnimationFrame(macroTransitionFrame);
+      macroTransitionFrame = null;
+    }
+
+    function renderMacroScene(state) {
+      renderMacroAdas(state);
+      renderMacroMoney(state);
+      renderMacroLoanable(state);
+      renderMacroPhillips(state);
+      renderMacroMetrics(state);
+      if (macroNarrative) {
+        macroNarrative.textContent = buildMacroNarrative(state);
+      }
+    }
+
+    function animateMacroScene(nextState, options = {}) {
+      const animate = options.animate !== false;
+      const shockMagnitude = Number.isFinite(options.shockMagnitude) ? options.shockMagnitude : 0;
+      const burst = options.burst === true || shockMagnitude >= MACRO_ANIMATION.emphasisThreshold;
+      const canAnimate = animate && !macroMotionReduced() && !!macroRenderedState;
+
+      cancelMacroTransitionAnimation();
+
+      if (!canAnimate) {
+        macroRenderedState = nextState;
+        renderMacroScene(nextState);
+      } else {
+        const startState = macroRenderedState;
+        const duration = clamp(
+          MACRO_ANIMATION.baselineMs + (shockMagnitude * 8),
+          MACRO_ANIMATION.minMs,
+          MACRO_ANIMATION.maxMs
+        );
+        const startTs = performance.now();
+
+        const draw = (ts) => {
+          const progress = clamp((ts - startTs) / duration, 0, 1);
+          const eased = macroEaseInOutQuad(progress);
+          const frameState = macroInterpolateState(startState, nextState, eased);
+          macroRenderedState = frameState;
+          renderMacroScene(frameState);
+
+          if (progress < 1) {
+            macroTransitionFrame = window.requestAnimationFrame(draw);
+          } else {
+            macroTransitionFrame = null;
+            macroRenderedState = nextState;
+            renderMacroScene(nextState);
+          }
+        };
+        macroTransitionFrame = window.requestAnimationFrame(draw);
+      }
+
+      if (shockMagnitude >= MACRO_ANIMATION.particleThreshold) {
+        flashMacroShiftCards(shockMagnitude);
+      }
+      if (burst) {
+        spawnMacroParticles(macroRenderedState || nextState, nextState, Math.max(shockMagnitude, MACRO_ANIMATION.emphasisThreshold));
+      } else {
+        spawnMacroParticles(macroRenderedState || nextState, nextState, shockMagnitude);
+      }
+    }
+
+    function updateMacroLinkStudio(readControls = true, options = {}) {
       if (!macroLayoutMode || !macroPairMode || !macroNarrative) return;
+      const prevInput = { ...macroLastInputState };
       if (readControls) {
         readMacroLinkControlsIntoState();
       }
@@ -7908,14 +8238,15 @@
       renderMacroLayout();
       persistMacroLinkState();
 
-      const state = computeMacroLinkState();
-      renderMacroAdas(state);
-      renderMacroMoney(state);
-      renderMacroLoanable(state);
-      renderMacroPhillips(state);
-      renderMacroMetrics(state);
-      macroNarrative.textContent = buildMacroNarrative(state);
-      typesetMath(macroNarrative);
+      const nextInput = { ...macroLinkState };
+      const shockMagnitude = macroInputDeltaMagnitude(prevInput, nextInput);
+      macroLastInputState = nextInput;
+      const state = computeMacroLinkState(nextInput);
+      animateMacroScene(state, {
+        animate: options.animate !== false,
+        burst: options.burst === true,
+        shockMagnitude
+      });
     }
 
     function applyMacroPreset(name) {
@@ -7965,7 +8296,7 @@
       }
       macroLinkState = sanitizeMacroLinkState(next);
       writeMacroLinkStateToControls();
-      updateMacroLinkStudio(false);
+      updateMacroLinkStudio(false, { animate: true, burst: true });
       showStatus("Macro transmission preset applied.");
     }
 
@@ -7987,7 +8318,11 @@
       }
 
       macroLinkState = sanitizeMacroLinkState(safeRead(STORAGE.macroLink, null));
+      macroLastInputState = { ...macroLinkState };
       writeMacroLinkStateToControls();
+      resizeMacroParticleCanvas();
+      stopMacroParticleLoop(true);
+      window.addEventListener("resize", resizeMacroParticleCanvas);
 
       [
         macroDemandShift,
@@ -7997,17 +8332,17 @@
         macroSavingShift,
         macroInvestmentShift,
         macroExpectedInflation
-      ].forEach((slider) => slider.addEventListener("input", () => updateMacroLinkStudio(true)));
+      ].forEach((slider) => slider.addEventListener("input", () => updateMacroLinkStudio(true, { animate: true })));
 
-      macroLayoutMode.addEventListener("change", () => updateMacroLinkStudio(true));
-      macroPairMode.addEventListener("change", () => updateMacroLinkStudio(true));
+      macroLayoutMode.addEventListener("change", () => updateMacroLinkStudio(true, { animate: false }));
+      macroPairMode.addEventListener("change", () => updateMacroLinkStudio(true, { animate: false }));
       macroPresetBtns.forEach((btn) => {
         btn.addEventListener("click", () => {
           applyMacroPreset(btn.dataset.macroPreset || "reset");
         });
       });
 
-      updateMacroLinkStudio(false);
+      updateMacroLinkStudio(false, { animate: false });
     }
 
     function sanitizeArenaStats(raw) {
@@ -10007,6 +10342,7 @@
         ["macroLayoutMode", macroLayoutMode],
         ["macroPairMode", macroPairMode],
         ["macroChartGrid", macroChartGrid],
+        ["macroParticleCanvas", macroParticleCanvas],
         ["macroDemandShift", macroDemandShift],
         ["macroExpectedInflation", macroExpectedInflation],
         ["macroNarrative", macroNarrative],
@@ -10437,7 +10773,8 @@
         updateMarketLab();
       }
       macroLinkState = { ...MACRO_LINK_DEFAULT_STATE };
-      updateMacroLinkStudio(false);
+      updateMacroLinkStudio(false, { animate: false, burst: false });
+      stopMacroParticleLoop(true);
       resetFormulaLabState(false, true);
       stopArenaTimer();
       arenaChallenge = null;
