@@ -1937,6 +1937,24 @@
       gap: 8px;
     }
 
+    .intuition-library-tools {
+      display: grid;
+      gap: 8px;
+    }
+
+    .intuition-filter-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .intuition-filter-row label {
+      font-size: 0.74rem;
+      color: #5d5045;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
     .intuition-scenario {
       width: 100%;
       text-align: left;
@@ -1994,6 +2012,51 @@
       border-radius: 10px;
       background: #fff;
       padding: 10px;
+    }
+
+    .intuition-tools {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .intuition-confidence {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid #dfccb5;
+      border-radius: 999px;
+      background: #fff;
+      padding: 4px 8px;
+      font-size: 0.74rem;
+      color: #5c4f44;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .intuition-confidence select {
+      border: 1px solid #dbc6ac;
+      border-radius: 999px;
+      background: #fffdf9;
+      color: #382e24;
+      font-size: 0.78rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      min-width: 132px;
+    }
+
+    .intuition-coach-meta {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      color: #4f4439;
+      border: 1px solid #ddc9b2;
+      border-radius: 999px;
+      background: #fff;
+      padding: 4px 10px;
+      white-space: nowrap;
     }
 
     .intuition-vars {
@@ -2096,6 +2159,63 @@
 
     .intuition-chain strong {
       color: #3f2b1f;
+    }
+
+    .intuition-debrief {
+      border: 1px dashed #d7c3a8;
+      border-radius: 10px;
+      background: #fff;
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .intuition-debrief.hidden {
+      display: none;
+    }
+
+    .intuition-debrief h4 {
+      margin: 0;
+      color: #3f2b1f;
+      font-size: 0.88rem;
+      letter-spacing: 0.01em;
+    }
+
+    .intuition-debrief-item {
+      border: 1px solid #e1cfba;
+      border-radius: 10px;
+      background: #fffdf9;
+      padding: 8px 10px;
+      display: grid;
+      gap: 5px;
+    }
+
+    .intuition-debrief-item.good {
+      border-color: rgba(22, 122, 72, 0.34);
+      background: linear-gradient(180deg, #f5fff9 0%, #effcf4 100%);
+    }
+
+    .intuition-debrief-item.bad {
+      border-color: rgba(155, 18, 18, 0.32);
+      background: linear-gradient(180deg, #fff9f8 0%, #fff2f1 100%);
+    }
+
+    .intuition-debrief-item .top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.8rem;
+      color: #4a3d32;
+      font-weight: 700;
+    }
+
+    .intuition-debrief-item .logic {
+      margin: 0;
+      color: #5b4d42;
+      font-size: 0.8rem;
+      line-height: 1.45;
     }
 
     .mission-grid {
@@ -2426,6 +2546,17 @@
       }
       .arena-stats {
         grid-template-columns: 1fr;
+      }
+      .intuition-tools {
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .intuition-confidence {
+        width: 100%;
+        justify-content: space-between;
+      }
+      .intuition-coach-meta {
+        white-space: normal;
       }
       .formula-data-grid,
       .formula-meta-grid {
@@ -2956,6 +3087,18 @@
       <div class="intuition-grid">
         <div class="intuition-panel">
           <h3>Scenario Library</h3>
+          <div class="intuition-library-tools">
+            <div class="intuition-filter-row">
+              <label for="intuitionTagFilter">Filter by module</label>
+              <select id="intuitionTagFilter" class="intuition-select">
+                <option value="all">All Modules</option>
+                <option value="L01-L02">L01-L02: Markets + Policy</option>
+                <option value="L05">L05: Spending + Saving</option>
+                <option value="L06">L06: Labor Market</option>
+                <option value="L07">L07: Growth + Production</option>
+              </select>
+            </div>
+          </div>
           <div class="intuition-scenarios" id="intuitionScenarioCards"></div>
           <div class="flash-meta" id="intuitionStatsMeta">Attempts: 0 • Perfect rounds: 0</div>
         </div>
@@ -2965,13 +3108,26 @@
             <span class="chip" id="intuitionScenarioTag">Intuition</span>
           </div>
           <p class="intuition-shock" id="intuitionShock">Select a scenario on the left to start directional reasoning practice.</p>
+          <div class="intuition-tools">
+            <label class="intuition-confidence" for="intuitionConfidence">
+              Confidence level
+              <select id="intuitionConfidence">
+                <option value="medium">Medium confidence</option>
+                <option value="high">High confidence</option>
+                <option value="low">Low confidence</option>
+              </select>
+            </label>
+            <div class="intuition-coach-meta" id="intuitionCoachMeta">Hint step 0/0 • Filter: all modules</div>
+          </div>
           <div class="intuition-vars" id="intuitionVars"></div>
           <div class="flash-actions">
             <button type="button" class="btn btn-primary" id="intuitionGradeBtn">Grade Predictions</button>
+            <button type="button" class="btn btn-ghost" id="intuitionHintBtn">Hint Step</button>
             <button type="button" class="btn btn-ghost" id="intuitionRevealBtn">Reveal Logic</button>
             <button type="button" class="btn btn-ghost" id="intuitionNextBtn">Next Scenario</button>
           </div>
           <div class="arena-feedback" id="intuitionFeedback">Use the dropdowns, then click <strong>Grade Predictions</strong>.</div>
+          <div class="intuition-debrief hidden" id="intuitionDebrief"></div>
           <div class="intuition-chain hidden" id="intuitionChain"></div>
         </div>
       </div>
@@ -3376,6 +3532,35 @@
       { value: "down", label: "Decrease (↓)" },
       { value: "flat", label: "No clear change (~)" }
     ];
+
+    const INTUITION_CONFIDENCE = {
+      low: { label: "Low confidence", penaltyPerWrong: 2, perfectBonus: 0 },
+      medium: { label: "Medium confidence", penaltyPerWrong: 4, perfectBonus: 2 },
+      high: { label: "High confidence", penaltyPerWrong: 7, perfectBonus: 4 }
+    };
+
+    const INTUITION_TAG_FILTERS = {
+      all: {
+        label: "all modules",
+        markers: []
+      },
+      "L01-L02": {
+        label: "L01-L02",
+        markers: ["L01", "L02"]
+      },
+      L05: {
+        label: "L05",
+        markers: ["L05"]
+      },
+      L06: {
+        label: "L06",
+        markers: ["L06"]
+      },
+      L07: {
+        label: "L07",
+        markers: ["L07"]
+      }
+    };
 
     const intuitionScenarios = [
       {
@@ -4630,11 +4815,16 @@
     const intuitionScenarioTitle = document.getElementById("intuitionScenarioTitle");
     const intuitionScenarioTag = document.getElementById("intuitionScenarioTag");
     const intuitionShock = document.getElementById("intuitionShock");
+    const intuitionTagFilter = document.getElementById("intuitionTagFilter");
+    const intuitionConfidence = document.getElementById("intuitionConfidence");
+    const intuitionCoachMeta = document.getElementById("intuitionCoachMeta");
     const intuitionVars = document.getElementById("intuitionVars");
     const intuitionGradeBtn = document.getElementById("intuitionGradeBtn");
+    const intuitionHintBtn = document.getElementById("intuitionHintBtn");
     const intuitionRevealBtn = document.getElementById("intuitionRevealBtn");
     const intuitionNextBtn = document.getElementById("intuitionNextBtn");
     const intuitionFeedback = document.getElementById("intuitionFeedback");
+    const intuitionDebrief = document.getElementById("intuitionDebrief");
     const intuitionChain = document.getElementById("intuitionChain");
 
     const masteryRing = document.getElementById("masteryRing");
@@ -4771,6 +4961,8 @@
     let intuitionState = null;
     let activeIntuitionScenarioId = "";
     let intuitionGuesses = {};
+    let intuitionHintStep = 0;
+    let activeIntuitionTagFilter = "all";
     let questState = null;
     let formulaLabState = null;
     let formulaApiState = null;
@@ -7152,10 +7344,56 @@
       });
     }
 
-    function defaultIntuitionScenarioStats() {
+    function normalizeIntuitionTagFilter(value) {
+      const key = String(value || "").trim();
+      return key in INTUITION_TAG_FILTERS ? key : "all";
+    }
+
+    function normalizeIntuitionConfidence(value) {
+      const key = String(value || "").trim();
+      return key in INTUITION_CONFIDENCE ? key : "medium";
+    }
+
+    function scenarioMatchesIntuitionFilter(scenario, filterKey = activeIntuitionTagFilter) {
+      const normalized = normalizeIntuitionTagFilter(filterKey);
+      const filter = INTUITION_TAG_FILTERS[normalized] || INTUITION_TAG_FILTERS.all;
+      if (!scenario || !Array.isArray(filter.markers) || !filter.markers.length) return true;
+      return filter.markers.some((marker) => scenario.tag.includes(marker));
+    }
+
+    function getFilteredIntuitionScenarios() {
+      return intuitionScenarios.filter((scenario) => scenarioMatchesIntuitionFilter(scenario));
+    }
+
+    function defaultIntuitionVarStats() {
       return {
         attempts: 0,
-        perfect: 0
+        correct: 0
+      };
+    }
+
+    function sanitizeIntuitionVarStats(raw) {
+      const base = defaultIntuitionVarStats();
+      if (!raw || typeof raw !== "object") return base;
+      const attempts = clamp(Number.parseInt(raw.attempts, 10) || 0, 0, 100000);
+      const correct = clamp(Number.parseInt(raw.correct, 10) || 0, 0, attempts);
+      return { attempts, correct };
+    }
+
+    function defaultIntuitionScenarioStats(scenario = null) {
+      const byVar = {};
+      if (scenario && Array.isArray(scenario.variables)) {
+        scenario.variables.forEach((item) => {
+          if (item && item.id) {
+            byVar[item.id] = defaultIntuitionVarStats();
+          }
+        });
+      }
+      return {
+        attempts: 0,
+        perfect: 0,
+        scoreSum: 0,
+        byVar
       };
     }
 
@@ -7163,36 +7401,59 @@
       return {
         attempts: 0,
         perfect: 0,
+        scoreSum: 0,
+        tagFilter: "all",
+        confidence: "medium",
         currentId: intuitionScenarios[0] ? intuitionScenarios[0].id : "",
         scenarioStats: {}
       };
     }
 
-    function sanitizeIntuitionScenarioStats(raw) {
-      const base = defaultIntuitionScenarioStats();
+    function sanitizeIntuitionScenarioStats(raw, scenario = null) {
+      const base = defaultIntuitionScenarioStats(scenario);
       if (!raw || typeof raw !== "object") return base;
       const attempts = clamp(Number.parseInt(raw.attempts, 10) || 0, 0, 100000);
       const perfect = clamp(Number.parseInt(raw.perfect, 10) || 0, 0, attempts);
-      return { attempts, perfect };
+      const rawScore = Number.parseFloat(raw.scoreSum);
+      const scoreCap = attempts * 100;
+      const scoreSum = Number.isFinite(rawScore)
+        ? clamp(Math.round(rawScore * 100) / 100, 0, scoreCap)
+        : 0;
+      const byVar = { ...base.byVar };
+      if (raw.byVar && typeof raw.byVar === "object") {
+        Object.keys(byVar).forEach((varId) => {
+          byVar[varId] = sanitizeIntuitionVarStats(raw.byVar[varId]);
+        });
+      }
+      return { attempts, perfect, scoreSum, byVar };
     }
 
     function sanitizeIntuitionState(raw) {
       const base = defaultIntuitionState();
       if (!raw || typeof raw !== "object") return base;
 
+      const attempts = clamp(Number.parseInt(raw.attempts, 10) || 0, 0, 100000);
+      const perfect = clamp(Number.parseInt(raw.perfect, 10) || 0, 0, attempts);
+      const rawScore = Number.parseFloat(raw.scoreSum);
+      const scoreCap = attempts * 100;
+      const scoreSum = Number.isFinite(rawScore)
+        ? clamp(Math.round(rawScore * 100) / 100, 0, scoreCap)
+        : 0;
       const next = {
-        attempts: clamp(Number.parseInt(raw.attempts, 10) || 0, 0, 100000),
-        perfect: 0,
+        attempts,
+        perfect,
+        scoreSum,
+        tagFilter: normalizeIntuitionTagFilter(raw.tagFilter),
+        confidence: normalizeIntuitionConfidence(raw.confidence),
         currentId: typeof raw.currentId === "string" ? raw.currentId : base.currentId,
         scenarioStats: {}
       };
-      next.perfect = clamp(Number.parseInt(raw.perfect, 10) || 0, 0, next.attempts);
 
       const rawScenarioStats = raw.scenarioStats && typeof raw.scenarioStats === "object"
         ? raw.scenarioStats
         : {};
       intuitionScenarios.forEach((scenario) => {
-        next.scenarioStats[scenario.id] = sanitizeIntuitionScenarioStats(rawScenarioStats[scenario.id]);
+        next.scenarioStats[scenario.id] = sanitizeIntuitionScenarioStats(rawScenarioStats[scenario.id], scenario);
       });
 
       if (!intuitionScenarios.find((scenario) => scenario.id === next.currentId)) {
@@ -7219,9 +7480,11 @@
       if (!intuitionState.scenarioStats || typeof intuitionState.scenarioStats !== "object") {
         intuitionState.scenarioStats = {};
       }
-      if (!intuitionState.scenarioStats[id]) {
-        intuitionState.scenarioStats[id] = defaultIntuitionScenarioStats();
-      }
+      const scenario = getIntuitionScenarioById(id);
+      intuitionState.scenarioStats[id] = sanitizeIntuitionScenarioStats(
+        intuitionState.scenarioStats[id],
+        scenario
+      );
       return intuitionState.scenarioStats[id];
     }
 
@@ -7231,10 +7494,64 @@
       return "No clear change (~)";
     }
 
+    function stripIntuitionLabel(rawLabel) {
+      return String(rawLabel || "")
+        .replace(/\\\([^)]*\\\)/g, "")
+        .replace(/<[^>]+>/g, "")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function getCurrentIntuitionConfidence() {
+      const fallback = intuitionState ? intuitionState.confidence : "medium";
+      const selected = normalizeIntuitionConfidence(
+        intuitionConfidence ? intuitionConfidence.value : fallback
+      );
+      if (intuitionConfidence && intuitionConfidence.value !== selected) {
+        intuitionConfidence.value = selected;
+      }
+      if (intuitionState) intuitionState.confidence = selected;
+      return selected;
+    }
+
+    function weakestVariableForScenario(scenario, stats) {
+      if (!scenario || !stats || !stats.byVar || typeof stats.byVar !== "object") return null;
+      const candidates = scenario.variables
+        .map((item) => {
+          const varStats = sanitizeIntuitionVarStats(stats.byVar[item.id]);
+          const rate = varStats.attempts
+            ? Math.round((varStats.correct / varStats.attempts) * 100)
+            : 0;
+          return {
+            label: stripIntuitionLabel(item.label) || item.id,
+            attempts: varStats.attempts,
+            rate
+          };
+        })
+        .sort((a, b) => {
+          if (a.rate !== b.rate) return a.rate - b.rate;
+          return a.attempts - b.attempts;
+        });
+      return candidates[0] || null;
+    }
+
     function setIntuitionFeedback(message, tone = "") {
       if (!intuitionFeedback) return;
       intuitionFeedback.innerHTML = message;
       intuitionFeedback.className = `arena-feedback${tone ? ` ${tone}` : ""}`;
+      typesetMath(intuitionFeedback);
+    }
+
+    function updateIntuitionCoachMeta(scenario = null) {
+      if (!intuitionCoachMeta) return;
+      const activeScenario = scenario || getActiveIntuitionScenario();
+      const totalSteps = activeScenario && Array.isArray(activeScenario.chain)
+        ? activeScenario.chain.length
+        : 0;
+      const hintStep = clamp(intuitionHintStep, 0, totalSteps);
+      const filter = INTUITION_TAG_FILTERS[normalizeIntuitionTagFilter(activeIntuitionTagFilter)] || INTUITION_TAG_FILTERS.all;
+      const confidence = INTUITION_CONFIDENCE[getCurrentIntuitionConfidence()] || INTUITION_CONFIDENCE.medium;
+      intuitionCoachMeta.textContent = `Hint step ${hintStep}/${totalSteps} • Filter: ${filter.label} • ${confidence.label}`;
     }
 
     function updateIntuitionStatsMeta() {
@@ -7242,7 +7559,8 @@
       const attempts = intuitionState.attempts;
       const perfect = intuitionState.perfect;
       const pct = attempts ? Math.round((perfect / attempts) * 100) : 0;
-      intuitionStatsMeta.textContent = `Attempts: ${attempts} • Perfect rounds: ${perfect} • Perfect rate: ${pct}%`;
+      const avgCalibrated = attempts ? Math.round(intuitionState.scoreSum / attempts) : 0;
+      intuitionStatsMeta.textContent = `Attempts: ${attempts} • Perfect rounds: ${perfect} • Perfect rate: ${pct}% • Avg calibrated: ${avgCalibrated}%`;
       updateMissionControl();
     }
 
@@ -7250,13 +7568,33 @@
       if (!intuitionScenarioCards || !intuitionState) return;
       intuitionScenarioCards.innerHTML = "";
 
-      intuitionScenarios.forEach((scenario) => {
+      const active = getActiveIntuitionScenario();
+      const filtered = getFilteredIntuitionScenarios();
+      const renderList = filtered.slice();
+      if (active && !renderList.some((scenario) => scenario.id === active.id)) {
+        renderList.unshift(active);
+      }
+
+      if (!renderList.length) {
+        const empty = document.createElement("div");
+        empty.className = "arena-feedback";
+        empty.textContent = "No scenarios match the selected filter.";
+        intuitionScenarioCards.appendChild(empty);
+        return;
+      }
+
+      renderList.forEach((scenario) => {
         const stats = getIntuitionScenarioStats(scenario.id);
         const pct = stats.attempts ? Math.round((stats.perfect / stats.attempts) * 100) : 0;
+        const avgCalibrated = stats.attempts ? Math.round(stats.scoreSum / stats.attempts) : 0;
+        const weak = weakestVariableForScenario(scenario, stats);
+        const weakMeta = weak && stats.attempts
+          ? ` • weak: ${weak.label} ${weak.rate}%`
+          : "";
         const row = document.createElement("button");
         row.type = "button";
         row.className = `intuition-scenario${scenario.id === activeIntuitionScenarioId ? " active" : ""}`;
-        row.innerHTML = `<span class="title">${scenario.title}</span><span class="meta">${scenario.tag} • ${stats.attempts} tries • ${pct}% perfect</span>`;
+        row.innerHTML = `<span class="title">${scenario.title}</span><span class="meta">${scenario.tag} • ${stats.attempts} tries • ${pct}% perfect • ${avgCalibrated}% calibrated${weakMeta}</span>`;
         row.addEventListener("click", () => {
           setActiveIntuitionScenario(scenario.id);
         });
@@ -7264,18 +7602,28 @@
       });
     }
 
-    function renderIntuitionChain(scenario, includeReasons = true) {
+    function renderIntuitionChain(scenario, includeReasons = true, maxSteps = null) {
       if (!intuitionChain || !scenario) return;
+      const stepCap = Number.isFinite(maxSteps)
+        ? clamp(Math.round(maxSteps), 0, scenario.chain.length)
+        : scenario.chain.length;
       const chainItems = scenario.chain
+        .slice(0, stepCap)
         .map((line) => `<li>${line}</li>`)
         .join("");
-      const reasonItems = includeReasons
+      const reasonItems = includeReasons && stepCap === scenario.chain.length
         ? scenario.variables
           .map((item) => `<li><strong>${item.label}:</strong> ${item.why}</li>`)
           .join("")
         : "";
+      const chainBody = chainItems
+        ? `<ol>${chainItems}</ol>`
+        : "<p>No hint steps revealed yet. Use <strong>Hint Step</strong> to unlock the mechanism progressively.</p>";
+      const reasonBlock = includeReasons && stepCap === scenario.chain.length
+        ? `<strong>Directional logic</strong><ul>${reasonItems}</ul>`
+        : "";
 
-      intuitionChain.innerHTML = `<strong>Causal chain</strong><ol>${chainItems}</ol>${includeReasons ? `<strong>Directional logic</strong><ul>${reasonItems}</ul>` : ""}`;
+      intuitionChain.innerHTML = `<strong>Causal chain (${stepCap}/${scenario.chain.length} steps)</strong>${chainBody}${reasonBlock}`;
       intuitionChain.classList.remove("hidden");
       typesetMath(intuitionChain);
     }
@@ -7284,6 +7632,33 @@
       if (!intuitionChain) return;
       intuitionChain.innerHTML = "";
       intuitionChain.classList.add("hidden");
+    }
+
+    function renderIntuitionDebrief(scenario, details, calibratedScore, confidenceLabel) {
+      if (!intuitionDebrief || !scenario || !Array.isArray(details) || !details.length) return;
+      const summary = `<h4>Directional Debrief • Calibrated score ${calibratedScore}% (${confidenceLabel})</h4>`;
+      const rows = details.map((entry) => {
+        const guessText = intuitionDirectionLabel(entry.guess);
+        const expectedText = intuitionDirectionLabel(entry.expected);
+        return `
+          <article class="intuition-debrief-item ${entry.correct ? "good" : "bad"}">
+            <div class="top">
+              <span>${entry.label}</span>
+              <span>${entry.correct ? "Correct" : `Your call: ${guessText} • Expected: ${expectedText}`}</span>
+            </div>
+            <p class="logic">${entry.why}</p>
+          </article>
+        `;
+      }).join("");
+      intuitionDebrief.innerHTML = `${summary}${rows}`;
+      intuitionDebrief.classList.remove("hidden");
+      typesetMath(intuitionDebrief);
+    }
+
+    function hideIntuitionDebrief() {
+      if (!intuitionDebrief) return;
+      intuitionDebrief.innerHTML = "";
+      intuitionDebrief.classList.add("hidden");
     }
 
     function renderIntuitionVariables(scenario) {
@@ -7335,8 +7710,11 @@
 
       activeIntuitionScenarioId = scenario.id;
       intuitionGuesses = {};
+      intuitionHintStep = 0;
       if (intuitionState) {
         intuitionState.currentId = scenario.id;
+        intuitionState.tagFilter = normalizeIntuitionTagFilter(activeIntuitionTagFilter);
+        intuitionState.confidence = getCurrentIntuitionConfidence();
         persistIntuitionState();
       }
 
@@ -7347,20 +7725,27 @@
       renderIntuitionScenarioCards();
       updateIntuitionStatsMeta();
       hideIntuitionChain();
-      setIntuitionFeedback("Use the dropdowns, then click <strong>Grade Predictions</strong>.", "");
+      hideIntuitionDebrief();
+      updateIntuitionCoachMeta(scenario);
+      setIntuitionFeedback("Choose a direction for each variable. Use <strong>Hint Step</strong> for incremental mechanism support before grading.", "");
       typesetMath(intuitionShock);
     }
 
     function pickNextIntuitionScenarioId() {
-      if (intuitionScenarios.length <= 1) return intuitionScenarios[0] ? intuitionScenarios[0].id : "";
-      const candidates = intuitionScenarios.filter((scenario) => scenario.id !== activeIntuitionScenarioId);
+      const pool = getFilteredIntuitionScenarios();
+      if (!pool.length) return intuitionScenarios[0] ? intuitionScenarios[0].id : "";
+      if (pool.length <= 1) return pool[0].id;
+      const candidates = pool.filter((scenario) => scenario.id !== activeIntuitionScenarioId);
       if (!candidates.length) return activeIntuitionScenarioId;
 
       const ranked = candidates
         .map((scenario) => {
           const stats = getIntuitionScenarioStats(scenario.id);
-          const rate = stats.attempts ? (stats.perfect / stats.attempts) : 0;
-          const priority = (1 - rate) + (stats.attempts === 0 ? 0.8 : 0) + (Math.random() * 0.2);
+          const perfectRate = stats.attempts ? (stats.perfect / stats.attempts) : 0;
+          const calibratedAvg = stats.attempts ? (stats.scoreSum / stats.attempts) / 100 : 0.45;
+          const weaknessPressure = (1 - perfectRate) * 0.65 + (1 - calibratedAvg) * 0.35;
+          const noveltyBoost = stats.attempts === 0 ? 0.8 : 0;
+          const priority = weaknessPressure + noveltyBoost + (Math.random() * 0.2);
           return { id: scenario.id, priority };
         })
         .sort((a, b) => b.priority - a.priority);
@@ -7382,6 +7767,7 @@
 
       let missing = 0;
       let correct = 0;
+      const details = [];
       scenario.variables.forEach((item) => {
         const row = intuitionVars.querySelector(`.intuition-var[data-var-id="${item.id}"]`);
         if (!row) return;
@@ -7397,7 +7783,17 @@
           return;
         }
 
-        if (guess === item.answer) {
+        const isCorrect = guess === item.answer;
+        details.push({
+          id: item.id,
+          label: item.label,
+          why: item.why,
+          guess,
+          expected: item.answer,
+          correct: isCorrect
+        });
+
+        if (isCorrect) {
           correct += 1;
           row.classList.add("correct");
           if (result) result.textContent = "Correct";
@@ -7414,35 +7810,107 @@
 
       const stats = getIntuitionScenarioStats(scenario.id);
       const perfect = correct === scenario.variables.length;
+      const wrong = scenario.variables.length - correct;
+      const baseScore = Math.round((correct / scenario.variables.length) * 100);
+      const confidenceKey = getCurrentIntuitionConfidence();
+      const confidence = INTUITION_CONFIDENCE[confidenceKey] || INTUITION_CONFIDENCE.medium;
+      const calibratedScore = clamp(
+        baseScore - (wrong * confidence.penaltyPerWrong) + (perfect ? confidence.perfectBonus : 0),
+        0,
+        100
+      );
 
       intuitionState.attempts += 1;
+      intuitionState.scoreSum += calibratedScore;
       stats.attempts += 1;
+      stats.scoreSum += calibratedScore;
       if (perfect) {
         intuitionState.perfect += 1;
         stats.perfect += 1;
       }
+      if (!stats.byVar || typeof stats.byVar !== "object") {
+        stats.byVar = {};
+      }
+      details.forEach((entry) => {
+        if (!stats.byVar[entry.id]) {
+          stats.byVar[entry.id] = defaultIntuitionVarStats();
+        }
+        stats.byVar[entry.id].attempts += 1;
+        if (entry.correct) {
+          stats.byVar[entry.id].correct += 1;
+        }
+      });
+
+      intuitionHintStep = scenario.chain.length;
       persistIntuitionState();
       renderIntuitionScenarioCards();
       updateIntuitionStatsMeta();
-      renderIntuitionChain(scenario, true);
+      updateIntuitionCoachMeta(scenario);
+      renderIntuitionChain(scenario, true, scenario.chain.length);
+      renderIntuitionDebrief(scenario, details, calibratedScore, confidence.label);
 
       if (perfect) {
-        setIntuitionFeedback(`Perfect round. ${correct}/${scenario.variables.length} directions are correct.`, "success");
+        setIntuitionFeedback(`Perfect round. ${correct}/${scenario.variables.length} correct with ${calibratedScore}% calibrated score (${confidence.label.toLowerCase()}).`, "success");
       } else {
-        setIntuitionFeedback(`Scored ${correct}/${scenario.variables.length}. Review the causal chain and directional logic below.`, "error");
+        setIntuitionFeedback(`Scored ${correct}/${scenario.variables.length}. Base: ${baseScore}%. Calibrated: ${calibratedScore}% (${confidence.label.toLowerCase()}). Review the chain and debrief below.`, "error");
       }
+    }
+
+    function revealIntuitionHintStep() {
+      const scenario = getActiveIntuitionScenario();
+      if (!scenario) return;
+      if (intuitionHintStep >= scenario.chain.length) {
+        renderIntuitionChain(scenario, false, scenario.chain.length);
+        setIntuitionFeedback("All hint steps are already revealed. Grade now, or reveal full logic for directional reasons.", "");
+        return;
+      }
+      intuitionHintStep += 1;
+      renderIntuitionChain(scenario, false, intuitionHintStep);
+      updateIntuitionCoachMeta(scenario);
+      hideIntuitionDebrief();
+      setIntuitionFeedback(`Hint ${intuitionHintStep}/${scenario.chain.length}: focus on mechanism before jumping to final outcomes.`, "");
     }
 
     function revealIntuitionLogic() {
       const scenario = getActiveIntuitionScenario();
       if (!scenario) return;
-      renderIntuitionChain(scenario, true);
-      setIntuitionFeedback("Logic revealed. Re-run the same scenario and aim for a perfect directional pass.", "");
+      intuitionHintStep = scenario.chain.length;
+      renderIntuitionChain(scenario, true, scenario.chain.length);
+      updateIntuitionCoachMeta(scenario);
+      setIntuitionFeedback("Full logic revealed. Re-run this scenario and target a perfect calibrated score.", "");
+    }
+
+    function handleIntuitionFilterChange() {
+      activeIntuitionTagFilter = normalizeIntuitionTagFilter(intuitionTagFilter ? intuitionTagFilter.value : activeIntuitionTagFilter);
+      if (intuitionTagFilter) intuitionTagFilter.value = activeIntuitionTagFilter;
+      if (intuitionState) {
+        intuitionState.tagFilter = activeIntuitionTagFilter;
+      }
+
+      const filtered = getFilteredIntuitionScenarios();
+      if (!filtered.some((scenario) => scenario.id === activeIntuitionScenarioId)) {
+        const fallback = filtered[0] || intuitionScenarios[0];
+        if (fallback) {
+          setActiveIntuitionScenario(fallback.id);
+        }
+      } else {
+        renderIntuitionScenarioCards();
+        updateIntuitionCoachMeta();
+      }
+      persistIntuitionState();
+      const filterLabel = INTUITION_TAG_FILTERS[activeIntuitionTagFilter]
+        ? INTUITION_TAG_FILTERS[activeIntuitionTagFilter].label
+        : "all modules";
+      showStatus(`Intuition filter set to ${filterLabel}.`);
     }
 
     function resetIntuitionStudioState(shouldPersist = true) {
       intuitionState = defaultIntuitionState();
       intuitionGuesses = {};
+      intuitionHintStep = 0;
+      activeIntuitionTagFilter = intuitionState.tagFilter;
+      if (intuitionTagFilter) intuitionTagFilter.value = activeIntuitionTagFilter;
+      if (intuitionConfidence) intuitionConfidence.value = intuitionState.confidence;
       if (shouldPersist) {
         safeWrite(STORAGE.intuitionState, intuitionState);
       }
@@ -7450,7 +7918,9 @@
       if (fallback) setActiveIntuitionScenario(fallback);
       updateIntuitionStatsMeta();
       hideIntuitionChain();
-      setIntuitionFeedback("Intuition studio reset. Choose directions and grade again.", "");
+      hideIntuitionDebrief();
+      updateIntuitionCoachMeta();
+      setIntuitionFeedback("Intuition studio reset. Choose directions, use hint steps if needed, then grade.", "");
     }
 
     function initIntuitionStudio() {
@@ -7460,24 +7930,50 @@
         || !intuitionScenarioTitle
         || !intuitionScenarioTag
         || !intuitionShock
+        || !intuitionTagFilter
+        || !intuitionConfidence
+        || !intuitionCoachMeta
         || !intuitionVars
         || !intuitionGradeBtn
+        || !intuitionHintBtn
         || !intuitionRevealBtn
         || !intuitionNextBtn
         || !intuitionFeedback
+        || !intuitionDebrief
         || !intuitionChain
       ) {
         return;
       }
       intuitionState = sanitizeIntuitionState(safeRead(STORAGE.intuitionState, null));
+      activeIntuitionTagFilter = normalizeIntuitionTagFilter(intuitionState.tagFilter);
+      intuitionTagFilter.value = activeIntuitionTagFilter;
+      intuitionConfidence.value = normalizeIntuitionConfidence(intuitionState.confidence);
       activeIntuitionScenarioId = intuitionState.currentId || (intuitionScenarios[0] && intuitionScenarios[0].id) || "";
 
+      const filtered = getFilteredIntuitionScenarios();
+      if (!filtered.some((scenario) => scenario.id === activeIntuitionScenarioId)) {
+        activeIntuitionScenarioId = filtered[0]
+          ? filtered[0].id
+          : ((intuitionScenarios[0] && intuitionScenarios[0].id) || "");
+      }
+
       intuitionGradeBtn.addEventListener("click", gradeIntuitionPredictions);
+      intuitionHintBtn.addEventListener("click", revealIntuitionHintStep);
       intuitionRevealBtn.addEventListener("click", revealIntuitionLogic);
       intuitionNextBtn.addEventListener("click", nextIntuitionScenario);
+      intuitionTagFilter.addEventListener("change", handleIntuitionFilterChange);
+      intuitionConfidence.addEventListener("change", () => {
+        const normalized = getCurrentIntuitionConfidence();
+        if (intuitionState) {
+          intuitionState.confidence = normalized;
+          persistIntuitionState();
+        }
+        updateIntuitionCoachMeta();
+      });
 
       setActiveIntuitionScenario(activeIntuitionScenarioId);
       updateIntuitionStatsMeta();
+      updateIntuitionCoachMeta();
     }
 
     const QUEST_INTENSITY = {
@@ -7610,9 +8106,12 @@
 
     function peekIntuitionScenarioStats(id) {
       if (!intuitionState || !intuitionState.scenarioStats || typeof intuitionState.scenarioStats !== "object") {
-        return { attempts: 0, perfect: 0 };
+        return { attempts: 0, perfect: 0, scoreSum: 0, byVar: {} };
       }
-      return sanitizeIntuitionScenarioStats(intuitionState.scenarioStats[id]);
+      return sanitizeIntuitionScenarioStats(
+        intuitionState.scenarioStats[id],
+        getIntuitionScenarioById(id)
+      );
     }
 
     function intuitionAccuracyForMarkers(markers, fallback = 55) {
@@ -8213,6 +8712,12 @@
           run: () => gradeIntuitionPredictions()
         },
         {
+          title: "Intuition Hint Step",
+          meta: "Action",
+          keywords: "intuition hint mechanism step coach",
+          run: () => revealIntuitionHintStep()
+        },
+        {
           title: "Reveal Intuition Logic",
           meta: "Action",
           keywords: "intuition reveal why chain",
@@ -8421,8 +8926,14 @@
         ["submitAnswerBtn", submitAnswerBtn],
         ["recallFeedback", recallFeedback],
         ["intuitionScenarioCards", intuitionScenarioCards],
+        ["intuitionTagFilter", intuitionTagFilter],
+        ["intuitionConfidence", intuitionConfidence],
+        ["intuitionCoachMeta", intuitionCoachMeta],
         ["intuitionVars", intuitionVars],
+        ["intuitionHintBtn", intuitionHintBtn],
         ["intuitionFeedback", intuitionFeedback],
+        ["intuitionDebrief", intuitionDebrief],
+        ["intuitionChain", intuitionChain],
         ["masteryRing", masteryRing],
         ["missionHeatmap", missionHeatmap],
         ["questIntensity", questIntensity],
@@ -8611,6 +9122,37 @@
             }
             if (!INTUITION_OPTIONS.some((option) => option.value === item.answer)) {
               issues.push(`intuition-answer-${sIdx}-${iIdx}`);
+            }
+          });
+        });
+      }
+      if (!INTUITION_TAG_FILTERS.all || !INTUITION_CONFIDENCE.medium) {
+        issues.push("intuition-config-missing");
+      }
+      if (!intuitionState || typeof intuitionState !== "object") {
+        issues.push("intuition-state-missing");
+      } else {
+        if (!(normalizeIntuitionTagFilter(intuitionState.tagFilter) in INTUITION_TAG_FILTERS)) {
+          issues.push("intuition-filter-invalid");
+        }
+        if (!(normalizeIntuitionConfidence(intuitionState.confidence) in INTUITION_CONFIDENCE)) {
+          issues.push("intuition-confidence-invalid");
+        }
+        if (!Number.isFinite(intuitionState.scoreSum) || intuitionState.scoreSum < 0) {
+          issues.push("intuition-score-sum-invalid");
+        }
+        intuitionScenarios.forEach((scenario, sIdx) => {
+          const stats = sanitizeIntuitionScenarioStats(
+            intuitionState.scenarioStats ? intuitionState.scenarioStats[scenario.id] : null,
+            scenario
+          );
+          if (stats.perfect > stats.attempts || stats.scoreSum > (stats.attempts * 100)) {
+            issues.push(`intuition-scenario-stats-${sIdx}`);
+          }
+          scenario.variables.forEach((item, iIdx) => {
+            const varStats = sanitizeIntuitionVarStats(stats.byVar[item.id]);
+            if (varStats.correct > varStats.attempts) {
+              issues.push(`intuition-var-stats-${sIdx}-${iIdx}`);
             }
           });
         });
@@ -8929,6 +9471,9 @@
       } else if (key === "y") {
         event.preventDefault();
         gradeIntuitionPredictions();
+      } else if (key === "j") {
+        event.preventDefault();
+        revealIntuitionHintStep();
       } else if (key === "h") {
         event.preventDefault();
         revealIntuitionLogic();
@@ -8994,7 +9539,7 @@
     pickPrompt();
     bootstrapMath();
     runInternalDiagnostics();
-    showStatus("Interactive mode ready. Shortcuts: N/S/R/M/1/2/3/4 + I/Y/H + Q/X + G/K/V + Cmd/Ctrl+K.");
+    showStatus("Interactive mode ready. Shortcuts: N/S/R/M/1/2/3/4 + I/Y/J/H + Q/X + G/K/V + Cmd/Ctrl+K.");
   </script>
 </body>
 </html>
