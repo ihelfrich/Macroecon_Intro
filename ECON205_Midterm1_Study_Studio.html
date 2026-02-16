@@ -1321,7 +1321,8 @@
     .lab-select:focus-visible,
     .intuition-select:focus-visible,
     .formula-field input:focus-visible,
-    .formula-field select:focus-visible {
+    .formula-field select:focus-visible,
+    .macro-inline-controls select:focus-visible {
       outline: 2px solid rgba(153, 0, 0, 0.35);
       outline-offset: 1px;
       border-color: rgba(153, 0, 0, 0.4);
@@ -1720,6 +1721,208 @@
       font-size: 0.9rem;
       color: #3b2c22;
       line-height: 1.2;
+    }
+
+    .macro-link-shell {
+      margin-top: 12px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(280px, 0.9fr) minmax(420px, 1.1fr);
+      align-items: start;
+    }
+
+    .macro-panel {
+      border: 1px solid #dcc8ae;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffefb 0%, #fff6e9 100%);
+      padding: 12px;
+      box-shadow: 0 10px 24px rgba(44, 26, 15, 0.08);
+      display: grid;
+      gap: 10px;
+    }
+
+    .macro-presets {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .macro-preset {
+      font-size: 0.75rem;
+      letter-spacing: 0.02em;
+      padding: 6px 10px;
+    }
+
+    .macro-control-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .macro-row {
+      display: grid;
+      gap: 6px;
+    }
+
+    .macro-row label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.83rem;
+      color: #4f4338;
+      font-weight: 700;
+    }
+
+    .macro-row label strong {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      color: var(--usc-cardinal-deep);
+      border: 1px solid #dcc8b1;
+      border-radius: 999px;
+      background: #fff;
+      padding: 2px 8px;
+    }
+
+    .macro-slider {
+      width: 100%;
+      accent-color: var(--usc-cardinal);
+      cursor: pointer;
+    }
+
+    .macro-inline-controls {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .macro-inline-controls .field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .macro-inline-controls label {
+      font-size: 0.74rem;
+      color: #5a4d42;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .macro-inline-controls select {
+      border: 1px solid #dbc7af;
+      border-radius: 10px;
+      background: #fff;
+      color: #342a22;
+      font-size: 0.82rem;
+      padding: 7px 9px;
+      min-height: 36px;
+      font-weight: 600;
+    }
+
+    .macro-formulas {
+      gap: 6px;
+      padding: 8px;
+      border-style: dashed;
+    }
+
+    .macro-formulas .formula {
+      font-size: 0.86rem;
+      padding: 7px 9px;
+    }
+
+    .macro-narrative {
+      border: 1px solid #dfccb5;
+      border-radius: 10px;
+      background: #fff;
+      padding: 9px 10px;
+      color: #4e4237;
+      font-size: 0.84rem;
+      line-height: 1.46;
+      min-height: 92px;
+    }
+
+    .macro-metrics {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .macro-metric {
+      border: 1px solid #e0cdb7;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 9px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .macro-metric span {
+      font-size: 0.72rem;
+      color: #5f5348;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .macro-metric strong {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.86rem;
+      color: #3a2d23;
+      line-height: 1.2;
+    }
+
+    .macro-chart-grid {
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .macro-chart-card {
+      border: 1px solid #dfccb5;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #fff 0%, #fff8ec 100%);
+      padding: 8px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .macro-chart-card.hidden {
+      display: none;
+    }
+
+    .macro-chart-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .macro-chart-head h3 {
+      margin: 0;
+      font-size: 0.86rem;
+      color: #422b1d;
+      letter-spacing: 0.01em;
+    }
+
+    .macro-chart-head span {
+      border: 1px solid #ddc8af;
+      border-radius: 999px;
+      background: #fff;
+      padding: 3px 8px;
+      font-size: 0.72rem;
+      color: #5c4f44;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .macro-svg {
+      width: 100%;
+      height: auto;
+      border: 1px solid #e2d0b9;
+      border-radius: 10px;
+      background: #fffdf9;
     }
 
     .arena-grid {
@@ -2497,6 +2700,15 @@
       .lab-grid {
         grid-template-columns: 1fr;
       }
+      .macro-link-shell {
+        grid-template-columns: 1fr;
+      }
+      .macro-chart-grid {
+        grid-template-columns: 1fr;
+      }
+      .macro-metrics {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
       .formula-workbench {
         grid-template-columns: 1fr;
       }
@@ -2545,6 +2757,10 @@
         grid-template-columns: 1fr;
       }
       .arena-stats {
+        grid-template-columns: 1fr;
+      }
+      .macro-inline-controls,
+      .macro-metrics {
         grid-template-columns: 1fr;
       }
       .intuition-tools {
@@ -2600,6 +2816,7 @@
       .flash-actions,
       .btn,
       #marketLab,
+      #macroLinkStudio,
       #formulaEngine .formula-catalog,
       #formulaEngine .formula-data-lab .btn,
       #missionControl .quest-actions,
@@ -2652,6 +2869,7 @@
         <button class="btn btn-ghost admin-inline" id="adminDiagnosticsBtn" type="button">Run Diag</button>
         <a class="btn btn-ghost" href="#missionControl">Mission</a>
         <a class="btn btn-ghost" href="#marketLab">Graph Lab</a>
+        <a class="btn btn-ghost" href="#macroLinkStudio">Macro Studio</a>
         <a class="btn btn-ghost" href="#intuitionStudio">Intuition</a>
         <a class="btn btn-ghost" href="#quantArena">Quant Arena</a>
         <a class="btn btn-ghost" href="ECON205_Midterm1_Complete_Study_Pack.pdf">Open Full Pack</a>
@@ -3076,6 +3294,183 @@
               <span>Gap at \(P_c\)</span>
               <strong id="labGap">0.00</strong>
             </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="macroLinkStudio">
+      <h2>Macro Transmission Studio</h2>
+      <p class="lead">Run synchronized shocks across linked panels. Compare how a single scenario propagates through <strong>AD-AS, Money Market, Loanable Funds, and Inflation-Unemployment</strong> at the same time.</p>
+      <div class="macro-link-shell">
+        <div class="macro-panel">
+          <div class="macro-presets">
+            <button type="button" class="btn btn-ghost macro-preset" data-macro-preset="reset">Reset</button>
+            <button type="button" class="btn btn-ghost macro-preset" data-macro-preset="monetary_easing">Monetary Easing</button>
+            <button type="button" class="btn btn-ghost macro-preset" data-macro-preset="fiscal_expansion">Fiscal Expansion</button>
+            <button type="button" class="btn btn-ghost macro-preset" data-macro-preset="productivity_boom">Productivity Boom</button>
+            <button type="button" class="btn btn-ghost macro-preset" data-macro-preset="stagflation_shock">Stagflation Shock</button>
+            <button type="button" class="btn btn-ghost macro-preset" data-macro-preset="uncertainty_shock">Uncertainty Shock</button>
+          </div>
+
+          <div class="macro-inline-controls">
+            <div class="field">
+              <label for="macroLayoutMode">Panel layout</label>
+              <select id="macroLayoutMode">
+                <option value="2x2">2x2 linked grid</option>
+                <option value="1x2">1x2 focused pair</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="macroPairMode">Focused pair</label>
+              <select id="macroPairMode">
+                <option value="adas_money">AD-AS + Money</option>
+                <option value="adas_loanable">AD-AS + Loanable Funds</option>
+                <option value="money_loanable">Money + Loanable Funds</option>
+                <option value="adas_phillips">AD-AS + Inflation-Unemployment</option>
+                <option value="money_phillips">Money + Inflation-Unemployment</option>
+                <option value="loanable_phillips">Loanable Funds + Inflation-Unemployment</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="macro-control-grid">
+            <div class="macro-row">
+              <label for="macroDemandShift"><span>Aggregate demand shift \(\Delta AD\)</span><strong id="macroDemandShiftVal">0</strong></label>
+              <input id="macroDemandShift" class="macro-slider" type="range" min="-40" max="40" step="1" value="0" />
+            </div>
+            <div class="macro-row">
+              <label for="macroSupplyShift"><span>Short-run supply shift \(\Delta SRAS\)</span><strong id="macroSupplyShiftVal">0</strong></label>
+              <input id="macroSupplyShift" class="macro-slider" type="range" min="-30" max="30" step="1" value="0" />
+            </div>
+            <div class="macro-row">
+              <label for="macroMoneySupplyShift"><span>Money supply shift \(\Delta M_s\)</span><strong id="macroMoneySupplyShiftVal">0</strong></label>
+              <input id="macroMoneySupplyShift" class="macro-slider" type="range" min="-40" max="40" step="1" value="0" />
+            </div>
+            <div class="macro-row">
+              <label for="macroMoneyDemandShift"><span>Money demand shift \(\Delta L\)</span><strong id="macroMoneyDemandShiftVal">0</strong></label>
+              <input id="macroMoneyDemandShift" class="macro-slider" type="range" min="-40" max="40" step="1" value="0" />
+            </div>
+            <div class="macro-row">
+              <label for="macroSavingShift"><span>Saving supply shift \(\Delta S\)</span><strong id="macroSavingShiftVal">0</strong></label>
+              <input id="macroSavingShift" class="macro-slider" type="range" min="-30" max="30" step="1" value="0" />
+            </div>
+            <div class="macro-row">
+              <label for="macroInvestmentShift"><span>Investment demand shift \(\Delta I\)</span><strong id="macroInvestmentShiftVal">0</strong></label>
+              <input id="macroInvestmentShift" class="macro-slider" type="range" min="-30" max="30" step="1" value="0" />
+            </div>
+            <div class="macro-row">
+              <label for="macroExpectedInflation"><span>Expected inflation \(\pi^e\)</span><strong id="macroExpectedInflationVal">2.0%</strong></label>
+              <input id="macroExpectedInflation" class="macro-slider" type="range" min="-1" max="10" step="0.1" value="2" />
+            </div>
+          </div>
+
+          <div class="formula-board macro-formulas">
+            <div class="formula">\(AD: \; P = \bar{A}_{AD} - bY, \quad SRAS: \; P = \bar{A}_{SRAS} + cY\)</div>
+            <div class="formula">\(Money:\; \frac{M^s}{P} = L(Y,i)\)</div>
+            <div class="formula">\(Loanable\;Funds:\; S(r) = I(r)\)</div>
+            <div class="formula">\(\pi = \pi^e - \alpha(u-u_n) + \text{cost-push}\)</div>
+          </div>
+
+          <div class="macro-narrative" id="macroNarrative">Run a preset or move sliders to see one shock transmit across all connected macro markets.</div>
+        </div>
+
+        <div class="macro-panel">
+          <div class="macro-metrics">
+            <div class="macro-metric"><span>Output \(Y\)</span><strong id="macroOutputLevel">0.0</strong></div>
+            <div class="macro-metric"><span>Price Level \(P\)</span><strong id="macroPriceLevel">0.0</strong></div>
+            <div class="macro-metric"><span>Nominal Rate \(i\)</span><strong id="macroNominalRate">0.0%</strong></div>
+            <div class="macro-metric"><span>Real Rate \(r\)</span><strong id="macroRealRate">0.0%</strong></div>
+            <div class="macro-metric"><span>Unemployment \(u\)</span><strong id="macroUnemploymentRate">0.0%</strong></div>
+            <div class="macro-metric"><span>Inflation \(\pi\)</span><strong id="macroInflationRate">0.0%</strong></div>
+            <div class="macro-metric"><span>Rate Wedge \((i-\pi^e)-r\)</span><strong id="macroRateGap">0.0</strong></div>
+            <div class="macro-metric"><span>Regime Signal</span><strong id="macroRegimeTag">Baseline</strong></div>
+          </div>
+
+          <div class="macro-chart-grid" id="macroChartGrid" data-layout="2x2">
+            <article class="macro-chart-card" data-chart="adas">
+              <div class="macro-chart-head">
+                <h3>AD-AS</h3>
+                <span id="macroAdasTag">Output-Price</span>
+              </div>
+              <svg id="macroAdasSvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="AD-AS linked graph">
+                <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
+                <g id="macroAdasGrid"></g>
+                <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
+                <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
+                <text x="602" y="338" font-size="12" fill="#433326">Output Y</text>
+                <text x="16" y="20" font-size="12" fill="#433326">Price P</text>
+                <path id="macroAdasBaseAd" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
+                <path id="macroAdasBaseSras" d="" fill="none" stroke="#9ab6c5" stroke-width="2" stroke-dasharray="6 5"></path>
+                <path id="macroAdPath" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
+                <path id="macroSrasPath" d="" fill="none" stroke="#1f5a67" stroke-width="3"></path>
+                <line id="macroAdasBaseLras" x1="0" y1="0" x2="0" y2="0" stroke="#9f7d4a" stroke-width="1.7" stroke-dasharray="5 4"></line>
+                <line id="macroAdasLras" x1="0" y1="0" x2="0" y2="0" stroke="#7f5f2b" stroke-width="2.1"></line>
+                <circle id="macroAdasEqPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
+                <text id="macroAdasEqLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">E1</text>
+              </svg>
+            </article>
+
+            <article class="macro-chart-card" data-chart="money">
+              <div class="macro-chart-head">
+                <h3>Money Market</h3>
+                <span id="macroMoneyTag">Liquidity</span>
+              </div>
+              <svg id="macroMoneySvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="Money market linked graph">
+                <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
+                <g id="macroMoneyGrid"></g>
+                <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
+                <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
+                <text x="522" y="338" font-size="12" fill="#433326">Real Balances</text>
+                <text x="16" y="20" font-size="12" fill="#433326">Nominal i</text>
+                <line id="macroMoneyBaseSupply" x1="0" y1="0" x2="0" y2="0" stroke="#9f7d4a" stroke-width="2" stroke-dasharray="6 5"></line>
+                <path id="macroMoneyBaseDemand" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
+                <line id="macroMoneySupply" x1="0" y1="0" x2="0" y2="0" stroke="#7f5f2b" stroke-width="2.4"></line>
+                <path id="macroMoneyDemand" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
+                <circle id="macroMoneyEqPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
+                <text id="macroMoneyEqLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">i1</text>
+              </svg>
+            </article>
+
+            <article class="macro-chart-card" data-chart="loanable">
+              <div class="macro-chart-head">
+                <h3>Loanable Funds</h3>
+                <span id="macroLfTag">Saving-Investment</span>
+              </div>
+              <svg id="macroLfSvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="Loanable funds linked graph">
+                <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
+                <g id="macroLfGrid"></g>
+                <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
+                <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
+                <text x="534" y="338" font-size="12" fill="#433326">Funds Q</text>
+                <text x="16" y="20" font-size="12" fill="#433326">Real r</text>
+                <path id="macroLfBaseSupply" d="" fill="none" stroke="#9ab6c5" stroke-width="2" stroke-dasharray="6 5"></path>
+                <path id="macroLfBaseDemand" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
+                <path id="macroLfSupply" d="" fill="none" stroke="#1f5a67" stroke-width="3"></path>
+                <path id="macroLfDemand" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
+                <circle id="macroLfEqPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
+                <text id="macroLfEqLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">r1</text>
+              </svg>
+            </article>
+
+            <article class="macro-chart-card" data-chart="phillips">
+              <div class="macro-chart-head">
+                <h3>Inflation-Unemployment</h3>
+                <span id="macroPcTag">Expectations</span>
+              </div>
+              <svg id="macroPcSvg" class="macro-svg" viewBox="0 0 640 360" role="img" aria-label="Inflation and unemployment linked graph">
+                <rect x="0" y="0" width="640" height="360" fill="#fffdf8"></rect>
+                <g id="macroPcGrid"></g>
+                <line x1="58" y1="314" x2="616" y2="314" stroke="#3a2a1a" stroke-width="2"></line>
+                <line x1="58" y1="314" x2="58" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
+                <text x="492" y="338" font-size="12" fill="#433326">Unemployment u</text>
+                <text x="16" y="20" font-size="12" fill="#433326">Inflation π</text>
+                <path id="macroPcBasePath" d="" fill="none" stroke="#cb8d8d" stroke-width="2" stroke-dasharray="6 5"></path>
+                <path id="macroPcPath" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
+                <circle id="macroPcPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
+                <text id="macroPcLabel" x="0" y="0" font-size="12" fill="#6a3f00" font-weight="700">π1</text>
+              </svg>
+            </article>
           </div>
         </div>
       </div>
@@ -4658,6 +5053,7 @@
       formulaLab: "econ205_midterm1_formula_lab_v1",
       formulaApi: "econ205_midterm1_formula_api_v1",
       marketLab: "econ205_midterm1_market_lab_v1",
+      macroLink: "econ205_midterm1_macro_link_v1",
       arenaStats: "econ205_midterm1_arena_stats_v1",
       arenaPrefs: "econ205_midterm1_arena_prefs_v1",
       intuitionState: "econ205_midterm1_intuition_state_v1",
@@ -4793,6 +5189,71 @@
     const labNarrative = document.getElementById("labNarrative");
     const labPresetBtns = [...document.querySelectorAll(".lab-preset")];
 
+    const macroLayoutMode = document.getElementById("macroLayoutMode");
+    const macroPairMode = document.getElementById("macroPairMode");
+    const macroDemandShift = document.getElementById("macroDemandShift");
+    const macroSupplyShift = document.getElementById("macroSupplyShift");
+    const macroMoneySupplyShift = document.getElementById("macroMoneySupplyShift");
+    const macroMoneyDemandShift = document.getElementById("macroMoneyDemandShift");
+    const macroSavingShift = document.getElementById("macroSavingShift");
+    const macroInvestmentShift = document.getElementById("macroInvestmentShift");
+    const macroExpectedInflation = document.getElementById("macroExpectedInflation");
+    const macroDemandShiftVal = document.getElementById("macroDemandShiftVal");
+    const macroSupplyShiftVal = document.getElementById("macroSupplyShiftVal");
+    const macroMoneySupplyShiftVal = document.getElementById("macroMoneySupplyShiftVal");
+    const macroMoneyDemandShiftVal = document.getElementById("macroMoneyDemandShiftVal");
+    const macroSavingShiftVal = document.getElementById("macroSavingShiftVal");
+    const macroInvestmentShiftVal = document.getElementById("macroInvestmentShiftVal");
+    const macroExpectedInflationVal = document.getElementById("macroExpectedInflationVal");
+    const macroOutputLevel = document.getElementById("macroOutputLevel");
+    const macroPriceLevel = document.getElementById("macroPriceLevel");
+    const macroNominalRate = document.getElementById("macroNominalRate");
+    const macroRealRate = document.getElementById("macroRealRate");
+    const macroUnemploymentRate = document.getElementById("macroUnemploymentRate");
+    const macroInflationRate = document.getElementById("macroInflationRate");
+    const macroRateGap = document.getElementById("macroRateGap");
+    const macroRegimeTag = document.getElementById("macroRegimeTag");
+    const macroNarrative = document.getElementById("macroNarrative");
+    const macroChartGrid = document.getElementById("macroChartGrid");
+    const macroChartCards = [...document.querySelectorAll(".macro-chart-card")];
+    const macroPresetBtns = [...document.querySelectorAll(".macro-preset")];
+
+    const macroAdasGrid = document.getElementById("macroAdasGrid");
+    const macroAdasBaseAd = document.getElementById("macroAdasBaseAd");
+    const macroAdasBaseSras = document.getElementById("macroAdasBaseSras");
+    const macroAdPath = document.getElementById("macroAdPath");
+    const macroSrasPath = document.getElementById("macroSrasPath");
+    const macroAdasBaseLras = document.getElementById("macroAdasBaseLras");
+    const macroAdasLras = document.getElementById("macroAdasLras");
+    const macroAdasEqPoint = document.getElementById("macroAdasEqPoint");
+    const macroAdasEqLabel = document.getElementById("macroAdasEqLabel");
+    const macroAdasTag = document.getElementById("macroAdasTag");
+
+    const macroMoneyGrid = document.getElementById("macroMoneyGrid");
+    const macroMoneyBaseSupply = document.getElementById("macroMoneyBaseSupply");
+    const macroMoneyBaseDemand = document.getElementById("macroMoneyBaseDemand");
+    const macroMoneySupply = document.getElementById("macroMoneySupply");
+    const macroMoneyDemand = document.getElementById("macroMoneyDemand");
+    const macroMoneyEqPoint = document.getElementById("macroMoneyEqPoint");
+    const macroMoneyEqLabel = document.getElementById("macroMoneyEqLabel");
+    const macroMoneyTag = document.getElementById("macroMoneyTag");
+
+    const macroLfGrid = document.getElementById("macroLfGrid");
+    const macroLfBaseSupply = document.getElementById("macroLfBaseSupply");
+    const macroLfBaseDemand = document.getElementById("macroLfBaseDemand");
+    const macroLfSupply = document.getElementById("macroLfSupply");
+    const macroLfDemand = document.getElementById("macroLfDemand");
+    const macroLfEqPoint = document.getElementById("macroLfEqPoint");
+    const macroLfEqLabel = document.getElementById("macroLfEqLabel");
+    const macroLfTag = document.getElementById("macroLfTag");
+
+    const macroPcGrid = document.getElementById("macroPcGrid");
+    const macroPcBasePath = document.getElementById("macroPcBasePath");
+    const macroPcPath = document.getElementById("macroPcPath");
+    const macroPcPoint = document.getElementById("macroPcPoint");
+    const macroPcLabel = document.getElementById("macroPcLabel");
+    const macroPcTag = document.getElementById("macroPcTag");
+
     const marketSvg = document.getElementById("marketSvg");
     const marketGrid = document.getElementById("marketGrid");
     const marketDemandPath = document.getElementById("marketDemandPath");
@@ -4912,6 +5373,50 @@
     };
 
     let marketLabState = { ...LAB_DEFAULT_STATE };
+
+    const MACRO_LINK_DEFAULT_STATE = {
+      demandShift: 0,
+      supplyShift: 0,
+      moneySupplyShift: 0,
+      moneyDemandShift: 0,
+      savingShift: 0,
+      investmentShift: 0,
+      expectedInflation: 2,
+      layoutMode: "2x2",
+      pairMode: "adas_money"
+    };
+
+    const MACRO_LINK_LAYOUTS = {
+      "2x2": ["adas", "money", "loanable", "phillips"],
+      adas_money: ["adas", "money"],
+      adas_loanable: ["adas", "loanable"],
+      money_loanable: ["money", "loanable"],
+      adas_phillips: ["adas", "phillips"],
+      money_phillips: ["money", "phillips"],
+      loanable_phillips: ["loanable", "phillips"]
+    };
+
+    const MACRO_CHART = {
+      width: 640,
+      height: 360,
+      marginLeft: 58,
+      marginRight: 24,
+      marginTop: 24,
+      marginBottom: 46
+    };
+
+    const MACRO_AXIS = {
+      adasY: { min: 60, max: 140 },
+      adasP: { min: 50, max: 120 },
+      moneyQ: { min: 70, max: 170 },
+      moneyI: { min: 0, max: 14 },
+      lfQ: { min: 70, max: 170 },
+      lfR: { min: 0, max: 12 },
+      pcU: { min: 2, max: 11 },
+      pcPi: { min: -1, max: 10 }
+    };
+
+    let macroLinkState = { ...MACRO_LINK_DEFAULT_STATE };
 
     const ARENA_TYPES = ["gdp", "deflator", "labor", "saving", "real_rate", "elasticity"];
     const ARENA_TYPE_LABELS = {
@@ -6951,6 +7456,560 @@
       updateMarketLab();
     }
 
+    function sanitizeMacroLinkState(raw) {
+      const base = { ...MACRO_LINK_DEFAULT_STATE };
+      if (!raw || typeof raw !== "object") return base;
+      const layoutMode = raw.layoutMode === "1x2" ? "1x2" : "2x2";
+      const pairMode = raw.pairMode in MACRO_LINK_LAYOUTS && raw.pairMode !== "2x2"
+        ? raw.pairMode
+        : base.pairMode;
+      return {
+        demandShift: clamp(Number.parseInt(raw.demandShift, 10) || 0, -40, 40),
+        supplyShift: clamp(Number.parseInt(raw.supplyShift, 10) || 0, -30, 30),
+        moneySupplyShift: clamp(Number.parseInt(raw.moneySupplyShift, 10) || 0, -40, 40),
+        moneyDemandShift: clamp(Number.parseInt(raw.moneyDemandShift, 10) || 0, -40, 40),
+        savingShift: clamp(Number.parseInt(raw.savingShift, 10) || 0, -30, 30),
+        investmentShift: clamp(Number.parseInt(raw.investmentShift, 10) || 0, -30, 30),
+        expectedInflation: clamp(Number.parseFloat(raw.expectedInflation) || 2, -1, 10),
+        layoutMode,
+        pairMode
+      };
+    }
+
+    function persistMacroLinkState() {
+      safeWrite(STORAGE.macroLink, macroLinkState);
+    }
+
+    function macroMapX(value, axis) {
+      const usable = MACRO_CHART.width - MACRO_CHART.marginLeft - MACRO_CHART.marginRight;
+      return MACRO_CHART.marginLeft + ((clamp(value, axis.min, axis.max) - axis.min) / (axis.max - axis.min)) * usable;
+    }
+
+    function macroMapY(value, axis) {
+      const usable = MACRO_CHART.height - MACRO_CHART.marginTop - MACRO_CHART.marginBottom;
+      return MACRO_CHART.height - MACRO_CHART.marginBottom - ((clamp(value, axis.min, axis.max) - axis.min) / (axis.max - axis.min)) * usable;
+    }
+
+    function macroPathFromXFunction(xAxis, yAxis, fnY) {
+      const xLo = xAxis.min;
+      const xHi = xAxis.max;
+      return `M ${macroMapX(xLo, xAxis)} ${macroMapY(fnY(xLo), yAxis)} L ${macroMapX(xHi, xAxis)} ${macroMapY(fnY(xHi), yAxis)}`;
+    }
+
+    function macroPathFromYFunction(yAxis, xAxis, fnX) {
+      const yLo = yAxis.min;
+      const yHi = yAxis.max;
+      return `M ${macroMapX(fnX(yLo), xAxis)} ${macroMapY(yLo, yAxis)} L ${macroMapX(fnX(yHi), xAxis)} ${macroMapY(yHi, yAxis)}`;
+    }
+
+    function setSvgLine(node, x1, y1, x2, y2) {
+      if (!node) return;
+      node.setAttribute("x1", String(x1));
+      node.setAttribute("y1", String(y1));
+      node.setAttribute("x2", String(x2));
+      node.setAttribute("y2", String(y2));
+    }
+
+    function setSvgPoint(node, x, y) {
+      if (!node) return;
+      node.setAttribute("cx", String(x));
+      node.setAttribute("cy", String(y));
+    }
+
+    function setSvgText(node, x, y, text) {
+      if (!node) return;
+      node.setAttribute("x", String(x));
+      node.setAttribute("y", String(y));
+      node.textContent = text;
+    }
+
+    function buildMacroGrid(node, xAxis, yAxis) {
+      if (!node || node.dataset.ready === "1") return;
+      for (let i = 1; i <= 4; i += 1) {
+        const xVal = xAxis.min + ((xAxis.max - xAxis.min) * i) / 5;
+        const yVal = yAxis.min + ((yAxis.max - yAxis.min) * i) / 5;
+        const vLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        vLine.setAttribute("x1", String(macroMapX(xVal, xAxis)));
+        vLine.setAttribute("y1", String(macroMapY(yAxis.min, yAxis)));
+        vLine.setAttribute("x2", String(macroMapX(xVal, xAxis)));
+        vLine.setAttribute("y2", String(macroMapY(yAxis.max, yAxis)));
+        vLine.setAttribute("stroke", "#eadcc9");
+        vLine.setAttribute("stroke-width", "1");
+        node.appendChild(vLine);
+
+        const hLine = document.createElementNS("http://www.w3.org/2000/svg", "line");
+        hLine.setAttribute("x1", String(macroMapX(xAxis.min, xAxis)));
+        hLine.setAttribute("y1", String(macroMapY(yVal, yAxis)));
+        hLine.setAttribute("x2", String(macroMapX(xAxis.max, xAxis)));
+        hLine.setAttribute("y2", String(macroMapY(yVal, yAxis)));
+        hLine.setAttribute("stroke", "#eadcc9");
+        hLine.setAttribute("stroke-width", "1");
+        node.appendChild(hLine);
+      }
+      node.dataset.ready = "1";
+    }
+
+    function computeMacroLinkCore(input) {
+      const adSlope = 0.62;
+      const srasSlope = 0.47;
+      const adIntercept = 166
+        + (0.75 * input.demandShift)
+        + (0.45 * input.moneySupplyShift)
+        - (0.3 * input.moneyDemandShift)
+        + (0.2 * input.investmentShift)
+        - (0.12 * input.savingShift);
+      const srasIntercept = 36
+        - (0.85 * input.supplyShift)
+        + (0.15 * input.expectedInflation);
+
+      let yEq = (adIntercept - srasIntercept) / (adSlope + srasSlope);
+      yEq = clamp(yEq, MACRO_AXIS.adasY.min + 1, MACRO_AXIS.adasY.max - 1);
+      let pEq = srasIntercept + (srasSlope * yEq);
+      pEq = clamp(pEq, MACRO_AXIS.adasP.min + 0.5, MACRO_AXIS.adasP.max - 0.5);
+      const yPotential = clamp(100 + (0.5 * input.supplyShift), MACRO_AXIS.adasY.min + 3, MACRO_AXIS.adasY.max - 3);
+      const outputGap = yEq - yPotential;
+
+      const ms = clamp(
+        110 + input.moneySupplyShift + (0.1 * input.demandShift),
+        MACRO_AXIS.moneyQ.min + 2,
+        MACRO_AXIS.moneyQ.max - 2
+      );
+      const mdSlope = 4.2;
+      const mdIntercept = 156
+        + (0.6 * outputGap)
+        + input.moneyDemandShift
+        + (0.12 * input.demandShift);
+      let iEq = (mdIntercept - ms) / mdSlope;
+      iEq = clamp(iEq, MACRO_AXIS.moneyI.min, MACRO_AXIS.moneyI.max);
+      const moneyEqQ = ms;
+
+      const savingSlope = 5;
+      const investSlope = 5.4;
+      const savingIntercept = 92
+        + input.savingShift
+        - (0.5 * input.demandShift)
+        + (0.25 * input.supplyShift)
+        + (0.1 * outputGap);
+      const investIntercept = 122
+        + input.investmentShift
+        + (0.38 * input.demandShift)
+        + (0.22 * input.moneyDemandShift);
+      let rEq = (investIntercept - savingIntercept) / (savingSlope + investSlope);
+      rEq = clamp(rEq, MACRO_AXIS.lfR.min, MACRO_AXIS.lfR.max);
+      const lfEqQ = clamp(
+        savingIntercept + (savingSlope * rEq),
+        MACRO_AXIS.lfQ.min + 1,
+        MACRO_AXIS.lfQ.max - 1
+      );
+
+      const uNatural = clamp(4.8 - (0.03 * input.supplyShift), 3.2, 6.5);
+      const unemployment = clamp(uNatural - (0.08 * outputGap), MACRO_AXIS.pcU.min, MACRO_AXIS.pcU.max);
+      const pcSlope = 0.8;
+      const costPush = (-0.07 * input.supplyShift) + (0.05 * input.moneyDemandShift);
+      const piActual = clamp(
+        input.expectedInflation - (pcSlope * (unemployment - uNatural)) + costPush,
+        MACRO_AXIS.pcPi.min,
+        MACRO_AXIS.pcPi.max
+      );
+
+      const impliedRealFromMoney = iEq - input.expectedInflation;
+      const rateGap = impliedRealFromMoney - rEq;
+
+      return {
+        adSlope,
+        srasSlope,
+        adIntercept,
+        srasIntercept,
+        yEq,
+        pEq,
+        yPotential,
+        outputGap,
+        ms,
+        mdSlope,
+        mdIntercept,
+        iEq,
+        moneyEqQ,
+        savingSlope,
+        savingIntercept,
+        investSlope,
+        investIntercept,
+        rEq,
+        lfEqQ,
+        uNatural,
+        unemployment,
+        pcSlope,
+        costPush,
+        piActual,
+        expectedInflation: input.expectedInflation,
+        impliedRealFromMoney,
+        rateGap
+      };
+    }
+
+    function computeMacroLinkState() {
+      const baseline = computeMacroLinkCore({
+        ...MACRO_LINK_DEFAULT_STATE,
+        expectedInflation: macroLinkState.expectedInflation
+      });
+      const current = computeMacroLinkCore(macroLinkState);
+      return { baseline, current };
+    }
+
+    function renderMacroLayout() {
+      if (!macroChartGrid || !macroChartCards.length) return;
+      const layoutMode = macroLinkState.layoutMode === "1x2" ? "1x2" : "2x2";
+      macroChartGrid.dataset.layout = layoutMode;
+      const visible = layoutMode === "1x2"
+        ? (MACRO_LINK_LAYOUTS[macroLinkState.pairMode] || MACRO_LINK_LAYOUTS.adas_money)
+        : MACRO_LINK_LAYOUTS["2x2"];
+      macroChartCards.forEach((card) => {
+        card.classList.toggle("hidden", !visible.includes(card.dataset.chart));
+      });
+      if (macroPairMode) {
+        macroPairMode.disabled = layoutMode !== "1x2";
+      }
+    }
+
+    function renderMacroAdas(state) {
+      buildMacroGrid(macroAdasGrid, MACRO_AXIS.adasY, MACRO_AXIS.adasP);
+      if (macroAdasBaseAd) {
+        macroAdasBaseAd.setAttribute("d", macroPathFromXFunction(
+          MACRO_AXIS.adasY,
+          MACRO_AXIS.adasP,
+          (y) => state.baseline.adIntercept - (state.baseline.adSlope * y)
+        ));
+      }
+      if (macroAdasBaseSras) {
+        macroAdasBaseSras.setAttribute("d", macroPathFromXFunction(
+          MACRO_AXIS.adasY,
+          MACRO_AXIS.adasP,
+          (y) => state.baseline.srasIntercept + (state.baseline.srasSlope * y)
+        ));
+      }
+      if (macroAdPath) {
+        macroAdPath.setAttribute("d", macroPathFromXFunction(
+          MACRO_AXIS.adasY,
+          MACRO_AXIS.adasP,
+          (y) => state.current.adIntercept - (state.current.adSlope * y)
+        ));
+      }
+      if (macroSrasPath) {
+        macroSrasPath.setAttribute("d", macroPathFromXFunction(
+          MACRO_AXIS.adasY,
+          MACRO_AXIS.adasP,
+          (y) => state.current.srasIntercept + (state.current.srasSlope * y)
+        ));
+      }
+
+      const yLo = macroMapY(MACRO_AXIS.adasP.min, MACRO_AXIS.adasP);
+      const yHi = macroMapY(MACRO_AXIS.adasP.max, MACRO_AXIS.adasP);
+      const baseLrasX = macroMapX(state.baseline.yPotential, MACRO_AXIS.adasY);
+      const lrasX = macroMapX(state.current.yPotential, MACRO_AXIS.adasY);
+      setSvgLine(macroAdasBaseLras, baseLrasX, yLo, baseLrasX, yHi);
+      setSvgLine(macroAdasLras, lrasX, yLo, lrasX, yHi);
+
+      const eqX = macroMapX(state.current.yEq, MACRO_AXIS.adasY);
+      const eqY = macroMapY(state.current.pEq, MACRO_AXIS.adasP);
+      setSvgPoint(macroAdasEqPoint, eqX, eqY);
+      setSvgText(macroAdasEqLabel, eqX + 8, eqY - 7, "E1");
+      if (macroAdasTag) {
+        macroAdasTag.textContent = state.current.outputGap > 1.2
+          ? "Positive Gap"
+          : (state.current.outputGap < -1.2 ? "Negative Gap" : "Near Potential");
+      }
+    }
+
+    function renderMacroMoney(state) {
+      buildMacroGrid(macroMoneyGrid, MACRO_AXIS.moneyQ, MACRO_AXIS.moneyI);
+      const yMin = macroMapY(MACRO_AXIS.moneyI.min, MACRO_AXIS.moneyI);
+      const yMax = macroMapY(MACRO_AXIS.moneyI.max, MACRO_AXIS.moneyI);
+      const baseSupplyX = macroMapX(state.baseline.ms, MACRO_AXIS.moneyQ);
+      const supplyX = macroMapX(state.current.ms, MACRO_AXIS.moneyQ);
+      setSvgLine(macroMoneyBaseSupply, baseSupplyX, yMin, baseSupplyX, yMax);
+      setSvgLine(macroMoneySupply, supplyX, yMin, supplyX, yMax);
+      if (macroMoneyBaseDemand) {
+        macroMoneyBaseDemand.setAttribute("d", macroPathFromYFunction(
+          MACRO_AXIS.moneyI,
+          MACRO_AXIS.moneyQ,
+          (i) => state.baseline.mdIntercept - (state.baseline.mdSlope * i)
+        ));
+      }
+      if (macroMoneyDemand) {
+        macroMoneyDemand.setAttribute("d", macroPathFromYFunction(
+          MACRO_AXIS.moneyI,
+          MACRO_AXIS.moneyQ,
+          (i) => state.current.mdIntercept - (state.current.mdSlope * i)
+        ));
+      }
+      const eqX = macroMapX(state.current.moneyEqQ, MACRO_AXIS.moneyQ);
+      const eqY = macroMapY(state.current.iEq, MACRO_AXIS.moneyI);
+      setSvgPoint(macroMoneyEqPoint, eqX, eqY);
+      setSvgText(macroMoneyEqLabel, eqX + 8, eqY - 7, "i1");
+      if (macroMoneyTag) {
+        macroMoneyTag.textContent = state.current.iEq > state.baseline.iEq + 0.4
+          ? "Rate Up"
+          : (state.current.iEq < state.baseline.iEq - 0.4 ? "Rate Down" : "Rate Stable");
+      }
+    }
+
+    function renderMacroLoanable(state) {
+      buildMacroGrid(macroLfGrid, MACRO_AXIS.lfQ, MACRO_AXIS.lfR);
+      if (macroLfBaseSupply) {
+        macroLfBaseSupply.setAttribute("d", macroPathFromYFunction(
+          MACRO_AXIS.lfR,
+          MACRO_AXIS.lfQ,
+          (r) => state.baseline.savingIntercept + (state.baseline.savingSlope * r)
+        ));
+      }
+      if (macroLfBaseDemand) {
+        macroLfBaseDemand.setAttribute("d", macroPathFromYFunction(
+          MACRO_AXIS.lfR,
+          MACRO_AXIS.lfQ,
+          (r) => state.baseline.investIntercept - (state.baseline.investSlope * r)
+        ));
+      }
+      if (macroLfSupply) {
+        macroLfSupply.setAttribute("d", macroPathFromYFunction(
+          MACRO_AXIS.lfR,
+          MACRO_AXIS.lfQ,
+          (r) => state.current.savingIntercept + (state.current.savingSlope * r)
+        ));
+      }
+      if (macroLfDemand) {
+        macroLfDemand.setAttribute("d", macroPathFromYFunction(
+          MACRO_AXIS.lfR,
+          MACRO_AXIS.lfQ,
+          (r) => state.current.investIntercept - (state.current.investSlope * r)
+        ));
+      }
+      const eqX = macroMapX(state.current.lfEqQ, MACRO_AXIS.lfQ);
+      const eqY = macroMapY(state.current.rEq, MACRO_AXIS.lfR);
+      setSvgPoint(macroLfEqPoint, eqX, eqY);
+      setSvgText(macroLfEqLabel, eqX + 8, eqY - 7, "r1");
+      if (macroLfTag) {
+        macroLfTag.textContent = state.current.rEq > state.baseline.rEq + 0.4
+          ? "Crowding-Out"
+          : (state.current.rEq < state.baseline.rEq - 0.4 ? "Crowding-In" : "Balanced");
+      }
+    }
+
+    function renderMacroPhillips(state) {
+      buildMacroGrid(macroPcGrid, MACRO_AXIS.pcU, MACRO_AXIS.pcPi);
+      if (macroPcBasePath) {
+        macroPcBasePath.setAttribute("d", macroPathFromXFunction(
+          MACRO_AXIS.pcU,
+          MACRO_AXIS.pcPi,
+          (u) => state.baseline.expectedInflation - (state.baseline.pcSlope * (u - state.baseline.uNatural)) + state.baseline.costPush
+        ));
+      }
+      if (macroPcPath) {
+        macroPcPath.setAttribute("d", macroPathFromXFunction(
+          MACRO_AXIS.pcU,
+          MACRO_AXIS.pcPi,
+          (u) => state.current.expectedInflation - (state.current.pcSlope * (u - state.current.uNatural)) + state.current.costPush
+        ));
+      }
+      const pointX = macroMapX(state.current.unemployment, MACRO_AXIS.pcU);
+      const pointY = macroMapY(state.current.piActual, MACRO_AXIS.pcPi);
+      setSvgPoint(macroPcPoint, pointX, pointY);
+      setSvgText(macroPcLabel, pointX + 8, pointY - 7, "π1");
+      if (macroPcTag) {
+        macroPcTag.textContent = state.current.piActual > state.current.expectedInflation + 0.4
+          ? "Inflation Above Expectation"
+          : (state.current.piActual < state.current.expectedInflation - 0.4 ? "Inflation Below Expectation" : "Near Expectation");
+      }
+    }
+
+    function buildMacroNarrative(state) {
+      const yMove = state.current.yEq > state.baseline.yEq + 0.8
+        ? "Output is above baseline."
+        : (state.current.yEq < state.baseline.yEq - 0.8 ? "Output is below baseline." : "Output is near baseline.");
+      const pMove = state.current.pEq > state.baseline.pEq + 0.8
+        ? "Price pressure is higher."
+        : (state.current.pEq < state.baseline.pEq - 0.8 ? "Price pressure is lower." : "Price pressure is broadly stable.");
+      const moneyMove = state.current.iEq > state.baseline.iEq + 0.35
+        ? "Money market implies tighter nominal rates."
+        : (state.current.iEq < state.baseline.iEq - 0.35 ? "Money market implies easier nominal rates." : "Money-market rate is near baseline.");
+      const lfMove = state.current.rEq > state.baseline.rEq + 0.35
+        ? "Loanable funds indicates stronger crowding-out pressure."
+        : (state.current.rEq < state.baseline.rEq - 0.35 ? "Loanable funds indicates stronger crowding-in pressure." : "Loanable-funds real rate is near baseline.");
+      const wedge = Math.abs(state.current.rateGap) > 0.85
+        ? `Rate wedge is elevated at ${state.current.rateGap.toFixed(2)}, signaling tension between liquidity and saving-investment channels.`
+        : `Rate wedge is moderate at ${state.current.rateGap.toFixed(2)}, so channels are broadly aligned.`;
+      return `${yMove} ${pMove} ${moneyMove} ${lfMove} ${wedge}`;
+    }
+
+    function readMacroLinkControlsIntoState() {
+      macroLinkState = sanitizeMacroLinkState({
+        demandShift: macroDemandShift ? macroDemandShift.value : macroLinkState.demandShift,
+        supplyShift: macroSupplyShift ? macroSupplyShift.value : macroLinkState.supplyShift,
+        moneySupplyShift: macroMoneySupplyShift ? macroMoneySupplyShift.value : macroLinkState.moneySupplyShift,
+        moneyDemandShift: macroMoneyDemandShift ? macroMoneyDemandShift.value : macroLinkState.moneyDemandShift,
+        savingShift: macroSavingShift ? macroSavingShift.value : macroLinkState.savingShift,
+        investmentShift: macroInvestmentShift ? macroInvestmentShift.value : macroLinkState.investmentShift,
+        expectedInflation: macroExpectedInflation ? macroExpectedInflation.value : macroLinkState.expectedInflation,
+        layoutMode: macroLayoutMode ? macroLayoutMode.value : macroLinkState.layoutMode,
+        pairMode: macroPairMode ? macroPairMode.value : macroLinkState.pairMode
+      });
+    }
+
+    function writeMacroLinkStateToControls() {
+      if (macroDemandShift) macroDemandShift.value = String(macroLinkState.demandShift);
+      if (macroSupplyShift) macroSupplyShift.value = String(macroLinkState.supplyShift);
+      if (macroMoneySupplyShift) macroMoneySupplyShift.value = String(macroLinkState.moneySupplyShift);
+      if (macroMoneyDemandShift) macroMoneyDemandShift.value = String(macroLinkState.moneyDemandShift);
+      if (macroSavingShift) macroSavingShift.value = String(macroLinkState.savingShift);
+      if (macroInvestmentShift) macroInvestmentShift.value = String(macroLinkState.investmentShift);
+      if (macroExpectedInflation) macroExpectedInflation.value = String(macroLinkState.expectedInflation);
+      if (macroLayoutMode) macroLayoutMode.value = macroLinkState.layoutMode;
+      if (macroPairMode) macroPairMode.value = macroLinkState.pairMode;
+    }
+
+    function updateMacroControlLabels() {
+      if (macroDemandShiftVal) macroDemandShiftVal.textContent = formatShift(macroLinkState.demandShift);
+      if (macroSupplyShiftVal) macroSupplyShiftVal.textContent = formatShift(macroLinkState.supplyShift);
+      if (macroMoneySupplyShiftVal) macroMoneySupplyShiftVal.textContent = formatShift(macroLinkState.moneySupplyShift);
+      if (macroMoneyDemandShiftVal) macroMoneyDemandShiftVal.textContent = formatShift(macroLinkState.moneyDemandShift);
+      if (macroSavingShiftVal) macroSavingShiftVal.textContent = formatShift(macroLinkState.savingShift);
+      if (macroInvestmentShiftVal) macroInvestmentShiftVal.textContent = formatShift(macroLinkState.investmentShift);
+      if (macroExpectedInflationVal) macroExpectedInflationVal.textContent = `${macroLinkState.expectedInflation.toFixed(1)}%`;
+    }
+
+    function renderMacroMetrics(state) {
+      if (macroOutputLevel) macroOutputLevel.textContent = state.current.yEq.toFixed(1);
+      if (macroPriceLevel) macroPriceLevel.textContent = state.current.pEq.toFixed(1);
+      if (macroNominalRate) macroNominalRate.textContent = `${state.current.iEq.toFixed(2)}%`;
+      if (macroRealRate) macroRealRate.textContent = `${state.current.rEq.toFixed(2)}%`;
+      if (macroUnemploymentRate) macroUnemploymentRate.textContent = `${state.current.unemployment.toFixed(2)}%`;
+      if (macroInflationRate) macroInflationRate.textContent = `${state.current.piActual.toFixed(2)}%`;
+      if (macroRateGap) macroRateGap.textContent = state.current.rateGap >= 0
+        ? `+${state.current.rateGap.toFixed(2)}`
+        : state.current.rateGap.toFixed(2);
+      if (macroRegimeTag) {
+        if (state.current.outputGap > 1.1 && state.current.piActual > state.current.expectedInflation + 0.4) {
+          macroRegimeTag.textContent = "Overheating";
+        } else if (state.current.outputGap < -1.1 && state.current.unemployment > state.current.uNatural + 0.4) {
+          macroRegimeTag.textContent = "Demand Slump";
+        } else if (macroLinkState.supplyShift < -8 && state.current.piActual > state.current.expectedInflation + 0.6) {
+          macroRegimeTag.textContent = "Stagflation Risk";
+        } else {
+          macroRegimeTag.textContent = "Near Potential";
+        }
+      }
+    }
+
+    function updateMacroLinkStudio(readControls = true) {
+      if (!macroLayoutMode || !macroPairMode || !macroNarrative) return;
+      if (readControls) {
+        readMacroLinkControlsIntoState();
+      }
+      writeMacroLinkStateToControls();
+      updateMacroControlLabels();
+      renderMacroLayout();
+      persistMacroLinkState();
+
+      const state = computeMacroLinkState();
+      renderMacroAdas(state);
+      renderMacroMoney(state);
+      renderMacroLoanable(state);
+      renderMacroPhillips(state);
+      renderMacroMetrics(state);
+      macroNarrative.textContent = buildMacroNarrative(state);
+      typesetMath(macroNarrative);
+    }
+
+    function applyMacroPreset(name) {
+      const next = { ...macroLinkState };
+      if (name === "monetary_easing") {
+        next.demandShift = 14;
+        next.supplyShift = 0;
+        next.moneySupplyShift = 24;
+        next.moneyDemandShift = -6;
+        next.savingShift = 5;
+        next.investmentShift = 10;
+        next.expectedInflation = 2.8;
+      } else if (name === "fiscal_expansion") {
+        next.demandShift = 20;
+        next.supplyShift = 0;
+        next.moneySupplyShift = 0;
+        next.moneyDemandShift = 8;
+        next.savingShift = -10;
+        next.investmentShift = 9;
+        next.expectedInflation = 2.4;
+      } else if (name === "productivity_boom") {
+        next.demandShift = 6;
+        next.supplyShift = 18;
+        next.moneySupplyShift = 4;
+        next.moneyDemandShift = -4;
+        next.savingShift = 9;
+        next.investmentShift = 7;
+        next.expectedInflation = 1.8;
+      } else if (name === "stagflation_shock") {
+        next.demandShift = -6;
+        next.supplyShift = -18;
+        next.moneySupplyShift = 2;
+        next.moneyDemandShift = 10;
+        next.savingShift = -4;
+        next.investmentShift = -9;
+        next.expectedInflation = 4.2;
+      } else if (name === "uncertainty_shock") {
+        next.demandShift = -18;
+        next.supplyShift = -4;
+        next.moneySupplyShift = 6;
+        next.moneyDemandShift = 15;
+        next.savingShift = 11;
+        next.investmentShift = -16;
+        next.expectedInflation = 1.9;
+      } else {
+        Object.assign(next, MACRO_LINK_DEFAULT_STATE);
+      }
+      macroLinkState = sanitizeMacroLinkState(next);
+      writeMacroLinkStateToControls();
+      updateMacroLinkStudio(false);
+      showStatus("Macro transmission preset applied.");
+    }
+
+    function initMacroLinkStudio() {
+      if (
+        !macroLayoutMode
+        || !macroPairMode
+        || !macroDemandShift
+        || !macroSupplyShift
+        || !macroMoneySupplyShift
+        || !macroMoneyDemandShift
+        || !macroSavingShift
+        || !macroInvestmentShift
+        || !macroExpectedInflation
+        || !macroNarrative
+        || !macroChartGrid
+      ) {
+        return;
+      }
+
+      macroLinkState = sanitizeMacroLinkState(safeRead(STORAGE.macroLink, null));
+      writeMacroLinkStateToControls();
+
+      [
+        macroDemandShift,
+        macroSupplyShift,
+        macroMoneySupplyShift,
+        macroMoneyDemandShift,
+        macroSavingShift,
+        macroInvestmentShift,
+        macroExpectedInflation
+      ].forEach((slider) => slider.addEventListener("input", () => updateMacroLinkStudio(true)));
+
+      macroLayoutMode.addEventListener("change", () => updateMacroLinkStudio(true));
+      macroPairMode.addEventListener("change", () => updateMacroLinkStudio(true));
+      macroPresetBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          applyMacroPreset(btn.dataset.macroPreset || "reset");
+        });
+      });
+
+      updateMacroLinkStudio(false);
+    }
+
     function sanitizeArenaStats(raw) {
       const base = defaultArenaStats();
       if (!raw || typeof raw !== "object") return base;
@@ -8624,6 +9683,12 @@
           run: () => scrollToSection("marketLab")
         },
         {
+          title: "Jump to Macro Transmission Studio",
+          meta: "Navigate",
+          keywords: "macro linked graphs ad as money loanable phillips",
+          run: () => scrollToSection("macroLinkStudio")
+        },
+        {
           title: "Jump to Causal Intuition Studio",
           meta: "Navigate",
           keywords: "intuition causal logic why reasoning",
@@ -8764,6 +9829,24 @@
           meta: "Scenario",
           keywords: "market floor binding surplus",
           run: () => applyMarketPreset("floor_bind")
+        },
+        {
+          title: "Macro Preset: Monetary Easing",
+          meta: "Scenario",
+          keywords: "macro preset monetary easing ad as money market",
+          run: () => applyMacroPreset("monetary_easing")
+        },
+        {
+          title: "Macro Preset: Fiscal Expansion",
+          meta: "Scenario",
+          keywords: "macro preset fiscal expansion loanable funds",
+          run: () => applyMacroPreset("fiscal_expansion")
+        },
+        {
+          title: "Macro Preset: Stagflation Shock",
+          meta: "Scenario",
+          keywords: "macro preset stagflation supply shock",
+          run: () => applyMacroPreset("stagflation_shock")
         },
         {
           title: "Focus Resource Filter",
@@ -8912,6 +9995,7 @@
     function runInternalDiagnostics() {
       const issues = [];
       const currentMarketState = { ...marketLabState };
+      const currentMacroState = { ...macroLinkState };
       const criticalNodes = [
         ["authGate", authGate],
         ["authNameInput", authNameInput],
@@ -8920,6 +10004,16 @@
         ["resourceGrid", resourceGrid],
         ["commandShell", commandShell],
         ["marketSvg", marketSvg],
+        ["macroLayoutMode", macroLayoutMode],
+        ["macroPairMode", macroPairMode],
+        ["macroChartGrid", macroChartGrid],
+        ["macroDemandShift", macroDemandShift],
+        ["macroExpectedInflation", macroExpectedInflation],
+        ["macroNarrative", macroNarrative],
+        ["macroAdPath", macroAdPath],
+        ["macroMoneyDemand", macroMoneyDemand],
+        ["macroLfSupply", macroLfSupply],
+        ["macroPcPath", macroPcPath],
         ["arenaPrompt", arenaPrompt],
         ["flashQ", flashQ],
         ["recallOptions", recallOptions],
@@ -9012,6 +10106,19 @@
           issues.push("formula-active-variable-missing");
         }
       }
+      if (!MACRO_LINK_LAYOUTS["2x2"] || !MACRO_LINK_LAYOUTS.adas_money) {
+        issues.push("macro-layout-config-missing");
+      }
+      if (!macroLinkState || typeof macroLinkState !== "object") {
+        issues.push("macro-state-missing");
+      } else {
+        if (macroLinkState.layoutMode !== "2x2" && macroLinkState.layoutMode !== "1x2") {
+          issues.push("macro-layout-invalid");
+        }
+        if (!(macroLinkState.pairMode in MACRO_LINK_LAYOUTS) || macroLinkState.pairMode === "2x2") {
+          issues.push("macro-pair-invalid");
+        }
+      }
 
       for (let i = 0; i < 60; i += 1) {
         marketLabState = {
@@ -9030,6 +10137,34 @@
         }
       }
       marketLabState = currentMarketState;
+
+      for (let i = 0; i < 60; i += 1) {
+        const randomState = sanitizeMacroLinkState({
+          demandShift: randomInt(-40, 40),
+          supplyShift: randomInt(-30, 30),
+          moneySupplyShift: randomInt(-40, 40),
+          moneyDemandShift: randomInt(-40, 40),
+          savingShift: randomInt(-30, 30),
+          investmentShift: randomInt(-30, 30),
+          expectedInflation: randomInt(-10, 100) / 10,
+          layoutMode: randomChoice(["2x2", "1x2"]),
+          pairMode: randomChoice(Object.keys(MACRO_LINK_LAYOUTS).filter((key) => key !== "2x2"))
+        });
+        const sample = computeMacroLinkCore(randomState);
+        const values = [
+          sample.yEq,
+          sample.pEq,
+          sample.iEq,
+          sample.rEq,
+          sample.unemployment,
+          sample.piActual,
+          sample.rateGap
+        ];
+        if (!values.every(Number.isFinite)) {
+          issues.push(`macro-state-${i}`);
+        }
+      }
+      macroLinkState = currentMacroState;
 
       const generators = [
         generateGDPChallenge,
@@ -9209,6 +10344,7 @@
             bls: Boolean((safeRead(STORAGE.formulaApi, {}) || {}).blsKey)
           },
           marketLab: safeRead(STORAGE.marketLab, null),
+          macroLink: safeRead(STORAGE.macroLink, null),
           arenaStats: safeRead(STORAGE.arenaStats, null),
           arenaPrefs: safeRead(STORAGE.arenaPrefs, null),
           intuitionState: safeRead(STORAGE.intuitionState, null),
@@ -9264,7 +10400,7 @@
     }
 
     function resetAllProgress() {
-      if (!window.confirm("Reset checklist, flashcard mastery, timer settings, mission quests, graph lab state, and quant arena stats?")) {
+      if (!window.confirm("Reset checklist, flashcard mastery, timer settings, mission quests, formula/graph labs, and quant arena stats?")) {
         return;
       }
       try {
@@ -9275,6 +10411,7 @@
         localStorage.removeItem(STORAGE.formulaLab);
         localStorage.removeItem(STORAGE.formulaApi);
         localStorage.removeItem(STORAGE.marketLab);
+        localStorage.removeItem(STORAGE.macroLink);
         localStorage.removeItem(STORAGE.arenaStats);
         localStorage.removeItem(STORAGE.arenaPrefs);
         localStorage.removeItem(STORAGE.intuitionState);
@@ -9299,6 +10436,8 @@
         labControlPrice.value = String(marketLabState.controlPrice);
         updateMarketLab();
       }
+      macroLinkState = { ...MACRO_LINK_DEFAULT_STATE };
+      updateMacroLinkStudio(false);
       resetFormulaLabState(false, true);
       stopArenaTimer();
       arenaChallenge = null;
@@ -9326,7 +10465,7 @@
       resetIntuitionStudioState(false);
       clearQuest(false);
       pickPrompt();
-      showStatus("All interactive progress reset, including formula, graph, mission, intuition, and quant arenas.");
+      showStatus("All interactive progress reset, including formula, multigraph, market, mission, intuition, and quant arenas.");
     }
 
     function initRevealEffects() {
@@ -9526,6 +10665,7 @@
     applyResourceFilter();
     initFormulaEngine();
     initMarketLab();
+    initMacroLinkStudio();
     initIntuitionStudio();
     initArena();
     initMissionControl();
