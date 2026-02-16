@@ -882,7 +882,8 @@
     .self-answer:focus-visible,
     .resource-filter-input:focus-visible,
     .timer-minutes:focus-visible,
-    .lab-select:focus-visible {
+    .lab-select:focus-visible,
+    .intuition-select:focus-visible {
       outline: 2px solid rgba(153, 0, 0, 0.35);
       outline-offset: 1px;
       border-color: rgba(153, 0, 0, 0.4);
@@ -1468,6 +1469,197 @@
       line-height: 1.2;
     }
 
+    .intuition-grid {
+      margin-top: 12px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(250px, 0.86fr) minmax(420px, 1.2fr);
+      align-items: start;
+    }
+
+    .intuition-panel {
+      border: 1px solid #dcc8ae;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffefb 0%, #fff5e6 100%);
+      padding: 12px;
+      box-shadow: 0 10px 24px rgba(44, 26, 15, 0.08);
+      display: grid;
+      gap: 10px;
+    }
+
+    .intuition-panel h3 {
+      margin: 0;
+      color: #452d1f;
+      font-size: 0.96rem;
+      letter-spacing: 0.01em;
+    }
+
+    .intuition-scenarios {
+      display: grid;
+      gap: 8px;
+    }
+
+    .intuition-scenario {
+      width: 100%;
+      text-align: left;
+      border: 1px solid #dfccb3;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      cursor: pointer;
+      display: grid;
+      gap: 3px;
+      transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+    }
+
+    .intuition-scenario:hover {
+      transform: translateY(-1px);
+      border-color: rgba(153, 0, 0, 0.33);
+      box-shadow: 0 8px 18px rgba(42, 25, 15, 0.1);
+    }
+
+    .intuition-scenario.active {
+      border-color: rgba(153, 0, 0, 0.45);
+      box-shadow: 0 10px 20px rgba(153, 0, 0, 0.14);
+      background: linear-gradient(180deg, #fffaf3 0%, #fff5e7 100%);
+    }
+
+    .intuition-scenario .title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #3b2d22;
+      line-height: 1.25;
+    }
+
+    .intuition-scenario .meta {
+      font-size: 0.72rem;
+      color: #675b4f;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .intuition-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .intuition-shock {
+      margin: 0;
+      font-size: 0.9rem;
+      color: #4f4338;
+      line-height: 1.45;
+      border: 1px solid #dfccb5;
+      border-radius: 10px;
+      background: #fff;
+      padding: 10px;
+    }
+
+    .intuition-vars {
+      display: grid;
+      gap: 8px;
+    }
+
+    .intuition-var {
+      border: 1px solid #e2d0ba;
+      border-radius: 10px;
+      background: #fff;
+      padding: 9px 10px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: minmax(160px, 1fr) minmax(150px, 0.9fr) auto;
+      align-items: center;
+    }
+
+    .intuition-var.correct {
+      border-color: rgba(22, 122, 72, 0.35);
+      background: linear-gradient(180deg, #f4fff8 0%, #effcf3 100%);
+    }
+
+    .intuition-var.wrong {
+      border-color: rgba(155, 18, 18, 0.32);
+      background: linear-gradient(180deg, #fff8f7 0%, #fff2f1 100%);
+    }
+
+    .intuition-label {
+      font-size: 0.84rem;
+      color: #493d33;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .intuition-select {
+      border: 1px solid #dbc6ac;
+      border-radius: 10px;
+      background: #fff;
+      color: #352b22;
+      font-size: 0.84rem;
+      padding: 7px 9px;
+      font-weight: 600;
+      min-width: 140px;
+    }
+
+    .intuition-result {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      color: #5d5146;
+      border: 1px solid #ddccb8;
+      border-radius: 999px;
+      background: #fff;
+      padding: 3px 8px;
+      white-space: nowrap;
+      justify-self: end;
+    }
+
+    .intuition-var.correct .intuition-result {
+      border-color: rgba(22, 122, 72, 0.35);
+      color: #1e5e42;
+      background: #f7fffa;
+    }
+
+    .intuition-var.wrong .intuition-result {
+      border-color: rgba(155, 18, 18, 0.32);
+      color: #781818;
+      background: #fff7f7;
+    }
+
+    .intuition-chain {
+      border: 1px dashed #d8c3a8;
+      border-radius: 10px;
+      background: #fff;
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+      color: #4f4338;
+      font-size: 0.84rem;
+      line-height: 1.45;
+    }
+
+    .intuition-chain.hidden {
+      display: none;
+    }
+
+    .intuition-chain ol {
+      margin: 0;
+      padding-left: 17px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .intuition-chain ul {
+      margin: 0;
+      padding-left: 17px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .intuition-chain strong {
+      color: #3f2b1f;
+    }
+
     .admin-console {
       display: grid;
       gap: 10px;
@@ -1499,6 +1691,9 @@
         grid-template-columns: 1fr;
       }
       .arena-grid {
+        grid-template-columns: 1fr;
+      }
+      .intuition-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -1539,6 +1734,12 @@
       .arena-stats {
         grid-template-columns: 1fr;
       }
+      .intuition-var {
+        grid-template-columns: 1fr;
+      }
+      .intuition-result {
+        justify-self: start;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1562,6 +1763,7 @@
       .flash-actions,
       .btn,
       #marketLab,
+      #intuitionStudio,
       #quantArena,
       footer {
         display: none !important;
@@ -1609,6 +1811,7 @@
         <button class="btn btn-ghost" id="commandBtn" type="button">Command</button>
         <button class="btn btn-ghost admin-inline" id="adminDiagnosticsBtn" type="button">Run Diag</button>
         <a class="btn btn-ghost" href="#marketLab">Graph Lab</a>
+        <a class="btn btn-ghost" href="#intuitionStudio">Intuition</a>
         <a class="btn btn-ghost" href="#quantArena">Quant Arena</a>
         <a class="btn btn-ghost" href="ECON205_Midterm1_Complete_Study_Pack.pdf">Open Full Pack</a>
         <button class="btn btn-ghost" id="resetAllBtn" type="button">Reset Progress</button>
@@ -1622,7 +1825,7 @@
       <div class="command-backdrop" id="commandBackdrop"></div>
       <div class="command-dialog" role="dialog" aria-label="Command palette">
         <div class="command-head">
-          <input id="commandInput" class="command-input" type="search" placeholder="Search actions... (e.g., graph, timer, arena, recall)" />
+          <input id="commandInput" class="command-input" type="search" placeholder="Search actions... (e.g., graph, intuition, timer, arena, recall)" />
           <span class="command-hint">ESC</span>
         </div>
         <div class="command-list" id="commandList"></div>
@@ -1646,7 +1849,7 @@
         <span class="chip">Mode: Concept + Computation + Graphing</span>
         <span class="chip">Timed Runtime: 75 minutes</span>
         <span class="chip">Coverage: Lecture 01-07</span>
-        <span class="chip">Workflow: Learn -> Drill -> Simulate -> Debrief</span>
+        <span class="chip">Workflow: Learn -> Reason -> Drill -> Simulate -> Debrief</span>
         <span class="chip" id="diagnosticsChip">Diagnostics: pending</span>
       </div>
       <div class="kpi-strip">
@@ -1878,6 +2081,33 @@
               <strong id="labGap">0.00</strong>
             </div>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="intuitionStudio">
+      <h2>Causal Intuition Studio</h2>
+      <p class="lead">Train the logic chain the exam rewards most: <strong>shock -> incentives -> curve shift -> equilibrium outcome</strong>. Predict directions first, then compare to the economic mechanism.</p>
+      <div class="intuition-grid">
+        <div class="intuition-panel">
+          <h3>Scenario Library</h3>
+          <div class="intuition-scenarios" id="intuitionScenarioCards"></div>
+          <div class="flash-meta" id="intuitionStatsMeta">Attempts: 0 • Perfect rounds: 0</div>
+        </div>
+        <div class="intuition-panel">
+          <div class="intuition-head">
+            <h3 id="intuitionScenarioTitle">Choose a scenario</h3>
+            <span class="chip" id="intuitionScenarioTag">Intuition</span>
+          </div>
+          <p class="intuition-shock" id="intuitionShock">Select a scenario on the left to start directional reasoning practice.</p>
+          <div class="intuition-vars" id="intuitionVars"></div>
+          <div class="flash-actions">
+            <button type="button" class="btn btn-primary" id="intuitionGradeBtn">Grade Predictions</button>
+            <button type="button" class="btn btn-ghost" id="intuitionRevealBtn">Reveal Logic</button>
+            <button type="button" class="btn btn-ghost" id="intuitionNextBtn">Next Scenario</button>
+          </div>
+          <div class="arena-feedback" id="intuitionFeedback">Use the dropdowns, then click <strong>Grade Predictions</strong>.</div>
+          <div class="intuition-chain hidden" id="intuitionChain"></div>
         </div>
       </div>
     </section>
@@ -2176,6 +2406,311 @@
       "Can distinguish marginal returns vs returns to scale"
     ];
 
+    const INTUITION_OPTIONS = [
+      { value: "up", label: "Increase (↑)" },
+      { value: "down", label: "Decrease (↓)" },
+      { value: "flat", label: "No clear change (~)" }
+    ];
+
+    const intuitionScenarios = [
+      {
+        id: "demand_income_jump",
+        title: "Income Shock for a Normal Good",
+        tag: "L01 Supply and Demand",
+        shock: "Household income rises for a normal good while supply conditions are unchanged.",
+        chain: [
+          "Income rise increases willingness to pay for a normal good.",
+          "Demand shifts right from \\(D_0\\) to \\(D_1\\); supply stays at \\(S_0\\).",
+          "New equilibrium has higher price and higher quantity."
+        ],
+        variables: [
+          {
+            id: "price",
+            label: "Equilibrium price \\(P^*\\)",
+            answer: "up",
+            why: "Rightward demand shift with fixed supply pushes equilibrium price upward."
+          },
+          {
+            id: "quantity",
+            label: "Equilibrium quantity \\(Q^*\\)",
+            answer: "up",
+            why: "A stronger demand schedule intersects supply at a larger quantity."
+          },
+          {
+            id: "gap",
+            label: "Shortage/surplus gap at equilibrium",
+            answer: "flat",
+            why: "At equilibrium, quantity demanded still equals quantity supplied, so the gap remains zero."
+          },
+          {
+            id: "revenue",
+            label: "Producer revenue \\((P \\times Q)\\)",
+            answer: "up",
+            why: "Both equilibrium price and quantity increase, so producer revenue rises."
+          }
+        ]
+      },
+      {
+        id: "supply_cost_spike",
+        title: "Input Cost Shock",
+        tag: "L01-L02 Curves and Policy",
+        shock: "Input costs rise sharply, reducing quantity supplied at every price.",
+        chain: [
+          "Higher production cost shifts supply left from \\(S_0\\) to \\(S_1\\).",
+          "Demand remains unchanged in the baseline setup.",
+          "New equilibrium moves to higher price and lower quantity."
+        ],
+        variables: [
+          {
+            id: "price",
+            label: "Equilibrium price \\(P^*\\)",
+            answer: "up",
+            why: "Leftward supply shift creates upward price pressure at intersection with demand."
+          },
+          {
+            id: "quantity",
+            label: "Equilibrium quantity \\(Q^*\\)",
+            answer: "down",
+            why: "Less supply at each price means market-clearing quantity contracts."
+          },
+          {
+            id: "supply_position",
+            label: "Supply position (at any given price)",
+            answer: "down",
+            why: "A cost shock reduces supplied quantity at each price, i.e., a left shift."
+          },
+          {
+            id: "gap",
+            label: "Shortage/surplus gap at equilibrium",
+            answer: "flat",
+            why: "Even after the shift, equilibrium still clears the market."
+          }
+        ]
+      },
+      {
+        id: "binding_ceiling",
+        title: "Binding Price Ceiling",
+        tag: "L02 Price Controls",
+        shock: "A price ceiling is imposed below the original equilibrium price \\(P^*\\).",
+        chain: [
+          "Ceiling forces observed price down to \\(P_c < P^*\\).",
+          "At lower price, quantity demanded rises while quantity supplied falls.",
+          "The market does not clear: shortage appears and transactions are limited by supply."
+        ],
+        variables: [
+          {
+            id: "price",
+            label: "Observed transaction price",
+            answer: "down",
+            why: "A binding ceiling caps legal price below market-clearing level."
+          },
+          {
+            id: "traded_qty",
+            label: "Quantity actually traded",
+            answer: "down",
+            why: "Actual trades are constrained by the smaller supplied quantity at \\(P_c\\)."
+          },
+          {
+            id: "shortage",
+            label: "Shortage size \\((Q_D - Q_S)\\)",
+            answer: "up",
+            why: "Demand exceeds supply at the capped low price."
+          },
+          {
+            id: "search_cost",
+            label: "Queue/search/non-price rationing costs",
+            answer: "up",
+            why: "Shortages force buyers to spend more time and effort to obtain goods."
+          }
+        ]
+      },
+      {
+        id: "real_rate_hike",
+        title: "Higher Real Interest Rate",
+        tag: "L05 Spending and Saving",
+        shock: "Real interest rate rises while income is held fixed in the short run.",
+        chain: [
+          "Higher \\(r\\) raises the reward to postponing consumption.",
+          "Current consumption and many investment projects fall.",
+          "With \\(S = Y - C - G\\) and \\(NX = S - I\\), lower \\(C\\) and \\(I\\) push \\(NX\\) up."
+        ],
+        variables: [
+          {
+            id: "consumption",
+            label: "Current consumption \\(C\\)",
+            answer: "down",
+            why: "Intertemporal substitution encourages shifting spending into the future."
+          },
+          {
+            id: "investment",
+            label: "Investment \\(I\\)",
+            answer: "down",
+            why: "Higher financing cost makes fewer projects profitable."
+          },
+          {
+            id: "saving",
+            label: "National saving \\(S\\)",
+            answer: "up",
+            why: "With fixed \\(Y\\) and \\(G\\), lower \\(C\\) implies higher \\(S = Y - C - G\\)."
+          },
+          {
+            id: "nx",
+            label: "Net exports \\(NX\\)",
+            answer: "up",
+            why: "Using \\(NX = S - I\\), higher \\(S\\) and lower \\(I\\) raise \\(NX\\)."
+          }
+        ]
+      },
+      {
+        id: "gov_spending_rise",
+        title: "Government Spending Expansion",
+        tag: "L05 National Accounts",
+        shock: "Government purchases increase with taxes unchanged; treat \\(Y\\) and \\(C\\) as fixed in this accounting drill.",
+        chain: [
+          "A higher \\(G\\) directly raises the government spending share.",
+          "National saving falls because \\(S = Y - C - G\\).",
+          "Holding investment constant in the short accounting setup, \\(NX = S - I\\) declines."
+        ],
+        variables: [
+          {
+            id: "g",
+            label: "Government purchases \\(G\\)",
+            answer: "up",
+            why: "The policy shock is defined as an increase in \\(G\\)."
+          },
+          {
+            id: "saving",
+            label: "National saving \\(S\\)",
+            answer: "down",
+            why: "With fixed \\(Y\\) and \\(C\\), larger \\(G\\) mechanically reduces \\(S\\)."
+          },
+          {
+            id: "nx",
+            label: "Net exports \\(NX\\) (holding \\(I\\) fixed)",
+            answer: "down",
+            why: "Lower \\(S\\) with unchanged \\(I\\) implies lower \\(NX = S - I\\)."
+          },
+          {
+            id: "r_pressure",
+            label: "Real interest rate pressure",
+            answer: "up",
+            why: "Lower public saving tightens loanable funds and tends to push \\(r\\) upward."
+          }
+        ]
+      },
+      {
+        id: "matching_efficiency",
+        title: "Better Job Matching Technology",
+        tag: "L06 Labor Market",
+        shock: "A new platform reduces search frictions between workers and firms.",
+        chain: [
+          "Faster matching shortens job-search duration.",
+          "Frictional unemployment falls, reducing the natural unemployment rate.",
+          "More workers are matched into employment at a given point in time."
+        ],
+        variables: [
+          {
+            id: "frictional",
+            label: "Frictional unemployment",
+            answer: "down",
+            why: "The source of friction is directly reduced by better matching."
+          },
+          {
+            id: "natural_u",
+            label: "Natural unemployment rate",
+            answer: "down",
+            why: "Natural unemployment includes frictional plus structural components."
+          },
+          {
+            id: "epop",
+            label: "Employment-to-population ratio (EPOP)",
+            answer: "up",
+            why: "Quicker matching lifts employment among the adult population."
+          },
+          {
+            id: "potential_y",
+            label: "Potential output capacity",
+            answer: "up",
+            why: "Higher sustained employment increases available labor input."
+          }
+        ]
+      },
+      {
+        id: "tfp_jump",
+        title: "Productivity Increase (TFP)",
+        tag: "L07 Production and Growth",
+        shock: "Total factor productivity \\(A\\) rises in \\(Y = A K^{0.5} L^{0.5}\\), with \\(K\\) and \\(L\\) fixed.",
+        chain: [
+          "Higher \\(A\\) scales output upward for the same inputs.",
+          "Marginal products rise because each unit of capital and labor becomes more productive.",
+          "Wages and output per worker rise with stronger productivity."
+        ],
+        variables: [
+          {
+            id: "output",
+            label: "Total output \\(Y\\)",
+            answer: "up",
+            why: "In the production function, \\(A\\) is a multiplicative efficiency term."
+          },
+          {
+            id: "y_per_l",
+            label: "Output per worker \\(Y/L\\)",
+            answer: "up",
+            why: "With fixed \\(L\\), a higher \\(A\\) raises total output and therefore \\(Y/L\\)."
+          },
+          {
+            id: "mpl",
+            label: "Marginal product of labor",
+            answer: "up",
+            why: "Higher productivity raises additional output from one more unit of labor."
+          },
+          {
+            id: "rts",
+            label: "Returns-to-scale classification",
+            answer: "flat",
+            why: "Changing \\(A\\) shifts level, not whether exponents imply constant returns."
+          }
+        ]
+      },
+      {
+        id: "scale_up_crs",
+        title: "Doubling Capital and Labor Under CRS",
+        tag: "L07 Production and Growth",
+        shock: "In \\(Y = A K^{0.5} L^{0.5}\\), both \\(K\\) and \\(L\\) double while \\(A\\) is unchanged.",
+        chain: [
+          "Exponents sum to 1, so the function has constant returns to scale.",
+          "Scaling both inputs by 2 scales output by 2.",
+          "Because \\(K/L\\) is unchanged, output per worker stays roughly unchanged."
+        ],
+        variables: [
+          {
+            id: "output",
+            label: "Total output \\(Y\\)",
+            answer: "up",
+            why: "Under CRS, doubling all inputs doubles output."
+          },
+          {
+            id: "y_per_l",
+            label: "Output per worker \\(Y/L\\)",
+            answer: "flat",
+            why: "Both numerator and denominator double, leaving \\(Y/L\\) unchanged."
+          },
+          {
+            id: "k_per_l",
+            label: "Capital per worker \\(K/L\\)",
+            answer: "flat",
+            why: "Both \\(K\\) and \\(L\\) double, so their ratio is unchanged."
+          },
+          {
+            id: "rts",
+            label: "Returns-to-scale classification",
+            answer: "flat",
+            why: "Classification remains constant returns to scale."
+          }
+        ]
+      }
+    ];
+
     const STORAGE = {
       checks: "econ205_midterm1_checks_v3",
       mastered: "econ205_midterm1_mastered_v3",
@@ -2184,6 +2719,7 @@
       marketLab: "econ205_midterm1_market_lab_v1",
       arenaStats: "econ205_midterm1_arena_stats_v1",
       arenaPrefs: "econ205_midterm1_arena_prefs_v1",
+      intuitionState: "econ205_midterm1_intuition_state_v1",
       authSession: "econ205_midterm1_auth_session_v1",
       idleMinutes: "econ205_midterm1_idle_minutes_v1"
     };
@@ -2326,6 +2862,18 @@
     const marketQdLabel = document.getElementById("marketQdLabel");
     const marketQsLabel = document.getElementById("marketQsLabel");
 
+    const intuitionScenarioCards = document.getElementById("intuitionScenarioCards");
+    const intuitionStatsMeta = document.getElementById("intuitionStatsMeta");
+    const intuitionScenarioTitle = document.getElementById("intuitionScenarioTitle");
+    const intuitionScenarioTag = document.getElementById("intuitionScenarioTag");
+    const intuitionShock = document.getElementById("intuitionShock");
+    const intuitionVars = document.getElementById("intuitionVars");
+    const intuitionGradeBtn = document.getElementById("intuitionGradeBtn");
+    const intuitionRevealBtn = document.getElementById("intuitionRevealBtn");
+    const intuitionNextBtn = document.getElementById("intuitionNextBtn");
+    const intuitionFeedback = document.getElementById("intuitionFeedback");
+    const intuitionChain = document.getElementById("intuitionChain");
+
     let currentIdx = null;
     let timerSeconds = 75 * 60;
     let timerId = null;
@@ -2394,6 +2942,9 @@
     let lastIdleWarningTs = 0;
     let idleMonitorId = null;
     let sessionIdleMinutes = SESSION_SECURITY.defaultIdleMinutes;
+    let intuitionState = null;
+    let activeIntuitionScenarioId = "";
+    let intuitionGuesses = {};
 
     function safeRead(key, fallback) {
       try {
@@ -3819,6 +4370,333 @@
       });
     }
 
+    function defaultIntuitionScenarioStats() {
+      return {
+        attempts: 0,
+        perfect: 0
+      };
+    }
+
+    function defaultIntuitionState() {
+      return {
+        attempts: 0,
+        perfect: 0,
+        currentId: intuitionScenarios[0] ? intuitionScenarios[0].id : "",
+        scenarioStats: {}
+      };
+    }
+
+    function sanitizeIntuitionScenarioStats(raw) {
+      const base = defaultIntuitionScenarioStats();
+      if (!raw || typeof raw !== "object") return base;
+      const attempts = clamp(Number.parseInt(raw.attempts, 10) || 0, 0, 100000);
+      const perfect = clamp(Number.parseInt(raw.perfect, 10) || 0, 0, attempts);
+      return { attempts, perfect };
+    }
+
+    function sanitizeIntuitionState(raw) {
+      const base = defaultIntuitionState();
+      if (!raw || typeof raw !== "object") return base;
+
+      const next = {
+        attempts: clamp(Number.parseInt(raw.attempts, 10) || 0, 0, 100000),
+        perfect: 0,
+        currentId: typeof raw.currentId === "string" ? raw.currentId : base.currentId,
+        scenarioStats: {}
+      };
+      next.perfect = clamp(Number.parseInt(raw.perfect, 10) || 0, 0, next.attempts);
+
+      const rawScenarioStats = raw.scenarioStats && typeof raw.scenarioStats === "object"
+        ? raw.scenarioStats
+        : {};
+      intuitionScenarios.forEach((scenario) => {
+        next.scenarioStats[scenario.id] = sanitizeIntuitionScenarioStats(rawScenarioStats[scenario.id]);
+      });
+
+      if (!intuitionScenarios.find((scenario) => scenario.id === next.currentId)) {
+        next.currentId = base.currentId;
+      }
+      return next;
+    }
+
+    function persistIntuitionState() {
+      if (!intuitionState) return;
+      safeWrite(STORAGE.intuitionState, intuitionState);
+    }
+
+    function getIntuitionScenarioById(id) {
+      return intuitionScenarios.find((scenario) => scenario.id === id) || null;
+    }
+
+    function getActiveIntuitionScenario() {
+      return getIntuitionScenarioById(activeIntuitionScenarioId);
+    }
+
+    function getIntuitionScenarioStats(id) {
+      if (!intuitionState) intuitionState = defaultIntuitionState();
+      if (!intuitionState.scenarioStats || typeof intuitionState.scenarioStats !== "object") {
+        intuitionState.scenarioStats = {};
+      }
+      if (!intuitionState.scenarioStats[id]) {
+        intuitionState.scenarioStats[id] = defaultIntuitionScenarioStats();
+      }
+      return intuitionState.scenarioStats[id];
+    }
+
+    function intuitionDirectionLabel(value) {
+      if (value === "up") return "Increase (↑)";
+      if (value === "down") return "Decrease (↓)";
+      return "No clear change (~)";
+    }
+
+    function setIntuitionFeedback(message, tone = "") {
+      if (!intuitionFeedback) return;
+      intuitionFeedback.innerHTML = message;
+      intuitionFeedback.className = `arena-feedback${tone ? ` ${tone}` : ""}`;
+    }
+
+    function updateIntuitionStatsMeta() {
+      if (!intuitionStatsMeta || !intuitionState) return;
+      const attempts = intuitionState.attempts;
+      const perfect = intuitionState.perfect;
+      const pct = attempts ? Math.round((perfect / attempts) * 100) : 0;
+      intuitionStatsMeta.textContent = `Attempts: ${attempts} • Perfect rounds: ${perfect} • Perfect rate: ${pct}%`;
+    }
+
+    function renderIntuitionScenarioCards() {
+      if (!intuitionScenarioCards || !intuitionState) return;
+      intuitionScenarioCards.innerHTML = "";
+
+      intuitionScenarios.forEach((scenario) => {
+        const stats = getIntuitionScenarioStats(scenario.id);
+        const pct = stats.attempts ? Math.round((stats.perfect / stats.attempts) * 100) : 0;
+        const row = document.createElement("button");
+        row.type = "button";
+        row.className = `intuition-scenario${scenario.id === activeIntuitionScenarioId ? " active" : ""}`;
+        row.innerHTML = `<span class="title">${scenario.title}</span><span class="meta">${scenario.tag} • ${stats.attempts} tries • ${pct}% perfect</span>`;
+        row.addEventListener("click", () => {
+          setActiveIntuitionScenario(scenario.id);
+        });
+        intuitionScenarioCards.appendChild(row);
+      });
+    }
+
+    function renderIntuitionChain(scenario, includeReasons = true) {
+      if (!intuitionChain || !scenario) return;
+      const chainItems = scenario.chain
+        .map((line) => `<li>${line}</li>`)
+        .join("");
+      const reasonItems = includeReasons
+        ? scenario.variables
+          .map((item) => `<li><strong>${item.label}:</strong> ${item.why}</li>`)
+          .join("")
+        : "";
+
+      intuitionChain.innerHTML = `<strong>Causal chain</strong><ol>${chainItems}</ol>${includeReasons ? `<strong>Directional logic</strong><ul>${reasonItems}</ul>` : ""}`;
+      intuitionChain.classList.remove("hidden");
+      typesetMath(intuitionChain);
+    }
+
+    function hideIntuitionChain() {
+      if (!intuitionChain) return;
+      intuitionChain.innerHTML = "";
+      intuitionChain.classList.add("hidden");
+    }
+
+    function renderIntuitionVariables(scenario) {
+      if (!intuitionVars) return;
+      intuitionVars.innerHTML = "";
+
+      scenario.variables.forEach((item) => {
+        const row = document.createElement("div");
+        row.className = "intuition-var";
+        row.dataset.varId = item.id;
+
+        const label = document.createElement("label");
+        label.className = "intuition-label";
+        label.innerHTML = item.label;
+
+        const select = document.createElement("select");
+        select.className = "intuition-select";
+        select.setAttribute("aria-label", item.label);
+        select.innerHTML = "<option value=''>Choose direction...</option>";
+        INTUITION_OPTIONS.forEach((option) => {
+          const node = document.createElement("option");
+          node.value = option.value;
+          node.textContent = option.label;
+          select.appendChild(node);
+        });
+        select.value = intuitionGuesses[item.id] || "";
+        select.addEventListener("change", () => {
+          intuitionGuesses[item.id] = select.value;
+          row.classList.remove("correct", "wrong");
+          const result = row.querySelector(".intuition-result");
+          if (result) result.textContent = select.value ? "Ready" : "Pending";
+        });
+
+        const result = document.createElement("span");
+        result.className = "intuition-result";
+        result.textContent = "Pending";
+
+        row.appendChild(label);
+        row.appendChild(select);
+        row.appendChild(result);
+        intuitionVars.appendChild(row);
+      });
+      typesetMath(intuitionVars);
+    }
+
+    function setActiveIntuitionScenario(id) {
+      const scenario = getIntuitionScenarioById(id) || intuitionScenarios[0];
+      if (!scenario) return;
+
+      activeIntuitionScenarioId = scenario.id;
+      intuitionGuesses = {};
+      if (intuitionState) {
+        intuitionState.currentId = scenario.id;
+        persistIntuitionState();
+      }
+
+      if (intuitionScenarioTitle) intuitionScenarioTitle.textContent = scenario.title;
+      if (intuitionScenarioTag) intuitionScenarioTag.textContent = scenario.tag;
+      if (intuitionShock) intuitionShock.innerHTML = scenario.shock;
+      renderIntuitionVariables(scenario);
+      renderIntuitionScenarioCards();
+      updateIntuitionStatsMeta();
+      hideIntuitionChain();
+      setIntuitionFeedback("Use the dropdowns, then click <strong>Grade Predictions</strong>.", "");
+      typesetMath(intuitionShock);
+    }
+
+    function pickNextIntuitionScenarioId() {
+      if (intuitionScenarios.length <= 1) return intuitionScenarios[0] ? intuitionScenarios[0].id : "";
+      const candidates = intuitionScenarios.filter((scenario) => scenario.id !== activeIntuitionScenarioId);
+      if (!candidates.length) return activeIntuitionScenarioId;
+
+      const ranked = candidates
+        .map((scenario) => {
+          const stats = getIntuitionScenarioStats(scenario.id);
+          const rate = stats.attempts ? (stats.perfect / stats.attempts) : 0;
+          const priority = (1 - rate) + (stats.attempts === 0 ? 0.8 : 0) + (Math.random() * 0.2);
+          return { id: scenario.id, priority };
+        })
+        .sort((a, b) => b.priority - a.priority);
+
+      const topBand = ranked.slice(0, Math.min(3, ranked.length));
+      return topBand[Math.floor(Math.random() * topBand.length)].id;
+    }
+
+    function nextIntuitionScenario() {
+      const nextId = pickNextIntuitionScenarioId();
+      if (!nextId) return;
+      setActiveIntuitionScenario(nextId);
+      showStatus("Loaded next intuition scenario.");
+    }
+
+    function gradeIntuitionPredictions() {
+      const scenario = getActiveIntuitionScenario();
+      if (!scenario || !intuitionVars || !intuitionState) return;
+
+      let missing = 0;
+      let correct = 0;
+      scenario.variables.forEach((item) => {
+        const row = intuitionVars.querySelector(`.intuition-var[data-var-id="${item.id}"]`);
+        if (!row) return;
+        const select = row.querySelector("select");
+        const result = row.querySelector(".intuition-result");
+        const guess = select ? select.value : "";
+        intuitionGuesses[item.id] = guess;
+
+        row.classList.remove("correct", "wrong");
+        if (!guess) {
+          missing += 1;
+          if (result) result.textContent = "Required";
+          return;
+        }
+
+        if (guess === item.answer) {
+          correct += 1;
+          row.classList.add("correct");
+          if (result) result.textContent = "Correct";
+        } else {
+          row.classList.add("wrong");
+          if (result) result.textContent = `${intuitionDirectionLabel(item.answer)} expected`;
+        }
+      });
+
+      if (missing > 0) {
+        setIntuitionFeedback(`Complete all predictions first. Missing ${missing} selection${missing === 1 ? "" : "s"}.`, "error");
+        return;
+      }
+
+      const stats = getIntuitionScenarioStats(scenario.id);
+      const perfect = correct === scenario.variables.length;
+
+      intuitionState.attempts += 1;
+      stats.attempts += 1;
+      if (perfect) {
+        intuitionState.perfect += 1;
+        stats.perfect += 1;
+      }
+      persistIntuitionState();
+      renderIntuitionScenarioCards();
+      updateIntuitionStatsMeta();
+      renderIntuitionChain(scenario, true);
+
+      if (perfect) {
+        setIntuitionFeedback(`Perfect round. ${correct}/${scenario.variables.length} directions are correct.`, "success");
+      } else {
+        setIntuitionFeedback(`Scored ${correct}/${scenario.variables.length}. Review the causal chain and directional logic below.`, "error");
+      }
+    }
+
+    function revealIntuitionLogic() {
+      const scenario = getActiveIntuitionScenario();
+      if (!scenario) return;
+      renderIntuitionChain(scenario, true);
+      setIntuitionFeedback("Logic revealed. Re-run the same scenario and aim for a perfect directional pass.", "");
+    }
+
+    function resetIntuitionStudioState(shouldPersist = true) {
+      intuitionState = defaultIntuitionState();
+      intuitionGuesses = {};
+      if (shouldPersist) {
+        safeWrite(STORAGE.intuitionState, intuitionState);
+      }
+      const fallback = intuitionState.currentId || (intuitionScenarios[0] && intuitionScenarios[0].id);
+      if (fallback) setActiveIntuitionScenario(fallback);
+      updateIntuitionStatsMeta();
+      hideIntuitionChain();
+      setIntuitionFeedback("Intuition studio reset. Choose directions and grade again.", "");
+    }
+
+    function initIntuitionStudio() {
+      if (
+        !intuitionScenarioCards
+        || !intuitionStatsMeta
+        || !intuitionScenarioTitle
+        || !intuitionScenarioTag
+        || !intuitionShock
+        || !intuitionVars
+        || !intuitionGradeBtn
+        || !intuitionRevealBtn
+        || !intuitionNextBtn
+        || !intuitionFeedback
+        || !intuitionChain
+      ) {
+        return;
+      }
+      intuitionState = sanitizeIntuitionState(safeRead(STORAGE.intuitionState, null));
+      activeIntuitionScenarioId = intuitionState.currentId || (intuitionScenarios[0] && intuitionScenarios[0].id) || "";
+
+      intuitionGradeBtn.addEventListener("click", gradeIntuitionPredictions);
+      intuitionRevealBtn.addEventListener("click", revealIntuitionLogic);
+      intuitionNextBtn.addEventListener("click", nextIntuitionScenario);
+
+      setActiveIntuitionScenario(activeIntuitionScenarioId);
+      updateIntuitionStatsMeta();
+    }
+
     function scrollToSection(id) {
       const target = document.getElementById(id);
       if (!target) return;
@@ -3850,6 +4728,12 @@
           meta: "Navigate",
           keywords: "market lab ceiling floor shortage surplus",
           run: () => scrollToSection("marketLab")
+        },
+        {
+          title: "Jump to Causal Intuition Studio",
+          meta: "Navigate",
+          keywords: "intuition causal logic why reasoning",
+          run: () => scrollToSection("intuitionStudio")
         },
         {
           title: "Jump to Quant Arena",
@@ -3902,6 +4786,24 @@
           meta: "Action",
           keywords: "quant arena generate challenge",
           run: () => generateArenaChallenge()
+        },
+        {
+          title: "Grade Intuition Predictions",
+          meta: "Action",
+          keywords: "intuition grade predictions directions",
+          run: () => gradeIntuitionPredictions()
+        },
+        {
+          title: "Reveal Intuition Logic",
+          meta: "Action",
+          keywords: "intuition reveal why chain",
+          run: () => revealIntuitionLogic()
+        },
+        {
+          title: "Next Intuition Scenario",
+          meta: "Action",
+          keywords: "intuition next scenario adaptive",
+          run: () => nextIntuitionScenario()
         },
         {
           title: "Check Quant Answer",
@@ -3969,7 +4871,7 @@
       if (!filteredCommandItems.length) {
         const empty = document.createElement("div");
         empty.className = "command-item";
-        empty.innerHTML = "<span class=\"title\">No matching actions</span><span class=\"meta\">Try keywords like graph, timer, arena, recall</span>";
+        empty.innerHTML = "<span class=\"title\">No matching actions</span><span class=\"meta\">Try keywords like graph, intuition, timer, arena, recall</span>";
         commandList.appendChild(empty);
         return;
       }
@@ -4095,6 +4997,9 @@
         ["commandShell", commandShell],
         ["marketSvg", marketSvg],
         ["arenaPrompt", arenaPrompt],
+        ["intuitionScenarioCards", intuitionScenarioCards],
+        ["intuitionVars", intuitionVars],
+        ["intuitionFeedback", intuitionFeedback],
         ["liveStatus", liveStatus]
       ];
 
@@ -4161,6 +5066,35 @@
         });
       });
 
+      if (!Array.isArray(intuitionScenarios) || intuitionScenarios.length < 4) {
+        issues.push("intuition-scenarios-missing");
+      } else {
+        intuitionScenarios.forEach((scenario, sIdx) => {
+          if (!scenario || typeof scenario !== "object") {
+            issues.push(`intuition-shape-${sIdx}`);
+            return;
+          }
+          if (!scenario.id || !scenario.title || !scenario.tag || !scenario.shock) {
+            issues.push(`intuition-metadata-${sIdx}`);
+          }
+          if (!Array.isArray(scenario.chain) || scenario.chain.length < 2) {
+            issues.push(`intuition-chain-${sIdx}`);
+          }
+          if (!Array.isArray(scenario.variables) || scenario.variables.length < 3) {
+            issues.push(`intuition-vars-${sIdx}`);
+            return;
+          }
+          scenario.variables.forEach((item, iIdx) => {
+            if (!item.id || !item.label || !item.why) {
+              issues.push(`intuition-var-shape-${sIdx}-${iIdx}`);
+            }
+            if (!INTUITION_OPTIONS.some((option) => option.value === item.answer)) {
+              issues.push(`intuition-answer-${sIdx}-${iIdx}`);
+            }
+          });
+        });
+      }
+
       if (issues.length) {
         console.warn("Internal diagnostics failed", issues.slice(0, 8));
         if (diagnosticsChip) {
@@ -4197,7 +5131,8 @@
           cards: safeRead(STORAGE.cards, null),
           marketLab: safeRead(STORAGE.marketLab, null),
           arenaStats: safeRead(STORAGE.arenaStats, null),
-          arenaPrefs: safeRead(STORAGE.arenaPrefs, null)
+          arenaPrefs: safeRead(STORAGE.arenaPrefs, null),
+          intuitionState: safeRead(STORAGE.intuitionState, null)
         }
       };
       const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
@@ -4260,6 +5195,7 @@
         localStorage.removeItem(STORAGE.marketLab);
         localStorage.removeItem(STORAGE.arenaStats);
         localStorage.removeItem(STORAGE.arenaPrefs);
+        localStorage.removeItem(STORAGE.intuitionState);
         localStorage.removeItem(STORAGE.idleMinutes);
       } catch {
         // Ignore storage failures.
@@ -4303,8 +5239,9 @@
       }
       if (arenaAnswer) arenaAnswer.value = "";
       setArenaFeedback("Arena reset. Generate a fresh challenge.", "");
+      resetIntuitionStudioState(false);
       pickPrompt();
-      showStatus("All interactive progress reset, including graph and quant arenas.");
+      showStatus("All interactive progress reset, including graph, intuition, and quant arenas.");
     }
 
     function initRevealEffects() {
@@ -4440,6 +5377,15 @@
       } else if (key === "4") {
         event.preventDefault();
         rateCurrent("easy");
+      } else if (key === "i") {
+        event.preventDefault();
+        nextIntuitionScenario();
+      } else if (key === "y") {
+        event.preventDefault();
+        gradeIntuitionPredictions();
+      } else if (key === "h") {
+        event.preventDefault();
+        revealIntuitionLogic();
       } else if (key === "g") {
         event.preventDefault();
         generateArenaChallenge();
@@ -4480,6 +5426,7 @@
     renderChecks();
     applyResourceFilter();
     initMarketLab();
+    initIntuitionStudio();
     initArena();
     initAdminControls();
     initCommandPalette();
@@ -4491,7 +5438,7 @@
     pickPrompt();
     bootstrapMath();
     runInternalDiagnostics();
-    showStatus("Interactive mode ready. Shortcuts: N/R/M/1/2/3/4 + G/K/V + Cmd/Ctrl+K.");
+    showStatus("Interactive mode ready. Shortcuts: N/R/M/1/2/3/4 + I/Y/H + G/K/V + Cmd/Ctrl+K.");
   </script>
 </body>
 </html>
