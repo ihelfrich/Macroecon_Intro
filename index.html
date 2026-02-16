@@ -1579,7 +1579,7 @@
         <input id="authNameInput" class="auth-input" type="text" autocomplete="name" placeholder="Name" aria-label="Authorized name" spellcheck="false" />
         <button class="btn btn-primary" id="authUnlockBtn" type="button" aria-label="Unlock access">Unlock</button>
       </div>
-      <div class="auth-help">Use your authorized course name.</div>
+      <div class="auth-help">Use your authorized course name. Sessions auto-lock after inactivity.</div>
       <div class="auth-message" id="authMessage">Access is name-gated for current enrolled use.</div>
     </div>
   </div>
@@ -2185,6 +2185,13 @@
       lockMs: 20000
     };
 
+    const SESSION_SECURITY = {
+      idleLockMs: 30 * 60 * 1000,
+      warningMs: 60 * 1000,
+      pollMs: 1000,
+      warningPulseMs: 10000
+    };
+
     const flashQ = document.getElementById("flashQ");
     const flashA = document.getElementById("flashA");
     const flashMeta = document.getElementById("flashMeta");
@@ -2356,6 +2363,9 @@
     let authFailedAttempts = 0;
     let authLockedUntil = 0;
     let authCooldownId = null;
+    let lastActivityTs = Date.now();
+    let lastIdleWarningTs = 0;
+    let idleMonitorId = null;
 
     function safeRead(key, fallback) {
       try {
@@ -2409,6 +2419,32 @@
       authCooldownId = null;
     }
 
+    function clearSessionWarning() {
+      lastIdleWarningTs = 0;
+      if (!liveStatus) return;
+      if (liveStatus.textContent.startsWith("Security: session locks in ")) {
+        liveStatus.textContent = "";
+      }
+    }
+
+    function markSessionActivity(force = false) {
+      if (!activeAuth || document.body.classList.contains("auth-locked")) return;
+      const now = Date.now();
+      if (!force && now - lastActivityTs < 600) return;
+      lastActivityTs = now;
+      clearSessionWarning();
+    }
+
+    function lockSessionNow(message = "Session locked.") {
+      try {
+        localStorage.removeItem(STORAGE.authSession);
+      } catch {
+        // Ignore storage failures.
+      }
+      lockAccess(message);
+      showStatus("Session locked. Re-enter authorized name.");
+    }
+
     function resetAuthThrottle() {
       authFailedAttempts = 0;
       authLockedUntil = 0;
@@ -2451,6 +2487,7 @@
     function lockAccess(message = "Access is name-gated for current enrolled use.") {
       activeAuth = null;
       resetAuthThrottle();
+      clearSessionWarning();
       document.body.classList.add("auth-locked");
       document.body.dataset.role = "locked";
       if (authGate) authGate.classList.remove("hidden");
@@ -2469,6 +2506,8 @@
     function applyAccess(user) {
       activeAuth = user;
       setAuthLockedState(false);
+      lastActivityTs = Date.now();
+      clearSessionWarning();
       document.body.classList.remove("auth-locked");
       document.body.dataset.role = user.role;
       if (authGate) authGate.classList.add("hidden");
@@ -2529,15 +2568,47 @@
       }
       if (switchUserBtn) {
         switchUserBtn.addEventListener("click", () => {
-          try {
-            localStorage.removeItem(STORAGE.authSession);
-          } catch {
-            // Ignore storage failures.
-          }
-          lockAccess("Session cleared. Enter an authorized name.");
-          showStatus("Session locked.");
+          lockSessionNow("Session cleared. Enter an authorized name.");
         });
       }
+    }
+
+    function initSessionSecurity() {
+      const activityEvents = ["pointerdown", "keydown", "mousedown", "touchstart", "scroll", "wheel"];
+      activityEvents.forEach((eventName) => {
+        window.addEventListener(eventName, () => markSessionActivity(), { passive: true });
+      });
+      window.addEventListener("focus", () => markSessionActivity(true));
+      document.addEventListener("visibilitychange", () => {
+        if (document.visibilityState === "visible") {
+          markSessionActivity(true);
+        }
+      });
+
+      if (idleMonitorId) {
+        clearInterval(idleMonitorId);
+      }
+      idleMonitorId = window.setInterval(() => {
+        if (!activeAuth || document.body.classList.contains("auth-locked")) return;
+        const now = Date.now();
+        const idleMs = now - lastActivityTs;
+        const remainingMs = SESSION_SECURITY.idleLockMs - idleMs;
+
+        if (remainingMs <= 0) {
+          lockSessionNow("Session timed out due to inactivity.");
+          return;
+        }
+
+        if (remainingMs <= SESSION_SECURITY.warningMs) {
+          if (now - lastIdleWarningTs >= SESSION_SECURITY.warningPulseMs) {
+            const seconds = Math.max(1, Math.ceil(remainingMs / 1000));
+            showStatus(`Security: session locks in ${seconds}s without activity.`);
+            lastIdleWarningTs = now;
+          }
+        } else {
+          clearSessionWarning();
+        }
+      }, SESSION_SECURITY.pollMs);
     }
 
     let mathQueue = Promise.resolve();
@@ -3783,6 +3854,12 @@
           run: () => resourceFilter.focus()
         },
         {
+          title: "Lock Session",
+          meta: "Security",
+          keywords: "lock logout auth session",
+          run: () => lockSessionNow("Session locked. Enter an authorized name.")
+        },
+        {
           title: "Print Layout",
           meta: "Action",
           keywords: "print pdf export",
@@ -3917,6 +3994,28 @@
     function runInternalDiagnostics() {
       const issues = [];
       const currentMarketState = { ...marketLabState };
+      const criticalNodes = [
+        ["authGate", authGate],
+        ["authNameInput", authNameInput],
+        ["authUnlockBtn", authUnlockBtn],
+        ["resourceGrid", resourceGrid],
+        ["commandShell", commandShell],
+        ["marketSvg", marketSvg],
+        ["arenaPrompt", arenaPrompt],
+        ["liveStatus", liveStatus]
+      ];
+
+      criticalNodes.forEach(([label, node]) => {
+        if (!node) {
+          issues.push(`dom-missing-${label}`);
+        }
+      });
+      if (!AUTH_ALIASES.hanna || !AUTH_ALIASES.ian) {
+        issues.push("auth-aliases-missing");
+      }
+      if (AUTH_THROTTLE.maxAttempts < 3 || AUTH_THROTTLE.lockMs < 5000) {
+        issues.push("auth-throttle-unsafe");
+      }
 
       for (let i = 0; i < 60; i += 1) {
         marketLabState = {
@@ -4267,6 +4366,7 @@
     initAdminControls();
     initCommandPalette();
     initAccessGate();
+    initSessionSecurity();
     initRevealEffects();
     initParallax();
     initHeroPointerMotion();

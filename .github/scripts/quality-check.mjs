@@ -44,6 +44,9 @@ const requiredSnippets = [
   "function resolveAuthorizedUser(",
   "function resetAuthThrottle(",
   "function isAuthTemporarilyLocked(",
+  "function lockSessionNow(",
+  "function initSessionSecurity(",
+  "SESSION_SECURITY",
   "commandReturnFocus"
 ];
 
