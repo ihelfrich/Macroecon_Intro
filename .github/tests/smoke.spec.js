@@ -26,6 +26,12 @@ test("auth aliases, admin controls, and lock flow", async ({ page }) => {
   await page.click("#authUnlockBtn");
   await expect(page.locator("body")).toHaveAttribute("data-role", "admin");
   await expect(page.locator("#adminConsole")).toBeVisible();
+  await expect(page.locator("#missionControl")).toBeVisible();
+
+  await page.click("#generateQuestBtn");
+  await expect(page.locator("#questList .quest-item")).toHaveCount(4);
+  await page.click("#runNextQuestBtn");
+  await expect(page.locator("#liveStatus")).toContainText("Quest focus loaded");
 
   await page.fill("#adminIdleMinutes", "35");
   await page.click("#adminSaveIdleBtn");

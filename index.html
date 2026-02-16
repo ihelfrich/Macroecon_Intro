@@ -1660,6 +1660,255 @@
       color: #3f2b1f;
     }
 
+    .mission-grid {
+      margin-top: 12px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(300px, 0.92fr) minmax(420px, 1.08fr);
+      align-items: start;
+    }
+
+    .mission-panel {
+      border: 1px solid #dcc8ae;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffefb 0%, #fff6e9 100%);
+      padding: 12px;
+      box-shadow: 0 10px 24px rgba(44, 26, 15, 0.08);
+      display: grid;
+      gap: 10px;
+    }
+
+    .mission-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .mission-head h3 {
+      margin: 0;
+      color: #482f20;
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+    }
+
+    .mastery-ring {
+      width: 138px;
+      height: 138px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      background:
+        radial-gradient(circle at center, #fff 52%, transparent 54%),
+        conic-gradient(from 270deg, #b22323 0deg, #b22323 120deg, #ddc6ad 120deg);
+      border: 1px solid #ddc8b0;
+      box-shadow: inset 0 0 0 1px rgba(153, 0, 0, 0.1);
+      margin: 4px auto;
+    }
+
+    .mastery-ring .value {
+      font-family: "Fraunces", serif;
+      font-weight: 700;
+      font-size: 1.35rem;
+      color: #3f2a1f;
+      line-height: 1.1;
+    }
+
+    .mastery-ring .label {
+      display: block;
+      margin-top: 2px;
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.64rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #6d5f50;
+      text-align: center;
+    }
+
+    .mission-signals {
+      display: grid;
+      gap: 8px;
+    }
+
+    .mission-signal {
+      border: 1px solid #e2d0bb;
+      border-radius: 10px;
+      background: #fff;
+      padding: 7px 9px;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .mission-signal span {
+      font-size: 0.8rem;
+      color: #56493f;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+    }
+
+    .mission-signal strong {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.82rem;
+      color: #3a2c22;
+    }
+
+    .mission-heatmap {
+      display: grid;
+      gap: 8px;
+    }
+
+    .heat-row {
+      border: 1px solid #dfccb5;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 9px;
+      display: grid;
+      gap: 7px;
+    }
+
+    .heat-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      font-size: 0.79rem;
+      color: #51453a;
+      font-weight: 700;
+    }
+
+    .heat-top strong {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      color: #3f2f25;
+      padding: 2px 8px;
+      border: 1px solid #ddc9b1;
+      border-radius: 999px;
+      background: #fff9ee;
+    }
+
+    .heat-bar {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      border: 1px solid #e2d1bc;
+      background: #efe1d0;
+      overflow: hidden;
+    }
+
+    .heat-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ad1f1f, #d9792e, #2e8d5b);
+      transition: width 0.24s ease;
+    }
+
+    .heat-note {
+      font-size: 0.76rem;
+      color: #65584d;
+      line-height: 1.35;
+    }
+
+    .quest-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .quest-select {
+      border: 1px solid #dbc6ac;
+      border-radius: 10px;
+      background: #fff;
+      color: #352b22;
+      font-size: 0.84rem;
+      padding: 7px 9px;
+      font-weight: 600;
+      min-width: 150px;
+    }
+
+    .quest-select:focus-visible {
+      outline: 2px solid rgba(153, 0, 0, 0.35);
+      outline-offset: 1px;
+      border-color: rgba(153, 0, 0, 0.4);
+    }
+
+    .quest-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .quest-item {
+      border: 1px solid #dfccb5;
+      border-radius: 10px;
+      background: #fff;
+      padding: 9px 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .quest-item.done {
+      border-color: rgba(22, 122, 72, 0.35);
+      background: linear-gradient(180deg, #f4fff8 0%, #effcf3 100%);
+    }
+
+    .quest-item-head {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .quest-item input[type="checkbox"] {
+      width: 17px;
+      height: 17px;
+      accent-color: var(--usc-cardinal);
+      cursor: pointer;
+    }
+
+    .quest-title {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #3c2d22;
+      line-height: 1.3;
+    }
+
+    .quest-mins {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      color: #574b40;
+      border: 1px solid #deccb7;
+      border-radius: 999px;
+      background: #fff9ee;
+      padding: 2px 7px;
+      white-space: nowrap;
+    }
+
+    .quest-note {
+      margin: 0;
+      font-size: 0.78rem;
+      color: #66594f;
+      line-height: 1.35;
+    }
+
+    .quest-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .quest-progress-row {
+      display: grid;
+      gap: 8px;
+    }
+
+    .quest-progress-row .progress-bar {
+      height: 11px;
+    }
+
     .admin-console {
       display: grid;
       gap: 10px;
@@ -1694,6 +1943,9 @@
         grid-template-columns: 1fr;
       }
       .intuition-grid {
+        grid-template-columns: 1fr;
+      }
+      .mission-grid {
         grid-template-columns: 1fr;
       }
     }
@@ -1740,6 +1992,9 @@
       .intuition-result {
         justify-self: start;
       }
+      .quest-item-head {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -1763,6 +2018,7 @@
       .flash-actions,
       .btn,
       #marketLab,
+      #missionControl .quest-actions,
       #intuitionStudio,
       #quantArena,
       footer {
@@ -1810,6 +2066,7 @@
         <span class="auth-chip" id="sessionGuardChip">Session Guard: Locked</span>
         <button class="btn btn-ghost" id="commandBtn" type="button">Command</button>
         <button class="btn btn-ghost admin-inline" id="adminDiagnosticsBtn" type="button">Run Diag</button>
+        <a class="btn btn-ghost" href="#missionControl">Mission</a>
         <a class="btn btn-ghost" href="#marketLab">Graph Lab</a>
         <a class="btn btn-ghost" href="#intuitionStudio">Intuition</a>
         <a class="btn btn-ghost" href="#quantArena">Quant Arena</a>
@@ -1825,7 +2082,7 @@
       <div class="command-backdrop" id="commandBackdrop"></div>
       <div class="command-dialog" role="dialog" aria-label="Command palette">
         <div class="command-head">
-          <input id="commandInput" class="command-input" type="search" placeholder="Search actions... (e.g., graph, intuition, timer, arena, recall)" />
+          <input id="commandInput" class="command-input" type="search" placeholder="Search actions... (e.g., mission, graph, intuition, timer, arena, recall)" />
           <span class="command-hint">ESC</span>
         </div>
         <div class="command-list" id="commandList"></div>
@@ -1857,6 +2114,67 @@
         <div class="kpi"><div class="n">17</div><div class="l">Core Equations</div></div>
         <div class="kpi"><div class="n" id="heroRecallCount">10</div><div class="l">Recall Prompts</div></div>
         <div class="kpi"><div class="n">3</div><div class="l">Timed Mock Forms</div></div>
+      </div>
+    </section>
+
+    <section class="section" id="missionControl">
+      <h2>Mission Control</h2>
+      <p class="lead">A live control center for mastery quality. Signals combine retrieval, quantitative execution, causal intuition, and checklist completion into one adaptive plan.</p>
+      <div class="mission-grid">
+        <div class="mission-panel">
+          <div class="mission-head">
+            <h3>Mastery Signal</h3>
+            <button type="button" class="btn btn-ghost" id="refreshMissionBtn">Refresh Analysis</button>
+          </div>
+          <div class="mastery-ring" id="masteryRing">
+            <div>
+              <div class="value" id="masteryScore">50%</div>
+              <span class="label">Composite</span>
+            </div>
+          </div>
+          <div class="mission-signals">
+            <div class="mission-signal"><span>Recall retention</span><strong id="missionRecallScore">50%</strong></div>
+            <div class="mission-signal"><span>Quant execution</span><strong id="missionArenaScore">50%</strong></div>
+            <div class="mission-signal"><span>Causal intuition</span><strong id="missionIntuitionScore">50%</strong></div>
+            <div class="mission-signal"><span>Protocol completion</span><strong id="missionChecklistScore">0%</strong></div>
+          </div>
+          <div class="arena-feedback" id="missionAlert">Run one recall + one quant + one intuition round to generate a high-confidence mastery signal.</div>
+        </div>
+
+        <div class="mission-panel">
+          <div class="mission-head">
+            <h3>Weakness Heatmap</h3>
+            <span class="flash-meta" id="missionWeaknessMeta">Weakest focus: pending</span>
+          </div>
+          <div class="mission-heatmap" id="missionHeatmap"></div>
+        </div>
+      </div>
+
+      <div class="mission-panel" style="margin-top: 12px;">
+        <div class="mission-head">
+          <h3>Adaptive Quest Planner</h3>
+          <span class="flash-meta" id="questMeta">No quest generated yet.</span>
+        </div>
+        <div class="quest-controls">
+          <label class="timer-label" for="questIntensity">Intensity
+            <select id="questIntensity" class="quest-select">
+              <option value="light">Light (20-25 min)</option>
+              <option value="standard" selected>Standard (30-40 min)</option>
+              <option value="challenge">Challenge (45-60 min)</option>
+            </select>
+          </label>
+          <button type="button" class="btn btn-primary" id="generateQuestBtn">Generate Quest</button>
+          <button type="button" class="btn btn-ghost" id="runNextQuestBtn">Run Next Task</button>
+          <button type="button" class="btn btn-ghost" id="clearQuestBtn">Clear Quest</button>
+        </div>
+        <div class="quest-progress-row">
+          <div class="progress-meta">
+            <strong id="questProgressPct">0% complete</strong>
+            <span id="questProgressText">No active tasks.</span>
+          </div>
+          <div class="progress-bar"><div class="progress-fill" id="questProgressFill"></div></div>
+        </div>
+        <div class="quest-list" id="questList"></div>
       </div>
     </section>
 
@@ -2720,6 +3038,7 @@
       arenaStats: "econ205_midterm1_arena_stats_v1",
       arenaPrefs: "econ205_midterm1_arena_prefs_v1",
       intuitionState: "econ205_midterm1_intuition_state_v1",
+      questState: "econ205_midterm1_quest_state_v1",
       authSession: "econ205_midterm1_auth_session_v1",
       idleMinutes: "econ205_midterm1_idle_minutes_v1"
     };
@@ -2874,6 +3193,26 @@
     const intuitionFeedback = document.getElementById("intuitionFeedback");
     const intuitionChain = document.getElementById("intuitionChain");
 
+    const masteryRing = document.getElementById("masteryRing");
+    const masteryScore = document.getElementById("masteryScore");
+    const missionRecallScore = document.getElementById("missionRecallScore");
+    const missionArenaScore = document.getElementById("missionArenaScore");
+    const missionIntuitionScore = document.getElementById("missionIntuitionScore");
+    const missionChecklistScore = document.getElementById("missionChecklistScore");
+    const missionAlert = document.getElementById("missionAlert");
+    const missionHeatmap = document.getElementById("missionHeatmap");
+    const missionWeaknessMeta = document.getElementById("missionWeaknessMeta");
+    const refreshMissionBtn = document.getElementById("refreshMissionBtn");
+    const questIntensity = document.getElementById("questIntensity");
+    const generateQuestBtn = document.getElementById("generateQuestBtn");
+    const runNextQuestBtn = document.getElementById("runNextQuestBtn");
+    const clearQuestBtn = document.getElementById("clearQuestBtn");
+    const questMeta = document.getElementById("questMeta");
+    const questList = document.getElementById("questList");
+    const questProgressPct = document.getElementById("questProgressPct");
+    const questProgressText = document.getElementById("questProgressText");
+    const questProgressFill = document.getElementById("questProgressFill");
+
     let currentIdx = null;
     let timerSeconds = 75 * 60;
     let timerId = null;
@@ -2915,13 +3254,21 @@
       elasticity: "Elasticity midpoint"
     };
 
+    function defaultArenaByType() {
+      return ARENA_TYPES.reduce((acc, type) => {
+        acc[type] = { solved: 0, correct: 0 };
+        return acc;
+      }, {});
+    }
+
     function defaultArenaStats() {
       return {
         solved: 0,
         correct: 0,
         streak: 0,
         bestStreak: 0,
-        lastType: "-"
+        lastType: "-",
+        byType: defaultArenaByType()
       };
     }
 
@@ -2945,6 +3292,7 @@
     let intuitionState = null;
     let activeIntuitionScenarioId = "";
     let intuitionGuesses = {};
+    let questState = null;
 
     function safeRead(key, fallback) {
       try {
@@ -3431,6 +3779,7 @@
         ? "No active prompt"
         : `Prompt #${currentIdx + 1} • Next due ${currentDue}`;
       heroRecallCount.textContent = String(prompts.length);
+      updateMissionControl();
     }
 
     function clearAnswerBox() {
@@ -3560,6 +3909,7 @@
       progressPct.textContent = `${pct}% complete`;
       progressText.textContent = `${completed} of ${dailyChecks.length} checklist targets done`;
       progressFill.style.width = `${pct}%`;
+      updateMissionControl();
     }
 
     function renderChecks() {
@@ -4003,12 +4353,23 @@
       const lastType = typeof raw.lastType === "string" && raw.lastType
         ? raw.lastType
         : "-";
+      const byType = defaultArenaByType();
+      if (raw.byType && typeof raw.byType === "object") {
+        ARENA_TYPES.forEach((type) => {
+          const item = raw.byType[type];
+          if (!item || typeof item !== "object") return;
+          const solved = clamp(Number.parseInt(item.solved, 10) || 0, 0, 100000);
+          const correct = clamp(Number.parseInt(item.correct, 10) || 0, 0, solved);
+          byType[type] = { solved, correct };
+        });
+      }
       return {
         solved: clamp(Number.parseInt(raw.solved, 10) || 0, 0, 100000),
         correct: clamp(Number.parseInt(raw.correct, 10) || 0, 0, 100000),
         streak: clamp(Number.parseInt(raw.streak, 10) || 0, 0, 10000),
         bestStreak: clamp(Number.parseInt(raw.bestStreak, 10) || 0, 0, 10000),
-        lastType
+        lastType,
+        byType
       };
     }
 
@@ -4035,6 +4396,7 @@
       arenaStreak.textContent = String(arenaStats.streak);
       arenaBestStreak.textContent = String(arenaStats.bestStreak);
       arenaLastType.textContent = arenaStats.lastType;
+      updateMissionControl();
     }
 
     function setArenaFeedback(message, tone = "") {
@@ -4075,10 +4437,18 @@
       stopArenaTimer();
 
       arenaStats.solved += 1;
+      if (!arenaStats.byType || typeof arenaStats.byType !== "object") {
+        arenaStats.byType = defaultArenaByType();
+      }
+      if (!arenaStats.byType[arenaChallenge.type]) {
+        arenaStats.byType[arenaChallenge.type] = { solved: 0, correct: 0 };
+      }
+      arenaStats.byType[arenaChallenge.type].solved += 1;
       if (correct) {
         arenaStats.correct += 1;
         arenaStats.streak += 1;
         arenaStats.bestStreak = Math.max(arenaStats.bestStreak, arenaStats.streak);
+        arenaStats.byType[arenaChallenge.type].correct += 1;
       } else {
         arenaStats.streak = 0;
       }
@@ -4461,6 +4831,7 @@
       const perfect = intuitionState.perfect;
       const pct = attempts ? Math.round((perfect / attempts) * 100) : 0;
       intuitionStatsMeta.textContent = `Attempts: ${attempts} • Perfect rounds: ${perfect} • Perfect rate: ${pct}%`;
+      updateMissionControl();
     }
 
     function renderIntuitionScenarioCards() {
@@ -4697,6 +5068,594 @@
       updateIntuitionStatsMeta();
     }
 
+    const QUEST_INTENSITY = {
+      light: { count: 3, minuteScale: 0.85 },
+      standard: { count: 4, minuteScale: 1.0 },
+      challenge: { count: 5, minuteScale: 1.2 }
+    };
+
+    const QUEST_LIBRARY = {
+      foundations: [
+        {
+          title: "Graph policy shock drill",
+          note: "Run a binding ceiling scenario and narrate shortage mechanics.",
+          minutes: 7,
+          action: "go_graph",
+          args: { preset: "ceiling_bind" }
+        },
+        {
+          title: "Causal market reasoning",
+          note: "Complete one L01/L02 intuition scenario with full directional accuracy.",
+          minutes: 6,
+          action: "go_intuition",
+          args: { marker: "L01" }
+        },
+        {
+          title: "Elasticity execution rep",
+          note: "Generate and solve one midpoint elasticity quant challenge.",
+          minutes: 7,
+          action: "go_quant",
+          args: { type: "elasticity" }
+        }
+      ],
+      national: [
+        {
+          title: "GDP identity precision",
+          note: "Solve a GDP spending challenge and verify units.",
+          minutes: 7,
+          action: "go_quant",
+          args: { type: "gdp" }
+        },
+        {
+          title: "Deflator inflation rep",
+          note: "Complete one deflator problem with clean formula steps.",
+          minutes: 7,
+          action: "go_quant",
+          args: { type: "deflator" }
+        },
+        {
+          title: "Saving and NX chain",
+          note: "Solve one saving/NX problem and explain sign logic.",
+          minutes: 7,
+          action: "go_quant",
+          args: { type: "saving" }
+        }
+      ],
+      labor_rates: [
+        {
+          title: "Labor metric speed run",
+          note: "Solve one unemployment-rate challenge under timer pressure.",
+          minutes: 6,
+          action: "go_quant",
+          args: { type: "labor" }
+        },
+        {
+          title: "Real rate interpretation",
+          note: "Solve one real-interest challenge and interpret direction.",
+          minutes: 6,
+          action: "go_quant",
+          args: { type: "real_rate" }
+        },
+        {
+          title: "Labor intuition pass",
+          note: "Run one L06 intuition scenario and score perfect.",
+          minutes: 6,
+          action: "go_intuition",
+          args: { marker: "L06" }
+        }
+      ],
+      growth: [
+        {
+          title: "Production function intuition",
+          note: "Work one L07 intuition scenario on TFP/CRS mechanics.",
+          minutes: 7,
+          action: "go_intuition",
+          args: { marker: "L07" }
+        },
+        {
+          title: "Formula pass: growth block",
+          note: "Review formula engine with focus on production and growth equations.",
+          minutes: 5,
+          action: "go_formula",
+          args: {}
+        }
+      ],
+      retrieval: [
+        {
+          title: "Recall burst",
+          note: "Complete 5 prompt cycles with reveal and rating.",
+          minutes: 8,
+          action: "go_recall",
+          args: {}
+        },
+        {
+          title: "Error-clinic checkpoint",
+          note: "Review one conceptual trap and one calculation trap before next round.",
+          minutes: 5,
+          action: "go_error",
+          args: {}
+        }
+      ],
+      pacing: [
+        {
+          title: "Timed sprint",
+          note: "Run a 12-minute focused sprint to simulate exam urgency.",
+          minutes: 12,
+          action: "go_timer",
+          args: { minutes: 12 }
+        }
+      ]
+    };
+
+    function percentFromCounts(correct, total, fallback = 50) {
+      if (!Number.isFinite(correct) || !Number.isFinite(total) || total <= 0) return fallback;
+      return clamp(Math.round((correct / total) * 100), 0, 100);
+    }
+
+    function formatPercent(value) {
+      return `${clamp(Math.round(value), 0, 100)}%`;
+    }
+
+    function peekIntuitionScenarioStats(id) {
+      if (!intuitionState || !intuitionState.scenarioStats || typeof intuitionState.scenarioStats !== "object") {
+        return { attempts: 0, perfect: 0 };
+      }
+      return sanitizeIntuitionScenarioStats(intuitionState.scenarioStats[id]);
+    }
+
+    function intuitionAccuracyForMarkers(markers, fallback = 55) {
+      const markerList = Array.isArray(markers) ? markers : [markers];
+      const relevant = intuitionScenarios.filter((scenario) => markerList.some((marker) => scenario.tag.includes(marker)));
+      if (!relevant.length) return fallback;
+      let attempts = 0;
+      let perfect = 0;
+      relevant.forEach((scenario) => {
+        const stats = peekIntuitionScenarioStats(scenario.id);
+        attempts += stats.attempts;
+        perfect += stats.perfect;
+      });
+      return percentFromCounts(perfect, attempts, fallback);
+    }
+
+    function arenaTypeAccuracy(type, fallback = 55) {
+      const byType = arenaStats && arenaStats.byType && typeof arenaStats.byType === "object"
+        ? arenaStats.byType[type]
+        : null;
+      if (!byType || typeof byType !== "object") return fallback;
+      return percentFromCounts(byType.correct, byType.solved, fallback);
+    }
+
+    function computeMissionSignals() {
+      const totals = computeTotals();
+      const checklistCompleted = checks.filter(Boolean).length;
+      const recallPct = percentFromCounts(totals.correct, totals.seen, 50);
+      const arenaPct = percentFromCounts(arenaStats.correct, arenaStats.solved, 50);
+      const intuitionPct = percentFromCounts(
+        intuitionState ? intuitionState.perfect : 0,
+        intuitionState ? intuitionState.attempts : 0,
+        50
+      );
+      const checklistPct = dailyChecks.length
+        ? Math.round((checklistCompleted / dailyChecks.length) * 100)
+        : 0;
+      const composite = Math.round(
+        (recallPct * 0.27)
+        + (arenaPct * 0.31)
+        + (intuitionPct * 0.30)
+        + (checklistPct * 0.12)
+      );
+
+      const topicScores = [
+        {
+          id: "foundations",
+          label: "Markets + Policy (L01-L02)",
+          score: Math.round(
+            (intuitionAccuracyForMarkers(["L01", "L02"], 55) * 0.5)
+            + (arenaTypeAccuracy("elasticity", 55) * 0.25)
+            + ((checks[3] ? 100 : 45) * 0.25)
+          ),
+          note: "Supply-demand shifts, policy binding logic, and elasticity execution."
+        },
+        {
+          id: "national",
+          label: "National Accounts (L03-L05)",
+          score: Math.round(
+            (((arenaTypeAccuracy("gdp", 55) + arenaTypeAccuracy("deflator", 55) + arenaTypeAccuracy("saving", 55)) / 3) * 0.7)
+            + (recallPct * 0.3)
+          ),
+          note: "GDP decomposition, deflator inflation, and saving-NX identity."
+        },
+        {
+          id: "labor_rates",
+          label: "Labor + Interest (L05-L06)",
+          score: Math.round(
+            (((arenaTypeAccuracy("labor", 55) + arenaTypeAccuracy("real_rate", 55)) / 2) * 0.65)
+            + (intuitionAccuracyForMarkers("L06", 55) * 0.35)
+          ),
+          note: "Unemployment metrics, natural rate intuition, and real-rate channels."
+        },
+        {
+          id: "growth",
+          label: "Growth + Production (L07)",
+          score: Math.round(
+            (intuitionAccuracyForMarkers("L07", 55) * 0.6)
+            + (recallPct * 0.4)
+          ),
+          note: "Production functions, TFP shifts, and returns-to-scale reasoning."
+        },
+        {
+          id: "retrieval",
+          label: "Retrieval Consistency",
+          score: Math.round(
+            (recallPct * 0.6)
+            + (checklistPct * 0.4)
+          ),
+          note: "How reliably you retrieve formulas and concepts without cues."
+        }
+      ];
+
+      topicScores.forEach((topic) => {
+        topic.score = clamp(topic.score, 0, 100);
+      });
+
+      const sortedTopics = topicScores.slice().sort((a, b) => a.score - b.score);
+      return {
+        recallPct,
+        arenaPct,
+        intuitionPct,
+        checklistPct,
+        composite: clamp(composite, 0, 100),
+        topicScores,
+        sortedTopics
+      };
+    }
+
+    function setMissionAlertByScore(score, weakestLabel) {
+      if (!missionAlert) return;
+      let message = "";
+      let tone = "";
+      if (score < 55) {
+        message = `Risk band: fundamentals are unstable. Prioritize ${weakestLabel}, then run a timed sprint immediately after one corrective drill.`;
+        tone = "error";
+      } else if (score < 75) {
+        message = `Building phase: progress is real, but ${weakestLabel} still limits your exam ceiling. Use the adaptive quest to close this gap.`;
+        tone = "";
+      } else {
+        message = `Strong position: readiness signal is high. Keep retrieval and quant reps active to preserve speed under exam timing.`;
+        tone = "success";
+      }
+      missionAlert.textContent = message;
+      missionAlert.className = `arena-feedback${tone ? ` ${tone}` : ""}`;
+    }
+
+    function renderMissionHeatmap(topicScores) {
+      if (!missionHeatmap) return;
+      missionHeatmap.innerHTML = "";
+      topicScores.forEach((topic) => {
+        const row = document.createElement("div");
+        row.className = "heat-row";
+        row.innerHTML = `
+          <div class="heat-top"><span>${topic.label}</span><strong>${formatPercent(topic.score)}</strong></div>
+          <div class="heat-bar"><div class="heat-fill" style="width:${topic.score}%"></div></div>
+          <div class="heat-note">${topic.note}</div>
+        `;
+        missionHeatmap.appendChild(row);
+      });
+    }
+
+    function defaultQuestState() {
+      return {
+        generatedAt: 0,
+        intensity: "standard",
+        tasks: []
+      };
+    }
+
+    function sanitizeQuestTask(raw, fallbackId = "task") {
+      if (!raw || typeof raw !== "object") return null;
+      if (typeof raw.title !== "string" || !raw.title.trim()) return null;
+      if (typeof raw.note !== "string") return null;
+      if (typeof raw.action !== "string" || !raw.action.trim()) return null;
+      const id = typeof raw.id === "string" && raw.id.trim() ? raw.id : fallbackId;
+      const minutes = clamp(Number.parseInt(raw.minutes, 10) || 5, 3, 60);
+      const done = Boolean(raw.done);
+      const args = raw.args && typeof raw.args === "object" ? raw.args : {};
+      return {
+        id,
+        title: raw.title.trim(),
+        note: raw.note.trim(),
+        minutes,
+        action: raw.action.trim(),
+        args,
+        done
+      };
+    }
+
+    function sanitizeQuestState(raw) {
+      const base = defaultQuestState();
+      if (!raw || typeof raw !== "object") return base;
+      const intensity = raw.intensity in QUEST_INTENSITY ? raw.intensity : "standard";
+      const generatedAt = Math.max(0, Number.parseInt(raw.generatedAt, 10) || 0);
+      const tasks = Array.isArray(raw.tasks)
+        ? raw.tasks
+          .map((task, idx) => sanitizeQuestTask(task, `task_${idx}`))
+          .filter(Boolean)
+          .slice(0, 8)
+        : [];
+      return {
+        generatedAt,
+        intensity,
+        tasks
+      };
+    }
+
+    function persistQuestState() {
+      if (!questState) return;
+      safeWrite(STORAGE.questState, questState);
+    }
+
+    function selectWeakestIntuitionScenario(marker) {
+      const candidates = intuitionScenarios.filter((scenario) => scenario.tag.includes(marker));
+      if (!candidates.length) return null;
+      const ranked = candidates
+        .map((scenario) => {
+          const stats = peekIntuitionScenarioStats(scenario.id);
+          const ratio = stats.attempts ? stats.perfect / stats.attempts : 0;
+          return {
+            id: scenario.id,
+            score: ratio + (stats.attempts === 0 ? -0.35 : 0)
+          };
+        })
+        .sort((a, b) => a.score - b.score);
+      return ranked[0] ? ranked[0].id : candidates[0].id;
+    }
+
+    function runQuestTask(task) {
+      if (!task || typeof task !== "object") return;
+      const args = task.args && typeof task.args === "object" ? task.args : {};
+
+      if (task.action === "go_graph") {
+        applyMarketPreset(args.preset || "reset");
+        scrollToSection("marketLab");
+      } else if (task.action === "go_intuition") {
+        const marker = typeof args.marker === "string" ? args.marker : "";
+        const targetScenario = marker ? selectWeakestIntuitionScenario(marker) : pickNextIntuitionScenarioId();
+        if (targetScenario) {
+          setActiveIntuitionScenario(targetScenario);
+        }
+        scrollToSection("intuitionStudio");
+      } else if (task.action === "go_quant") {
+        const type = typeof args.type === "string" && ARENA_TYPES.includes(args.type) ? args.type : "mixed";
+        if (arenaType) arenaType.value = type;
+        if (arenaDifficulty) {
+          arenaDifficulty.value = questState && questState.intensity === "challenge"
+            ? "challenge"
+            : "standard";
+        }
+        persistArenaPrefs();
+        generateArenaChallenge();
+        scrollToSection("quantArena");
+      } else if (task.action === "go_formula") {
+        scrollToSection("formulaEngine");
+      } else if (task.action === "go_recall") {
+        pickPrompt();
+        scrollToSection("recallTrainer");
+      } else if (task.action === "go_error") {
+        scrollToSection("errorClinic");
+      } else if (task.action === "go_timer") {
+        const mins = clamp(Number.parseInt(args.minutes, 10) || 12, 5, 75);
+        if (timerMinutes) timerMinutes.value = String(mins);
+        resetTimerFromInput();
+        startTimer();
+        scrollToSection("timerLab");
+      }
+      showStatus(`Quest focus loaded: ${task.title}`);
+    }
+
+    function getQuestTemplatesForTopic(topicId) {
+      return Array.isArray(QUEST_LIBRARY[topicId]) ? QUEST_LIBRARY[topicId] : [];
+    }
+
+    function buildQuestTasks(signals, intensityConfig) {
+      const usedKeys = new Set();
+      const tasks = [];
+      const weakOrder = signals.sortedTopics.map((topic) => topic.id);
+      weakOrder.push("pacing");
+
+      let loopSafety = 0;
+      while (tasks.length < intensityConfig.count && loopSafety < 20) {
+        loopSafety += 1;
+        for (const topicId of weakOrder) {
+          if (tasks.length >= intensityConfig.count) break;
+          const templates = getQuestTemplatesForTopic(topicId);
+          const nextTemplate = templates.find((template, idx) => !usedKeys.has(`${topicId}_${idx}`));
+          if (!nextTemplate) continue;
+          const templateIdx = templates.indexOf(nextTemplate);
+          usedKeys.add(`${topicId}_${templateIdx}`);
+          tasks.push({
+            id: `quest_${Date.now()}_${tasks.length}`,
+            title: nextTemplate.title,
+            note: nextTemplate.note,
+            minutes: clamp(Math.round(nextTemplate.minutes * intensityConfig.minuteScale), 3, 75),
+            action: nextTemplate.action,
+            args: nextTemplate.args || {},
+            done: false
+          });
+        }
+      }
+      return tasks.slice(0, intensityConfig.count);
+    }
+
+    function updateQuestProgress() {
+      if (!questProgressPct || !questProgressText || !questProgressFill || !questState) return;
+      const total = questState.tasks.length;
+      const done = questState.tasks.filter((task) => task.done).length;
+      const pct = total ? Math.round((done / total) * 100) : 0;
+      questProgressPct.textContent = `${pct}% complete`;
+      questProgressText.textContent = total
+        ? `${done} of ${total} tasks completed`
+        : "No active tasks.";
+      questProgressFill.style.width = `${pct}%`;
+    }
+
+    function renderQuestList() {
+      if (!questList || !questMeta || !questState) return;
+      questList.innerHTML = "";
+      if (!questState.tasks.length) {
+        questList.innerHTML = "<div class=\"arena-feedback\">Generate a quest to receive adaptive study tasks tied to your weakest topic signals.</div>";
+        questMeta.textContent = "No quest generated yet.";
+        updateQuestProgress();
+        return;
+      }
+
+      const totalMinutes = questState.tasks.reduce((sum, task) => sum + task.minutes, 0);
+      const generated = questState.generatedAt
+        ? new Date(questState.generatedAt).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
+        : "--:--";
+      questMeta.textContent = `${questState.tasks.length} tasks • ${totalMinutes} min • Generated ${generated}`;
+
+      questState.tasks.forEach((task, idx) => {
+        const row = document.createElement("article");
+        row.className = `quest-item${task.done ? " done" : ""}`;
+        row.innerHTML = `
+          <div class="quest-item-head">
+            <input type="checkbox" aria-label="Mark quest task complete" ${task.done ? "checked" : ""} />
+            <div class="quest-title">${task.title}</div>
+            <span class="quest-mins">${task.minutes} min</span>
+          </div>
+          <p class="quest-note">${task.note}</p>
+          <div class="quest-actions">
+            <button type="button" class="btn btn-ghost">Run Task</button>
+          </div>
+        `;
+
+        const checkbox = row.querySelector("input[type='checkbox']");
+        const runBtn = row.querySelector("button");
+        if (checkbox) {
+          checkbox.addEventListener("change", () => {
+            task.done = checkbox.checked;
+            persistQuestState();
+            row.classList.toggle("done", task.done);
+            updateQuestProgress();
+            if (task.done && questState.tasks.every((entry) => entry.done)) {
+              showStatus("Quest completed. Generate the next adaptive round.");
+            }
+          });
+        }
+        if (runBtn) {
+          runBtn.addEventListener("click", () => {
+            runQuestTask(task);
+          });
+        }
+        questList.appendChild(row);
+      });
+      updateQuestProgress();
+    }
+
+    function clearQuest(shouldPersist = true) {
+      questState = defaultQuestState();
+      if (questIntensity) questIntensity.value = "standard";
+      if (shouldPersist) {
+        safeWrite(STORAGE.questState, questState);
+      }
+      renderQuestList();
+      updateMissionControl();
+    }
+
+    function generateAdaptiveQuest(forcedIntensity = "") {
+      const signals = computeMissionSignals();
+      const level = forcedIntensity || (questIntensity ? questIntensity.value : "standard");
+      const config = QUEST_INTENSITY[level] || QUEST_INTENSITY.standard;
+      if (questIntensity) questIntensity.value = level in QUEST_INTENSITY ? level : "standard";
+
+      questState = {
+        generatedAt: Date.now(),
+        intensity: questIntensity ? questIntensity.value : "standard",
+        tasks: buildQuestTasks(signals, config)
+      };
+      persistQuestState();
+      renderQuestList();
+      updateMissionControl();
+      showStatus(`Adaptive quest generated (${questState.tasks.length} tasks).`);
+    }
+
+    function runNextQuestTask() {
+      if (!questState || !Array.isArray(questState.tasks) || !questState.tasks.length) {
+        showStatus("Generate a quest first.");
+        return;
+      }
+      const nextTask = questState.tasks.find((task) => !task.done) || questState.tasks[0];
+      runQuestTask(nextTask);
+    }
+
+    function updateMissionControl() {
+      if (
+        !masteryRing
+        || !masteryScore
+        || !missionRecallScore
+        || !missionArenaScore
+        || !missionIntuitionScore
+        || !missionChecklistScore
+        || !missionWeaknessMeta
+      ) {
+        return;
+      }
+
+      const signals = computeMissionSignals();
+      const weakest = signals.sortedTopics[0];
+      const ringDeg = Math.round((signals.composite / 100) * 360);
+      masteryRing.style.background =
+        `radial-gradient(circle at center, #fff 52%, transparent 54%),` +
+        `conic-gradient(from 270deg, #b22323 0deg, #b22323 ${ringDeg}deg, #ddc6ad ${ringDeg}deg)`;
+      masteryScore.textContent = formatPercent(signals.composite);
+      missionRecallScore.textContent = formatPercent(signals.recallPct);
+      missionArenaScore.textContent = formatPercent(signals.arenaPct);
+      missionIntuitionScore.textContent = formatPercent(signals.intuitionPct);
+      missionChecklistScore.textContent = formatPercent(signals.checklistPct);
+      missionWeaknessMeta.textContent = weakest
+        ? `Weakest focus: ${weakest.label}`
+        : "Weakest focus: pending";
+      renderMissionHeatmap(signals.topicScores);
+      setMissionAlertByScore(signals.composite, weakest ? weakest.label : "core topics");
+    }
+
+    function initMissionControl() {
+      if (
+        !masteryRing
+        || !questIntensity
+        || !generateQuestBtn
+        || !runNextQuestBtn
+        || !clearQuestBtn
+        || !refreshMissionBtn
+      ) {
+        return;
+      }
+
+      questState = sanitizeQuestState(safeRead(STORAGE.questState, null));
+      questIntensity.value = questState.intensity in QUEST_INTENSITY
+        ? questState.intensity
+        : "standard";
+
+      generateQuestBtn.addEventListener("click", () => generateAdaptiveQuest());
+      runNextQuestBtn.addEventListener("click", runNextQuestTask);
+      clearQuestBtn.addEventListener("click", () => {
+        clearQuest(true);
+        showStatus("Adaptive quest cleared.");
+      });
+      refreshMissionBtn.addEventListener("click", () => {
+        updateMissionControl();
+        showStatus("Mastery analysis refreshed.");
+      });
+      questIntensity.addEventListener("change", () => {
+        if (!questState) questState = defaultQuestState();
+        questState.intensity = questIntensity.value in QUEST_INTENSITY ? questIntensity.value : "standard";
+        persistQuestState();
+      });
+
+      renderQuestList();
+      updateMissionControl();
+    }
+
     function scrollToSection(id) {
       const target = document.getElementById(id);
       if (!target) return;
@@ -4705,6 +5664,12 @@
 
     function buildCommandItems() {
       commandItems = [
+        {
+          title: "Jump to Mission Control",
+          meta: "Navigate",
+          keywords: "mission dashboard mastery heatmap quest",
+          run: () => scrollToSection("missionControl")
+        },
         {
           title: "Jump to Topic Architecture",
           meta: "Navigate",
@@ -4752,6 +5717,18 @@
           meta: "Navigate",
           keywords: "resource dock pdf mock",
           run: () => scrollToSection("resourceDock")
+        },
+        {
+          title: "Generate Adaptive Quest",
+          meta: "Action",
+          keywords: "quest planner adaptive generate",
+          run: () => generateAdaptiveQuest()
+        },
+        {
+          title: "Run Next Quest Task",
+          meta: "Action",
+          keywords: "quest next task run",
+          run: () => runNextQuestTask()
         },
         {
           title: "Start 75-Minute Exam Timer",
@@ -4871,7 +5848,7 @@
       if (!filteredCommandItems.length) {
         const empty = document.createElement("div");
         empty.className = "command-item";
-        empty.innerHTML = "<span class=\"title\">No matching actions</span><span class=\"meta\">Try keywords like graph, intuition, timer, arena, recall</span>";
+        empty.innerHTML = "<span class=\"title\">No matching actions</span><span class=\"meta\">Try keywords like mission, quest, graph, intuition, timer, arena, recall</span>";
         commandList.appendChild(empty);
         return;
       }
@@ -5000,6 +5977,11 @@
         ["intuitionScenarioCards", intuitionScenarioCards],
         ["intuitionVars", intuitionVars],
         ["intuitionFeedback", intuitionFeedback],
+        ["masteryRing", masteryRing],
+        ["missionHeatmap", missionHeatmap],
+        ["questIntensity", questIntensity],
+        ["generateQuestBtn", generateQuestBtn],
+        ["questList", questList],
         ["liveStatus", liveStatus]
       ];
 
@@ -5019,6 +6001,12 @@
         || sessionIdleMinutes > SESSION_SECURITY.maxIdleMinutes
       ) {
         issues.push("session-idle-policy-out-of-range");
+      }
+      if (!QUEST_INTENSITY.light || !QUEST_INTENSITY.standard || !QUEST_INTENSITY.challenge) {
+        issues.push("quest-intensity-config-missing");
+      }
+      if (!QUEST_LIBRARY.foundations || !QUEST_LIBRARY.national || !QUEST_LIBRARY.retrieval) {
+        issues.push("quest-library-missing-core");
       }
 
       for (let i = 0; i < 60; i += 1) {
@@ -5066,6 +6054,25 @@
         });
       });
 
+      if (!arenaStats.byType || typeof arenaStats.byType !== "object") {
+        issues.push("arena-by-type-missing");
+      } else {
+        ARENA_TYPES.forEach((type) => {
+          const node = arenaStats.byType[type];
+          if (!node || typeof node !== "object") {
+            issues.push(`arena-by-type-${type}-missing`);
+            return;
+          }
+          if (!Number.isFinite(node.solved) || !Number.isFinite(node.correct)) {
+            issues.push(`arena-by-type-${type}-nan`);
+            return;
+          }
+          if (node.correct > node.solved || node.solved < 0 || node.correct < 0) {
+            issues.push(`arena-by-type-${type}-range`);
+          }
+        });
+      }
+
       if (!Array.isArray(intuitionScenarios) || intuitionScenarios.length < 4) {
         issues.push("intuition-scenarios-missing");
       } else {
@@ -5093,6 +6100,17 @@
             }
           });
         });
+      }
+
+      if (!questState || typeof questState !== "object") {
+        issues.push("quest-state-missing");
+      } else {
+        if (!(questState.intensity in QUEST_INTENSITY)) {
+          issues.push("quest-intensity-invalid");
+        }
+        if (!Array.isArray(questState.tasks)) {
+          issues.push("quest-tasks-invalid");
+        }
       }
 
       if (issues.length) {
@@ -5132,7 +6150,8 @@
           marketLab: safeRead(STORAGE.marketLab, null),
           arenaStats: safeRead(STORAGE.arenaStats, null),
           arenaPrefs: safeRead(STORAGE.arenaPrefs, null),
-          intuitionState: safeRead(STORAGE.intuitionState, null)
+          intuitionState: safeRead(STORAGE.intuitionState, null),
+          questState: safeRead(STORAGE.questState, null)
         }
       };
       const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
@@ -5184,7 +6203,7 @@
     }
 
     function resetAllProgress() {
-      if (!window.confirm("Reset checklist, flashcard mastery, timer settings, graph lab state, and quant arena stats?")) {
+      if (!window.confirm("Reset checklist, flashcard mastery, timer settings, mission quests, graph lab state, and quant arena stats?")) {
         return;
       }
       try {
@@ -5196,6 +6215,7 @@
         localStorage.removeItem(STORAGE.arenaStats);
         localStorage.removeItem(STORAGE.arenaPrefs);
         localStorage.removeItem(STORAGE.intuitionState);
+        localStorage.removeItem(STORAGE.questState);
         localStorage.removeItem(STORAGE.idleMinutes);
       } catch {
         // Ignore storage failures.
@@ -5240,8 +6260,9 @@
       if (arenaAnswer) arenaAnswer.value = "";
       setArenaFeedback("Arena reset. Generate a fresh challenge.", "");
       resetIntuitionStudioState(false);
+      clearQuest(false);
       pickPrompt();
-      showStatus("All interactive progress reset, including graph, intuition, and quant arenas.");
+      showStatus("All interactive progress reset, including mission planning, graph, intuition, and quant arenas.");
     }
 
     function initRevealEffects() {
@@ -5386,6 +6407,12 @@
       } else if (key === "h") {
         event.preventDefault();
         revealIntuitionLogic();
+      } else if (key === "q") {
+        event.preventDefault();
+        generateAdaptiveQuest();
+      } else if (key === "x") {
+        event.preventDefault();
+        runNextQuestTask();
       } else if (key === "g") {
         event.preventDefault();
         generateArenaChallenge();
@@ -5428,6 +6455,7 @@
     initMarketLab();
     initIntuitionStudio();
     initArena();
+    initMissionControl();
     initAdminControls();
     initCommandPalette();
     initAccessGate();
@@ -5438,7 +6466,7 @@
     pickPrompt();
     bootstrapMath();
     runInternalDiagnostics();
-    showStatus("Interactive mode ready. Shortcuts: N/R/M/1/2/3/4 + I/Y/H + G/K/V + Cmd/Ctrl+K.");
+    showStatus("Interactive mode ready. Shortcuts: N/R/M/1/2/3/4 + I/Y/H + Q/X + G/K/V + Cmd/Ctrl+K.");
   </script>
 </body>
 </html>
