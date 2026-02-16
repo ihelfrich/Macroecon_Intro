@@ -736,6 +736,358 @@
       line-height: 1.25 !important;
     }
 
+    .formula-workbench {
+      margin-top: 12px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(240px, 0.84fr) minmax(420px, 1.16fr);
+      align-items: start;
+    }
+
+    .formula-catalog {
+      border: 1px solid #deccb7;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffefb 0%, #fff6e9 100%);
+      box-shadow: 0 10px 24px rgba(45, 27, 16, 0.08);
+      padding: 10px;
+      display: grid;
+      gap: 8px;
+      max-height: 760px;
+      overflow: auto;
+    }
+
+    .formula-item {
+      width: 100%;
+      border: 1px solid #decab2;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      text-align: left;
+      cursor: pointer;
+      display: grid;
+      gap: 4px;
+      transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
+    }
+
+    .formula-item:hover {
+      transform: translateY(-1px);
+      border-color: rgba(153, 0, 0, 0.33);
+      box-shadow: 0 8px 18px rgba(43, 25, 15, 0.1);
+    }
+
+    .formula-item.active {
+      border-color: rgba(153, 0, 0, 0.45);
+      background: linear-gradient(180deg, #fffaf3 0%, #fff3e5 100%);
+      box-shadow: 0 9px 20px rgba(153, 0, 0, 0.14);
+    }
+
+    .formula-item .kicker {
+      font-size: 0.7rem;
+      color: #6b5a4b;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .formula-item .title {
+      font-size: 0.86rem;
+      font-weight: 700;
+      color: #3c2d22;
+      line-height: 1.3;
+    }
+
+    .formula-item .math {
+      font-size: 0.83rem;
+      color: #4a3a2f;
+      font-family: "Fraunces", serif;
+      line-height: 1.25;
+    }
+
+    .formula-main {
+      display: grid;
+      gap: 12px;
+    }
+
+    .formula-panel {
+      border: 1px solid #deccb5;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffefc 0%, #fff6e9 100%);
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      box-shadow: 0 12px 26px rgba(55, 35, 20, 0.08);
+    }
+
+    .formula-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .formula-head h3 {
+      margin: 0;
+      color: #452d1f;
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+    }
+
+    .formula-topic {
+      border: 1px solid #ddccb8;
+      border-radius: 999px;
+      background: #fff;
+      padding: 3px 9px;
+      font-size: 0.72rem;
+      color: #5d5248;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    .formula-latex {
+      min-height: 58px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-size: 1.06rem;
+      line-height: 1.3;
+    }
+
+    .formula-intuition {
+      margin: 0;
+      font-size: 0.86rem;
+      color: #4f4338;
+      line-height: 1.45;
+      border: 1px solid #dfccb5;
+      border-radius: 10px;
+      background: #fff;
+      padding: 9px 10px;
+    }
+
+    .formula-focus-list {
+      margin: 0;
+      padding-left: 18px;
+      color: #4b4036;
+      font-size: 0.84rem;
+      display: grid;
+      gap: 5px;
+    }
+
+    .formula-variable-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .formula-var-chip {
+      border: 1px solid #dec9b2;
+      border-radius: 999px;
+      background: #fff;
+      color: #3d3025;
+      font-size: 0.79rem;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      padding: 5px 10px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      cursor: pointer;
+      transition: border-color 0.14s ease, box-shadow 0.14s ease, transform 0.14s ease;
+    }
+
+    .formula-var-chip:hover {
+      transform: translateY(-1px);
+      border-color: rgba(153, 0, 0, 0.35);
+      box-shadow: 0 6px 14px rgba(43, 25, 15, 0.1);
+    }
+
+    .formula-var-chip.active {
+      border-color: rgba(153, 0, 0, 0.45);
+      background: linear-gradient(180deg, #fffaf3 0%, #fff2e2 100%);
+      box-shadow: 0 7px 16px rgba(153, 0, 0, 0.14);
+    }
+
+    .formula-var-chip .symbol {
+      font-family: "Fraunces", serif;
+      font-size: 0.86rem;
+      color: var(--usc-cardinal-deep);
+      line-height: 1.1;
+    }
+
+    .formula-var-symbol {
+      border: 1px solid #deccb6;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      color: #3f3126;
+      font-family: "Fraunces", serif;
+      font-size: 1.04rem;
+      text-align: center;
+    }
+
+    .formula-meta-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .formula-meta {
+      border: 1px solid #dfcdb8;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      display: grid;
+      gap: 4px;
+      align-content: start;
+    }
+
+    .formula-meta span {
+      font-size: 0.72rem;
+      color: #63564b;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .formula-meta strong {
+      font-size: 0.82rem;
+      color: #3f3329;
+      line-height: 1.35;
+      font-weight: 700;
+    }
+
+    .formula-data-lab {
+      gap: 11px;
+    }
+
+    .formula-data-grid {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .formula-field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .formula-field label {
+      font-size: 0.78rem;
+      color: #5a4d43;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .formula-field input,
+    .formula-field select {
+      border: 1px solid #dbc7af;
+      border-radius: 10px;
+      background: #fff;
+      color: #342a22;
+      font-size: 0.85rem;
+      padding: 7px 10px;
+      min-height: 38px;
+    }
+
+    .formula-field input[type="password"] {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+    }
+
+    .formula-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .formula-binding-table {
+      display: grid;
+      gap: 6px;
+    }
+
+    .formula-binding-row {
+      border: 1px solid #e0ceb8;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      display: grid;
+      gap: 8px;
+      grid-template-columns: minmax(88px, 0.55fr) minmax(90px, 0.5fr) minmax(82px, 0.5fr) minmax(160px, 1fr);
+      align-items: center;
+      text-align: left;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+    }
+
+    .formula-binding-row.header {
+      border-style: dashed;
+      background: #fffaf2;
+      color: #645649;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-weight: 700;
+      padding-top: 7px;
+      padding-bottom: 7px;
+      cursor: default;
+    }
+
+    .formula-binding-row.active {
+      border-color: rgba(153, 0, 0, 0.4);
+      background: linear-gradient(180deg, #fffbf6 0%, #fff2e4 100%);
+    }
+
+    .formula-binding-row button {
+      border: none;
+      background: none;
+      text-align: left;
+      padding: 0;
+      font: inherit;
+      color: inherit;
+      cursor: pointer;
+    }
+
+    .formula-binding-row .cell-value {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      color: #3e3126;
+      font-weight: 700;
+    }
+
+    .formula-binding-row .cell-source {
+      font-size: 0.76rem;
+      color: #5d5146;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .formula-binding-row .cell-series {
+      font-size: 0.77rem;
+      color: #594d42;
+      line-height: 1.3;
+    }
+
+    .formula-compute-solution {
+      display: none;
+      border: 1px dashed #d8c3a8;
+      border-radius: 10px;
+      background: #fff;
+      padding: 10px;
+      color: #4f4338;
+      font-size: 0.86rem;
+      line-height: 1.45;
+    }
+
+    .formula-compute-solution.show {
+      display: block;
+    }
+
     .playbook-step {
       display: grid;
       grid-template-columns: 34px 1fr;
@@ -967,7 +1319,9 @@
     .resource-filter-input:focus-visible,
     .timer-minutes:focus-visible,
     .lab-select:focus-visible,
-    .intuition-select:focus-visible {
+    .intuition-select:focus-visible,
+    .formula-field input:focus-visible,
+    .formula-field select:focus-visible {
       outline: 2px solid rgba(153, 0, 0, 0.35);
       outline-offset: 1px;
       border-color: rgba(153, 0, 0, 0.4);
@@ -2023,6 +2377,9 @@
       .lab-grid {
         grid-template-columns: 1fr;
       }
+      .formula-workbench {
+        grid-template-columns: 1fr;
+      }
       .arena-grid {
         grid-template-columns: 1fr;
       }
@@ -2070,6 +2427,16 @@
       .arena-stats {
         grid-template-columns: 1fr;
       }
+      .formula-data-grid,
+      .formula-meta-grid {
+        grid-template-columns: 1fr;
+      }
+      .formula-binding-row {
+        grid-template-columns: 1fr;
+      }
+      .formula-binding-row.header {
+        display: none;
+      }
       .intuition-var {
         grid-template-columns: 1fr;
       }
@@ -2102,6 +2469,8 @@
       .flash-actions,
       .btn,
       #marketLab,
+      #formulaEngine .formula-catalog,
+      #formulaEngine .formula-data-lab .btn,
       #missionControl .quest-actions,
       #intuitionStudio,
       #quantArena,
@@ -2339,19 +2708,113 @@
     </section>
 
     <section class="section" id="formulaEngine">
-      <h2>Formula Engine</h2>
-      <p class="lead">Memorize these exactly. Most midterm points are execution quality on these expressions.</p>
-      <div class="formula-board">
-        <div class="formula">\(Y = C + I + G + NX\)</div>
-        <div class="formula">\(NX = X - M\)</div>
-        <div class="formula">\(\text{GDP Deflator} = \frac{\text{Nominal GDP}}{\text{Real GDP}} \times 100\)</div>
-        <div class="formula">\(\pi_t^{\text{GDP}} = \frac{\text{Def}_t - \text{Def}_{t-1}}{\text{Def}_{t-1}} \times 100\)</div>
-        <div class="formula">\(\text{Private Saving: } S_p = Y - C - T,\quad \text{Public Saving: } S_g = T - G,\quad S = Y - C - G\)</div>
-        <div class="formula">\(S = I + NX\)</div>
-        <div class="formula">\(\text{LF} = E + U,\quad u = \frac{U}{\text{LF}},\quad \text{LFPR} = \frac{\text{LF}}{\text{Adults}},\quad \text{EPOP} = \frac{E}{\text{Adults}}\)</div>
-        <div class="formula">\(r \approx i - \pi^e\)</div>
-        <div class="formula">\(\varepsilon_D=\frac{\frac{Q_2-Q_1}{(Q_2+Q_1)/2}}{\frac{P_2-P_1}{(P_2+P_1)/2}}\)</div>
-        <div class="formula">\(g=\left(\frac{X_t}{X_0}\right)^{\frac{1}{n}}-1\)</div>
+      <h2>Formula Explorer</h2>
+      <p class="lead">Click any formula, then click any variable. Each variable includes economic intuition, data mapping, and API-ready hooks for real FRED/BLS series.</p>
+      <div class="formula-workbench">
+        <aside class="formula-catalog" id="formulaCatalog" aria-label="Formula catalog"></aside>
+
+        <div class="formula-main">
+          <div class="formula-panel">
+            <div class="formula-head">
+              <h3 id="formulaActiveTitle">Select a formula</h3>
+              <span class="formula-topic" id="formulaActiveTopic">Catalog</span>
+            </div>
+            <div class="formula formula-latex" id="formulaActiveLatex">\(Y=C+I+G+NX\)</div>
+            <p class="formula-intuition" id="formulaIntuition">Choose a formula from the left panel to open its intuition, exam logic, and variable-level guidance.</p>
+            <ul class="formula-focus-list" id="formulaExamFocus"></ul>
+            <div class="formula-variable-cloud" id="formulaVariableButtons"></div>
+          </div>
+
+          <div class="formula-panel">
+            <div class="formula-head">
+              <h3 id="formulaVariableTitle">Variable Explorer</h3>
+              <span class="formula-topic">Deep Dive</span>
+            </div>
+            <div class="formula-var-symbol" id="formulaVariableSymbol">\(Y\)</div>
+            <p class="formula-intuition" id="formulaVariableDefinition">Click a variable chip to inspect what the variable means, why it matters, and what real data can represent it.</p>
+            <div class="formula-meta-grid">
+              <div class="formula-meta">
+                <span>Economic Role</span>
+                <strong id="formulaVariableRole">-</strong>
+              </div>
+              <div class="formula-meta">
+                <span>Typical Units</span>
+                <strong id="formulaVariableUnits">-</strong>
+              </div>
+              <div class="formula-meta">
+                <span>Data Mapping</span>
+                <strong id="formulaVariableDataMap">-</strong>
+              </div>
+              <div class="formula-meta">
+                <span>Exam Intuition</span>
+                <strong id="formulaVariableExamHint">-</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="formula-panel formula-data-lab">
+            <div class="formula-head">
+              <h3>Formula Data Playground</h3>
+              <span class="formula-topic">Live + Local Storage</span>
+            </div>
+            <p class="formula-intuition">Bind each variable to a manual value, FRED series, or BLS series. Values persist in local storage so students can keep experimenting between sessions.</p>
+
+            <div class="formula-data-grid">
+              <div class="formula-field">
+                <label for="formulaVariableSelect">Variable</label>
+                <select id="formulaVariableSelect"></select>
+              </div>
+              <div class="formula-field">
+                <label for="formulaSourceSelect">Input source</label>
+                <select id="formulaSourceSelect">
+                  <option value="manual">Manual value</option>
+                  <option value="fred">FRED API series</option>
+                  <option value="bls">BLS API series</option>
+                </select>
+              </div>
+              <div class="formula-field" id="formulaSeriesField">
+                <label for="formulaSeriesInput">Series ID</label>
+                <input id="formulaSeriesInput" type="text" placeholder="e.g., GDPC1 or LNS14000000" spellcheck="false" />
+              </div>
+              <div class="formula-field" id="formulaManualField">
+                <label for="formulaManualInput">Manual value</label>
+                <input id="formulaManualInput" type="number" step="any" placeholder="Enter numeric value" />
+              </div>
+            </div>
+
+            <div class="formula-actions">
+              <button type="button" class="btn btn-ghost" id="formulaSaveBindingBtn">Save Variable Binding</button>
+              <button type="button" class="btn btn-primary" id="formulaFetchBtn">Fetch Latest Series Value</button>
+              <button type="button" class="btn btn-ghost" id="formulaApplyManualBtn">Apply Manual Value</button>
+            </div>
+
+            <div class="formula-data-grid">
+              <div class="formula-field">
+                <label for="fredApiKeyInput">FRED API key (stored locally)</label>
+                <input id="fredApiKeyInput" type="password" placeholder="Enter FRED API key" autocomplete="off" spellcheck="false" />
+              </div>
+              <div class="formula-field">
+                <label for="blsApiKeyInput">BLS API key (stored locally)</label>
+                <input id="blsApiKeyInput" type="password" placeholder="Enter BLS API key" autocomplete="off" spellcheck="false" />
+              </div>
+            </div>
+
+            <div class="formula-actions">
+              <button type="button" class="btn btn-ghost" id="formulaSaveKeysBtn">Save API Keys</button>
+              <span class="flash-meta" id="formulaDataMeta">No variable updates yet.</span>
+            </div>
+
+            <div class="formula-binding-table" id="formulaBindingsTable"></div>
+
+            <div class="formula-actions">
+              <button type="button" class="btn btn-primary" id="formulaComputeBtn">Compute Active Formula Output</button>
+              <button type="button" class="btn btn-ghost" id="formulaResetBtn">Reset Formula Playground</button>
+            </div>
+
+            <div class="arena-feedback" id="formulaComputeResult">Ready to compute.</div>
+            <div class="formula-compute-solution" id="formulaComputeSteps"></div>
+          </div>
+        </div>
       </div>
     </section>
 
@@ -3213,11 +3676,802 @@
       }
     ];
 
+    const FORMULA_SOURCES = ["manual", "fred", "bls", "computed"];
+
+    const FORMULA_VARIABLES = {
+      y: {
+        id: "y",
+        symbolLatex: "Y",
+        label: "Output / GDP",
+        definition: "Total market value of final goods and services produced domestically over a period.",
+        role: "The aggregate output target in national income accounting.",
+        units: "Usually billions of dollars (real or nominal, depending on context).",
+        dataMap: "BEA national accounts; FRED example: GDPC1 (real GDP).",
+        examHint: "Track exactly which components changed and whether the identity is nominal or real.",
+        sources: { fred: { seriesId: "GDPC1", label: "Real GDP (quarterly)" } }
+      },
+      c: {
+        id: "c",
+        symbolLatex: "C",
+        label: "Consumption",
+        definition: "Household spending on final goods and services.",
+        role: "Largest GDP expenditure component in most modern economies.",
+        units: "Billions of dollars.",
+        dataMap: "BEA consumption expenditure; FRED example: PCECC96.",
+        examHint: "Higher real rates typically reduce current consumption through intertemporal substitution.",
+        sources: { fred: { seriesId: "PCECC96", label: "Real personal consumption expenditures" } }
+      },
+      i: {
+        id: "i",
+        symbolLatex: "I",
+        label: "Investment",
+        definition: "Spending on capital goods, inventories, and residential structures.",
+        role: "Links savings behavior and future productive capacity.",
+        units: "Billions of dollars.",
+        dataMap: "BEA gross private domestic investment; FRED example: GPDIC1.",
+        examHint: "Investment is highly interest-sensitive in short-run comparative statics.",
+        sources: { fred: { seriesId: "GPDIC1", label: "Real gross private domestic investment" } }
+      },
+      g: {
+        id: "g",
+        symbolLatex: "G",
+        label: "Government Purchases",
+        definition: "Government spending on final goods and services.",
+        role: "Direct fiscal channel inside the spending identity.",
+        units: "Billions of dollars.",
+        dataMap: "BEA government consumption and investment; FRED example: GCEC1.",
+        examHint: "Transfer payments are not part of \\(G\\) in GDP accounting.",
+        sources: { fred: { seriesId: "GCEC1", label: "Real government consumption and investment" } }
+      },
+      nx: {
+        id: "nx",
+        symbolLatex: "NX",
+        label: "Net Exports",
+        definition: "Exports minus imports.",
+        role: "Connects domestic saving-investment balance to external trade balance.",
+        units: "Billions of dollars.",
+        dataMap: "Trade balance in national accounts; FRED example: NETEXP.",
+        examHint: "Remember sign conventions: deficit means \\(NX < 0\\).",
+        sources: { fred: { seriesId: "NETEXP", label: "Net exports of goods and services" } }
+      },
+      x: {
+        id: "x",
+        symbolLatex: "X",
+        label: "Exports",
+        definition: "Domestic production sold abroad.",
+        role: "Positive contributor to domestic GDP.",
+        units: "Billions of dollars.",
+        dataMap: "BEA exports; FRED example: EXPGSC1.",
+        examHint: "Exports are produced domestically, so they are included in GDP.",
+        sources: { fred: { seriesId: "EXPGSC1", label: "Real exports of goods and services" } }
+      },
+      m: {
+        id: "m",
+        symbolLatex: "M",
+        label: "Imports",
+        definition: "Foreign production purchased domestically.",
+        role: "Subtracted from GDP to avoid counting foreign production.",
+        units: "Billions of dollars.",
+        dataMap: "BEA imports; FRED example: IMPGSC1.",
+        examHint: "Imports are subtracted in expenditure GDP even when purchased by domestic agents.",
+        sources: { fred: { seriesId: "IMPGSC1", label: "Real imports of goods and services" } }
+      },
+      nominal_gdp: {
+        id: "nominal_gdp",
+        symbolLatex: "\\text{Nominal GDP}",
+        label: "Nominal GDP",
+        definition: "GDP measured at current-period prices.",
+        role: "Numerator in the GDP deflator identity.",
+        units: "Billions of current dollars.",
+        dataMap: "BEA nominal GDP; FRED example: GDP.",
+        examHint: "Nominal changes mix quantity and price movements.",
+        sources: { fred: { seriesId: "GDP", label: "Gross Domestic Product (nominal)" } }
+      },
+      real_gdp: {
+        id: "real_gdp",
+        symbolLatex: "\\text{Real GDP}",
+        label: "Real GDP",
+        definition: "GDP measured in base-year prices (chain-weighted in modern data).",
+        role: "Denominator in deflator; isolates volume changes.",
+        units: "Billions of chained dollars.",
+        dataMap: "BEA real GDP; FRED example: GDPC1.",
+        examHint: "Real GDP tracks quantity/volume, not current prices.",
+        sources: { fred: { seriesId: "GDPC1", label: "Real GDP" } }
+      },
+      deflator_t: {
+        id: "deflator_t",
+        symbolLatex: "\\text{Def}_t",
+        label: "GDP Deflator (Current Period)",
+        definition: "Price index for domestically produced final output in period \\(t\\).",
+        role: "Current-period index level used to compute GDP inflation.",
+        units: "Index level (base year = 100).",
+        dataMap: "FRED example: GDPDEF.",
+        examHint: "Deflator growth is inflation for domestic final output.",
+        sources: { fred: { seriesId: "GDPDEF", label: "GDP implicit price deflator" } }
+      },
+      deflator_t1: {
+        id: "deflator_t1",
+        symbolLatex: "\\text{Def}_{t-1}",
+        label: "GDP Deflator (Previous Period)",
+        definition: "GDP deflator in the prior comparison period.",
+        role: "Base level in the inflation growth-rate denominator.",
+        units: "Index level (base year = 100).",
+        dataMap: "Use lagged value from GDPDEF or equivalent index.",
+        examHint: "Always divide by the earlier period level when computing growth.",
+        sources: { fred: { seriesId: "GDPDEF", label: "GDP implicit price deflator (lagged value)" } }
+      },
+      inflation_gdp: {
+        id: "inflation_gdp",
+        symbolLatex: "\\pi_t^{GDP}",
+        label: "GDP Inflation",
+        definition: "Percent change in GDP deflator from \\(t-1\\) to \\(t\\).",
+        role: "Output of the GDP-inflation formula.",
+        units: "Percent.",
+        dataMap: "Derived from GDPDEF levels.",
+        examHint: "Compute as growth rate of deflator, not nominal GDP growth.",
+        sources: {}
+      },
+      t: {
+        id: "t",
+        symbolLatex: "T",
+        label: "Net Taxes",
+        definition: "Government tax revenue net of transfers.",
+        role: "Separates private and public saving in fiscal decomposition.",
+        units: "Billions of dollars.",
+        dataMap: "National accounts fiscal aggregates; often instructor-provided in exam drills.",
+        examHint: "Keep sign discipline: transfers reduce net taxes.",
+        sources: {}
+      },
+      sp: {
+        id: "sp",
+        symbolLatex: "S_p",
+        label: "Private Saving",
+        definition: "Income left after household consumption and net taxes.",
+        role: "Private-sector contribution to national saving.",
+        units: "Billions of dollars.",
+        dataMap: "Derived from \\(Y, C, T\\), not typically observed directly in intro datasets.",
+        examHint: "If \\(C\\) rises with \\(Y, T\\) fixed, private saving falls one-for-one.",
+        sources: {}
+      },
+      sg: {
+        id: "sg",
+        symbolLatex: "S_g",
+        label: "Public Saving",
+        definition: "Government net revenue after purchases.",
+        role: "Fiscal component of national saving.",
+        units: "Billions of dollars.",
+        dataMap: "Derived from \\(T - G\\).",
+        examHint: "Budget deficits imply negative public saving.",
+        sources: {}
+      },
+      s: {
+        id: "s",
+        symbolLatex: "S",
+        label: "National Saving",
+        definition: "Total saving available for domestic investment and/or net foreign lending.",
+        role: "Bridge between domestic spending and external balance.",
+        units: "Billions of dollars.",
+        dataMap: "Derived from \\(Y - C - G\\).",
+        examHint: "Higher \\(G\\) with fixed \\(Y, C\\) lowers national saving.",
+        sources: {}
+      },
+      e: {
+        id: "e",
+        symbolLatex: "E",
+        label: "Employed",
+        definition: "Number of people currently employed.",
+        role: "Component of labor force and numerator for EPOP.",
+        units: "Persons (often thousands).",
+        dataMap: "BLS household survey; BLS series: LNS12000000.",
+        examHint: "Employment can rise even if unemployment rate rises when labor force expands faster.",
+        sources: {
+          fred: { seriesId: "CE16OV", label: "Civilian employment level" },
+          bls: { seriesId: "LNS12000000", label: "Employment level (household survey)" }
+        }
+      },
+      u: {
+        id: "u",
+        symbolLatex: "U",
+        label: "Unemployed",
+        definition: "People without a job who are actively searching for one.",
+        role: "Numerator in unemployment rate.",
+        units: "Persons (often thousands).",
+        dataMap: "BLS household survey; BLS series: LNS13000000.",
+        examHint: "Not in labor force is distinct from unemployed.",
+        sources: {
+          fred: { seriesId: "UNEMPLOY", label: "Number unemployed" },
+          bls: { seriesId: "LNS13000000", label: "Unemployment level (household survey)" }
+        }
+      },
+      lf: {
+        id: "lf",
+        symbolLatex: "\\text{LF}",
+        label: "Labor Force",
+        definition: "Sum of employed and unemployed workers.",
+        role: "Denominator for unemployment rate; numerator for LFPR.",
+        units: "Persons (often thousands).",
+        dataMap: "BLS household survey; BLS series: LNS11000000.",
+        examHint: "Do not divide unemployment by population; divide by labor force.",
+        sources: {
+          fred: { seriesId: "CLF16OV", label: "Civilian labor force" },
+          bls: { seriesId: "LNS11000000", label: "Labor force level (household survey)" }
+        }
+      },
+      adults: {
+        id: "adults",
+        symbolLatex: "\\text{Adults}",
+        label: "Adult Population",
+        definition: "Civilian noninstitutional population used for participation ratios.",
+        role: "Base population for LFPR and EPOP.",
+        units: "Persons (often thousands).",
+        dataMap: "BLS/Census concept; FRED example: CNP16OV.",
+        examHint: "Participation and employment-population ratios use adults, not labor force.",
+        sources: {
+          fred: { seriesId: "CNP16OV", label: "Civilian noninstitutional population" }
+        }
+      },
+      u_rate: {
+        id: "u_rate",
+        symbolLatex: "u",
+        label: "Unemployment Rate",
+        definition: "Share of labor force that is unemployed.",
+        role: "Headline labor-market slack indicator in intro macro.",
+        units: "Percent.",
+        dataMap: "BLS monthly release; BLS series: LNS14000000.",
+        examHint: "Rate can move for numerator or denominator reasons.",
+        sources: {
+          fred: { seriesId: "UNRATE", label: "Civilian unemployment rate" },
+          bls: { seriesId: "LNS14000000", label: "Unemployment rate" }
+        }
+      },
+      lfpr: {
+        id: "lfpr",
+        symbolLatex: "\\text{LFPR}",
+        label: "Labor Force Participation Rate",
+        definition: "Labor force as a share of adult population.",
+        role: "Tracks participation decisions, not just job-finding.",
+        units: "Percent.",
+        dataMap: "BLS series: LNS11300000.",
+        examHint: "LFPR can fall even with strong job growth if fewer adults participate.",
+        sources: {
+          fred: { seriesId: "CIVPART", label: "Labor force participation rate" },
+          bls: { seriesId: "LNS11300000", label: "Labor force participation rate" }
+        }
+      },
+      epop: {
+        id: "epop",
+        symbolLatex: "\\text{EPOP}",
+        label: "Employment-Population Ratio",
+        definition: "Employment as a share of adult population.",
+        role: "Broad utilization metric less sensitive to pure search-status definitions.",
+        units: "Percent.",
+        dataMap: "BLS series: LNS12300000.",
+        examHint: "EPOP captures both participation and employment dynamics.",
+        sources: {
+          fred: { seriesId: "EMRATIO", label: "Employment-population ratio" },
+          bls: { seriesId: "LNS12300000", label: "Employment-population ratio" }
+        }
+      },
+      i_nominal: {
+        id: "i_nominal",
+        symbolLatex: "i",
+        label: "Nominal Interest Rate",
+        definition: "Quoted interest rate not adjusted for inflation expectations.",
+        role: "Starting point for real-rate approximation.",
+        units: "Percent.",
+        dataMap: "Market or policy rate; FRED examples include FEDFUNDS, GS1, GS10.",
+        examHint: "Nominal rates can rise while real rates fall if expected inflation rises faster.",
+        sources: { fred: { seriesId: "FEDFUNDS", label: "Effective federal funds rate" } }
+      },
+      pi_expected: {
+        id: "pi_expected",
+        symbolLatex: "\\pi^e",
+        label: "Expected Inflation",
+        definition: "Inflation households/firms/investors expect over the relevant horizon.",
+        role: "Subtracted from nominal rate to approximate real rate.",
+        units: "Percent.",
+        dataMap: "Survey or market-implied expectation; FRED example: T5YIE.",
+        examHint: "Expectation horizon should match interest-rate horizon in careful applications.",
+        sources: { fred: { seriesId: "T5YIE", label: "5-year breakeven inflation" } }
+      },
+      r_real: {
+        id: "r_real",
+        symbolLatex: "r",
+        label: "Real Interest Rate",
+        definition: "Inflation-adjusted intertemporal price of consumption.",
+        role: "Core channel for consumption/investment timing choices.",
+        units: "Percent.",
+        dataMap: "Approximate from \\(i - \\pi^e\\) or use inflation-indexed yields.",
+        examHint: "Use approximation with care when inflation is high/volatile.",
+        sources: {}
+      },
+      q1: {
+        id: "q1",
+        symbolLatex: "Q_1",
+        label: "Initial Quantity",
+        definition: "Quantity demanded before a price change.",
+        role: "One endpoint in midpoint elasticity calculation.",
+        units: "Units of the good.",
+        dataMap: "Observed quantity from problem statement or market data.",
+        examHint: "Keep endpoint labels consistent with the paired price point.",
+        sources: {}
+      },
+      q2: {
+        id: "q2",
+        symbolLatex: "Q_2",
+        label: "New Quantity",
+        definition: "Quantity demanded after price change.",
+        role: "Second endpoint in midpoint elasticity.",
+        units: "Units of the good.",
+        dataMap: "Observed quantity from problem statement or market data.",
+        examHint: "Midpoint method is symmetric, so ordering should not change final elasticity magnitude sign logic.",
+        sources: {}
+      },
+      p1: {
+        id: "p1",
+        symbolLatex: "P_1",
+        label: "Initial Price",
+        definition: "Price before the movement along demand curve.",
+        role: "First endpoint in midpoint price change.",
+        units: "Currency per unit.",
+        dataMap: "Observed market price at initial point.",
+        examHint: "Elasticity uses percent changes, not dollar-point changes.",
+        sources: {}
+      },
+      p2: {
+        id: "p2",
+        symbolLatex: "P_2",
+        label: "New Price",
+        definition: "Price after movement along demand curve.",
+        role: "Second endpoint in midpoint price change.",
+        units: "Currency per unit.",
+        dataMap: "Observed market price at second point.",
+        examHint: "Use midpoint denominator averages for both quantity and price.",
+        sources: {}
+      },
+      epsilon_d: {
+        id: "epsilon_d",
+        symbolLatex: "\\varepsilon_D",
+        label: "Demand Elasticity (Midpoint)",
+        definition: "Percent quantity change divided by percent price change using midpoint denominators.",
+        role: "Output of elasticity formula used for responsiveness and revenue logic.",
+        units: "Unit-free ratio.",
+        dataMap: "Derived from two observed price-quantity pairs.",
+        examHint: "Interpret absolute value for elastic vs inelastic; sign is usually negative for demand.",
+        sources: {}
+      },
+      x_t: {
+        id: "x_t",
+        symbolLatex: "X_t",
+        label: "Ending Level",
+        definition: "Final value of a variable at the end of period \\(t\\).",
+        role: "Numerator in compound annual growth calculation.",
+        units: "Same as \\(X_0\\).",
+        dataMap: "Any macro variable level: GDP, productivity, population, etc.",
+        examHint: "Use same unit basis and measurement concept for start and end values.",
+        sources: {}
+      },
+      x_0: {
+        id: "x_0",
+        symbolLatex: "X_0",
+        label: "Initial Level",
+        definition: "Starting value of a variable.",
+        role: "Denominator in CAGR calculation.",
+        units: "Same as \\(X_t\\).",
+        dataMap: "Baseline level in first period.",
+        examHint: "Ensure \\(X_0 > 0\\) before applying log/ratio growth logic.",
+        sources: {}
+      },
+      n_years: {
+        id: "n_years",
+        symbolLatex: "n",
+        label: "Number of Periods",
+        definition: "Count of years (or periods) between \\(X_0\\) and \\(X_t\\).",
+        role: "Root index that annualizes total growth.",
+        units: "Periods (typically years).",
+        dataMap: "Difference in calendar periods between observations.",
+        examHint: "For annualized growth, period count must match data frequency interpretation.",
+        sources: {}
+      },
+      growth_rate: {
+        id: "growth_rate",
+        symbolLatex: "g",
+        label: "Compound Growth Rate",
+        definition: "Constant per-period growth rate consistent with observed start/end levels.",
+        role: "Output of CAGR formula.",
+        units: "Decimal or percent per period.",
+        dataMap: "Derived indicator, often reported in percent.",
+        examHint: "Report clearly whether answer is decimal (0.03) or percent (3%).",
+        sources: {}
+      }
+    };
+
+    const FORMULA_CATALOG = [
+      {
+        id: "gdp_identity",
+        topic: "L04 National Accounts",
+        title: "GDP Spending Identity",
+        latex: "Y = C + I + G + NX",
+        outputVarId: "y",
+        variables: ["y", "c", "i", "g", "nx"],
+        intuition: "Total output equals domestic and foreign final spending on domestic production. This is an accounting identity, not a behavioral equation.",
+        examFocus: [
+          "Keep signs explicit, especially when \\(NX\\) is negative.",
+          "A change in one component moves \\(Y\\) one-for-one if others are fixed.",
+          "Distinguish this identity from causal macro models."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["c", "i", "g", "nx"]);
+          if (missing.length) return formulaMissingResult(missing);
+          const result = values.c + values.i + values.g + values.nx;
+          return formulaSuccess(
+            "y",
+            result,
+            `Computed output: ${formatFormulaNumber(result)}.`,
+            `<p>\\(Y = C + I + G + NX = ${formatFormulaNumber(values.c)} + ${formatFormulaNumber(values.i)} + ${formatFormulaNumber(values.g)} + ${formatFormulaNumber(values.nx)} = ${formatFormulaNumber(result)}\\).</p>`
+          );
+        }
+      },
+      {
+        id: "net_exports_trade",
+        topic: "L04 National Accounts",
+        title: "Net Exports Definition",
+        latex: "NX = X - M",
+        outputVarId: "nx",
+        variables: ["nx", "x", "m"],
+        intuition: "Net exports compare domestic sales abroad to foreign sales at home.",
+        examFocus: [
+          "Trade deficit means \\(NX<0\\); trade surplus means \\(NX>0\\).",
+          "Imports enter domestic spending components but are removed in \\(NX\\)."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["x", "m"]);
+          if (missing.length) return formulaMissingResult(missing);
+          const result = values.x - values.m;
+          return formulaSuccess(
+            "nx",
+            result,
+            `Computed net exports: ${formatFormulaNumber(result)}.`,
+            `<p>\\(NX = X - M = ${formatFormulaNumber(values.x)} - ${formatFormulaNumber(values.m)} = ${formatFormulaNumber(result)}\\).</p>`
+          );
+        }
+      },
+      {
+        id: "gdp_deflator_level",
+        topic: "L04 National Accounts",
+        title: "GDP Deflator Level",
+        latex: "\\text{Deflator} = \\frac{\\text{Nominal GDP}}{\\text{Real GDP}} \\times 100",
+        outputVarId: "deflator_t",
+        variables: ["deflator_t", "nominal_gdp", "real_gdp"],
+        intuition: "Deflator converts nominal output into a price index for domestically produced final output.",
+        examFocus: [
+          "Use the same period for nominal and real GDP values.",
+          "Deflator growth, not level, is inflation."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["nominal_gdp", "real_gdp"]);
+          if (missing.length) return formulaMissingResult(missing);
+          if (values.real_gdp === 0) return formulaError("Real GDP cannot be zero in the deflator denominator.");
+          const result = (values.nominal_gdp / values.real_gdp) * 100;
+          return formulaSuccess(
+            "deflator_t",
+            result,
+            `Computed GDP deflator index: ${formatFormulaNumber(result)}.`,
+            `<p>\\(\\text{Deflator} = \\frac{${formatFormulaNumber(values.nominal_gdp)}}{${formatFormulaNumber(values.real_gdp)}}\\times100 = ${formatFormulaNumber(result)}\\).</p>`
+          );
+        }
+      },
+      {
+        id: "gdp_deflator_inflation",
+        topic: "L04 National Accounts",
+        title: "GDP Inflation Rate",
+        latex: "\\pi_t^{GDP} = \\frac{\\text{Def}_t - \\text{Def}_{t-1}}{\\text{Def}_{t-1}} \\times 100",
+        outputVarId: "inflation_gdp",
+        variables: ["inflation_gdp", "deflator_t", "deflator_t1"],
+        intuition: "Inflation is a growth rate of a price index, so you compare current index level to prior index level.",
+        examFocus: [
+          "Denominator is previous-period index, not current.",
+          "Express final answer in percent."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["deflator_t", "deflator_t1"]);
+          if (missing.length) return formulaMissingResult(missing);
+          if (values.deflator_t1 === 0) return formulaError("Previous deflator level cannot be zero.");
+          const result = ((values.deflator_t - values.deflator_t1) / values.deflator_t1) * 100;
+          return formulaSuccess(
+            "inflation_gdp",
+            result,
+            `Computed GDP inflation: ${formatFormulaNumber(result)}%.`,
+            `<p>\\(\\pi_t^{GDP} = \\frac{${formatFormulaNumber(values.deflator_t)} - ${formatFormulaNumber(values.deflator_t1)}}{${formatFormulaNumber(values.deflator_t1)}}\\times100 = ${formatFormulaNumber(result)}\\%\\).</p>`
+          );
+        }
+      },
+      {
+        id: "private_saving",
+        topic: "L05 Saving Decomposition",
+        title: "Private Saving",
+        latex: "S_p = Y - C - T",
+        outputVarId: "sp",
+        variables: ["sp", "y", "c", "t"],
+        intuition: "Private saving is the portion of private income not used for consumption or net taxes.",
+        examFocus: [
+          "Keep tax sign consistent: \\(T\\) is net taxes.",
+          "Useful bridge between household behavior and national saving."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["y", "c", "t"]);
+          if (missing.length) return formulaMissingResult(missing);
+          const result = values.y - values.c - values.t;
+          return formulaSuccess(
+            "sp",
+            result,
+            `Computed private saving: ${formatFormulaNumber(result)}.`,
+            `<p>\\(S_p = Y - C - T = ${formatFormulaNumber(values.y)} - ${formatFormulaNumber(values.c)} - ${formatFormulaNumber(values.t)} = ${formatFormulaNumber(result)}\\).</p>`
+          );
+        }
+      },
+      {
+        id: "public_saving",
+        topic: "L05 Saving Decomposition",
+        title: "Public Saving",
+        latex: "S_g = T - G",
+        outputVarId: "sg",
+        variables: ["sg", "t", "g"],
+        intuition: "Public saving is fiscal balance before borrowing from private/foreign sectors.",
+        examFocus: [
+          "Deficits imply negative public saving.",
+          "Fiscal expansion can lower national saving if taxes are unchanged."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["t", "g"]);
+          if (missing.length) return formulaMissingResult(missing);
+          const result = values.t - values.g;
+          return formulaSuccess(
+            "sg",
+            result,
+            `Computed public saving: ${formatFormulaNumber(result)}.`,
+            `<p>\\(S_g = T - G = ${formatFormulaNumber(values.t)} - ${formatFormulaNumber(values.g)} = ${formatFormulaNumber(result)}\\).</p>`
+          );
+        }
+      },
+      {
+        id: "national_saving",
+        topic: "L05 Saving Decomposition",
+        title: "National Saving",
+        latex: "S = Y - C - G",
+        outputVarId: "s",
+        variables: ["s", "y", "c", "g"],
+        intuition: "National saving is domestic output left after private and public consumption spending.",
+        examFocus: [
+          "Mechanically links fiscal/consumption changes to saving.",
+          "Used with \\(NX = S - I\\) to infer trade balance implications."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["y", "c", "g"]);
+          if (missing.length) return formulaMissingResult(missing);
+          const result = values.y - values.c - values.g;
+          return formulaSuccess(
+            "s",
+            result,
+            `Computed national saving: ${formatFormulaNumber(result)}.`,
+            `<p>\\(S = Y - C - G = ${formatFormulaNumber(values.y)} - ${formatFormulaNumber(values.c)} - ${formatFormulaNumber(values.g)} = ${formatFormulaNumber(result)}\\).</p>`
+          );
+        }
+      },
+      {
+        id: "saving_investment_external",
+        topic: "L05 Saving and External Balance",
+        title: "Saving-Investment Identity",
+        latex: "NX = S - I",
+        outputVarId: "nx",
+        variables: ["nx", "s", "i"],
+        intuition: "An economy with saving above investment is a net lender to the rest of the world (positive \\(NX\\)).",
+        examFocus: [
+          "Strong for causal reasoning when rates move \\(S\\) and \\(I\\) in opposite directions.",
+          "Links domestic macro behavior to current account outcomes."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["s", "i"]);
+          if (missing.length) return formulaMissingResult(missing);
+          const result = values.s - values.i;
+          return formulaSuccess(
+            "nx",
+            result,
+            `Computed net exports from saving and investment: ${formatFormulaNumber(result)}.`,
+            `<p>\\(NX = S - I = ${formatFormulaNumber(values.s)} - ${formatFormulaNumber(values.i)} = ${formatFormulaNumber(result)}\\).</p>`
+          );
+        }
+      },
+      {
+        id: "labor_force_definition",
+        topic: "L06 Labor Market",
+        title: "Labor Force Definition",
+        latex: "\\text{LF} = E + U",
+        outputVarId: "lf",
+        variables: ["lf", "e", "u"],
+        intuition: "Labor force includes people employed or actively searching for jobs.",
+        examFocus: [
+          "People not searching are out of labor force.",
+          "Needed before computing unemployment rate."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["e", "u"]);
+          if (missing.length) return formulaMissingResult(missing);
+          const result = values.e + values.u;
+          return formulaSuccess(
+            "lf",
+            result,
+            `Computed labor force: ${formatFormulaNumber(result)}.`,
+            `<p>\\(LF = E + U = ${formatFormulaNumber(values.e)} + ${formatFormulaNumber(values.u)} = ${formatFormulaNumber(result)}\\).</p>`
+          );
+        }
+      },
+      {
+        id: "unemployment_rate",
+        topic: "L06 Labor Market",
+        title: "Unemployment Rate",
+        latex: "u = \\frac{U}{LF} \\times 100",
+        outputVarId: "u_rate",
+        variables: ["u_rate", "u", "lf"],
+        intuition: "Unemployment rate is the unemployed share of labor force, not of population.",
+        examFocus: [
+          "Numerator and denominator must come from same labor-force concept.",
+          "Rate can change from both \\(U\\) and \\(LF\\) movement."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["u", "lf"]);
+          if (missing.length) return formulaMissingResult(missing);
+          if (values.lf === 0) return formulaError("Labor force cannot be zero when computing unemployment rate.");
+          const result = (values.u / values.lf) * 100;
+          return formulaSuccess(
+            "u_rate",
+            result,
+            `Computed unemployment rate: ${formatFormulaNumber(result)}%.`,
+            `<p>\\(u = \\frac{U}{LF}\\times100 = \\frac{${formatFormulaNumber(values.u)}}{${formatFormulaNumber(values.lf)}}\\times100 = ${formatFormulaNumber(result)}\\%\\).</p>`
+          );
+        }
+      },
+      {
+        id: "labor_force_participation_rate",
+        topic: "L06 Labor Market",
+        title: "Labor Force Participation Rate",
+        latex: "\\text{LFPR} = \\frac{LF}{\\text{Adults}} \\times 100",
+        outputVarId: "lfpr",
+        variables: ["lfpr", "lf", "adults"],
+        intuition: "Participation captures willingness/ability of adults to be active in labor market.",
+        examFocus: [
+          "Adult population denominator is required.",
+          "LFPR can move independently from unemployment rate."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["lf", "adults"]);
+          if (missing.length) return formulaMissingResult(missing);
+          if (values.adults === 0) return formulaError("Adult population cannot be zero.");
+          const result = (values.lf / values.adults) * 100;
+          return formulaSuccess(
+            "lfpr",
+            result,
+            `Computed labor force participation rate: ${formatFormulaNumber(result)}%.`,
+            `<p>\\(LFPR = \\frac{LF}{Adults}\\times100 = \\frac{${formatFormulaNumber(values.lf)}}{${formatFormulaNumber(values.adults)}}\\times100 = ${formatFormulaNumber(result)}\\%\\).</p>`
+          );
+        }
+      },
+      {
+        id: "employment_population_ratio",
+        topic: "L06 Labor Market",
+        title: "Employment-Population Ratio",
+        latex: "\\text{EPOP} = \\frac{E}{\\text{Adults}} \\times 100",
+        outputVarId: "epop",
+        variables: ["epop", "e", "adults"],
+        intuition: "EPOP measures employment utilization relative to adult population base.",
+        examFocus: [
+          "Directly interpretable as share of adults employed.",
+          "Combines participation and employment outcomes."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["e", "adults"]);
+          if (missing.length) return formulaMissingResult(missing);
+          if (values.adults === 0) return formulaError("Adult population cannot be zero.");
+          const result = (values.e / values.adults) * 100;
+          return formulaSuccess(
+            "epop",
+            result,
+            `Computed employment-population ratio: ${formatFormulaNumber(result)}%.`,
+            `<p>\\(EPOP = \\frac{E}{Adults}\\times100 = \\frac{${formatFormulaNumber(values.e)}}{${formatFormulaNumber(values.adults)}}\\times100 = ${formatFormulaNumber(result)}\\%\\).</p>`
+          );
+        }
+      },
+      {
+        id: "real_rate_approx",
+        topic: "L05 Intertemporal Choice",
+        title: "Real Interest Approximation",
+        latex: "r \\approx i - \\pi^e",
+        outputVarId: "r_real",
+        variables: ["r_real", "i_nominal", "pi_expected"],
+        intuition: "Approximate real return by netting out expected inflation from nominal return.",
+        examFocus: [
+          "Maintain sign convention when inflation expectations are negative.",
+          "Good first-pass approximation in intro macro."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["i_nominal", "pi_expected"]);
+          if (missing.length) return formulaMissingResult(missing);
+          const result = values.i_nominal - values.pi_expected;
+          return formulaSuccess(
+            "r_real",
+            result,
+            `Computed real interest rate: ${formatFormulaNumber(result)}%.`,
+            `<p>\\(r \\approx i - \\pi^e = ${formatFormulaNumber(values.i_nominal)} - ${formatFormulaNumber(values.pi_expected)} = ${formatFormulaNumber(result)}\\%\\).</p>`
+          );
+        }
+      },
+      {
+        id: "midpoint_elasticity",
+        topic: "L02 Elasticity",
+        title: "Midpoint Demand Elasticity",
+        latex: "\\varepsilon_D=\\frac{\\frac{Q_2-Q_1}{(Q_2+Q_1)/2}}{\\frac{P_2-P_1}{(P_2+P_1)/2}}",
+        outputVarId: "epsilon_d",
+        variables: ["epsilon_d", "q1", "q2", "p1", "p2"],
+        intuition: "Midpoint method gives symmetric percent changes and avoids base-choice bias between endpoints.",
+        examFocus: [
+          "Use average denominator for both quantity and price.",
+          "Interpret absolute value for elastic/inelastic classification."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["q1", "q2", "p1", "p2"]);
+          if (missing.length) return formulaMissingResult(missing);
+          const qAvg = (values.q2 + values.q1) / 2;
+          const pAvg = (values.p2 + values.p1) / 2;
+          if (qAvg === 0 || pAvg === 0) {
+            return formulaError("Midpoint denominator cannot be zero for quantity or price averages.");
+          }
+          const pctQ = (values.q2 - values.q1) / qAvg;
+          const pctP = (values.p2 - values.p1) / pAvg;
+          if (pctP === 0) return formulaError("Price percent change is zero; elasticity is undefined.");
+          const result = pctQ / pctP;
+          return formulaSuccess(
+            "epsilon_d",
+            result,
+            `Computed demand elasticity: ${formatFormulaNumber(result)}.`,
+            `<p>\\(\\%\\Delta Q = \\frac{${formatFormulaNumber(values.q2)}-${formatFormulaNumber(values.q1)}}{(${formatFormulaNumber(values.q2)}+${formatFormulaNumber(values.q1)})/2} = ${formatFormulaNumber(pctQ)}\\)</p><p>\\(\\%\\Delta P = \\frac{${formatFormulaNumber(values.p2)}-${formatFormulaNumber(values.p1)}}{(${formatFormulaNumber(values.p2)}+${formatFormulaNumber(values.p1)})/2} = ${formatFormulaNumber(pctP)}\\)</p><p>\\(\\varepsilon_D = \\frac{\\%\\Delta Q}{\\%\\Delta P} = ${formatFormulaNumber(result)}\\)</p>`
+          );
+        }
+      },
+      {
+        id: "compound_growth",
+        topic: "L07 Growth",
+        title: "Compound Annual Growth Rate",
+        latex: "g=\\left(\\frac{X_t}{X_0}\\right)^{\\frac{1}{n}}-1",
+        outputVarId: "growth_rate",
+        variables: ["growth_rate", "x_t", "x_0", "n_years"],
+        intuition: "CAGR answers: what constant per-period rate would transform \\(X_0\\) into \\(X_t\\) over \\(n\\) periods?",
+        examFocus: [
+          "Ensure \\(X_0 > 0\\) and \\(n > 0\\).",
+          "Report both decimal and percent when presenting final answer."
+        ],
+        compute(values) {
+          const missing = missingFormulaInputs(values, ["x_t", "x_0", "n_years"]);
+          if (missing.length) return formulaMissingResult(missing);
+          if (values.x_0 <= 0) return formulaError("Initial level \\(X_0\\) must be positive.");
+          if (values.n_years <= 0) return formulaError("Number of periods \\(n\\) must be positive.");
+          const result = Math.pow(values.x_t / values.x_0, 1 / values.n_years) - 1;
+          return formulaSuccess(
+            "growth_rate",
+            result,
+            `Computed growth rate: ${formatFormulaNumber(result * 100)}% per period.`,
+            `<p>\\(g = \\left(\\frac{${formatFormulaNumber(values.x_t)}}{${formatFormulaNumber(values.x_0)}}\\right)^{1/${formatFormulaNumber(values.n_years)}} - 1 = ${formatFormulaNumber(result)}\\)</p><p>Percent form: \\(${formatFormulaNumber(result * 100)}\\%\\) per period.</p>`
+          );
+        }
+      }
+    ];
+
     const STORAGE = {
       checks: "econ205_midterm1_checks_v3",
       mastered: "econ205_midterm1_mastered_v3",
       minutes: "econ205_midterm1_timer_mins_v3",
       cards: "econ205_midterm1_card_stats_v1",
+      formulaLab: "econ205_midterm1_formula_lab_v1",
+      formulaApi: "econ205_midterm1_formula_api_v1",
       marketLab: "econ205_midterm1_market_lab_v1",
       arenaStats: "econ205_midterm1_arena_stats_v1",
       arenaPrefs: "econ205_midterm1_arena_prefs_v1",
@@ -3403,6 +4657,39 @@
     const questProgressText = document.getElementById("questProgressText");
     const questProgressFill = document.getElementById("questProgressFill");
 
+    const formulaCatalog = document.getElementById("formulaCatalog");
+    const formulaActiveTitle = document.getElementById("formulaActiveTitle");
+    const formulaActiveTopic = document.getElementById("formulaActiveTopic");
+    const formulaActiveLatex = document.getElementById("formulaActiveLatex");
+    const formulaIntuition = document.getElementById("formulaIntuition");
+    const formulaExamFocus = document.getElementById("formulaExamFocus");
+    const formulaVariableButtons = document.getElementById("formulaVariableButtons");
+    const formulaVariableTitle = document.getElementById("formulaVariableTitle");
+    const formulaVariableSymbol = document.getElementById("formulaVariableSymbol");
+    const formulaVariableDefinition = document.getElementById("formulaVariableDefinition");
+    const formulaVariableRole = document.getElementById("formulaVariableRole");
+    const formulaVariableUnits = document.getElementById("formulaVariableUnits");
+    const formulaVariableDataMap = document.getElementById("formulaVariableDataMap");
+    const formulaVariableExamHint = document.getElementById("formulaVariableExamHint");
+    const formulaVariableSelect = document.getElementById("formulaVariableSelect");
+    const formulaSourceSelect = document.getElementById("formulaSourceSelect");
+    const formulaSeriesField = document.getElementById("formulaSeriesField");
+    const formulaSeriesInput = document.getElementById("formulaSeriesInput");
+    const formulaManualField = document.getElementById("formulaManualField");
+    const formulaManualInput = document.getElementById("formulaManualInput");
+    const formulaSaveBindingBtn = document.getElementById("formulaSaveBindingBtn");
+    const formulaFetchBtn = document.getElementById("formulaFetchBtn");
+    const formulaApplyManualBtn = document.getElementById("formulaApplyManualBtn");
+    const fredApiKeyInput = document.getElementById("fredApiKeyInput");
+    const blsApiKeyInput = document.getElementById("blsApiKeyInput");
+    const formulaSaveKeysBtn = document.getElementById("formulaSaveKeysBtn");
+    const formulaDataMeta = document.getElementById("formulaDataMeta");
+    const formulaBindingsTable = document.getElementById("formulaBindingsTable");
+    const formulaComputeBtn = document.getElementById("formulaComputeBtn");
+    const formulaResetBtn = document.getElementById("formulaResetBtn");
+    const formulaComputeResult = document.getElementById("formulaComputeResult");
+    const formulaComputeSteps = document.getElementById("formulaComputeSteps");
+
     let currentIdx = null;
     let recallSubmitted = false;
     let recallLastCorrect = false;
@@ -3485,6 +4772,9 @@
     let activeIntuitionScenarioId = "";
     let intuitionGuesses = {};
     let questState = null;
+    let formulaLabState = null;
+    let formulaApiState = null;
+    let formulaFetchInFlight = false;
 
     function safeRead(key, fallback) {
       try {
@@ -3814,6 +5104,804 @@
 
     function clamp(value, min, max) {
       return Math.min(max, Math.max(min, value));
+    }
+
+    function formatFormulaNumber(value, digits = 4) {
+      if (!Number.isFinite(value)) return "--";
+      const precision = Math.abs(value) >= 100 ? 2 : digits;
+      return String(Number(value.toFixed(precision)));
+    }
+
+    function formatFormulaValueCell(value) {
+      if (!Number.isFinite(value)) return "--";
+      return value.toLocaleString(undefined, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 4
+      });
+    }
+
+    function getFormulaById(id) {
+      return FORMULA_CATALOG.find((formula) => formula.id === id) || null;
+    }
+
+    function getVariableMeta(id) {
+      return FORMULA_VARIABLES[id] || null;
+    }
+
+    function recommendedSeriesId(variableId, source = "fred") {
+      const meta = getVariableMeta(variableId);
+      if (!meta || !meta.sources || !meta.sources[source]) return "";
+      return String(meta.sources[source].seriesId || "").trim();
+    }
+
+    function defaultFormulaBinding(variableId) {
+      const defaultSeries = recommendedSeriesId(variableId, "fred") || recommendedSeriesId(variableId, "bls");
+      return {
+        source: "manual",
+        seriesId: defaultSeries || "",
+        manualValue: "",
+        value: null,
+        updatedAt: 0,
+        updatedLabel: ""
+      };
+    }
+
+    function defaultFormulaApiState() {
+      return {
+        fredKey: "",
+        blsKey: ""
+      };
+    }
+
+    function defaultFormulaLabState() {
+      const firstFormula = FORMULA_CATALOG[0] || null;
+      const firstVar = firstFormula && firstFormula.variables[0] ? firstFormula.variables[0] : "";
+      const bindings = {};
+      FORMULA_CATALOG.forEach((formula) => {
+        formula.variables.forEach((variableId) => {
+          if (!bindings[variableId]) {
+            bindings[variableId] = defaultFormulaBinding(variableId);
+          }
+        });
+      });
+      return {
+        selectedFormulaId: firstFormula ? firstFormula.id : "",
+        selectedVariableId: firstVar,
+        bindings
+      };
+    }
+
+    function sanitizeFormulaBinding(raw, variableId) {
+      const fallback = defaultFormulaBinding(variableId);
+      if (!raw || typeof raw !== "object") return fallback;
+      const source = FORMULA_SOURCES.includes(raw.source) ? raw.source : fallback.source;
+      const seriesId = typeof raw.seriesId === "string"
+        ? raw.seriesId.trim().slice(0, 64)
+        : fallback.seriesId;
+      const manualValue = typeof raw.manualValue === "string"
+        ? raw.manualValue.trim().slice(0, 64)
+        : (Number.isFinite(Number.parseFloat(raw.manualValue)) ? String(raw.manualValue).trim().slice(0, 64) : "");
+      const parsedValue = Number.parseFloat(raw.value);
+      const fallbackManual = Number.parseFloat(manualValue);
+      const value = Number.isFinite(parsedValue)
+        ? parsedValue
+        : (Number.isFinite(fallbackManual) ? fallbackManual : null);
+      const updatedAt = Math.max(0, Number.parseInt(raw.updatedAt, 10) || 0);
+      const updatedLabel = typeof raw.updatedLabel === "string" ? raw.updatedLabel.slice(0, 220) : "";
+      return {
+        source,
+        seriesId,
+        manualValue,
+        value,
+        updatedAt,
+        updatedLabel
+      };
+    }
+
+    function sanitizeFormulaApiState(raw) {
+      const base = defaultFormulaApiState();
+      if (!raw || typeof raw !== "object") return base;
+      return {
+        fredKey: typeof raw.fredKey === "string" ? raw.fredKey.trim().slice(0, 128) : "",
+        blsKey: typeof raw.blsKey === "string" ? raw.blsKey.trim().slice(0, 128) : ""
+      };
+    }
+
+    function sanitizeFormulaLabState(raw) {
+      const base = defaultFormulaLabState();
+      if (!raw || typeof raw !== "object") return base;
+
+      const selectedFormula = getFormulaById(raw.selectedFormulaId) || getFormulaById(base.selectedFormulaId);
+      const selectedFormulaId = selectedFormula ? selectedFormula.id : "";
+
+      const bindings = { ...base.bindings };
+      if (raw.bindings && typeof raw.bindings === "object") {
+        Object.keys(bindings).forEach((variableId) => {
+          bindings[variableId] = sanitizeFormulaBinding(raw.bindings[variableId], variableId);
+        });
+      }
+
+      let selectedVariableId = typeof raw.selectedVariableId === "string" ? raw.selectedVariableId : "";
+      if (!selectedFormula || !selectedFormula.variables.includes(selectedVariableId)) {
+        selectedVariableId = selectedFormula && selectedFormula.variables[0] ? selectedFormula.variables[0] : "";
+      }
+
+      return {
+        selectedFormulaId,
+        selectedVariableId,
+        bindings
+      };
+    }
+
+    function persistFormulaLabState() {
+      if (!formulaLabState) return;
+      safeWrite(STORAGE.formulaLab, formulaLabState);
+    }
+
+    function persistFormulaApiState() {
+      if (!formulaApiState) return;
+      safeWrite(STORAGE.formulaApi, formulaApiState);
+    }
+
+    function getActiveFormula() {
+      if (!formulaLabState) return null;
+      return getFormulaById(formulaLabState.selectedFormulaId);
+    }
+
+    function ensureFormulaBinding(variableId) {
+      if (!formulaLabState || !formulaLabState.bindings || typeof formulaLabState.bindings !== "object") {
+        formulaLabState = defaultFormulaLabState();
+      }
+      if (!formulaLabState.bindings[variableId]) {
+        formulaLabState.bindings[variableId] = defaultFormulaBinding(variableId);
+      }
+      return formulaLabState.bindings[variableId];
+    }
+
+    function missingFormulaInputs(values, requiredIds) {
+      return requiredIds.filter((id) => !Number.isFinite(values[id]));
+    }
+
+    function formulaError(message) {
+      return {
+        ok: false,
+        message
+      };
+    }
+
+    function formulaMissingResult(missingIds) {
+      const labels = missingIds
+        .map((id) => {
+          const meta = getVariableMeta(id);
+          return meta ? `\\(${meta.symbolLatex}\\)` : id;
+        })
+        .join(", ");
+      return formulaError(`Missing numeric values for ${labels}. Add values manually or fetch data first.`);
+    }
+
+    function formulaSuccess(outputVarId, value, summary, stepsHtml = "") {
+      return {
+        ok: true,
+        outputVarId,
+        value,
+        summary,
+        stepsHtml
+      };
+    }
+
+    function getFormulaValues(formula) {
+      const values = {};
+      formula.variables.forEach((id) => {
+        const binding = ensureFormulaBinding(id);
+        values[id] = Number.isFinite(binding.value) ? binding.value : null;
+      });
+      return values;
+    }
+
+    function setFormulaComputeFeedback(message, tone = "") {
+      if (!formulaComputeResult) return;
+      formulaComputeResult.innerHTML = message;
+      formulaComputeResult.className = `arena-feedback${tone ? ` ${tone}` : ""}`;
+      typesetMath(formulaComputeResult);
+    }
+
+    function setFormulaDataStatus(message) {
+      if (!formulaDataMeta) return;
+      formulaDataMeta.textContent = message;
+    }
+
+    function formatFormulaTimestamp(ts) {
+      if (!Number.isFinite(ts) || ts <= 0) return "";
+      try {
+        return new Date(ts).toLocaleString([], {
+          hour: "2-digit",
+          minute: "2-digit",
+          month: "short",
+          day: "numeric"
+        });
+      } catch {
+        return "";
+      }
+    }
+
+    function updateFormulaInputVisibility() {
+      if (!formulaSourceSelect || !formulaSeriesField || !formulaManualField) return;
+      const source = formulaSourceSelect.value;
+      formulaSeriesField.hidden = source === "manual";
+      formulaManualField.hidden = source !== "manual";
+    }
+
+    function renderFormulaCatalog() {
+      if (!formulaCatalog || !formulaLabState) return;
+      formulaCatalog.innerHTML = "";
+      FORMULA_CATALOG.forEach((formula) => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = `formula-item${formulaLabState.selectedFormulaId === formula.id ? " active" : ""}`;
+        button.innerHTML = `
+          <span class="kicker">${formula.topic}</span>
+          <span class="title">${formula.title}</span>
+          <span class="math">\\(${formula.latex}\\)</span>
+        `;
+        button.addEventListener("click", () => {
+          selectFormula(formula.id);
+        });
+        formulaCatalog.appendChild(button);
+      });
+      typesetMath(formulaCatalog);
+    }
+
+    function renderFormulaVariableDetails() {
+      const formula = getActiveFormula();
+      if (!formula || !formulaLabState) return;
+      const variableId = formulaLabState.selectedVariableId;
+      const meta = getVariableMeta(variableId);
+      if (!meta) return;
+
+      if (formulaVariableTitle) formulaVariableTitle.textContent = `${meta.label} Explorer`;
+      if (formulaVariableSymbol) formulaVariableSymbol.innerHTML = `\\(${meta.symbolLatex}\\)`;
+      if (formulaVariableDefinition) formulaVariableDefinition.textContent = meta.definition;
+      if (formulaVariableRole) {
+        const roleBits = [meta.role];
+        if (formula.outputVarId === variableId) {
+          roleBits.push("This variable is the current compute target in this formula.");
+        }
+        formulaVariableRole.textContent = roleBits.join(" ");
+      }
+      if (formulaVariableUnits) formulaVariableUnits.textContent = meta.units;
+      if (formulaVariableDataMap) formulaVariableDataMap.textContent = meta.dataMap;
+      if (formulaVariableExamHint) formulaVariableExamHint.textContent = meta.examHint;
+      typesetMath(formulaVariableSymbol);
+    }
+
+    function renderFormulaControlPanel() {
+      const formula = getActiveFormula();
+      if (!formula || !formulaLabState || !formulaVariableSelect || !formulaSourceSelect || !formulaSeriesInput || !formulaManualInput) return;
+
+      formulaVariableSelect.innerHTML = "";
+      formula.variables.forEach((variableId) => {
+        const meta = getVariableMeta(variableId);
+        const option = document.createElement("option");
+        option.value = variableId;
+        option.textContent = `${meta ? meta.label : variableId} [${variableId}]`;
+        formulaVariableSelect.appendChild(option);
+      });
+
+      if (!formula.variables.includes(formulaLabState.selectedVariableId)) {
+        formulaLabState.selectedVariableId = formula.variables[0] || "";
+      }
+      formulaVariableSelect.value = formulaLabState.selectedVariableId;
+
+      const binding = ensureFormulaBinding(formulaLabState.selectedVariableId);
+      const uiSource = binding.source === "computed" ? "manual" : binding.source;
+      formulaSourceSelect.value = ["manual", "fred", "bls"].includes(uiSource) ? uiSource : "manual";
+
+      const source = formulaSourceSelect.value;
+      if (source === "manual") {
+        formulaManualInput.value = binding.manualValue || (Number.isFinite(binding.value) ? String(binding.value) : "");
+      } else {
+        const recommended = recommendedSeriesId(formulaLabState.selectedVariableId, source);
+        formulaSeriesInput.value = binding.seriesId || recommended;
+      }
+
+      const ts = formatFormulaTimestamp(binding.updatedAt);
+      if (binding.updatedLabel) {
+        setFormulaDataStatus(`Latest ${formulaLabState.selectedVariableId}: ${binding.updatedLabel}${ts ? ` (${ts})` : ""}`);
+      } else {
+        setFormulaDataStatus("No variable updates yet.");
+      }
+
+      updateFormulaInputVisibility();
+    }
+
+    function renderFormulaBindingsTable() {
+      const formula = getActiveFormula();
+      if (!formula || !formulaBindingsTable || !formulaLabState) return;
+      formulaBindingsTable.innerHTML = "";
+
+      const header = document.createElement("div");
+      header.className = "formula-binding-row header";
+      header.innerHTML = "<span>Variable</span><span>Value</span><span>Source</span><span>Series / Update</span>";
+      formulaBindingsTable.appendChild(header);
+
+      formula.variables.forEach((variableId) => {
+        const meta = getVariableMeta(variableId);
+        const binding = ensureFormulaBinding(variableId);
+        const row = document.createElement("button");
+        row.type = "button";
+        row.className = `formula-binding-row${variableId === formulaLabState.selectedVariableId ? " active" : ""}`;
+        const sourceLabel = binding.source === "computed"
+          ? "computed"
+          : (binding.source || "manual");
+        const updateBits = [];
+        if (binding.seriesId) updateBits.push(binding.seriesId);
+        if (binding.updatedLabel) updateBits.push(binding.updatedLabel);
+        const ts = formatFormulaTimestamp(binding.updatedAt);
+        if (ts) updateBits.push(ts);
+        row.innerHTML = `
+          <span>\\(${meta ? meta.symbolLatex : variableId}\\) ${meta ? meta.label : variableId}</span>
+          <span class="cell-value">${formatFormulaValueCell(binding.value)}</span>
+          <span class="cell-source">${sourceLabel}</span>
+          <span class="cell-series">${updateBits.join(" • ") || "No data yet"}</span>
+        `;
+        row.addEventListener("click", () => {
+          selectFormulaVariable(variableId);
+        });
+        formulaBindingsTable.appendChild(row);
+      });
+      typesetMath(formulaBindingsTable);
+    }
+
+    function renderActiveFormula() {
+      const formula = getActiveFormula();
+      if (!formula || !formulaLabState) return;
+
+      if (formulaActiveTitle) formulaActiveTitle.textContent = formula.title;
+      if (formulaActiveTopic) formulaActiveTopic.textContent = formula.topic;
+      if (formulaActiveLatex) formulaActiveLatex.innerHTML = `\\(${formula.latex}\\)`;
+      if (formulaIntuition) formulaIntuition.textContent = formula.intuition;
+      if (formulaExamFocus) {
+        formulaExamFocus.innerHTML = "";
+        formula.examFocus.forEach((item) => {
+          const li = document.createElement("li");
+          li.innerHTML = item;
+          formulaExamFocus.appendChild(li);
+        });
+      }
+      if (!formula.variables.includes(formulaLabState.selectedVariableId)) {
+        formulaLabState.selectedVariableId = formula.variables[0] || "";
+      }
+
+      if (formulaVariableButtons) {
+        formulaVariableButtons.innerHTML = "";
+        formula.variables.forEach((variableId) => {
+          const meta = getVariableMeta(variableId);
+          const chip = document.createElement("button");
+          chip.type = "button";
+          chip.className = `formula-var-chip${variableId === formulaLabState.selectedVariableId ? " active" : ""}`;
+          chip.innerHTML = `<span class="symbol">\\(${meta ? meta.symbolLatex : variableId}\\)</span><span>${meta ? meta.label : variableId}</span>`;
+          chip.addEventListener("click", () => {
+            selectFormulaVariable(variableId);
+          });
+          formulaVariableButtons.appendChild(chip);
+        });
+      }
+
+      renderFormulaVariableDetails();
+      renderFormulaControlPanel();
+      renderFormulaBindingsTable();
+      persistFormulaLabState();
+      typesetMath(formulaActiveLatex);
+      typesetMath(formulaExamFocus);
+      typesetMath(formulaVariableButtons);
+    }
+
+    function selectFormula(formulaId, silent = false) {
+      if (!formulaLabState) formulaLabState = defaultFormulaLabState();
+      const next = getFormulaById(formulaId) || FORMULA_CATALOG[0];
+      if (!next) return;
+      formulaLabState.selectedFormulaId = next.id;
+      if (!next.variables.includes(formulaLabState.selectedVariableId)) {
+        formulaLabState.selectedVariableId = next.variables[0] || "";
+      }
+      renderFormulaCatalog();
+      renderActiveFormula();
+      if (!silent) showStatus(`Loaded formula: ${next.title}`);
+    }
+
+    function selectFormulaVariable(variableId, silent = false) {
+      const formula = getActiveFormula();
+      if (!formula || !formulaLabState) return;
+      if (!formula.variables.includes(variableId)) return;
+      formulaLabState.selectedVariableId = variableId;
+      renderActiveFormula();
+      if (!silent) {
+        const meta = getVariableMeta(variableId);
+        showStatus(`Variable focus: ${meta ? meta.label : variableId}`);
+      }
+    }
+
+    function saveFormulaVariableBinding() {
+      if (!formulaLabState || !formulaSourceSelect || !formulaSeriesInput || !formulaManualInput) return;
+      const variableId = formulaLabState.selectedVariableId;
+      const binding = ensureFormulaBinding(variableId);
+      const source = ["manual", "fred", "bls"].includes(formulaSourceSelect.value)
+        ? formulaSourceSelect.value
+        : "manual";
+      binding.source = source;
+      if (source === "manual") {
+        binding.manualValue = formulaManualInput.value.trim();
+        const numeric = Number.parseFloat(binding.manualValue);
+        if (binding.manualValue && Number.isFinite(numeric)) {
+          binding.value = numeric;
+          binding.updatedAt = Date.now();
+          binding.updatedLabel = "Manual value saved";
+        } else if (!binding.manualValue) {
+          binding.value = null;
+          binding.updatedAt = Date.now();
+          binding.updatedLabel = "Manual value cleared";
+        }
+      } else {
+        const candidateSeries = formulaSeriesInput.value.trim().toUpperCase();
+        const fallback = recommendedSeriesId(variableId, source);
+        binding.seriesId = candidateSeries || fallback;
+      }
+      persistFormulaLabState();
+      renderFormulaBindingsTable();
+      renderFormulaControlPanel();
+      showStatus("Variable binding saved.");
+    }
+
+    function applyManualFormulaValue() {
+      if (!formulaLabState || !formulaManualInput || !formulaSourceSelect) return;
+      const variableId = formulaLabState.selectedVariableId;
+      const binding = ensureFormulaBinding(variableId);
+      const raw = formulaManualInput.value.trim();
+      const numeric = Number.parseFloat(raw);
+      if (!raw || !Number.isFinite(numeric)) {
+        setFormulaComputeFeedback("Enter a valid numeric manual value first.", "error");
+        return;
+      }
+      binding.source = "manual";
+      binding.manualValue = raw;
+      binding.value = numeric;
+      binding.updatedAt = Date.now();
+      binding.updatedLabel = "Manual value applied";
+      formulaSourceSelect.value = "manual";
+      persistFormulaLabState();
+      renderFormulaBindingsTable();
+      renderFormulaControlPanel();
+      setFormulaComputeFeedback(`Stored manual value for \\(${getVariableMeta(variableId).symbolLatex}\\): ${formatFormulaNumber(numeric)}.`, "success");
+      showStatus("Manual variable value applied.");
+    }
+
+    function saveFormulaApiKeys() {
+      if (!formulaApiState || !fredApiKeyInput || !blsApiKeyInput) return;
+      formulaApiState.fredKey = fredApiKeyInput.value.trim();
+      formulaApiState.blsKey = blsApiKeyInput.value.trim();
+      persistFormulaApiState();
+      setFormulaDataStatus("API keys saved in local storage for this browser.");
+      showStatus("Formula API keys saved locally.");
+    }
+
+    async function fetchJsonWithTimeout(url, options = {}, timeoutMs = 15000) {
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => controller.abort(), timeoutMs);
+      try {
+        const response = await fetch(url, { ...options, signal: controller.signal });
+        const payload = await response.json();
+        if (!response.ok) {
+          const details = payload && typeof payload === "object"
+            ? (payload.error_message || payload.message || payload.status || "")
+            : "";
+          throw new Error(`${response.status} ${response.statusText}${details ? `: ${details}` : ""}`);
+        }
+        return payload;
+      } finally {
+        window.clearTimeout(timeoutId);
+      }
+    }
+
+    async function fetchFredObservationLatest(seriesId, apiKey = "") {
+      const dataUrl = new URL("https://api.stlouisfed.org/fred/series/observations");
+      dataUrl.searchParams.set("series_id", seriesId);
+      dataUrl.searchParams.set("sort_order", "desc");
+      dataUrl.searchParams.set("limit", "120");
+      dataUrl.searchParams.set("file_type", "json");
+      if (apiKey) dataUrl.searchParams.set("api_key", apiKey);
+
+      const payload = await fetchJsonWithTimeout(dataUrl.toString(), {
+        headers: { Accept: "application/json" }
+      });
+      if (!payload || !Array.isArray(payload.observations)) {
+        throw new Error("Unexpected FRED response shape.");
+      }
+      const observation = payload.observations.find((item) => {
+        if (!item || typeof item.value !== "string") return false;
+        const numeric = Number.parseFloat(item.value);
+        return Number.isFinite(numeric);
+      });
+      if (!observation) {
+        throw new Error("No numeric observation returned for this FRED series.");
+      }
+      let title = seriesId;
+      let units = "";
+      try {
+        const metaUrl = new URL("https://api.stlouisfed.org/fred/series");
+        metaUrl.searchParams.set("series_id", seriesId);
+        metaUrl.searchParams.set("file_type", "json");
+        if (apiKey) metaUrl.searchParams.set("api_key", apiKey);
+        const meta = await fetchJsonWithTimeout(metaUrl.toString(), {
+          headers: { Accept: "application/json" }
+        });
+        if (meta && Array.isArray(meta.seriess) && meta.seriess[0]) {
+          title = meta.seriess[0].title || title;
+          units = meta.seriess[0].units_short || meta.seriess[0].units || "";
+        }
+      } catch {
+        // Keep fallback metadata if secondary lookup fails.
+      }
+
+      return {
+        source: "fred",
+        seriesId,
+        value: Number.parseFloat(observation.value),
+        date: observation.date || "",
+        title,
+        units
+      };
+    }
+
+    function blsPeriodLabel(rawPeriod, periodName = "") {
+      if (periodName) return periodName;
+      if (!rawPeriod) return "";
+      if (rawPeriod === "M13") return "Annual average";
+      if (/^M\d{2}$/.test(rawPeriod)) {
+        const monthIdx = Number.parseInt(rawPeriod.slice(1), 10) - 1;
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+        return monthNames[monthIdx] || rawPeriod;
+      }
+      if (/^Q\d$/.test(rawPeriod)) return rawPeriod;
+      return rawPeriod;
+    }
+
+    async function fetchBlsObservationLatest(seriesId, apiKey = "") {
+      const year = new Date().getFullYear();
+      const requestBody = {
+        seriesid: [seriesId],
+        startyear: String(year - 2),
+        endyear: String(year)
+      };
+      if (apiKey) requestBody.registrationkey = apiKey;
+
+      const payload = await fetchJsonWithTimeout("https://api.bls.gov/publicAPI/v2/timeseries/data/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json"
+        },
+        body: JSON.stringify(requestBody)
+      });
+      if (!payload || payload.status !== "REQUEST_SUCCEEDED") {
+        throw new Error("BLS request did not succeed.");
+      }
+
+      const series = payload.Results && Array.isArray(payload.Results.series)
+        ? payload.Results.series[0]
+        : null;
+      if (!series || !Array.isArray(series.data)) {
+        throw new Error("Unexpected BLS response shape.");
+      }
+      const observation = series.data.find((item) => {
+        if (!item || typeof item.value !== "string") return false;
+        const cleaned = item.value.replace(/,/g, "");
+        return Number.isFinite(Number.parseFloat(cleaned));
+      });
+      if (!observation) {
+        throw new Error("No numeric observation returned for this BLS series.");
+      }
+
+      const value = Number.parseFloat(observation.value.replace(/,/g, ""));
+      const period = blsPeriodLabel(observation.period, observation.periodName);
+      const date = `${period} ${observation.year}`.trim();
+      const title = series.catalog && series.catalog.series_title
+        ? series.catalog.series_title
+        : series.seriesID;
+      return {
+        source: "bls",
+        seriesId,
+        value,
+        date,
+        title,
+        units: ""
+      };
+    }
+
+    async function fetchSelectedFormulaVariable() {
+      if (formulaFetchInFlight) return;
+      if (!formulaLabState || !formulaSourceSelect || !formulaSeriesInput) return;
+      const variableId = formulaLabState.selectedVariableId;
+      const source = formulaSourceSelect.value;
+      if (source !== "fred" && source !== "bls") {
+        setFormulaComputeFeedback("Switch source to FRED or BLS to fetch series data.", "error");
+        return;
+      }
+
+      const binding = ensureFormulaBinding(variableId);
+      const seriesId = formulaSeriesInput.value.trim().toUpperCase() || binding.seriesId || recommendedSeriesId(variableId, source);
+      if (!seriesId) {
+        setFormulaComputeFeedback(`No ${source.toUpperCase()} series ID provided for this variable.`, "error");
+        return;
+      }
+
+      formulaFetchInFlight = true;
+      if (formulaFetchBtn) formulaFetchBtn.disabled = true;
+      setFormulaDataStatus(`Fetching ${source.toUpperCase()} series ${seriesId}...`);
+
+      try {
+        const apiKey = source === "fred"
+          ? (formulaApiState ? formulaApiState.fredKey : "")
+          : (formulaApiState ? formulaApiState.blsKey : "");
+        const packet = source === "fred"
+          ? await fetchFredObservationLatest(seriesId, apiKey || "")
+          : await fetchBlsObservationLatest(seriesId, apiKey || "");
+
+        binding.source = source;
+        binding.seriesId = seriesId;
+        binding.value = packet.value;
+        binding.manualValue = String(packet.value);
+        binding.updatedAt = Date.now();
+        binding.updatedLabel = `${packet.title}${packet.date ? ` • ${packet.date}` : ""}`;
+
+        persistFormulaLabState();
+        renderFormulaBindingsTable();
+        renderFormulaControlPanel();
+        setFormulaComputeFeedback(
+          `Loaded \\(${getVariableMeta(variableId).symbolLatex}\\) = ${formatFormulaNumber(packet.value)} from ${source.toUpperCase()} (${seriesId}).`,
+          "success"
+        );
+        showStatus(`Fetched ${seriesId} from ${source.toUpperCase()}.`);
+      } catch (error) {
+        const message = error && error.name === "AbortError"
+          ? "Request timed out. Try again."
+          : (error && error.message ? error.message : "Failed to fetch series value.");
+        setFormulaComputeFeedback(`Data fetch failed: ${message}`, "error");
+        setFormulaDataStatus(`Fetch failed for ${seriesId}.`);
+      } finally {
+        formulaFetchInFlight = false;
+        if (formulaFetchBtn) formulaFetchBtn.disabled = false;
+      }
+    }
+
+    function computeActiveFormula() {
+      const formula = getActiveFormula();
+      if (!formula) return;
+      const values = getFormulaValues(formula);
+      const result = formula.compute(values);
+      if (!result || typeof result !== "object" || !result.ok) {
+        const message = result && result.message ? result.message : "Unable to compute this formula with current values.";
+        setFormulaComputeFeedback(message, "error");
+        if (formulaComputeSteps) {
+          formulaComputeSteps.innerHTML = "";
+          formulaComputeSteps.classList.remove("show");
+        }
+        return;
+      }
+
+      const outputVarId = result.outputVarId || formula.outputVarId;
+      if (outputVarId) {
+        const outputBinding = ensureFormulaBinding(outputVarId);
+        outputBinding.value = result.value;
+        outputBinding.manualValue = String(result.value);
+        outputBinding.source = "computed";
+        outputBinding.updatedAt = Date.now();
+        outputBinding.updatedLabel = `Computed from ${formula.title}`;
+      }
+      persistFormulaLabState();
+      renderFormulaBindingsTable();
+      renderFormulaControlPanel();
+      setFormulaComputeFeedback(result.summary || "Formula computed.", "success");
+      if (formulaComputeSteps) {
+        formulaComputeSteps.innerHTML = result.stepsHtml || "";
+        formulaComputeSteps.classList.toggle("show", Boolean(result.stepsHtml));
+        if (result.stepsHtml) typesetMath(formulaComputeSteps);
+      }
+      showStatus(`Computed ${formula.title}.`);
+    }
+
+    function resetFormulaLabState(shouldPersist = true, clearKeys = false) {
+      formulaLabState = defaultFormulaLabState();
+      if (clearKeys) {
+        formulaApiState = defaultFormulaApiState();
+        if (fredApiKeyInput) fredApiKeyInput.value = "";
+        if (blsApiKeyInput) blsApiKeyInput.value = "";
+      }
+      if (shouldPersist) {
+        safeWrite(STORAGE.formulaLab, formulaLabState);
+        if (clearKeys) {
+          safeWrite(STORAGE.formulaApi, formulaApiState || defaultFormulaApiState());
+        }
+      }
+      renderFormulaCatalog();
+      renderActiveFormula();
+      if (formulaComputeSteps) {
+        formulaComputeSteps.innerHTML = "";
+        formulaComputeSteps.classList.remove("show");
+      }
+      setFormulaComputeFeedback("Formula playground reset. Choose values and compute again.");
+      setFormulaDataStatus("No variable updates yet.");
+    }
+
+    function initFormulaEngine() {
+      if (
+        !formulaCatalog
+        || !formulaActiveTitle
+        || !formulaActiveLatex
+        || !formulaIntuition
+        || !formulaExamFocus
+        || !formulaVariableButtons
+        || !formulaVariableSelect
+        || !formulaSourceSelect
+        || !formulaSeriesInput
+        || !formulaManualInput
+        || !formulaSaveBindingBtn
+        || !formulaFetchBtn
+        || !formulaApplyManualBtn
+        || !formulaSaveKeysBtn
+        || !formulaBindingsTable
+        || !formulaComputeBtn
+        || !formulaResetBtn
+      ) {
+        return;
+      }
+
+      formulaApiState = sanitizeFormulaApiState(safeRead(STORAGE.formulaApi, null));
+      formulaLabState = sanitizeFormulaLabState(safeRead(STORAGE.formulaLab, null));
+
+      if (fredApiKeyInput) fredApiKeyInput.value = formulaApiState.fredKey;
+      if (blsApiKeyInput) blsApiKeyInput.value = formulaApiState.blsKey;
+
+      renderFormulaCatalog();
+      selectFormula(formulaLabState.selectedFormulaId, true);
+      setFormulaComputeFeedback("Ready to compute.");
+      setFormulaDataStatus("No variable updates yet.");
+
+      formulaVariableSelect.addEventListener("change", () => {
+        selectFormulaVariable(formulaVariableSelect.value, true);
+      });
+      formulaSourceSelect.addEventListener("change", () => {
+        updateFormulaInputVisibility();
+        const variableId = formulaLabState ? formulaLabState.selectedVariableId : "";
+        const fallback = recommendedSeriesId(variableId, formulaSourceSelect.value);
+        if (formulaSourceSelect.value !== "manual" && !formulaSeriesInput.value.trim() && fallback) {
+          formulaSeriesInput.value = fallback;
+        }
+      });
+      formulaSaveBindingBtn.addEventListener("click", saveFormulaVariableBinding);
+      formulaApplyManualBtn.addEventListener("click", applyManualFormulaValue);
+      formulaFetchBtn.addEventListener("click", fetchSelectedFormulaVariable);
+      formulaSaveKeysBtn.addEventListener("click", saveFormulaApiKeys);
+      formulaComputeBtn.addEventListener("click", computeActiveFormula);
+      formulaResetBtn.addEventListener("click", () => {
+        resetFormulaLabState(true, false);
+        showStatus("Formula playground reset.");
+      });
+      if (fredApiKeyInput) {
+        fredApiKeyInput.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            saveFormulaApiKeys();
+          }
+        });
+      }
+      if (blsApiKeyInput) {
+        blsApiKeyInput.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            saveFormulaApiKeys();
+          }
+        });
+      }
     }
 
     function isCardShape(card) {
@@ -6007,6 +8095,24 @@
           run: () => scrollToSection("formulaEngine")
         },
         {
+          title: "Formula Lab: Compute Active Formula",
+          meta: "Action",
+          keywords: "formula compute evaluate equation",
+          run: () => computeActiveFormula()
+        },
+        {
+          title: "Formula Lab: Fetch Variable Data",
+          meta: "Action",
+          keywords: "formula fetch fred bls series",
+          run: () => fetchSelectedFormulaVariable()
+        },
+        {
+          title: "Formula Lab: Reset Playground",
+          meta: "Action",
+          keywords: "formula reset data bindings",
+          run: () => resetFormulaLabState(true, false)
+        },
+        {
           title: "Jump to Graphing Playbook",
           meta: "Navigate",
           keywords: "graph supply demand playbook",
@@ -6322,6 +8428,13 @@
         ["questIntensity", questIntensity],
         ["generateQuestBtn", generateQuestBtn],
         ["questList", questList],
+        ["formulaCatalog", formulaCatalog],
+        ["formulaActiveTitle", formulaActiveTitle],
+        ["formulaVariableButtons", formulaVariableButtons],
+        ["formulaVariableSelect", formulaVariableSelect],
+        ["formulaSourceSelect", formulaSourceSelect],
+        ["formulaComputeBtn", formulaComputeBtn],
+        ["formulaComputeResult", formulaComputeResult],
         ["liveStatus", liveStatus]
       ];
 
@@ -6347,6 +8460,46 @@
       }
       if (!QUEST_LIBRARY.foundations || !QUEST_LIBRARY.national || !QUEST_LIBRARY.retrieval) {
         issues.push("quest-library-missing-core");
+      }
+      if (!Array.isArray(FORMULA_CATALOG) || FORMULA_CATALOG.length < 10) {
+        issues.push("formula-catalog-missing");
+      } else {
+        FORMULA_CATALOG.forEach((formula, fIdx) => {
+          if (!formula || typeof formula !== "object") {
+            issues.push(`formula-shape-${fIdx}`);
+            return;
+          }
+          if (!formula.id || !formula.title || !formula.latex || !Array.isArray(formula.variables) || formula.variables.length < 2) {
+            issues.push(`formula-meta-${fIdx}`);
+          }
+          if (typeof formula.compute !== "function") {
+            issues.push(`formula-compute-missing-${fIdx}`);
+          } else {
+            const probe = {};
+            formula.variables.forEach((variableId) => {
+              probe[variableId] = 1;
+            });
+            const result = formula.compute(probe);
+            if (!result || typeof result !== "object" || typeof result.ok !== "boolean") {
+              issues.push(`formula-compute-shape-${fIdx}`);
+            }
+          }
+          formula.variables.forEach((variableId, vIdx) => {
+            if (!FORMULA_VARIABLES[variableId]) {
+              issues.push(`formula-variable-missing-${fIdx}-${vIdx}`);
+            }
+          });
+        });
+      }
+      if (!formulaLabState || typeof formulaLabState !== "object") {
+        issues.push("formula-state-missing");
+      } else {
+        const activeFormula = getActiveFormula();
+        if (!activeFormula) {
+          issues.push("formula-active-missing");
+        } else if (!activeFormula.variables.includes(formulaLabState.selectedVariableId)) {
+          issues.push("formula-active-variable-missing");
+        }
       }
 
       for (let i = 0; i < 60; i += 1) {
@@ -6508,6 +8661,11 @@
           mastered: safeRead(STORAGE.mastered, null),
           minutes: safeRead(STORAGE.minutes, null),
           cards: safeRead(STORAGE.cards, null),
+          formulaLab: safeRead(STORAGE.formulaLab, null),
+          formulaApiConfigured: {
+            fred: Boolean((safeRead(STORAGE.formulaApi, {}) || {}).fredKey),
+            bls: Boolean((safeRead(STORAGE.formulaApi, {}) || {}).blsKey)
+          },
           marketLab: safeRead(STORAGE.marketLab, null),
           arenaStats: safeRead(STORAGE.arenaStats, null),
           arenaPrefs: safeRead(STORAGE.arenaPrefs, null),
@@ -6572,6 +8730,8 @@
         localStorage.removeItem(STORAGE.mastered);
         localStorage.removeItem(STORAGE.minutes);
         localStorage.removeItem(STORAGE.cards);
+        localStorage.removeItem(STORAGE.formulaLab);
+        localStorage.removeItem(STORAGE.formulaApi);
         localStorage.removeItem(STORAGE.marketLab);
         localStorage.removeItem(STORAGE.arenaStats);
         localStorage.removeItem(STORAGE.arenaPrefs);
@@ -6597,6 +8757,7 @@
         labControlPrice.value = String(marketLabState.controlPrice);
         updateMarketLab();
       }
+      resetFormulaLabState(false, true);
       stopArenaTimer();
       arenaChallenge = null;
       arenaStats = defaultArenaStats();
@@ -6623,7 +8784,7 @@
       resetIntuitionStudioState(false);
       clearQuest(false);
       pickPrompt();
-      showStatus("All interactive progress reset, including mission planning, graph, intuition, and quant arenas.");
+      showStatus("All interactive progress reset, including formula, graph, mission, intuition, and quant arenas.");
     }
 
     function initRevealEffects() {
@@ -6818,6 +8979,7 @@
     resetTimerFromInput();
     renderChecks();
     applyResourceFilter();
+    initFormulaEngine();
     initMarketLab();
     initIntuitionStudio();
     initArena();
