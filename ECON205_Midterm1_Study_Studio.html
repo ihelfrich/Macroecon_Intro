@@ -1562,12 +1562,12 @@
   <div class="auth-gate" id="authGate">
     <div class="auth-card">
       <h2>ECON 205 Access</h2>
-      <p>Enter your full name to unlock this instructional studio.</p>
+      <p>Enter your name to unlock this instructional studio.</p>
       <div class="auth-row">
-        <input id="authNameInput" class="auth-input" type="text" autocomplete="name" placeholder="Full name" />
+        <input id="authNameInput" class="auth-input" type="text" autocomplete="name" placeholder="Name" />
         <button class="btn btn-primary" id="authUnlockBtn" type="button">Unlock</button>
       </div>
-      <div class="auth-help">Authorized names: Hanna Nio (student), Ian Helfrich (admin)</div>
+      <div class="auth-help">Use your authorized course name.</div>
       <div class="auth-message" id="authMessage">Access is name-gated for current enrolled use.</div>
     </div>
   </div>
@@ -2156,9 +2156,21 @@
       authSession: "econ205_midterm1_auth_session_v1"
     };
 
-    const AUTH_ROSTER = {
-      "hanna nio": { name: "Hanna Nio", role: "student" },
-      "ian helfrich": { name: "Ian Helfrich", role: "admin" }
+    const AUTH_USERS = {
+      hanna: { name: "Hanna Nio", role: "student" },
+      ian: { name: "Ian Helfrich", role: "admin" }
+    };
+
+    const AUTH_ALIASES = {
+      "hanna": "hanna",
+      "hanna nio": "hanna",
+      "ian": "ian",
+      "ian helfrich": "ian"
+    };
+
+    const AUTH_THROTTLE = {
+      maxAttempts: 4,
+      lockMs: 20000
     };
 
     const flashQ = document.getElementById("flashQ");
@@ -2328,6 +2340,9 @@
     let commandActiveIndex = 0;
     let commandOpen = false;
     let activeAuth = null;
+    let authFailedAttempts = 0;
+    let authLockedUntil = 0;
+    let authCooldownId = null;
 
     function safeRead(key, fallback) {
       try {
@@ -2350,8 +2365,19 @@
     function normalizeName(value) {
       return String(value || "")
         .trim()
+        .toLowerCase()
+        .normalize("NFKD")
+        .replace(/[^\w\s]/g, " ")
+        .replace(/^(dr|doctor)\s+/, "")
         .replace(/\s+/g, " ")
-        .toLowerCase();
+        .trim();
+    }
+
+    function resolveAuthorizedUser(value) {
+      const normalized = normalizeName(value);
+      if (!normalized) return null;
+      const key = AUTH_ALIASES[normalized];
+      return key ? AUTH_USERS[key] : null;
     }
 
     function roleLabel(role) {
@@ -2364,16 +2390,56 @@
       authMessage.className = `auth-message${tone ? ` ${tone}` : ""}`;
     }
 
+    function clearAuthCooldownTimer() {
+      if (!authCooldownId) return;
+      clearInterval(authCooldownId);
+      authCooldownId = null;
+    }
+
+    function setAuthLockedState(locked, message = "") {
+      if (authUnlockBtn) authUnlockBtn.disabled = locked;
+      if (authNameInput) authNameInput.disabled = locked;
+      if (!locked) {
+        clearAuthCooldownTimer();
+        if (message) setAuthMessage(message);
+        return;
+      }
+      setAuthMessage(message, "error");
+      clearAuthCooldownTimer();
+      authCooldownId = setInterval(() => {
+        const remainingMs = authLockedUntil - Date.now();
+        if (remainingMs <= 0) {
+          clearAuthCooldownTimer();
+          setAuthLockedState(false, "You can try again.");
+          return;
+        }
+        const remainingSeconds = Math.ceil(remainingMs / 1000);
+        setAuthMessage(`Too many attempts. Try again in ${remainingSeconds}s.`, "error");
+      }, 250);
+    }
+
+    function isAuthTemporarilyLocked() {
+      const now = Date.now();
+      if (authLockedUntil <= now) return false;
+      setAuthLockedState(true, `Too many attempts. Try again in ${Math.ceil((authLockedUntil - now) / 1000)}s.`);
+      return true;
+    }
+
     function lockAccess(message = "Access is name-gated for current enrolled use.") {
       activeAuth = null;
+      authFailedAttempts = 0;
+      authLockedUntil = 0;
+      clearAuthCooldownTimer();
       document.body.classList.add("auth-locked");
       document.body.dataset.role = "locked";
       if (authGate) authGate.classList.remove("hidden");
       if (authBadge) authBadge.textContent = "Locked";
       if (authNameInput) {
+        authNameInput.disabled = false;
         authNameInput.value = "";
         authNameInput.focus();
       }
+      if (authUnlockBtn) authUnlockBtn.disabled = false;
       if (adminModeMeta) adminModeMeta.textContent = "Admin mode unavailable.";
       closeCommandPalette();
       setAuthMessage(message);
@@ -2381,6 +2447,9 @@
 
     function applyAccess(user) {
       activeAuth = user;
+      authFailedAttempts = 0;
+      authLockedUntil = 0;
+      setAuthLockedState(false);
       document.body.classList.remove("auth-locked");
       document.body.dataset.role = user.role;
       if (authGate) authGate.classList.add("hidden");
@@ -2395,10 +2464,18 @@
 
     function unlockByName() {
       if (!authNameInput) return;
-      const normalized = normalizeName(authNameInput.value);
-      const user = AUTH_ROSTER[normalized];
+      if (isAuthTemporarilyLocked()) return;
+      const user = resolveAuthorizedUser(authNameInput.value);
       if (!user) {
-        setAuthMessage("Name not recognized. Check spelling and full-name format.", "error");
+        authFailedAttempts += 1;
+        const remaining = Math.max(0, AUTH_THROTTLE.maxAttempts - authFailedAttempts);
+        if (remaining === 0) {
+          authLockedUntil = Date.now() + AUTH_THROTTLE.lockMs;
+          setAuthLockedState(true, `Too many attempts. Try again in ${Math.ceil(AUTH_THROTTLE.lockMs / 1000)}s.`);
+          showStatus("Access gate temporarily locked.");
+          return;
+        }
+        setAuthMessage(`Name not recognized. ${remaining} attempt${remaining === 1 ? "" : "s"} remaining.`, "error");
         return;
       }
       safeWrite(STORAGE.authSession, user);
@@ -2408,8 +2485,7 @@
 
     function initAccessGate() {
       const stored = safeRead(STORAGE.authSession, null);
-      const normalized = normalizeName(stored && stored.name);
-      const mapped = AUTH_ROSTER[normalized];
+      const mapped = resolveAuthorizedUser(stored && stored.name);
       if (mapped && mapped.role === stored.role) {
         applyAccess(mapped);
       } else {
@@ -2434,7 +2510,7 @@
           } catch {
             // Ignore storage failures.
           }
-          lockAccess("Session cleared. Enter an authorized full name.");
+          lockAccess("Session cleared. Enter an authorized name.");
           showStatus("Session locked.");
         });
       }
