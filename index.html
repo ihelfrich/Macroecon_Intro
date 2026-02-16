@@ -1,0 +1,4167 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ECON 205 Midterm I Study Studio</title>
+  <meta name="description" content="USC ECON 205 Midterm I learning studio with rendered math, adaptive recall, and timed macro drills by Dr. Ian Helfrich." />
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [["\\(", "\\)"], ["$", "$"]],
+        displayMath: [["\\[", "\\]"], ["$$", "$$"]]
+      },
+      options: {
+        skipHtmlTags: ["script", "noscript", "style", "textarea", "pre", "code"]
+      }
+    };
+  </script>
+  <script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&amp;family=Fraunces:opsz,wght@9..144,300;9..144,500;9..144,700&amp;family=JetBrains+Mono:wght@400;600&amp;display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --usc-cardinal: #990000;
+      --usc-cardinal-deep: #6f0000;
+      --usc-gold: #ffcc00;
+      --usc-gold-deep: #d89900;
+      --paper: #f6f0e5;
+      --paper-soft: #fbf7ef;
+      --ink: #1f1b16;
+      --muted: #5f564d;
+      --sage: #dbe7d4;
+      --ocean: #1f4b5a;
+      --ocean-soft: #34697b;
+      --border: #d5c8b6;
+      --shadow: 0 18px 40px rgba(34, 25, 18, 0.16);
+      --shadow-deep: 0 32px 64px rgba(31, 18, 11, 0.24);
+      --radius-lg: 18px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --maxw: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Sora", system-ui, sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(1300px 700px at -10% -8%, rgba(255, 204, 0, 0.24), transparent 56%),
+        radial-gradient(900px 520px at 108% -6%, rgba(31, 75, 90, 0.18), transparent 60%),
+        radial-gradient(900px 500px at 98% 10%, rgba(153, 0, 0, 0.12), transparent 68%),
+        linear-gradient(180deg, #faf5ea 0%, #f2e7d4 48%, #f1e2ce 100%);
+      line-height: 1.5;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(121, 98, 77, 0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(121, 98, 77, 0.07) 1px, transparent 1px);
+      background-size: 38px 38px;
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.34), rgba(0,0,0,0.07));
+      z-index: -1;
+    }
+
+    a {
+      color: var(--usc-cardinal);
+      text-decoration-thickness: 2px;
+      text-underline-offset: 2px;
+    }
+
+    .shell {
+      width: min(var(--maxw), 92vw);
+      margin: 0 auto;
+      padding: 16px 0 48px;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 10px;
+      z-index: 50;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 10px auto 22px;
+      padding: 10px 14px;
+      border: 1px solid rgba(111, 0, 0, 0.2);
+      border-radius: 999px;
+      background: rgba(251, 247, 239, 0.9);
+      backdrop-filter: blur(8px);
+      box-shadow: 0 8px 24px rgba(50, 29, 22, 0.1);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.02em;
+    }
+
+    .brand-copy {
+      display: grid;
+      gap: 1px;
+      line-height: 1.15;
+    }
+
+    .brand-title {
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: #2f261e;
+    }
+
+    .brand-credit {
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #71675e;
+      opacity: 0.86;
+    }
+
+    .crest {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: linear-gradient(145deg, var(--usc-cardinal), var(--usc-cardinal-deep));
+      font-family: "Fraunces", serif;
+      font-weight: 700;
+      font-size: 0.78rem;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .auth-chip {
+      font-size: 0.74rem;
+      border: 1px solid #ddccb8;
+      border-radius: 999px;
+      padding: 5px 10px;
+      background: #fff;
+      color: #54493f;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .admin-inline {
+      display: none;
+    }
+
+    body[data-role="admin"] .admin-inline {
+      display: inline-flex;
+    }
+
+    .admin-only {
+      display: none;
+    }
+
+    body[data-role="admin"] .admin-only {
+      display: block;
+    }
+
+    body.auth-locked {
+      overflow: hidden;
+    }
+
+    .auth-gate {
+      position: fixed;
+      inset: 0;
+      z-index: 130;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      background:
+        radial-gradient(1100px 540px at 0% 0%, rgba(255, 204, 0, 0.22), transparent 62%),
+        radial-gradient(900px 500px at 100% 0%, rgba(153, 0, 0, 0.16), transparent 68%),
+        rgba(25, 18, 13, 0.44);
+      backdrop-filter: blur(8px);
+    }
+
+    .auth-gate.hidden {
+      display: none;
+    }
+
+    .auth-card {
+      width: min(540px, 92vw);
+      border: 1px solid rgba(224, 205, 184, 0.9);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fffefb 0%, #fff4e2 100%);
+      box-shadow: 0 26px 56px rgba(22, 14, 9, 0.34);
+      padding: 16px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .auth-card h2 {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-size: 1.5rem;
+      color: #3a2b1f;
+      line-height: 1.18;
+    }
+
+    .auth-card p {
+      margin: 0;
+      color: #5f5247;
+      font-size: 0.9rem;
+    }
+
+    .auth-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .auth-input {
+      flex: 1 1 260px;
+      min-width: 220px;
+      border: 1px solid #dcc6ab;
+      border-radius: 10px;
+      padding: 9px 11px;
+      font-size: 0.92rem;
+      color: #33291f;
+      background: #fff;
+      font-family: "Sora", system-ui, sans-serif;
+    }
+
+    .auth-input:focus-visible {
+      outline: 2px solid rgba(153, 0, 0, 0.34);
+      outline-offset: 1px;
+      border-color: rgba(153, 0, 0, 0.4);
+    }
+
+    .auth-help {
+      font-size: 0.76rem;
+      color: #6d5f52;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .auth-message {
+      min-height: 1.2em;
+      font-size: 0.84rem;
+      color: #6a594c;
+    }
+
+    .auth-message.error {
+      color: #8f1f1f;
+      font-weight: 700;
+    }
+
+    .btn {
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 8px 12px;
+      font-weight: 600;
+      font-size: 0.82rem;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
+    }
+
+    .btn-primary {
+      color: #fff;
+      background: linear-gradient(140deg, var(--usc-cardinal), var(--usc-cardinal-deep));
+    }
+
+    .btn-ghost {
+      color: var(--usc-cardinal);
+      background: #fff;
+      border-color: rgba(153, 0, 0, 0.24);
+    }
+
+    .command-shell {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+    }
+
+    .command-shell.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .command-backdrop {
+      position: absolute;
+      inset: 0;
+      background: rgba(26, 17, 12, 0.36);
+      backdrop-filter: blur(6px);
+    }
+
+    .command-dialog {
+      position: relative;
+      width: min(760px, 92vw);
+      margin: 68px auto 0;
+      border: 1px solid rgba(223, 205, 184, 0.95);
+      border-radius: 16px;
+      background: linear-gradient(180deg, #fffefc 0%, #fff5e6 100%);
+      box-shadow: 0 24px 56px rgba(28, 17, 11, 0.32);
+      overflow: hidden;
+    }
+
+    .command-head {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px;
+      border-bottom: 1px solid #e4d4bf;
+      background: rgba(255, 255, 255, 0.86);
+    }
+
+    .command-input {
+      width: 100%;
+      border: 1px solid #dfcdb7;
+      border-radius: 10px;
+      padding: 9px 11px;
+      font-size: 0.9rem;
+      color: #30271f;
+      background: #fff;
+      font-family: "Sora", system-ui, sans-serif;
+    }
+
+    .command-input:focus-visible {
+      outline: 2px solid rgba(153, 0, 0, 0.35);
+      outline-offset: 1px;
+      border-color: rgba(153, 0, 0, 0.42);
+    }
+
+    .command-hint {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.74rem;
+      color: #60564d;
+      border: 1px solid #ddccb7;
+      border-radius: 8px;
+      background: #fff;
+      padding: 4px 7px;
+      white-space: nowrap;
+    }
+
+    .command-list {
+      max-height: min(62vh, 540px);
+      overflow: auto;
+      padding: 8px;
+      display: grid;
+      gap: 6px;
+    }
+
+    .command-item {
+      width: 100%;
+      text-align: left;
+      border: 1px solid #e3d4c1;
+      border-radius: 10px;
+      background: #fff;
+      color: #372e26;
+      padding: 9px 10px;
+      cursor: pointer;
+      display: grid;
+      gap: 2px;
+      transition: transform 0.14s ease, border-color 0.14s ease, box-shadow 0.14s ease;
+    }
+
+    .command-item:hover,
+    .command-item.active {
+      transform: translateY(-1px);
+      border-color: rgba(153, 0, 0, 0.4);
+      box-shadow: 0 9px 20px rgba(48, 30, 18, 0.12);
+    }
+
+    .command-item .title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: #3a2d22;
+    }
+
+    .command-item .meta {
+      font-size: 0.74rem;
+      color: #6c6258;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      font-weight: 700;
+    }
+
+    .hero {
+      --hero-shift-x: 0px;
+      --hero-shift-y: 0px;
+      position: relative;
+      overflow: hidden;
+      border-radius: calc(var(--radius-lg) + 6px);
+      border: 1px solid #d4c4ad;
+      box-shadow: var(--shadow-deep);
+      background:
+        radial-gradient(700px 280px at 0% 0%, rgba(255, 204, 0, 0.32), transparent 58%),
+        linear-gradient(130deg, #fff8ec 0%, #f5e5cc 45%, #f0ddbc 100%);
+      padding: 26px clamp(18px, 3vw, 34px) 24px;
+      isolation: isolate;
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -40px;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 35%, rgba(153, 0, 0, 0.45), rgba(153, 0, 0, 0.1) 60%, transparent 72%);
+      transform: translate3d(var(--hero-shift-x), var(--hero-shift-y), 0);
+      transition: transform 0.22s ease-out;
+      z-index: -1;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(118deg, rgba(255, 255, 255, 0.3) 0, rgba(255, 255, 255, 0.3) 2px, transparent 2px, transparent 14px);
+      mask-image: linear-gradient(to bottom, rgba(0,0,0,0.3), transparent 72%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .hero-kicker {
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ocean);
+      font-size: 0.74rem;
+    }
+
+    .hero h1 {
+      margin: 6px 0 0;
+      font-family: "Fraunces", serif;
+      font-weight: 700;
+      line-height: 1.06;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      letter-spacing: 0.01em;
+    }
+
+    .hero .sub {
+      margin: 10px 0 0;
+      color: var(--muted);
+      max-width: 70ch;
+      font-size: clamp(0.95rem, 1.6vw, 1.05rem);
+    }
+
+    .hero-art {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .hero-layer {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.74;
+      will-change: transform;
+      transition: transform 0.14s linear;
+      filter: saturate(1.08);
+      transform: translate3d(0, var(--parallax-y, 0px), 0);
+    }
+
+    .hero-layer.layer-a {
+      width: 230px;
+      height: 230px;
+      top: 8%;
+      left: 58%;
+      background: radial-gradient(circle at 35% 35%, rgba(255, 255, 255, 0.85), rgba(255, 204, 0, 0.44), rgba(255, 204, 0, 0.08) 72%);
+    }
+
+    .hero-layer.layer-b {
+      width: 300px;
+      height: 300px;
+      top: 22%;
+      left: 74%;
+      background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.22), rgba(52, 105, 123, 0.4), rgba(52, 105, 123, 0.04) 70%);
+    }
+
+    .hero-layer.layer-c {
+      width: 260px;
+      height: 260px;
+      top: 62%;
+      left: -4%;
+      background: radial-gradient(circle at 44% 44%, rgba(255, 255, 255, 0.3), rgba(153, 0, 0, 0.28), rgba(153, 0, 0, 0.05) 72%);
+    }
+
+    .hero-grid {
+      position: absolute;
+      left: -4%;
+      right: -4%;
+      top: 56%;
+      height: 220px;
+      background:
+        linear-gradient(rgba(111, 0, 0, 0.2) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(111, 0, 0, 0.14) 1px, transparent 1px);
+      background-size: 46px 28px;
+      transform: translate3d(0, var(--parallax-y, 0px), 0) perspective(420px) rotateX(66deg);
+      transform-origin: center top;
+      opacity: 0.3;
+      mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.76), transparent 90%);
+    }
+
+    .chip-row {
+      margin-top: 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .chip {
+      font-size: 0.78rem;
+      border: 1px solid #d7c4ab;
+      border-radius: 999px;
+      padding: 5px 10px;
+      background: rgba(255, 255, 255, 0.7);
+      color: #433a30;
+      font-weight: 600;
+      letter-spacing: 0.01em;
+    }
+
+    .chip-status-ok {
+      border-color: rgba(18, 122, 74, 0.36);
+      color: #1d5f43;
+      background: rgba(241, 255, 249, 0.84);
+    }
+
+    .chip-status-warn {
+      border-color: rgba(147, 66, 0, 0.34);
+      color: #7f4400;
+      background: rgba(255, 248, 237, 0.9);
+    }
+
+    .section {
+      margin-top: 24px;
+      border-radius: var(--radius-lg);
+      border: 1px solid var(--border);
+      background:
+        linear-gradient(180deg, #fefcf8 0%, var(--paper-soft) 100%);
+      box-shadow: 0 10px 28px rgba(52, 34, 23, 0.08);
+      padding: clamp(16px, 2.2vw, 24px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .section::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 0;
+      height: 3px;
+      background: linear-gradient(90deg, rgba(153, 0, 0, 0.16), rgba(255, 204, 0, 0.38), rgba(31, 75, 90, 0.2));
+      pointer-events: none;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s ease, transform 0.55s ease;
+    }
+
+    .reveal.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section h2 {
+      margin: 0 0 6px;
+      font-family: "Fraunces", serif;
+      font-size: clamp(1.3rem, 2.1vw, 1.9rem);
+      letter-spacing: 0.01em;
+    }
+
+    .section p.lead {
+      margin: 0;
+      color: var(--muted);
+      max-width: 78ch;
+      font-size: 0.95rem;
+    }
+
+    .grid {
+      margin-top: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid.cols-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.cols-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .card {
+      background: #fff;
+      border: 1px solid #e1d4c2;
+      border-radius: var(--radius-md);
+      padding: 14px;
+      box-shadow: 0 8px 20px rgba(49, 31, 22, 0.08);
+      transform-origin: center;
+      animation: rise 0.5s ease both;
+    }
+
+    .card:nth-child(2) { animation-delay: 0.05s; }
+    .card:nth-child(3) { animation-delay: 0.1s; }
+    .card:nth-child(4) { animation-delay: 0.15s; }
+    .card:nth-child(5) { animation-delay: 0.2s; }
+    .card:nth-child(6) { animation-delay: 0.25s; }
+
+    @keyframes rise {
+      from {
+        opacity: 0;
+        transform: translateY(8px) scale(0.99);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .card h3 {
+      margin: 0 0 8px;
+      font-size: 1rem;
+      line-height: 1.3;
+      color: var(--usc-cardinal-deep);
+    }
+
+    .card ul {
+      margin: 0;
+      padding-left: 18px;
+      color: #3f352d;
+    }
+
+    .card li {
+      margin: 4px 0;
+      font-size: 0.9rem;
+    }
+
+    .formula-board {
+      margin-top: 12px;
+      border-radius: var(--radius-md);
+      border: 1px solid #d6c3ac;
+      background: linear-gradient(180deg, #fffdfa 0%, #fff5e6 100%);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .formula {
+      border: 1px solid #e5d3be;
+      border-left: 5px solid var(--usc-cardinal);
+      border-radius: 8px;
+      background: #fff;
+      padding: 8px 10px;
+      font-family: "Fraunces", serif;
+      font-size: 1rem;
+      color: #2b2722;
+      white-space: pre-wrap;
+      text-align: center;
+    }
+
+    .formula .mjx-container,
+    .flash-q .mjx-container,
+    .flash-a .mjx-container {
+      margin: 0.15rem 0 !important;
+      line-height: 1.25 !important;
+    }
+
+    .playbook-step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 9px;
+      border-radius: 10px;
+      background: #fff;
+      border: 1px solid #e6d9ca;
+    }
+
+    .step-num {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      background: linear-gradient(145deg, #f9d46a, var(--usc-gold));
+      color: #302512;
+      font-weight: 800;
+      display: grid;
+      place-items: center;
+    }
+
+    .kpi-strip {
+      margin-top: 12px;
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .kpi {
+      background: linear-gradient(180deg, #fff, #fdf8f2);
+      border: 1px solid #e8d9c7;
+      border-radius: 12px;
+      padding: 10px;
+      text-align: center;
+    }
+
+    .kpi .n {
+      font-family: "Fraunces", serif;
+      font-size: 1.5rem;
+      color: var(--usc-cardinal);
+      line-height: 1.1;
+    }
+
+    .kpi .l {
+      margin-top: 3px;
+      font-size: 0.75rem;
+      color: var(--muted);
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .checklist {
+      margin-top: 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .check {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      align-items: center;
+      gap: 9px;
+      border: 1px solid #e3d4c2;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+    }
+
+    .check input {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--usc-cardinal);
+      cursor: pointer;
+    }
+
+    .flash-wrap {
+      margin-top: 10px;
+      border: 1px solid #d6c8b7;
+      border-radius: 12px;
+      background: linear-gradient(180deg, #fffefb, #fff6eb);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .flash-q {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #3a2c20;
+      min-height: 3.4em;
+      display: grid;
+      align-items: center;
+    }
+
+    .flash-a {
+      border: 1px dashed #d6bea3;
+      border-radius: 10px;
+      padding: 10px;
+      background: #fff;
+      color: #302a24;
+      display: none;
+      min-height: 2.5em;
+    }
+
+    .flash-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .flash-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      color: #5a5048;
+      font-size: 0.82rem;
+      font-weight: 600;
+    }
+
+    .flash-meta {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.78rem;
+      color: #4a3c30;
+      border: 1px solid #dccab5;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: #fff;
+    }
+
+    .rating-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .self-answer {
+      width: 100%;
+      min-height: 90px;
+      resize: vertical;
+      border: 1px solid #d8c4ad;
+      border-radius: 10px;
+      padding: 10px 12px;
+      font-family: "Sora", system-ui, sans-serif;
+      font-size: 0.9rem;
+      color: #2f2924;
+      background: #fff;
+    }
+
+    .self-answer:focus-visible,
+    .resource-filter-input:focus-visible,
+    .timer-minutes:focus-visible,
+    .lab-select:focus-visible {
+      outline: 2px solid rgba(153, 0, 0, 0.35);
+      outline-offset: 1px;
+      border-color: rgba(153, 0, 0, 0.4);
+    }
+
+    .study-stats {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      color: #5a5048;
+      font-size: 0.82rem;
+    }
+
+    .stat-pill {
+      border: 1px solid #dccab5;
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: #fff;
+      font-weight: 700;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .live-status {
+      margin: 6px 2px 0;
+      color: #554a42;
+      font-size: 0.82rem;
+      min-height: 1.1em;
+    }
+
+    .progress-wrap {
+      margin-top: 12px;
+      padding: 10px;
+      border: 1px solid #e2d4c3;
+      border-radius: 12px;
+      background: #fff;
+      display: grid;
+      gap: 10px;
+    }
+
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.84rem;
+      color: #574d45;
+      flex-wrap: wrap;
+    }
+
+    .progress-meta strong {
+      color: var(--usc-cardinal-deep);
+      font-size: 0.92rem;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: #efe2d1;
+      overflow: hidden;
+      border: 1px solid #dfcdb8;
+    }
+
+    .progress-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #b22424, var(--usc-cardinal), #df6d2b);
+      transition: width 0.25s ease;
+    }
+
+    .timer-panel {
+      margin-top: 12px;
+      border: 1px solid #dac7b0;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffdfa 0%, #fff4e4 100%);
+      padding: 14px;
+      display: grid;
+      gap: 12px;
+    }
+
+    .timer-display {
+      font-family: "JetBrains Mono", monospace;
+      font-weight: 700;
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      text-align: center;
+      color: var(--usc-cardinal-deep);
+      letter-spacing: 0.05em;
+      border: 1px solid #dfccb6;
+      border-radius: 12px;
+      background: #fff;
+      padding: 12px 10px;
+    }
+
+    .timer-controls {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .timer-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: #544a42;
+      font-weight: 600;
+      border: 1px solid #dfccb6;
+      background: #fff;
+      border-radius: 999px;
+      padding: 5px 8px;
+    }
+
+    .timer-minutes {
+      width: 72px;
+      border: 1px solid #d7c3ac;
+      border-radius: 999px;
+      padding: 4px 8px;
+      font-size: 0.82rem;
+      font-family: "JetBrains Mono", monospace;
+      color: #31281f;
+      background: #fffdf9;
+    }
+
+    .timer-status {
+      font-size: 0.84rem;
+      color: #574d45;
+      min-height: 1.1em;
+    }
+
+    .timer-status.warn {
+      color: #8f3f00;
+      font-weight: 700;
+    }
+
+    .timer-status.danger {
+      color: #9b1212;
+      font-weight: 800;
+    }
+
+    .resource-controls {
+      margin-top: 12px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .resource-filter-input {
+      flex: 1 1 280px;
+      min-width: 220px;
+      border: 1px solid #dbcab6;
+      border-radius: 999px;
+      background: #fff;
+      padding: 8px 12px;
+      font-size: 0.86rem;
+      color: #332b24;
+    }
+
+    .resource-grid {
+      margin-top: 12px;
+      display: grid;
+      gap: 10px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .resource {
+      display: grid;
+      gap: 8px;
+      padding: 12px;
+      border: 1px solid #e2d2bf;
+      border-radius: 12px;
+      background: #fff;
+    }
+
+    .resource h3 {
+      margin: 0;
+      font-size: 0.98rem;
+      color: #402a1f;
+    }
+
+    .resource p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 0.86rem;
+    }
+
+    .resource .links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid #e1d0bc;
+      padding: 4px 9px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: #513b2a;
+      background: #fff9ef;
+      text-decoration: none;
+    }
+
+    .timeline {
+      margin-top: 12px;
+      border-left: 3px solid rgba(153, 0, 0, 0.28);
+      padding-left: 16px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .tick {
+      position: relative;
+      background: #fff;
+      border: 1px solid #e5d8c8;
+      border-radius: 10px;
+      padding: 10px;
+    }
+
+    .tick::before {
+      content: "";
+      position: absolute;
+      left: -24px;
+      top: 15px;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--usc-cardinal);
+      border: 2px solid #ffe6b4;
+    }
+
+    .tick strong {
+      display: block;
+      margin-bottom: 3px;
+      color: #3f291f;
+      font-size: 0.92rem;
+    }
+
+    .tick span {
+      color: #5f554e;
+      font-size: 0.86rem;
+    }
+
+    .lab-grid {
+      margin-top: 12px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(280px, 0.95fr) minmax(420px, 1.35fr);
+      align-items: start;
+    }
+
+    .lab-panel {
+      border: 1px solid #deccb5;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffefc 0%, #fff7ec 100%);
+      padding: 12px;
+      display: grid;
+      gap: 10px;
+      box-shadow: 0 12px 26px rgba(55, 35, 20, 0.08);
+    }
+
+    .lab-presets {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .lab-preset {
+      padding: 6px 10px;
+      font-size: 0.76rem;
+      letter-spacing: 0.02em;
+    }
+
+    .slider-block {
+      display: grid;
+      gap: 6px;
+    }
+
+    .slider-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.86rem;
+      color: #4f4338;
+      font-weight: 700;
+    }
+
+    .slider-row strong {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.84rem;
+      color: var(--usc-cardinal-deep);
+      background: #fff;
+      border: 1px solid #dccab4;
+      border-radius: 999px;
+      padding: 2px 8px;
+    }
+
+    .policy-row {
+      display: grid;
+      gap: 6px;
+      font-size: 0.84rem;
+      color: #4f4338;
+      font-weight: 700;
+    }
+
+    .lab-select {
+      width: 100%;
+      border: 1px solid #d9c5ad;
+      border-radius: 10px;
+      padding: 7px 9px;
+      color: #332c25;
+      font-size: 0.86rem;
+      font-weight: 600;
+      background: #fff;
+    }
+
+    .lab-slider {
+      width: 100%;
+      accent-color: var(--usc-cardinal);
+      cursor: pointer;
+    }
+
+    .lab-formulas {
+      gap: 6px;
+      padding: 8px;
+      border-style: dashed;
+    }
+
+    .lab-formulas .formula {
+      font-size: 0.88rem;
+      padding: 7px 9px;
+    }
+
+    .lab-note {
+      border: 1px solid #deccb5;
+      border-radius: 10px;
+      padding: 10px;
+      background: linear-gradient(170deg, #fff 0%, #fff7ea 100%);
+    }
+
+    .lab-note h3 {
+      margin: 0 0 4px;
+      font-size: 0.9rem;
+      color: #462d1e;
+    }
+
+    .lab-note p {
+      margin: 0;
+      font-size: 0.84rem;
+      color: #5a4c40;
+      line-height: 1.45;
+    }
+
+    .lab-chart-panel {
+      display: grid;
+      gap: 10px;
+    }
+
+    .market-svg {
+      width: 100%;
+      height: auto;
+      border: 1px solid #e3d0b8;
+      border-radius: 12px;
+      background: #fffdf8;
+    }
+
+    .lab-metrics {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .lab-metric {
+      border: 1px solid #e0ceb8;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .lab-metric span {
+      font-size: 0.76rem;
+      color: #5e5248;
+      font-weight: 600;
+    }
+
+    .lab-metric strong {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.9rem;
+      color: #3b2c22;
+      line-height: 1.2;
+    }
+
+    .arena-grid {
+      margin-top: 12px;
+      display: grid;
+      gap: 12px;
+      grid-template-columns: minmax(300px, 1fr) minmax(360px, 1.05fr);
+      align-items: start;
+    }
+
+    .arena-panel {
+      border: 1px solid #dcc8ae;
+      border-radius: 14px;
+      background: linear-gradient(180deg, #fffefb 0%, #fff5e6 100%);
+      padding: 12px;
+      box-shadow: 0 10px 24px rgba(44, 26, 15, 0.08);
+      display: grid;
+      gap: 10px;
+    }
+
+    .arena-controls {
+      display: grid;
+      gap: 8px;
+    }
+
+    .arena-control-row {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .arena-control-row label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #4f4438;
+      letter-spacing: 0.03em;
+      text-transform: uppercase;
+    }
+
+    .arena-select,
+    .arena-answer-input {
+      border: 1px solid #dbc6ac;
+      border-radius: 10px;
+      background: #fff;
+      color: #352b22;
+      font-size: 0.88rem;
+      padding: 7px 10px;
+    }
+
+    .arena-select {
+      min-width: 180px;
+      font-weight: 600;
+    }
+
+    .arena-answer-input {
+      flex: 1 1 220px;
+      font-family: "JetBrains Mono", monospace;
+      min-width: 170px;
+    }
+
+    .arena-select:focus-visible,
+    .arena-answer-input:focus-visible {
+      outline: 2px solid rgba(153, 0, 0, 0.35);
+      outline-offset: 1px;
+      border-color: rgba(153, 0, 0, 0.4);
+    }
+
+    .arena-timer {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      border: 1px solid #ddc8b0;
+      border-radius: 999px;
+      background: #fff;
+      padding: 4px 9px;
+      font-size: 0.78rem;
+      color: #54483d;
+      font-weight: 700;
+      font-family: "JetBrains Mono", monospace;
+    }
+
+    .arena-timer.warn {
+      color: #8f3f00;
+      border-color: rgba(143, 63, 0, 0.34);
+    }
+
+    .arena-timer.danger {
+      color: #9b1212;
+      border-color: rgba(155, 18, 18, 0.34);
+    }
+
+    .arena-prompt {
+      border: 1px solid #dcc8ae;
+      border-radius: 12px;
+      background: linear-gradient(170deg, #fff 0%, #fff8ed 100%);
+      padding: 10px;
+      min-height: 140px;
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .arena-prompt h3 {
+      margin: 0;
+      color: #482e1e;
+      font-size: 0.96rem;
+    }
+
+    .arena-prompt p {
+      margin: 0;
+      color: #4e4136;
+      font-size: 0.9rem;
+      line-height: 1.45;
+    }
+
+    .arena-feedback {
+      border: 1px solid #ddc8b0;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      font-size: 0.84rem;
+      color: #584b3f;
+      min-height: 40px;
+      display: grid;
+      align-items: center;
+    }
+
+    .arena-feedback.success {
+      border-color: rgba(20, 124, 74, 0.35);
+      background: linear-gradient(180deg, #f3fff8 0%, #effcf4 100%);
+      color: #165b3d;
+      font-weight: 700;
+    }
+
+    .arena-feedback.error {
+      border-color: rgba(155, 18, 18, 0.33);
+      background: linear-gradient(180deg, #fff8f7 0%, #fff2f1 100%);
+      color: #7f1d1d;
+      font-weight: 700;
+    }
+
+    .arena-solution {
+      display: none;
+      border: 1px dashed #d8c3a8;
+      border-radius: 10px;
+      background: #fff;
+      padding: 10px;
+      color: #4f4338;
+      font-size: 0.88rem;
+      line-height: 1.45;
+    }
+
+    .arena-solution.show {
+      display: block;
+    }
+
+    .arena-stats {
+      display: grid;
+      gap: 8px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .arena-stat {
+      border: 1px solid #dfcab0;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      display: grid;
+      gap: 4px;
+    }
+
+    .arena-stat span {
+      font-size: 0.76rem;
+      color: #5f5246;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .arena-stat strong {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.92rem;
+      color: #3d3026;
+      line-height: 1.2;
+    }
+
+    .admin-console {
+      display: grid;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .admin-console .flash-meta {
+      width: fit-content;
+    }
+
+    footer {
+      margin-top: 24px;
+      color: #665a50;
+      font-size: 0.83rem;
+      text-align: center;
+      padding: 12px;
+    }
+
+    @media (max-width: 980px) {
+      .grid.cols-3,
+      .kpi-strip {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .grid.cols-2,
+      .resource-grid {
+        grid-template-columns: 1fr;
+      }
+      .lab-grid {
+        grid-template-columns: 1fr;
+      }
+      .arena-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 620px) {
+      .topbar {
+        border-radius: 14px;
+        position: static;
+      }
+      .kpi-strip,
+      .grid.cols-3 {
+        grid-template-columns: 1fr;
+      }
+      .hero {
+        padding: 18px;
+      }
+      .hero-layer.layer-a {
+        width: 170px;
+        height: 170px;
+      }
+      .hero-layer.layer-b {
+        width: 220px;
+        height: 220px;
+      }
+      .hero-layer.layer-c {
+        width: 180px;
+        height: 180px;
+      }
+      .hero-grid {
+        top: 62%;
+      }
+      .section {
+        padding: 14px;
+      }
+      .lab-metrics {
+        grid-template-columns: 1fr;
+      }
+      .arena-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card,
+      .reveal {
+        animation: none !important;
+        transition: none !important;
+      }
+      .hero-layer {
+        transform: none !important;
+      }
+      .hero::after {
+        transform: none !important;
+      }
+    }
+
+    @media print {
+      .auth-gate,
+      .topbar,
+      .command-shell,
+      .flash-actions,
+      .btn,
+      #marketLab,
+      #quantArena,
+      footer {
+        display: none !important;
+      }
+      body {
+        background: white;
+      }
+      .section, .hero, .card {
+        box-shadow: none;
+      }
+      a {
+        color: #000;
+        text-decoration: none;
+      }
+    }
+  </style>
+</head>
+<body class="auth-locked" data-role="locked">
+  <div class="auth-gate" id="authGate">
+    <div class="auth-card">
+      <h2>ECON 205 Access</h2>
+      <p>Enter your full name to unlock this instructional studio.</p>
+      <div class="auth-row">
+        <input id="authNameInput" class="auth-input" type="text" autocomplete="name" placeholder="Full name" />
+        <button class="btn btn-primary" id="authUnlockBtn" type="button">Unlock</button>
+      </div>
+      <div class="auth-help">Authorized names: Hanna Nio (student), Ian Helfrich (admin)</div>
+      <div class="auth-message" id="authMessage">Access is name-gated for current enrolled use.</div>
+    </div>
+  </div>
+
+  <div class="shell">
+    <div class="topbar">
+      <div class="brand">
+        <div class="crest">USC</div>
+        <div class="brand-copy">
+          <div class="brand-title">ECON 205 Midterm I Study Studio</div>
+          <div class="brand-credit">Dr. Ian Helfrich</div>
+        </div>
+      </div>
+      <div class="top-actions">
+        <span class="auth-chip" id="authBadge">Locked</span>
+        <button class="btn btn-ghost" id="commandBtn" type="button">Command</button>
+        <button class="btn btn-ghost admin-inline" id="adminDiagnosticsBtn" type="button">Run Diag</button>
+        <a class="btn btn-ghost" href="#marketLab">Graph Lab</a>
+        <a class="btn btn-ghost" href="#quantArena">Quant Arena</a>
+        <a class="btn btn-ghost" href="ECON205_Midterm1_Complete_Study_Pack.pdf">Open Full Pack</a>
+        <button class="btn btn-ghost" id="resetAllBtn" type="button">Reset Progress</button>
+        <button class="btn btn-ghost" id="switchUserBtn" type="button">Switch User</button>
+        <button class="btn btn-primary" id="printBtn" type="button">Print Layout</button>
+      </div>
+    </div>
+    <div class="live-status" id="liveStatus" aria-live="polite"></div>
+
+    <div class="command-shell" id="commandShell" aria-hidden="true">
+      <div class="command-backdrop" id="commandBackdrop"></div>
+      <div class="command-dialog" role="dialog" aria-label="Command palette">
+        <div class="command-head">
+          <input id="commandInput" class="command-input" type="search" placeholder="Search actions... (e.g., graph, timer, arena, recall)" />
+          <span class="command-hint">ESC</span>
+        </div>
+        <div class="command-list" id="commandList"></div>
+      </div>
+    </div>
+
+    <section class="hero" id="hero">
+      <div class="hero-art" aria-hidden="true">
+        <div class="hero-layer layer-a" data-parallax="0.08"></div>
+        <div class="hero-layer layer-b" data-parallax="0.13"></div>
+        <div class="hero-layer layer-c" data-parallax="0.05"></div>
+        <div class="hero-grid" data-parallax="0.04"></div>
+      </div>
+      <p class="hero-kicker">USC ECON 205 • Midterm I</p>
+      <h1>Macroeconomics Learning Studio</h1>
+      <p class="sub">
+        Built from your lecture flow and syllabus scope. Use this as a high-performance prep environment for
+        formulas, graph logic, adaptive recall, and full-timed exam execution.
+      </p>
+      <div class="chip-row">
+        <span class="chip">Mode: Concept + Computation + Graphing</span>
+        <span class="chip">Timed Runtime: 75 minutes</span>
+        <span class="chip">Coverage: Lecture 01-07</span>
+        <span class="chip">Workflow: Learn -> Drill -> Simulate -> Debrief</span>
+        <span class="chip" id="diagnosticsChip">Diagnostics: pending</span>
+      </div>
+      <div class="kpi-strip">
+        <div class="kpi"><div class="n">8</div><div class="l">Topic Blocks</div></div>
+        <div class="kpi"><div class="n">17</div><div class="l">Core Equations</div></div>
+        <div class="kpi"><div class="n" id="heroRecallCount">10</div><div class="l">Recall Prompts</div></div>
+        <div class="kpi"><div class="n">3</div><div class="l">Timed Mock Forms</div></div>
+      </div>
+    </section>
+
+    <section class="section admin-only" id="adminConsole">
+      <h2>Admin Console</h2>
+      <p class="lead">Admin mode for Dr. Ian Helfrich. Student view remains unchanged.</p>
+      <div class="admin-console">
+        <div class="flash-actions">
+          <button class="btn btn-ghost" id="adminRunDiagnosticsBtn" type="button">Run Diagnostics</button>
+          <button class="btn btn-ghost" id="adminExportStateBtn" type="button">Export Local State</button>
+          <button class="btn btn-ghost" id="adminHardResetBtn" type="button">Hard Reset</button>
+        </div>
+        <div class="flash-meta" id="adminModeMeta">Admin mode active.</div>
+      </div>
+    </section>
+
+    <section class="section" id="topicArchitecture">
+      <h2>Topic Architecture</h2>
+      <p class="lead">What you must master by lecture, in the same logic sequence used in class.</p>
+      <div class="grid cols-3">
+        <article class="card">
+          <h3>L01 Supply and Demand</h3>
+          <ul>
+            <li>Law of demand and law of supply</li>
+            <li>Movement along curve vs curve shift</li>
+            <li>Equilibrium, shortage, surplus, self-correction</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>L02 Policy and Elasticity</h3>
+          <ul>
+            <li>Binding price ceilings and floors</li>
+            <li>Midpoint elasticity mechanics</li>
+            <li>Revenue effects under elastic vs inelastic demand</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>L03 Macro Concepts</h3>
+          <ul>
+            <li>Real GDP, cycles, unemployment, inflation</li>
+            <li>Nominal vs real interest rates</li>
+            <li>Short-run fluctuations vs long-run growth</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>L04 National Accounts</h3>
+          <ul>
+            <li>Spending, income, value-added approaches</li>
+            <li>Final vs intermediate goods</li>
+            <li>Nominal vs real GDP and deflator</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>L05 Spending Shares and Saving</h3>
+          <ul>
+            <li>Shares C/Y, I/Y, G/Y, NX/Y</li>
+            <li>Private/public/national saving</li>
+            <li>Interest-rate channels to C, I, and NX</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h3>L06 Labor Market</h3>
+          <ul>
+            <li>LF, unemployment rate, LFPR, EPOP</li>
+            <li>Frictional, structural, cyclical, seasonal</li>
+            <li>Natural unemployment interpretation</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="formulaEngine">
+      <h2>Formula Engine</h2>
+      <p class="lead">Memorize these exactly. Most midterm points are execution quality on these expressions.</p>
+      <div class="formula-board">
+        <div class="formula">\(Y = C + I + G + NX\)</div>
+        <div class="formula">\(NX = X - M\)</div>
+        <div class="formula">\(\text{GDP Deflator} = \frac{\text{Nominal GDP}}{\text{Real GDP}} \times 100\)</div>
+        <div class="formula">\(\pi_t^{\text{GDP}} = \frac{\text{Def}_t - \text{Def}_{t-1}}{\text{Def}_{t-1}} \times 100\)</div>
+        <div class="formula">\(\text{Private Saving: } S_p = Y - C - T,\quad \text{Public Saving: } S_g = T - G,\quad S = Y - C - G\)</div>
+        <div class="formula">\(S = I + NX\)</div>
+        <div class="formula">\(\text{LF} = E + U,\quad u = \frac{U}{\text{LF}},\quad \text{LFPR} = \frac{\text{LF}}{\text{Adults}},\quad \text{EPOP} = \frac{E}{\text{Adults}}\)</div>
+        <div class="formula">\(r \approx i - \pi^e\)</div>
+        <div class="formula">\(\varepsilon_D=\frac{\frac{Q_2-Q_1}{(Q_2+Q_1)/2}}{\frac{P_2-P_1}{(P_2+P_1)/2}}\)</div>
+        <div class="formula">\(g=\left(\frac{X_t}{X_0}\right)^{\frac{1}{n}}-1\)</div>
+      </div>
+    </section>
+
+    <section class="section" id="graphPlaybook">
+      <h2>Graphing Playbook</h2>
+      <p class="lead">Use this exact routine on every graph question to maximize partial and full credit.</p>
+      <div class="grid cols-2">
+        <div class="grid">
+          <div class="playbook-step"><div class="step-num">1</div><div>Label axes first: <strong>P</strong> vertical, <strong>Q</strong> horizontal.</div></div>
+          <div class="playbook-step"><div class="step-num">2</div><div>Draw <strong>D0</strong>, <strong>S0</strong>, and mark initial equilibrium <strong>(P0, Q0)</strong>.</div></div>
+          <div class="playbook-step"><div class="step-num">3</div><div>Shift only the relevant curve(s). Left = decrease. Right = increase.</div></div>
+          <div class="playbook-step"><div class="step-num">4</div><div>Mark new equilibrium <strong>(P1, Q1)</strong>. Never leave the new point unlabeled.</div></div>
+          <div class="playbook-step"><div class="step-num">5</div><div>Add one sentence: <em>shock -> shift -> outcome</em>.</div></div>
+        </div>
+        <div class="card" style="height: fit-content;">
+          <h3>High-Frequency Graph Traps</h3>
+          <ul>
+            <li>Price changes do <strong>not</strong> shift demand/supply.</li>
+            <li>Binding ceiling is below equilibrium and creates shortage.</li>
+            <li>Binding floor is above equilibrium and creates surplus.</li>
+            <li>Two shocks: often price is clear, quantity is ambiguous.</li>
+            <li>Always include ceteris paribus statement when needed.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="marketLab">
+      <h2>Market Dynamics Lab</h2>
+      <p class="lead">Manipulate shifts and policies, then read equilibrium, binding status, and market gaps exactly like an exam graph write-up.</p>
+      <div class="lab-grid">
+        <div class="lab-panel">
+          <div class="lab-presets">
+            <button type="button" class="btn btn-ghost lab-preset" data-preset="reset">Reset</button>
+            <button type="button" class="btn btn-ghost lab-preset" data-preset="demand_surge">Demand Surge</button>
+            <button type="button" class="btn btn-ghost lab-preset" data-preset="supply_shock">Supply Shock</button>
+            <button type="button" class="btn btn-ghost lab-preset" data-preset="ceiling_bind">Binding Ceiling</button>
+            <button type="button" class="btn btn-ghost lab-preset" data-preset="floor_bind">Binding Floor</button>
+          </div>
+
+          <div class="slider-block">
+            <label class="slider-row" for="labDemandShift">
+              <span>Demand shift \(\Delta_D\)</span>
+              <strong id="labDemandShiftVal">0</strong>
+            </label>
+            <input id="labDemandShift" class="lab-slider" type="range" min="-40" max="40" step="1" value="0" />
+          </div>
+
+          <div class="slider-block">
+            <label class="slider-row" for="labSupplyShift">
+              <span>Supply shift \(\Delta_S\)</span>
+              <strong id="labSupplyShiftVal">0</strong>
+            </label>
+            <input id="labSupplyShift" class="lab-slider" type="range" min="-40" max="40" step="1" value="0" />
+          </div>
+
+          <div class="policy-row">
+            <label for="labPolicyType">Price policy</label>
+            <select id="labPolicyType" class="lab-select">
+              <option value="none">No control</option>
+              <option value="ceiling">Price ceiling</option>
+              <option value="floor">Price floor</option>
+            </select>
+          </div>
+
+          <div class="slider-block">
+            <label class="slider-row" for="labControlPrice">
+              <span>Controlled price \(P_c\)</span>
+              <strong id="labControlPriceVal">22.0</strong>
+            </label>
+            <input id="labControlPrice" class="lab-slider" type="range" min="2" max="46" step="0.5" value="22" />
+          </div>
+
+          <div class="formula-board lab-formulas">
+            <div class="formula">\(Q_D = (\bar{A}_D + \Delta_D) - bP\)</div>
+            <div class="formula">\(Q_S = (\bar{A}_S + \Delta_S) + dP\)</div>
+            <div class="formula">\(P^* = \frac{(\bar{A}_D + \Delta_D)-(\bar{A}_S + \Delta_S)}{b+d}\), \(\quad Q^* = Q_D(P^*)\)</div>
+          </div>
+
+          <div class="lab-note">
+            <h3>Coach Note</h3>
+            <p id="labNarrative">Use the controls to run a scenario. The site will auto-diagnose whether a control binds and whether the market gap is a shortage or surplus.</p>
+          </div>
+        </div>
+
+        <div class="lab-panel lab-chart-panel">
+          <svg id="marketSvg" class="market-svg" viewBox="0 0 700 420" role="img" aria-label="Supply and demand simulation chart">
+            <rect x="0" y="0" width="700" height="420" fill="#fffdf8"></rect>
+            <g id="marketGrid"></g>
+            <line id="marketAxisX" x1="66" y1="364" x2="674" y2="364" stroke="#3a2a1a" stroke-width="2"></line>
+            <line id="marketAxisY" x1="66" y1="364" x2="66" y2="24" stroke="#3a2a1a" stroke-width="2"></line>
+            <text x="662" y="388" font-size="13" fill="#433326">Quantity Q</text>
+            <text x="14" y="20" font-size="13" fill="#433326">Price P</text>
+
+            <line id="marketEqPriceLine" x1="66" y1="0" x2="66" y2="0" stroke="#9a7a44" stroke-dasharray="4 4" stroke-width="1.5"></line>
+            <line id="marketEqQtyLine" x1="0" y1="364" x2="0" y2="364" stroke="#9a7a44" stroke-dasharray="4 4" stroke-width="1.5"></line>
+
+            <path id="marketDemandPath" d="" fill="none" stroke="#b52121" stroke-width="3"></path>
+            <path id="marketSupplyPath" d="" fill="none" stroke="#1f5a67" stroke-width="3"></path>
+            <text id="marketDemandLabel" x="0" y="0" fill="#8f1818" font-size="13" font-weight="700">D</text>
+            <text id="marketSupplyLabel" x="0" y="0" fill="#1f4f5b" font-size="13" font-weight="700">S</text>
+
+            <line id="marketPolicyLine" x1="66" y1="0" x2="674" y2="0" stroke="#5b4b3c" stroke-width="2" stroke-dasharray="8 6" opacity="0"></line>
+            <line id="marketQdLine" x1="0" y1="0" x2="0" y2="364" stroke="#b52121" stroke-width="2" stroke-dasharray="5 5" opacity="0"></line>
+            <line id="marketQsLine" x1="0" y1="0" x2="0" y2="364" stroke="#1f5a67" stroke-width="2" stroke-dasharray="5 5" opacity="0"></line>
+            <text id="marketPcLabel" x="78" y="0" fill="#5a4a3d" font-size="12" opacity="0">Pc</text>
+            <text id="marketQdLabel" x="0" y="382" fill="#8f1818" font-size="12" opacity="0">Qd(Pc)</text>
+            <text id="marketQsLabel" x="0" y="382" fill="#1f4f5b" font-size="12" opacity="0">Qs(Pc)</text>
+
+            <circle id="marketEqPoint" cx="0" cy="0" r="6" fill="#c2892e" stroke="#fff8ec" stroke-width="2"></circle>
+            <text id="marketEqLabel" x="0" y="0" fill="#6a3f00" font-size="12" font-weight="700">E*</text>
+          </svg>
+
+          <div class="lab-metrics">
+            <div class="lab-metric">
+              <span>Equilibrium price \(P^*\)</span>
+              <strong id="labEqPrice">0.00</strong>
+            </div>
+            <div class="lab-metric">
+              <span>Equilibrium quantity \(Q^*\)</span>
+              <strong id="labEqQty">0.00</strong>
+            </div>
+            <div class="lab-metric">
+              <span>Policy status</span>
+              <strong id="labPolicyStatus">No control</strong>
+            </div>
+            <div class="lab-metric">
+              <span>Gap at \(P_c\)</span>
+              <strong id="labGap">0.00</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="errorClinic">
+      <h2>Error Clinic</h2>
+      <p class="lead">The mistakes that burn points fastest. Use this as your pre-exam diagnostic checklist.</p>
+      <div class="grid cols-2">
+        <div class="card">
+          <h3>Calculation Errors</h3>
+          <ul>
+            <li>Using population instead of labor force in unemployment rate</li>
+            <li>Forgetting midpoint denominator average values</li>
+            <li>Mixing nominal and real GDP in growth calculations</li>
+            <li>Dropping NX sign in saving-investment identity</li>
+            <li>Failing to report units (million, billion, percent)</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Conceptual Errors</h3>
+          <ul>
+            <li>Treating transfer payments as G in GDP accounting</li>
+            <li>Counting used goods or financial assets as current output</li>
+            <li>Confusing frictional and structural unemployment</li>
+            <li>Confusing marginal returns with returns to scale</li>
+            <li>Forgetting revenue direction from elasticity classification</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="trainingProtocol">
+      <h2>Training Protocol (Feb 16-23, 2026)</h2>
+      <p class="lead">A tight sequence for peak retention and score reliability under timed conditions.</p>
+      <div class="timeline">
+        <div class="tick"><strong>Mon Feb 16:</strong><span>L01-L02 deep drill: graph shifts + 20 elasticity problems.</span></div>
+        <div class="tick"><strong>Tue Feb 17:</strong><span>L03 conceptual precision: GDP, unemployment, inflation, interest logic.</span></div>
+        <div class="tick"><strong>Wed Feb 18:</strong><span>L04 full national accounts set: spending, real vs nominal, deflator.</span></div>
+        <div class="tick"><strong>Thu Feb 19:</strong><span>L05 identities and channels: saving blocks and NX interpretation.</span></div>
+        <div class="tick"><strong>Fri Feb 20:</strong><span>L06 labor market metrics timed repetitions.</span></div>
+        <div class="tick"><strong>Sat Feb 21:</strong><span>L07 production function and growth mechanics.</span></div>
+        <div class="tick"><strong>Sun Feb 22:</strong><span>Mock A under strict 75-minute timing + post-mortem.</span></div>
+        <div class="tick"><strong>Mon Feb 23 (exam day):</strong><span>Only formulas, graph checklist, and error list. No new content.</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="timerLab">
+      <h2>Exam Timer Lab</h2>
+      <p class="lead">Run realistic timed practice blocks. Default is 75 minutes to match the exam length.</p>
+      <div class="timer-panel">
+        <div class="timer-display" id="timerDisplay">75:00</div>
+        <div class="timer-controls">
+          <label class="timer-label" for="timerMinutes">Minutes
+            <input id="timerMinutes" class="timer-minutes" type="number" min="1" max="240" step="1" value="75" />
+          </label>
+          <button class="btn btn-primary" id="startTimerBtn" type="button">Start</button>
+          <button class="btn btn-ghost" id="pauseTimerBtn" type="button">Pause</button>
+          <button class="btn btn-ghost" id="resetTimerBtn" type="button">Reset</button>
+        </div>
+        <div class="timer-status" id="timerStatus">Ready. Set minutes, then start.</div>
+      </div>
+    </section>
+
+    <section class="section" id="quantArena">
+      <h2>Adaptive Quant Arena</h2>
+      <p class="lead">Generate fresh numerical macro problems, submit a numeric answer, and get immediate grading plus worked solution.</p>
+      <div class="arena-grid">
+        <div class="arena-panel">
+          <div class="arena-controls">
+            <div class="arena-control-row">
+              <label for="arenaType">Problem Type</label>
+              <select id="arenaType" class="arena-select">
+                <option value="mixed">Mixed rotation</option>
+                <option value="gdp">GDP spending</option>
+                <option value="deflator">Deflator inflation</option>
+                <option value="labor">Unemployment rate</option>
+                <option value="saving">Saving and net exports</option>
+                <option value="real_rate">Real interest rate</option>
+                <option value="elasticity">Elasticity midpoint</option>
+              </select>
+            </div>
+
+            <div class="arena-control-row">
+              <label for="arenaDifficulty">Difficulty</label>
+              <select id="arenaDifficulty" class="arena-select">
+                <option value="standard">Standard</option>
+                <option value="challenge">Challenge</option>
+              </select>
+              <span class="arena-timer" id="arenaTimer">02:00</span>
+            </div>
+
+            <div class="arena-control-row">
+              <button type="button" class="btn btn-primary" id="arenaGenerateBtn">Generate Challenge</button>
+              <button type="button" class="btn btn-ghost" id="arenaCheckBtn">Check Answer</button>
+              <button type="button" class="btn btn-ghost" id="arenaRevealBtn">Reveal Solution</button>
+            </div>
+          </div>
+
+          <div class="arena-prompt" id="arenaPrompt">
+            <h3>Challenge Ready</h3>
+            <p>Press <strong>Generate Challenge</strong> to start a timed quantitative problem.</p>
+          </div>
+
+          <div class="arena-control-row">
+            <input id="arenaAnswer" class="arena-answer-input" type="number" step="any" placeholder="Enter numeric answer (e.g., 4.25)" />
+            <button type="button" class="btn btn-ghost" id="arenaNextBtn">Next</button>
+            <button type="button" class="btn btn-ghost" id="arenaResetBtn">Reset Arena</button>
+          </div>
+
+          <div class="arena-feedback" id="arenaFeedback">Awaiting first challenge.</div>
+          <div class="arena-solution" id="arenaSolution"></div>
+        </div>
+
+        <div class="arena-panel">
+          <div class="arena-stats">
+            <div class="arena-stat"><span>Solved</span><strong id="arenaSolved">0</strong></div>
+            <div class="arena-stat"><span>Correct</span><strong id="arenaCorrect">0</strong></div>
+            <div class="arena-stat"><span>Accuracy</span><strong id="arenaAccuracy">0%</strong></div>
+            <div class="arena-stat"><span>Current Streak</span><strong id="arenaStreak">0</strong></div>
+            <div class="arena-stat"><span>Best Streak</span><strong id="arenaBestStreak">0</strong></div>
+            <div class="arena-stat"><span>Last Type</span><strong id="arenaLastType">-</strong></div>
+          </div>
+          <div class="formula-board">
+            <div class="formula">\(\text{GDP: } Y = C + I + G + NX\)</div>
+            <div class="formula">\(\pi_t^{\text{GDP}} = \frac{\text{Def}_t - \text{Def}_{t-1}}{\text{Def}_{t-1}} \times 100\)</div>
+            <div class="formula">\(\text{Deflator} = \frac{\text{Nominal GDP}}{\text{Real GDP}} \times 100\)</div>
+            <div class="formula">\(u = \frac{U}{LF},\quad LF = E + U\)</div>
+            <div class="formula">\(S = Y - C - G,\quad NX = S - I\)</div>
+            <div class="formula">\(\varepsilon_D=\frac{\frac{Q_2-Q_1}{(Q_2+Q_1)/2}}{\frac{P_2-P_1}{(P_2+P_1)/2}}\)</div>
+          </div>
+          <div class="lab-note">
+            <h3>Execution Rule</h3>
+            <p>Write units every time (%, billions, index points). Arena grading checks magnitude and sign, so careless formatting mistakes become visible immediately.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="recallTrainer">
+      <h2>Interactive Recall Trainer</h2>
+      <p class="lead">Run adaptive retrieval rounds with spaced repetition. Keyboard: <code>N</code> next, <code>R</code> reveal, <code>M</code> mark mastered.</p>
+      <div class="flash-wrap">
+        <div class="flash-head">
+          <div class="flash-meta" id="flashMeta">Prompt 1 / 10</div>
+          <div class="flash-meta" id="flashMasteredMeta">Mastered: 0</div>
+        </div>
+        <div class="flash-meta" id="flashAdaptiveMeta">Due now: 10 • Recall score: 0%</div>
+        <div class="flash-q" id="flashQ">Click “New Prompt” to start.</div>
+        <textarea class="self-answer" id="selfAnswer" placeholder="Type your answer first, then reveal and compare."></textarea>
+        <div class="flash-a" id="flashA"></div>
+        <div class="study-stats">
+          <span class="stat-pill">Seen: <span id="seenCount">0</span></span>
+          <span class="stat-pill">Remaining: <span id="remainingCount">0</span></span>
+          <span class="stat-pill">Recall Score: <span id="recallScore">0%</span></span>
+        </div>
+        <div class="flash-actions">
+          <button type="button" class="btn btn-primary" id="newCardBtn">New Prompt</button>
+          <button type="button" class="btn btn-ghost" id="showAnswerBtn">Reveal Answer</button>
+          <button type="button" class="btn btn-ghost" id="markMasteredBtn">Mark Mastered</button>
+          <button type="button" class="btn btn-ghost" id="clearMasteredBtn">Reset Deck</button>
+        </div>
+        <div class="rating-actions">
+          <button type="button" class="btn btn-ghost" id="rateAgainBtn">Again</button>
+          <button type="button" class="btn btn-ghost" id="rateHardBtn">Hard</button>
+          <button type="button" class="btn btn-ghost" id="rateGoodBtn">Good</button>
+          <button type="button" class="btn btn-primary" id="rateEasyBtn">Easy</button>
+        </div>
+      </div>
+      <div class="progress-wrap">
+        <div class="progress-meta">
+          <strong id="progressPct">0% complete</strong>
+          <span id="progressText">0 of 6 checklist targets done</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        <div class="flash-actions">
+          <button type="button" class="btn btn-ghost" id="resetChecklistBtn">Reset Checklist</button>
+        </div>
+      </div>
+      <div class="checklist" id="checklist"></div>
+    </section>
+
+    <section class="section" id="resourceDock">
+      <h2>Resource Dock</h2>
+      <p class="lead">All premium assets in one place. Use mock -> key -> error log workflow.</p>
+      <div class="resource-controls">
+        <input id="resourceFilter" class="resource-filter-input" type="search" placeholder="Filter resources (e.g., mock, key, cram, recall, master)...">
+        <span class="chip" id="resourceCount">6 resources</span>
+      </div>
+      <div class="resource-grid" id="resourceGrid">
+        <article class="resource" data-tags="master study formulas graph protocol guide">
+          <h3>Master Study Tool</h3>
+          <p>High-yield syllabus-aligned map, formulas, graph protocol, and examples.</p>
+          <div class="links">
+            <a class="badge" href="ECON205_Midterm1_Master_Study_Tool.pdf">PDF</a>
+            <a class="badge" href="ECON205_Midterm1_Master_Study_Tool.md">MD</a>
+          </div>
+        </article>
+        <article class="resource" data-tags="active recall bank retrieval questions key">
+          <h3>Active Recall Bank</h3>
+          <p>100-prompt retrieval system plus complete key.</p>
+          <div class="links">
+            <a class="badge" href="ECON205_Midterm1_Active_Recall_Bank.pdf">Bank PDF</a>
+            <a class="badge" href="ECON205_Midterm1_Active_Recall_Bank_Key.pdf">Key PDF</a>
+          </div>
+        </article>
+        <article class="resource" data-tags="mock exam a timed simulation key">
+          <h3>Mock Exam A</h3>
+          <p>Timed full simulation with worked key.</p>
+          <div class="links">
+            <a class="badge" href="ECON205_Midterm1_Mock_Exam_A.pdf">Exam</a>
+            <a class="badge" href="ECON205_Midterm1_Mock_Exam_A_Key.pdf">Key</a>
+          </div>
+        </article>
+        <article class="resource" data-tags="mock exam b timed simulation key">
+          <h3>Mock Exam B</h3>
+          <p>Fresh numbers and scenario variants with key.</p>
+          <div class="links">
+            <a class="badge" href="ECON205_Midterm1_Mock_Exam_B.pdf">Exam</a>
+            <a class="badge" href="ECON205_Midterm1_Mock_Exam_B_Key.pdf">Key</a>
+          </div>
+        </article>
+        <article class="resource" data-tags="mock exam c timed simulation key">
+          <h3>Mock Exam C</h3>
+          <p>Third variation to avoid pattern memorization.</p>
+          <div class="links">
+            <a class="badge" href="ECON205_Midterm1_Mock_Exam_C.pdf">Exam</a>
+            <a class="badge" href="ECON205_Midterm1_Mock_Exam_C_Key.pdf">Key</a>
+          </div>
+        </article>
+        <article class="resource" data-tags="complete pack binder cram sheet printable">
+          <h3>Complete Study Pack</h3>
+          <p>Consolidated 34-page printable binder.</p>
+          <div class="links">
+            <a class="badge" href="ECON205_Midterm1_Complete_Study_Pack.pdf">Open Binder</a>
+            <a class="badge" href="ECON205_Midterm1_Cram_Sheet_OnePage.pdf">Cram Sheet</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      ECON 205 Study Studio | Built for high-fidelity macro learning at scale. Instructional direction by Dr. Ian Helfrich.
+    </footer>
+  </div>
+
+  <script>
+    const prompts = [
+      {
+        q: "Write the spending identity and define each term.",
+        a: "\\(Y = C + I + G + NX\\), where \\(C\\) is consumption, \\(I\\) is investment, \\(G\\) is government purchases, and \\(NX\\) is net exports."
+      },
+      {
+        q: "How do you compute unemployment rate and labor force?",
+        a: "\\(\\text{LF} = E + U\\) and \\(u = \\frac{U}{\\text{LF}}\\)."
+      },
+      {
+        q: "A binding price ceiling causes what market outcome and why?",
+        a: "It causes a shortage because at the controlled low price, quantity demanded exceeds quantity supplied."
+      },
+      {
+        q: "What is the midpoint formula for demand elasticity?",
+        a: "\\[\\varepsilon_D = \\frac{\\frac{Q_2 - Q_1}{(Q_2 + Q_1)/2}}{\\frac{P_2 - P_1}{(P_2 + P_1)/2}}\\]"
+      },
+      {
+        q: "Difference between nominal and real GDP in one sentence.",
+        a: "Nominal uses current prices; real uses base-year prices to isolate quantity changes."
+      },
+      {
+        q: "If S = 800 and I = 950, what is NX?",
+        a: "\\(NX = S - I = 800 - 950 = -150\\), so the economy runs a trade deficit."
+      },
+      {
+        q: "For \\(Y = A K^{0.5}L^{0.5}\\), what happens if \\(K\\) and \\(L\\) both double?",
+        a: "\\(Y' = A(2K)^{0.5}(2L)^{0.5} = 2Y\\). Output doubles, so returns to scale are constant."
+      },
+      {
+        q: "How does higher real interest typically affect current C and I?",
+        a: "Both tend to decrease: consuming today is costlier and borrowing for investment is costlier."
+      },
+      {
+        q: "What is the GDP deflator and what does its growth measure?",
+        a: "\\(\\text{GDP Deflator} = \\frac{\\text{Nominal GDP}}{\\text{Real GDP}} \\times 100\\). Its growth rate measures inflation for domestic final output."
+      },
+      {
+        q: "Name the four unemployment types.",
+        a: "Frictional, structural, cyclical, and seasonal."
+      }
+    ];
+
+    const dailyChecks = [
+      "Can compute GDP, real GDP, deflator, inflation without notes",
+      "Can compute LF, unemployment, LFPR, EPOP quickly",
+      "Can classify elastic vs inelastic and predict revenue direction",
+      "Can draw binding ceiling/floor graph with full labels",
+      "Can do saving decomposition and infer NX",
+      "Can distinguish marginal returns vs returns to scale"
+    ];
+
+    const STORAGE = {
+      checks: "econ205_midterm1_checks_v3",
+      mastered: "econ205_midterm1_mastered_v3",
+      minutes: "econ205_midterm1_timer_mins_v3",
+      cards: "econ205_midterm1_card_stats_v1",
+      marketLab: "econ205_midterm1_market_lab_v1",
+      arenaStats: "econ205_midterm1_arena_stats_v1",
+      arenaPrefs: "econ205_midterm1_arena_prefs_v1",
+      authSession: "econ205_midterm1_auth_session_v1"
+    };
+
+    const AUTH_ROSTER = {
+      "hanna nio": { name: "Hanna Nio", role: "student" },
+      "ian helfrich": { name: "Ian Helfrich", role: "admin" }
+    };
+
+    const flashQ = document.getElementById("flashQ");
+    const flashA = document.getElementById("flashA");
+    const flashMeta = document.getElementById("flashMeta");
+    const flashMasteredMeta = document.getElementById("flashMasteredMeta");
+    const flashAdaptiveMeta = document.getElementById("flashAdaptiveMeta");
+    const seenCount = document.getElementById("seenCount");
+    const remainingCount = document.getElementById("remainingCount");
+    const recallScore = document.getElementById("recallScore");
+    const selfAnswer = document.getElementById("selfAnswer");
+    const heroRecallCount = document.getElementById("heroRecallCount");
+    const newCardBtn = document.getElementById("newCardBtn");
+    const showAnswerBtn = document.getElementById("showAnswerBtn");
+    const markMasteredBtn = document.getElementById("markMasteredBtn");
+    const clearMasteredBtn = document.getElementById("clearMasteredBtn");
+    const rateAgainBtn = document.getElementById("rateAgainBtn");
+    const rateHardBtn = document.getElementById("rateHardBtn");
+    const rateGoodBtn = document.getElementById("rateGoodBtn");
+    const rateEasyBtn = document.getElementById("rateEasyBtn");
+    const checklist = document.getElementById("checklist");
+    const progressPct = document.getElementById("progressPct");
+    const progressText = document.getElementById("progressText");
+    const progressFill = document.getElementById("progressFill");
+    const resetChecklistBtn = document.getElementById("resetChecklistBtn");
+    const resourceGrid = document.getElementById("resourceGrid");
+    const resourceFilter = document.getElementById("resourceFilter");
+    const resourceCount = document.getElementById("resourceCount");
+    const authGate = document.getElementById("authGate");
+    const authNameInput = document.getElementById("authNameInput");
+    const authUnlockBtn = document.getElementById("authUnlockBtn");
+    const authMessage = document.getElementById("authMessage");
+    const authBadge = document.getElementById("authBadge");
+    const printBtn = document.getElementById("printBtn");
+    const resetAllBtn = document.getElementById("resetAllBtn");
+    const switchUserBtn = document.getElementById("switchUserBtn");
+    const commandBtn = document.getElementById("commandBtn");
+    const adminDiagnosticsBtn = document.getElementById("adminDiagnosticsBtn");
+    const liveStatus = document.getElementById("liveStatus");
+    const commandShell = document.getElementById("commandShell");
+    const commandBackdrop = document.getElementById("commandBackdrop");
+    const commandInput = document.getElementById("commandInput");
+    const commandList = document.getElementById("commandList");
+    const diagnosticsChip = document.getElementById("diagnosticsChip");
+    const hero = document.getElementById("hero");
+    const parallaxLayers = [...document.querySelectorAll("[data-parallax]")];
+    const revealTargets = [...document.querySelectorAll(".hero, .section, footer")];
+
+    const timerDisplay = document.getElementById("timerDisplay");
+    const timerMinutes = document.getElementById("timerMinutes");
+    const timerStatus = document.getElementById("timerStatus");
+    const startTimerBtn = document.getElementById("startTimerBtn");
+    const pauseTimerBtn = document.getElementById("pauseTimerBtn");
+    const resetTimerBtn = document.getElementById("resetTimerBtn");
+
+    const arenaType = document.getElementById("arenaType");
+    const arenaDifficulty = document.getElementById("arenaDifficulty");
+    const arenaGenerateBtn = document.getElementById("arenaGenerateBtn");
+    const arenaCheckBtn = document.getElementById("arenaCheckBtn");
+    const arenaRevealBtn = document.getElementById("arenaRevealBtn");
+    const arenaNextBtn = document.getElementById("arenaNextBtn");
+    const arenaResetBtn = document.getElementById("arenaResetBtn");
+    const arenaPrompt = document.getElementById("arenaPrompt");
+    const arenaAnswer = document.getElementById("arenaAnswer");
+    const arenaFeedback = document.getElementById("arenaFeedback");
+    const arenaSolution = document.getElementById("arenaSolution");
+    const arenaTimer = document.getElementById("arenaTimer");
+    const arenaSolved = document.getElementById("arenaSolved");
+    const arenaCorrect = document.getElementById("arenaCorrect");
+    const arenaAccuracy = document.getElementById("arenaAccuracy");
+    const arenaStreak = document.getElementById("arenaStreak");
+    const arenaBestStreak = document.getElementById("arenaBestStreak");
+    const arenaLastType = document.getElementById("arenaLastType");
+    const adminRunDiagnosticsBtn = document.getElementById("adminRunDiagnosticsBtn");
+    const adminExportStateBtn = document.getElementById("adminExportStateBtn");
+    const adminHardResetBtn = document.getElementById("adminHardResetBtn");
+    const adminModeMeta = document.getElementById("adminModeMeta");
+
+    const labDemandShift = document.getElementById("labDemandShift");
+    const labSupplyShift = document.getElementById("labSupplyShift");
+    const labPolicyType = document.getElementById("labPolicyType");
+    const labControlPrice = document.getElementById("labControlPrice");
+    const labDemandShiftVal = document.getElementById("labDemandShiftVal");
+    const labSupplyShiftVal = document.getElementById("labSupplyShiftVal");
+    const labControlPriceVal = document.getElementById("labControlPriceVal");
+    const labEqPrice = document.getElementById("labEqPrice");
+    const labEqQty = document.getElementById("labEqQty");
+    const labPolicyStatus = document.getElementById("labPolicyStatus");
+    const labGap = document.getElementById("labGap");
+    const labNarrative = document.getElementById("labNarrative");
+    const labPresetBtns = [...document.querySelectorAll(".lab-preset")];
+
+    const marketSvg = document.getElementById("marketSvg");
+    const marketGrid = document.getElementById("marketGrid");
+    const marketDemandPath = document.getElementById("marketDemandPath");
+    const marketSupplyPath = document.getElementById("marketSupplyPath");
+    const marketDemandLabel = document.getElementById("marketDemandLabel");
+    const marketSupplyLabel = document.getElementById("marketSupplyLabel");
+    const marketEqPoint = document.getElementById("marketEqPoint");
+    const marketEqLabel = document.getElementById("marketEqLabel");
+    const marketEqPriceLine = document.getElementById("marketEqPriceLine");
+    const marketEqQtyLine = document.getElementById("marketEqQtyLine");
+    const marketPolicyLine = document.getElementById("marketPolicyLine");
+    const marketQdLine = document.getElementById("marketQdLine");
+    const marketQsLine = document.getElementById("marketQsLine");
+    const marketPcLabel = document.getElementById("marketPcLabel");
+    const marketQdLabel = document.getElementById("marketQdLabel");
+    const marketQsLabel = document.getElementById("marketQsLabel");
+
+    let currentIdx = null;
+    let timerSeconds = 75 * 60;
+    let timerId = null;
+
+    const LAB_MODEL = {
+      baseDemand: 130,
+      baseSupply: 25,
+      demandSlope: 2.2,
+      supplySlope: 1.8
+    };
+
+    const LAB_CHART = {
+      width: 700,
+      height: 420,
+      marginLeft: 66,
+      marginRight: 26,
+      marginTop: 24,
+      marginBottom: 56,
+      pMax: 50,
+      qMax: 190
+    };
+
+    const LAB_DEFAULT_STATE = {
+      demandShift: 0,
+      supplyShift: 0,
+      policy: "none",
+      controlPrice: 22
+    };
+
+    let marketLabState = { ...LAB_DEFAULT_STATE };
+
+    const ARENA_TYPES = ["gdp", "deflator", "labor", "saving", "real_rate", "elasticity"];
+    const ARENA_TYPE_LABELS = {
+      gdp: "GDP spending",
+      deflator: "Deflator inflation",
+      labor: "Unemployment rate",
+      saving: "Saving and net exports",
+      real_rate: "Real interest",
+      elasticity: "Elasticity midpoint"
+    };
+
+    function defaultArenaStats() {
+      return {
+        solved: 0,
+        correct: 0,
+        streak: 0,
+        bestStreak: 0,
+        lastType: "-"
+      };
+    }
+
+    let arenaStats = defaultArenaStats();
+    let arenaChallenge = null;
+    let arenaSeconds = 120;
+    let arenaTimerId = null;
+    let commandItems = [];
+    let filteredCommandItems = [];
+    let commandActiveIndex = 0;
+    let commandOpen = false;
+    let activeAuth = null;
+
+    function safeRead(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        if (!raw) return fallback;
+        return JSON.parse(raw);
+      } catch {
+        return fallback;
+      }
+    }
+
+    function safeWrite(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch {
+        // Ignore storage write failures.
+      }
+    }
+
+    function normalizeName(value) {
+      return String(value || "")
+        .trim()
+        .replace(/\s+/g, " ")
+        .toLowerCase();
+    }
+
+    function roleLabel(role) {
+      return role === "admin" ? "Admin" : "Student";
+    }
+
+    function setAuthMessage(message, tone = "") {
+      if (!authMessage) return;
+      authMessage.textContent = message;
+      authMessage.className = `auth-message${tone ? ` ${tone}` : ""}`;
+    }
+
+    function lockAccess(message = "Access is name-gated for current enrolled use.") {
+      activeAuth = null;
+      document.body.classList.add("auth-locked");
+      document.body.dataset.role = "locked";
+      if (authGate) authGate.classList.remove("hidden");
+      if (authBadge) authBadge.textContent = "Locked";
+      if (authNameInput) {
+        authNameInput.value = "";
+        authNameInput.focus();
+      }
+      if (adminModeMeta) adminModeMeta.textContent = "Admin mode unavailable.";
+      closeCommandPalette();
+      setAuthMessage(message);
+    }
+
+    function applyAccess(user) {
+      activeAuth = user;
+      document.body.classList.remove("auth-locked");
+      document.body.dataset.role = user.role;
+      if (authGate) authGate.classList.add("hidden");
+      if (authBadge) authBadge.textContent = `${user.name} • ${roleLabel(user.role)}`;
+      if (adminModeMeta) {
+        adminModeMeta.textContent = user.role === "admin"
+          ? `Admin mode active for ${user.name}.`
+          : "Student mode active.";
+      }
+      setAuthMessage("");
+    }
+
+    function unlockByName() {
+      if (!authNameInput) return;
+      const normalized = normalizeName(authNameInput.value);
+      const user = AUTH_ROSTER[normalized];
+      if (!user) {
+        setAuthMessage("Name not recognized. Check spelling and full-name format.", "error");
+        return;
+      }
+      safeWrite(STORAGE.authSession, user);
+      applyAccess(user);
+      showStatus(`${user.name} signed in (${roleLabel(user.role)} mode).`);
+    }
+
+    function initAccessGate() {
+      const stored = safeRead(STORAGE.authSession, null);
+      const normalized = normalizeName(stored && stored.name);
+      const mapped = AUTH_ROSTER[normalized];
+      if (mapped && mapped.role === stored.role) {
+        applyAccess(mapped);
+      } else {
+        lockAccess();
+      }
+
+      if (authUnlockBtn) {
+        authUnlockBtn.addEventListener("click", unlockByName);
+      }
+      if (authNameInput) {
+        authNameInput.addEventListener("keydown", (event) => {
+          if (event.key === "Enter") {
+            event.preventDefault();
+            unlockByName();
+          }
+        });
+      }
+      if (switchUserBtn) {
+        switchUserBtn.addEventListener("click", () => {
+          try {
+            localStorage.removeItem(STORAGE.authSession);
+          } catch {
+            // Ignore storage failures.
+          }
+          lockAccess("Session cleared. Enter an authorized full name.");
+          showStatus("Session locked.");
+        });
+      }
+    }
+
+    let mathQueue = Promise.resolve();
+
+    function typesetMath(target) {
+      if (!target || !window.MathJax || typeof window.MathJax.typesetPromise !== "function") {
+        return;
+      }
+      mathQueue = mathQueue
+        .then(() => {
+          if (typeof window.MathJax.typesetClear === "function") {
+            window.MathJax.typesetClear([target]);
+          }
+          return window.MathJax.typesetPromise([target]);
+        })
+        .catch(() => {
+          // Ignore typesetting failures and keep interactivity responsive.
+        });
+    }
+
+    function clamp(value, min, max) {
+      return Math.min(max, Math.max(min, value));
+    }
+
+    function isCardShape(card) {
+      return card && typeof card === "object";
+    }
+
+    function defaultCard() {
+      return {
+        seen: 0,
+        correct: 0,
+        streak: 0,
+        ef: 2.3,
+        intervalDays: 0,
+        dueTs: 0,
+        lastSeenTs: 0,
+        lastRating: ""
+      };
+    }
+
+    function sanitizeCard(raw) {
+      const base = defaultCard();
+      if (!isCardShape(raw)) return base;
+      return {
+        seen: clamp(Number.parseInt(raw.seen, 10) || 0, 0, 100000),
+        correct: clamp(Number.parseInt(raw.correct, 10) || 0, 0, 100000),
+        streak: clamp(Number.parseInt(raw.streak, 10) || 0, 0, 10000),
+        ef: clamp(Number.parseFloat(raw.ef) || 2.3, 1.3, 2.8),
+        intervalDays: clamp(Number.parseInt(raw.intervalDays, 10) || 0, 0, 3650),
+        dueTs: Math.max(0, Number.parseInt(raw.dueTs, 10) || 0),
+        lastSeenTs: Math.max(0, Number.parseInt(raw.lastSeenTs, 10) || 0),
+        lastRating: typeof raw.lastRating === "string" ? raw.lastRating : ""
+      };
+    }
+
+    function sanitizeCardStats(rawStats) {
+      if (!Array.isArray(rawStats)) return prompts.map(() => defaultCard());
+      const next = [];
+      for (let i = 0; i < prompts.length; i += 1) {
+        next.push(sanitizeCard(rawStats[i]));
+      }
+      return next;
+    }
+
+    let cardStats = sanitizeCardStats(safeRead(STORAGE.cards, null));
+
+    function getCard(idx) {
+      if (!cardStats[idx]) {
+        cardStats[idx] = defaultCard();
+      }
+      return cardStats[idx];
+    }
+
+    function persistCardStats() {
+      safeWrite(STORAGE.cards, cardStats);
+    }
+
+    function availableIndices() {
+      const out = [];
+      for (let i = 0; i < prompts.length; i += 1) {
+        if (!masteredSet.has(i)) out.push(i);
+      }
+      return out;
+    }
+
+    function cardDueNow(idx, nowMs = Date.now()) {
+      const card = getCard(idx);
+      return card.seen === 0 || card.dueTs <= nowMs;
+    }
+
+    function computeTotals() {
+      return cardStats.reduce((acc, c) => {
+        acc.seen += c.seen;
+        acc.correct += c.correct;
+        return acc;
+      }, { seen: 0, correct: 0 });
+    }
+
+    function formatDueDistance(ts) {
+      if (!ts) return "now";
+      const diff = ts - Date.now();
+      if (diff <= 0) return "now";
+      const mins = Math.ceil(diff / 60000);
+      if (mins < 60) return `${mins}m`;
+      const hours = Math.ceil(mins / 60);
+      if (hours < 24) return `${hours}h`;
+      const days = Math.ceil(hours / 24);
+      return `${days}d`;
+    }
+
+    function weightedPick(indices, nowMs) {
+      if (indices.length === 0) return null;
+      const pool = indices.length > 1 && currentIdx !== null
+        ? indices.filter((i) => i !== currentIdx)
+        : indices.slice();
+      const finalPool = pool.length ? pool : indices.slice();
+
+      const weights = finalPool.map((idx) => {
+        const c = getCard(idx);
+        const accuracy = c.seen > 0 ? (c.correct / c.seen) : 0;
+        const overdueHours = c.dueTs > 0 ? Math.max(0, (nowMs - c.dueTs) / 3600000) : 0;
+        const noveltyBoost = c.seen === 0 ? 0.7 : 0;
+        const weaknessBoost = (1 - accuracy) * 2.1;
+        const overdueBoost = Math.min(3, overdueHours / 12);
+        return 1 + noveltyBoost + weaknessBoost + overdueBoost;
+      });
+
+      let sum = 0;
+      for (const w of weights) sum += w;
+      let r = Math.random() * sum;
+
+      for (let i = 0; i < finalPool.length; i += 1) {
+        r -= weights[i];
+        if (r <= 0) return finalPool[i];
+      }
+      return finalPool[finalPool.length - 1];
+    }
+
+    function showStatus(message) {
+      liveStatus.textContent = message;
+      window.clearTimeout(showStatus._t);
+      showStatus._t = window.setTimeout(() => {
+        liveStatus.textContent = "";
+      }, 2600);
+    }
+
+    let masteredSet = new Set(
+      (safeRead(STORAGE.mastered, []) || [])
+        .filter((i) => Number.isInteger(i) && i >= 0 && i < prompts.length)
+    );
+
+    let checks = safeRead(STORAGE.checks, Array(dailyChecks.length).fill(false));
+    if (!Array.isArray(checks) || checks.length !== dailyChecks.length) {
+      checks = Array(dailyChecks.length).fill(false);
+    } else {
+      checks = checks.map(Boolean);
+    }
+
+    function availableCount() {
+      return prompts.length - masteredSet.size;
+    }
+
+    function updateFlashStats() {
+      const totals = computeTotals();
+      const score = totals.seen ? Math.round((totals.correct / totals.seen) * 100) : 0;
+      const nowMs = Date.now();
+      const dueNow = availableIndices().filter((i) => cardDueNow(i, nowMs)).length;
+      const currentDue = currentIdx === null ? "n/a" : formatDueDistance(getCard(currentIdx).dueTs);
+
+      flashMasteredMeta.textContent = `Mastered: ${masteredSet.size}/${prompts.length}`;
+      seenCount.textContent = String(totals.seen);
+      remainingCount.textContent = String(availableCount());
+      recallScore.textContent = `${score}%`;
+      flashAdaptiveMeta.textContent = `Due now: ${dueNow} • Recall score: ${score}%`;
+      flashMeta.textContent = currentIdx === null
+        ? "No active prompt"
+        : `Prompt #${currentIdx + 1} • Next due ${currentDue}`;
+      heroRecallCount.textContent = String(prompts.length);
+    }
+
+    function clearAnswerBox() {
+      if (selfAnswer) selfAnswer.value = "";
+    }
+
+    function setCardByIndex(idx) {
+      currentIdx = idx;
+      flashQ.innerHTML = prompts[idx].q;
+      flashA.innerHTML = prompts[idx].a;
+      flashA.style.display = "none";
+      clearAnswerBox();
+      updateFlashStats();
+      typesetMath(flashQ);
+      typesetMath(flashA);
+    }
+
+    function pickPrompt() {
+      if (availableCount() === 0) {
+        currentIdx = null;
+        flashQ.textContent = "All prompts are marked mastered. Click “Reset Deck” to practice again.";
+        flashA.textContent = "";
+        flashA.style.display = "none";
+        clearAnswerBox();
+        updateFlashStats();
+        return;
+      }
+
+      const nowMs = Date.now();
+      const pool = availableIndices();
+      const duePool = pool.filter((i) => cardDueNow(i, nowMs));
+      const next = weightedPick(duePool.length ? duePool : pool, nowMs);
+      setCardByIndex(next);
+    }
+
+    function revealAnswer() {
+      if (currentIdx === null) pickPrompt();
+      if (currentIdx !== null) {
+        flashA.style.display = "block";
+        typesetMath(flashA);
+      }
+    }
+
+    function applyRating(idx, grade) {
+      const nowMs = Date.now();
+      const card = getCard(idx);
+      const qualityMap = { again: 0, hard: 3, good: 4, easy: 5 };
+      const q = qualityMap[grade];
+      if (q === undefined) return;
+
+      card.seen += 1;
+      card.lastSeenTs = nowMs;
+      card.lastRating = grade;
+
+      if (q < 3) {
+        card.streak = 0;
+        card.intervalDays = 0;
+        card.ef = clamp(card.ef - 0.2, 1.3, 2.8);
+        card.dueTs = nowMs + (10 * 60 * 1000);
+        if (masteredSet.has(idx)) {
+          masteredSet.delete(idx);
+          safeWrite(STORAGE.mastered, [...masteredSet]);
+        }
+      } else {
+        card.correct += 1;
+        card.streak += 1;
+        if (card.streak === 1) {
+          card.intervalDays = grade === "easy" ? 2 : 1;
+        } else if (card.streak === 2) {
+          card.intervalDays = grade === "easy" ? 4 : (grade === "hard" ? 2 : 3);
+        } else {
+          const factor = grade === "hard"
+            ? Math.max(1.2, card.ef - 0.25)
+            : (grade === "easy" ? card.ef + 0.2 : card.ef);
+          card.intervalDays = Math.max(1, Math.round(card.intervalDays * factor));
+        }
+        card.ef = clamp(
+          card.ef + (0.1 - (5 - q) * (0.08 + (5 - q) * 0.02)),
+          1.3,
+          2.8
+        );
+        card.dueTs = nowMs + (card.intervalDays * 24 * 60 * 60 * 1000);
+      }
+
+      persistCardStats();
+    }
+
+    function rateCurrent(grade) {
+      if (currentIdx === null) {
+        showStatus("No active prompt to rate.");
+        return;
+      }
+      applyRating(currentIdx, grade);
+      const nextDue = formatDueDistance(getCard(currentIdx).dueTs);
+      showStatus(`Rated ${grade}. Next due in ${nextDue}.`);
+      pickPrompt();
+    }
+
+    function markCurrentMastered() {
+      if (currentIdx === null) {
+        showStatus("No active prompt to mark.");
+        return;
+      }
+      if (masteredSet.has(currentIdx)) {
+        showStatus("Prompt already marked mastered.");
+        return;
+      }
+
+      masteredSet.add(currentIdx);
+      safeWrite(STORAGE.mastered, [...masteredSet]);
+      showStatus("Prompt marked mastered.");
+      pickPrompt();
+    }
+
+    function resetDeck() {
+      masteredSet.clear();
+      cardStats = prompts.map(() => defaultCard());
+      safeWrite(STORAGE.mastered, []);
+      safeWrite(STORAGE.cards, cardStats);
+      pickPrompt();
+      showStatus("Deck and adaptive stats reset.");
+    }
+
+    function updateChecklistProgress() {
+      const completed = checks.filter(Boolean).length;
+      const pct = Math.round((completed / dailyChecks.length) * 100);
+      progressPct.textContent = `${pct}% complete`;
+      progressText.textContent = `${completed} of ${dailyChecks.length} checklist targets done`;
+      progressFill.style.width = `${pct}%`;
+    }
+
+    function renderChecks() {
+      checklist.innerHTML = "";
+      dailyChecks.forEach((txt, idx) => {
+        const row = document.createElement("label");
+        row.className = "check";
+
+        const box = document.createElement("input");
+        box.type = "checkbox";
+        box.checked = !!checks[idx];
+        box.addEventListener("change", () => {
+          checks[idx] = box.checked;
+          safeWrite(STORAGE.checks, checks);
+          updateChecklistProgress();
+        });
+
+        const span = document.createElement("span");
+        span.textContent = txt;
+
+        row.appendChild(box);
+        row.appendChild(span);
+        checklist.appendChild(row);
+      });
+      updateChecklistProgress();
+    }
+
+    function resetChecklist() {
+      checks = Array(dailyChecks.length).fill(false);
+      safeWrite(STORAGE.checks, checks);
+      renderChecks();
+      showStatus("Checklist reset.");
+    }
+
+    const resourceCards = [...resourceGrid.querySelectorAll(".resource")];
+
+    function applyResourceFilter() {
+      const q = resourceFilter.value.trim().toLowerCase();
+      let visible = 0;
+      resourceCards.forEach((card) => {
+        const hay = `${card.textContent} ${card.dataset.tags || ""}`.toLowerCase();
+        const match = !q || hay.includes(q);
+        card.style.display = match ? "grid" : "none";
+        if (match) visible += 1;
+      });
+      resourceCount.textContent = `${visible} resource${visible === 1 ? "" : "s"}`;
+    }
+
+    function formatTime(totalSeconds) {
+      const mins = Math.floor(totalSeconds / 60);
+      const secs = totalSeconds % 60;
+      return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    }
+
+    function setTimerStatus(message, level = "") {
+      timerStatus.textContent = message;
+      timerStatus.className = `timer-status${level ? ` ${level}` : ""}`;
+    }
+
+    function renderTimer() {
+      timerDisplay.textContent = formatTime(timerSeconds);
+    }
+
+    function stopTimer() {
+      if (timerId) {
+        window.clearInterval(timerId);
+        timerId = null;
+      }
+    }
+
+    function resetTimerFromInput() {
+      let mins = Number.parseInt(timerMinutes.value, 10);
+      if (!Number.isFinite(mins) || mins < 1) mins = 75;
+      mins = Math.min(240, Math.max(1, mins));
+      timerMinutes.value = String(mins);
+      safeWrite(STORAGE.minutes, mins);
+      timerSeconds = mins * 60;
+      stopTimer();
+      renderTimer();
+      setTimerStatus("Ready. Set minutes, then start.");
+    }
+
+    function tickTimer() {
+      if (timerSeconds <= 0) {
+        stopTimer();
+        setTimerStatus("Time is up.", "danger");
+        return;
+      }
+      timerSeconds -= 1;
+      renderTimer();
+
+      if (timerSeconds === 5 * 60) setTimerStatus("5 minutes remaining.", "warn");
+      if (timerSeconds === 60) setTimerStatus("1 minute remaining.", "danger");
+      if (timerSeconds === 0) {
+        stopTimer();
+        setTimerStatus("Time is up.", "danger");
+      }
+    }
+
+    function startTimer() {
+      if (timerId) return;
+      if (timerSeconds <= 0) resetTimerFromInput();
+      setTimerStatus("Timer running.");
+      timerId = window.setInterval(tickTimer, 1000);
+    }
+
+    function pauseTimer() {
+      if (!timerId) {
+        setTimerStatus("Timer is already paused.");
+        return;
+      }
+      stopTimer();
+      setTimerStatus("Paused.");
+    }
+
+    function sanitizeMarketLabState(raw) {
+      if (!raw || typeof raw !== "object") return { ...LAB_DEFAULT_STATE };
+      const policy = raw.policy === "ceiling" || raw.policy === "floor" ? raw.policy : "none";
+      const demandShift = clamp(Number.parseInt(raw.demandShift, 10) || 0, -40, 40);
+      const supplyShift = clamp(Number.parseInt(raw.supplyShift, 10) || 0, -40, 40);
+      const controlPrice = clamp(Number.parseFloat(raw.controlPrice) || 22, 2, 46);
+      return { demandShift, supplyShift, policy, controlPrice };
+    }
+
+    function persistMarketLabState() {
+      safeWrite(STORAGE.marketLab, marketLabState);
+    }
+
+    function qToX(quantity) {
+      const usableWidth = LAB_CHART.width - LAB_CHART.marginLeft - LAB_CHART.marginRight;
+      return LAB_CHART.marginLeft + (clamp(quantity, 0, LAB_CHART.qMax) / LAB_CHART.qMax) * usableWidth;
+    }
+
+    function pToY(price) {
+      const usableHeight = LAB_CHART.height - LAB_CHART.marginTop - LAB_CHART.marginBottom;
+      return LAB_CHART.height - LAB_CHART.marginBottom - (clamp(price, 0, LAB_CHART.pMax) / LAB_CHART.pMax) * usableHeight;
+    }
+
+    function buildMarketGrid() {
+      if (!marketGrid) return;
+      marketGrid.innerHTML = "";
+      const NS = "http://www.w3.org/2000/svg";
+      const pStep = 10;
+      const qStep = 20;
+
+      for (let p = 0; p <= LAB_CHART.pMax; p += pStep) {
+        const y = pToY(p);
+        const line = document.createElementNS(NS, "line");
+        line.setAttribute("x1", String(LAB_CHART.marginLeft));
+        line.setAttribute("x2", String(LAB_CHART.width - LAB_CHART.marginRight));
+        line.setAttribute("y1", String(y));
+        line.setAttribute("y2", String(y));
+        line.setAttribute("stroke", p === 0 ? "#8f7d69" : "#eadfce");
+        line.setAttribute("stroke-width", p === 0 ? "1.2" : "1");
+        marketGrid.appendChild(line);
+
+        if (p > 0) {
+          const label = document.createElementNS(NS, "text");
+          label.setAttribute("x", String(LAB_CHART.marginLeft - 10));
+          label.setAttribute("y", String(y + 4));
+          label.setAttribute("fill", "#7d6b58");
+          label.setAttribute("font-size", "11");
+          label.setAttribute("text-anchor", "end");
+          label.textContent = String(p);
+          marketGrid.appendChild(label);
+        }
+      }
+
+      for (let q = 0; q <= LAB_CHART.qMax; q += qStep) {
+        const x = qToX(q);
+        const line = document.createElementNS(NS, "line");
+        line.setAttribute("x1", String(x));
+        line.setAttribute("x2", String(x));
+        line.setAttribute("y1", String(LAB_CHART.marginTop));
+        line.setAttribute("y2", String(LAB_CHART.height - LAB_CHART.marginBottom));
+        line.setAttribute("stroke", q === 0 ? "#8f7d69" : "#efe3d1");
+        line.setAttribute("stroke-width", q === 0 ? "1.2" : "1");
+        marketGrid.appendChild(line);
+
+        if (q > 0) {
+          const label = document.createElementNS(NS, "text");
+          label.setAttribute("x", String(x));
+          label.setAttribute("y", String(LAB_CHART.height - LAB_CHART.marginBottom + 16));
+          label.setAttribute("fill", "#7d6b58");
+          label.setAttribute("font-size", "11");
+          label.setAttribute("text-anchor", "middle");
+          label.textContent = String(q);
+          marketGrid.appendChild(label);
+        }
+      }
+    }
+
+    function computeMarketState() {
+      const A_D = LAB_MODEL.baseDemand + marketLabState.demandShift;
+      const A_S = LAB_MODEL.baseSupply + marketLabState.supplyShift;
+      const b = LAB_MODEL.demandSlope;
+      const d = LAB_MODEL.supplySlope;
+      const pStar = (A_D - A_S) / (b + d);
+      const qStar = A_D - b * pStar;
+      const pBase = (LAB_MODEL.baseDemand - LAB_MODEL.baseSupply) / (b + d);
+      const qBase = LAB_MODEL.baseDemand - b * pBase;
+      const pControl = marketLabState.controlPrice;
+      const qdAtPc = A_D - b * pControl;
+      const qsAtPc = A_S + d * pControl;
+      const gap = Math.abs(qdAtPc - qsAtPc);
+      let policyStatus = "No control";
+      let policyGap = "n/a";
+      let binding = false;
+      let gapType = "none";
+
+      if (marketLabState.policy === "ceiling") {
+        binding = pControl < pStar;
+        if (binding) {
+          gapType = "shortage";
+          policyStatus = `Binding ceiling at ${pControl.toFixed(1)}`;
+          policyGap = `${gap.toFixed(2)} shortage`;
+        } else {
+          policyStatus = `Non-binding ceiling at ${pControl.toFixed(1)}`;
+          policyGap = "0.00";
+        }
+      } else if (marketLabState.policy === "floor") {
+        binding = pControl > pStar;
+        if (binding) {
+          gapType = "surplus";
+          policyStatus = `Binding floor at ${pControl.toFixed(1)}`;
+          policyGap = `${gap.toFixed(2)} surplus`;
+        } else {
+          policyStatus = `Non-binding floor at ${pControl.toFixed(1)}`;
+          policyGap = "0.00";
+        }
+      }
+
+      return {
+        A_D,
+        A_S,
+        b,
+        d,
+        pStar,
+        qStar,
+        pBase,
+        qBase,
+        pControl,
+        qdAtPc,
+        qsAtPc,
+        gap,
+        policyStatus,
+        policyGap,
+        binding,
+        gapType
+      };
+    }
+
+    function formatShift(n) {
+      if (n > 0) return `+${n}`;
+      return String(n);
+    }
+
+    function buildMarketNarrative(state) {
+      const demandView = state.A_D > LAB_MODEL.baseDemand
+        ? "Demand shifted right."
+        : (state.A_D < LAB_MODEL.baseDemand ? "Demand shifted left." : "Demand unchanged.");
+      const supplyView = state.A_S > LAB_MODEL.baseSupply
+        ? "Supply shifted right."
+        : (state.A_S < LAB_MODEL.baseSupply ? "Supply shifted left." : "Supply unchanged.");
+
+      const pMove = state.pStar > state.pBase + 0.15
+        ? "equilibrium price rises"
+        : (state.pStar < state.pBase - 0.15 ? "equilibrium price falls" : "equilibrium price is roughly unchanged");
+      const qMove = state.qStar > state.qBase + 0.15
+        ? "equilibrium quantity rises"
+        : (state.qStar < state.qBase - 0.15 ? "equilibrium quantity falls" : "equilibrium quantity is roughly unchanged");
+
+      let policyLine = "No policy distortion in this scenario.";
+      if (marketLabState.policy === "ceiling") {
+        policyLine = state.binding
+          ? `The ceiling binds, creating a shortage of ${state.gap.toFixed(2)} units at \\(P_c\\).`
+          : "The ceiling is non-binding, so market outcome remains at equilibrium.";
+      } else if (marketLabState.policy === "floor") {
+        policyLine = state.binding
+          ? `The floor binds, creating a surplus of ${state.gap.toFixed(2)} units at \\(P_c\\).`
+          : "The floor is non-binding, so market outcome remains at equilibrium.";
+      }
+
+      return `${demandView} ${supplyView} Relative to baseline, ${pMove} and ${qMove}. ${policyLine}`;
+    }
+
+    function renderMarketChart(state) {
+      if (!marketSvg) return;
+      const pTop = LAB_CHART.pMax;
+      const qDAtZero = state.A_D;
+      const qDAtTop = state.A_D - state.b * pTop;
+      const qSAtZero = state.A_S;
+      const qSAtTop = state.A_S + state.d * pTop;
+
+      marketDemandPath.setAttribute(
+        "d",
+        `M ${qToX(qDAtZero)} ${pToY(0)} L ${qToX(qDAtTop)} ${pToY(pTop)}`
+      );
+      marketSupplyPath.setAttribute(
+        "d",
+        `M ${qToX(qSAtZero)} ${pToY(0)} L ${qToX(qSAtTop)} ${pToY(pTop)}`
+      );
+
+      marketDemandLabel.setAttribute("x", String(qToX(state.A_D - state.b * 38) + 8));
+      marketDemandLabel.setAttribute("y", String(pToY(38) - 5));
+      marketSupplyLabel.setAttribute("x", String(qToX(state.A_S + state.d * 38) + 8));
+      marketSupplyLabel.setAttribute("y", String(pToY(38) - 5));
+
+      const eqX = qToX(state.qStar);
+      const eqY = pToY(state.pStar);
+      marketEqPoint.setAttribute("cx", String(eqX));
+      marketEqPoint.setAttribute("cy", String(eqY));
+      marketEqLabel.setAttribute("x", String(eqX + 8));
+      marketEqLabel.setAttribute("y", String(eqY - 8));
+      marketEqPriceLine.setAttribute("x1", String(LAB_CHART.marginLeft));
+      marketEqPriceLine.setAttribute("x2", String(eqX));
+      marketEqPriceLine.setAttribute("y1", String(eqY));
+      marketEqPriceLine.setAttribute("y2", String(eqY));
+      marketEqQtyLine.setAttribute("x1", String(eqX));
+      marketEqQtyLine.setAttribute("x2", String(eqX));
+      marketEqQtyLine.setAttribute("y1", String(eqY));
+      marketEqQtyLine.setAttribute("y2", String(pToY(0)));
+
+      const showPolicy = marketLabState.policy !== "none";
+      const policyOpacity = showPolicy ? "1" : "0";
+      const policyY = pToY(state.pControl);
+      const qdX = qToX(state.qdAtPc);
+      const qsX = qToX(state.qsAtPc);
+      marketPolicyLine.setAttribute("opacity", policyOpacity);
+      marketQdLine.setAttribute("opacity", policyOpacity);
+      marketQsLine.setAttribute("opacity", policyOpacity);
+      marketPcLabel.setAttribute("opacity", policyOpacity);
+      marketQdLabel.setAttribute("opacity", policyOpacity);
+      marketQsLabel.setAttribute("opacity", policyOpacity);
+
+      if (showPolicy) {
+        marketPolicyLine.setAttribute("y1", String(policyY));
+        marketPolicyLine.setAttribute("y2", String(policyY));
+        marketQdLine.setAttribute("x1", String(qdX));
+        marketQdLine.setAttribute("x2", String(qdX));
+        marketQdLine.setAttribute("y1", String(policyY));
+        marketQdLine.setAttribute("y2", String(pToY(0)));
+        marketQsLine.setAttribute("x1", String(qsX));
+        marketQsLine.setAttribute("x2", String(qsX));
+        marketQsLine.setAttribute("y1", String(policyY));
+        marketQsLine.setAttribute("y2", String(pToY(0)));
+        marketPcLabel.setAttribute("x", String(LAB_CHART.marginLeft + 8));
+        marketPcLabel.setAttribute("y", String(policyY - 6));
+        marketQdLabel.setAttribute("x", String(qdX + 6));
+        marketQdLabel.setAttribute("y", String(pToY(0) + 18));
+        marketQsLabel.setAttribute("x", String(qsX + 6));
+        marketQsLabel.setAttribute("y", String(pToY(0) + 34));
+      }
+    }
+
+    function updateMarketLab() {
+      if (!labDemandShift || !labSupplyShift || !labPolicyType || !labControlPrice) return;
+      marketLabState = {
+        demandShift: clamp(Number.parseInt(labDemandShift.value, 10) || 0, -40, 40),
+        supplyShift: clamp(Number.parseInt(labSupplyShift.value, 10) || 0, -40, 40),
+        policy: labPolicyType.value,
+        controlPrice: clamp(Number.parseFloat(labControlPrice.value) || 22, 2, 46)
+      };
+
+      labDemandShiftVal.textContent = formatShift(marketLabState.demandShift);
+      labSupplyShiftVal.textContent = formatShift(marketLabState.supplyShift);
+      labControlPriceVal.textContent = marketLabState.controlPrice.toFixed(1);
+
+      persistMarketLabState();
+      const state = computeMarketState();
+      renderMarketChart(state);
+
+      labEqPrice.textContent = state.pStar.toFixed(2);
+      labEqQty.textContent = state.qStar.toFixed(2);
+      labPolicyStatus.textContent = state.policyStatus;
+      labGap.textContent = state.policyGap;
+
+      labNarrative.innerHTML = buildMarketNarrative(state);
+      typesetMath(labNarrative);
+    }
+
+    function applyMarketPreset(name) {
+      if (!labDemandShift || !labSupplyShift || !labPolicyType || !labControlPrice) return;
+      if (name === "demand_surge") {
+        labDemandShift.value = "24";
+        labSupplyShift.value = "0";
+        labPolicyType.value = "none";
+        labControlPrice.value = "22";
+      } else if (name === "supply_shock") {
+        labDemandShift.value = "0";
+        labSupplyShift.value = "-24";
+        labPolicyType.value = "none";
+        labControlPrice.value = "22";
+      } else if (name === "ceiling_bind") {
+        labDemandShift.value = "16";
+        labSupplyShift.value = "-8";
+        labPolicyType.value = "ceiling";
+        labControlPrice.value = "20";
+      } else if (name === "floor_bind") {
+        labDemandShift.value = "-14";
+        labSupplyShift.value = "10";
+        labPolicyType.value = "floor";
+        labControlPrice.value = "30";
+      } else {
+        labDemandShift.value = String(LAB_DEFAULT_STATE.demandShift);
+        labSupplyShift.value = String(LAB_DEFAULT_STATE.supplyShift);
+        labPolicyType.value = LAB_DEFAULT_STATE.policy;
+        labControlPrice.value = String(LAB_DEFAULT_STATE.controlPrice);
+      }
+      updateMarketLab();
+      showStatus("Market lab preset applied.");
+    }
+
+    function initMarketLab() {
+      if (!marketSvg) return;
+      buildMarketGrid();
+      const stored = sanitizeMarketLabState(safeRead(STORAGE.marketLab, null));
+      marketLabState = { ...stored };
+
+      labDemandShift.value = String(marketLabState.demandShift);
+      labSupplyShift.value = String(marketLabState.supplyShift);
+      labPolicyType.value = marketLabState.policy;
+      labControlPrice.value = String(marketLabState.controlPrice);
+
+      labDemandShift.addEventListener("input", updateMarketLab);
+      labSupplyShift.addEventListener("input", updateMarketLab);
+      labPolicyType.addEventListener("change", updateMarketLab);
+      labControlPrice.addEventListener("input", updateMarketLab);
+      labPresetBtns.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          applyMarketPreset(btn.dataset.preset || "reset");
+        });
+      });
+
+      updateMarketLab();
+    }
+
+    function sanitizeArenaStats(raw) {
+      const base = defaultArenaStats();
+      if (!raw || typeof raw !== "object") return base;
+      const lastType = typeof raw.lastType === "string" && raw.lastType
+        ? raw.lastType
+        : "-";
+      return {
+        solved: clamp(Number.parseInt(raw.solved, 10) || 0, 0, 100000),
+        correct: clamp(Number.parseInt(raw.correct, 10) || 0, 0, 100000),
+        streak: clamp(Number.parseInt(raw.streak, 10) || 0, 0, 10000),
+        bestStreak: clamp(Number.parseInt(raw.bestStreak, 10) || 0, 0, 10000),
+        lastType
+      };
+    }
+
+    function persistArenaStats() {
+      safeWrite(STORAGE.arenaStats, arenaStats);
+    }
+
+    function persistArenaPrefs() {
+      if (!arenaType || !arenaDifficulty) return;
+      safeWrite(STORAGE.arenaPrefs, {
+        type: arenaType.value,
+        difficulty: arenaDifficulty.value
+      });
+    }
+
+    function updateArenaStatsUI() {
+      if (!arenaSolved) return;
+      const accuracyPct = arenaStats.solved
+        ? Math.round((arenaStats.correct / arenaStats.solved) * 100)
+        : 0;
+      arenaSolved.textContent = String(arenaStats.solved);
+      arenaCorrect.textContent = String(arenaStats.correct);
+      arenaAccuracy.textContent = `${accuracyPct}%`;
+      arenaStreak.textContent = String(arenaStats.streak);
+      arenaBestStreak.textContent = String(arenaStats.bestStreak);
+      arenaLastType.textContent = arenaStats.lastType;
+    }
+
+    function setArenaFeedback(message, tone = "") {
+      if (!arenaFeedback) return;
+      arenaFeedback.textContent = message;
+      arenaFeedback.className = `arena-feedback${tone ? ` ${tone}` : ""}`;
+    }
+
+    function formatArenaTime(totalSeconds) {
+      const mins = Math.floor(totalSeconds / 60);
+      const secs = totalSeconds % 60;
+      return `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+    }
+
+    function renderArenaTimer() {
+      if (!arenaTimer) return;
+      arenaTimer.textContent = formatArenaTime(arenaSeconds);
+      arenaTimer.className = "arena-timer";
+      if (arenaSeconds <= 20) {
+        arenaTimer.classList.add("danger");
+      } else if (arenaSeconds <= 45) {
+        arenaTimer.classList.add("warn");
+      }
+    }
+
+    function stopArenaTimer() {
+      if (!arenaTimerId) return;
+      window.clearInterval(arenaTimerId);
+      arenaTimerId = null;
+    }
+
+    function markArenaOutcome(correct, feedbackMessage, tone) {
+      if (!arenaChallenge || arenaChallenge.graded) {
+        if (feedbackMessage) setArenaFeedback(feedbackMessage, tone);
+        return;
+      }
+      arenaChallenge.graded = true;
+      stopArenaTimer();
+
+      arenaStats.solved += 1;
+      if (correct) {
+        arenaStats.correct += 1;
+        arenaStats.streak += 1;
+        arenaStats.bestStreak = Math.max(arenaStats.bestStreak, arenaStats.streak);
+      } else {
+        arenaStats.streak = 0;
+      }
+      arenaStats.lastType = ARENA_TYPE_LABELS[arenaChallenge.type] || arenaChallenge.type;
+      persistArenaStats();
+      updateArenaStatsUI();
+
+      if (feedbackMessage) {
+        setArenaFeedback(feedbackMessage, tone);
+      }
+    }
+
+    function startArenaTimer(seconds) {
+      arenaSeconds = Math.max(1, seconds);
+      renderArenaTimer();
+      stopArenaTimer();
+      arenaTimerId = window.setInterval(() => {
+        arenaSeconds -= 1;
+        renderArenaTimer();
+        if (arenaSeconds <= 0) {
+          stopArenaTimer();
+          if (arenaChallenge && !arenaChallenge.graded) {
+            markArenaOutcome(
+              false,
+              `Time expired. Correct value: ${arenaChallenge.answerDisplay}.`,
+              "error"
+            );
+            showStatus("Arena timeout logged as a miss.");
+          }
+        }
+      }, 1000);
+    }
+
+    function randomInt(min, max) {
+      const lo = Math.ceil(min);
+      const hi = Math.floor(max);
+      return Math.floor(Math.random() * (hi - lo + 1)) + lo;
+    }
+
+    function randomChoice(items) {
+      return items[randomInt(0, items.length - 1)];
+    }
+
+    function typeForArena() {
+      if (!arenaType) return "gdp";
+      if (arenaType.value !== "mixed") return arenaType.value;
+      return randomChoice(ARENA_TYPES);
+    }
+
+    function generateGDPChallenge(isChallenge) {
+      const C = randomInt(isChallenge ? 3600 : 1300, isChallenge ? 14500 : 7200);
+      const I = randomInt(isChallenge ? 900 : 220, isChallenge ? 5600 : 2200);
+      const G = randomInt(isChallenge ? 1100 : 300, isChallenge ? 5300 : 1900);
+      const NX = randomInt(isChallenge ? -1600 : -500, isChallenge ? 900 : 300);
+      const answer = C + I + G + NX;
+      return {
+        type: "gdp",
+        answer,
+        tolerance: 0.5,
+        answerDisplay: answer.toFixed(1),
+        promptHtml: `<h3>GDP Spending Identity</h3><p>Given \\(C=${C}\\), \\(I=${I}\\), \\(G=${G}\\), and \\(NX=${NX}\\) (billions), compute \\(Y\\) using \\(Y=C+I+G+NX\\).</p>`,
+        solutionHtml: `<p>\\(Y = C + I + G + NX = ${C} + ${I} + ${G} ${NX >= 0 ? "+" : "-"} ${Math.abs(NX)} = ${answer}\\).</p><p><strong>Answer:</strong> \\(${answer}\\) billion.</p>`
+      };
+    }
+
+    function generateDeflatorChallenge(isChallenge) {
+      const defPrev = randomInt(isChallenge ? 92 : 96, isChallenge ? 128 : 118);
+      const infl = randomInt(isChallenge ? -4 : -2, isChallenge ? 10 : 7) + (isChallenge ? randomChoice([0, 0.2, 0.4, 0.6]) : 0);
+      const defNow = defPrev * (1 + infl / 100);
+      const realPrev = randomInt(isChallenge ? 1400 : 900, isChallenge ? 3600 : 2300);
+      const realNow = randomInt(isChallenge ? 1500 : 950, isChallenge ? 3900 : 2500);
+      const nomPrev = (realPrev * defPrev) / 100;
+      const nomNow = (realNow * defNow) / 100;
+      const inflation = ((defNow - defPrev) / defPrev) * 100;
+      return {
+        type: "deflator",
+        answer: inflation,
+        tolerance: isChallenge ? 0.08 : 0.15,
+        answerDisplay: inflation.toFixed(2),
+        promptHtml: `<h3>Deflator Inflation</h3><p>Year \\(t-1\\): Nominal GDP \\(=${nomPrev.toFixed(1)}\\), Real GDP \\(=${realPrev}\\).<br>Year \\(t\\): Nominal GDP \\(=${nomNow.toFixed(1)}\\), Real GDP \\(=${realNow}\\).<br>Compute GDP-deflator inflation from \\(t-1\\) to \\(t\\) in percent.</p>`,
+        solutionHtml: `<p>\\(\\text{Def}_{t-1}=\\frac{${nomPrev.toFixed(1)}}{${realPrev}}\\times100=${defPrev.toFixed(2)}\\)</p><p>\\(\\text{Def}_{t}=\\frac{${nomNow.toFixed(1)}}{${realNow}}\\times100=${defNow.toFixed(2)}\\)</p><p>\\(\\pi_t^{GDP}=\\frac{\\text{Def}_t-\\text{Def}_{t-1}}{\\text{Def}_{t-1}}\\times100=${inflation.toFixed(2)}\\%\\)</p>`
+      };
+    }
+
+    function generateLaborChallenge(isChallenge) {
+      const adults = randomInt(isChallenge ? 180 : 100, isChallenge ? 390 : 260);
+      const employed = randomInt(isChallenge ? 90 : 50, adults - (isChallenge ? 20 : 10));
+      const unemployed = randomInt(isChallenge ? 8 : 4, Math.max(10, adults - employed - 4));
+      const laborForce = employed + unemployed;
+      const uRate = (unemployed / laborForce) * 100;
+      return {
+        type: "labor",
+        answer: uRate,
+        tolerance: 0.08,
+        answerDisplay: uRate.toFixed(2),
+        promptHtml: `<h3>Unemployment Rate</h3><p>Adults \\(=${adults}\\), employed \\(E=${employed}\\), unemployed \\(U=${unemployed}\\). Compute unemployment rate \\(u\\) as a percent.</p>`,
+        solutionHtml: `<p>\\(LF=E+U=${employed}+${unemployed}=${laborForce}\\)</p><p>\\(u=\\frac{U}{LF}\\times100=\\frac{${unemployed}}{${laborForce}}\\times100=${uRate.toFixed(2)}\\%\\)</p>`
+      };
+    }
+
+    function generateSavingChallenge(isChallenge) {
+      const Y = randomInt(isChallenge ? 6000 : 2800, isChallenge ? 18000 : 9200);
+      const C = randomInt(isChallenge ? 2500 : 1300, Math.max(2000, Math.floor(Y * 0.72)));
+      const G = randomInt(isChallenge ? 1000 : 450, Math.max(600, Math.floor(Y * 0.35)));
+      const I = randomInt(isChallenge ? 900 : 280, isChallenge ? 5200 : 2400);
+      const S = Y - C - G;
+      const NX = S - I;
+      return {
+        type: "saving",
+        answer: NX,
+        tolerance: 0.5,
+        answerDisplay: NX.toFixed(1),
+        promptHtml: `<h3>Saving and Net Exports</h3><p>Given \\(Y=${Y}\\), \\(C=${C}\\), \\(G=${G}\\), \\(I=${I}\\) (billions), compute \\(NX\\) using \\(S=Y-C-G\\) and \\(NX=S-I\\).</p>`,
+        solutionHtml: `<p>\\(S=Y-C-G=${Y}-${C}-${G}=${S}\\)</p><p>\\(NX=S-I=${S}-${I}=${NX}\\)</p><p><strong>Answer:</strong> \\(${NX}\\) billion.</p>`
+      };
+    }
+
+    function generateRealRateChallenge(isChallenge) {
+      const nominal = randomInt(isChallenge ? -1 : 1, isChallenge ? 14 : 10) + randomChoice([0, 0.2, 0.4, 0.6, 0.8]);
+      const expectedInfl = randomInt(isChallenge ? -2 : 0, isChallenge ? 9 : 7) + randomChoice([0, 0.2, 0.4, 0.6, 0.8]);
+      const real = nominal - expectedInfl;
+      return {
+        type: "real_rate",
+        answer: real,
+        tolerance: 0.05,
+        answerDisplay: real.toFixed(2),
+        promptHtml: `<h3>Real Interest Approximation</h3><p>Nominal interest \\(i=${nominal.toFixed(1)}\\%\\), expected inflation \\(\\pi^e=${expectedInfl.toFixed(1)}\\%\\). Compute \\(r\\approx i-\\pi^e\\).</p>`,
+        solutionHtml: `<p>\\(r \\approx i-\\pi^e=${nominal.toFixed(1)}-${expectedInfl.toFixed(1)}=${real.toFixed(2)}\\%\\)</p>`
+      };
+    }
+
+    function generateElasticityChallenge(isChallenge) {
+      const priceUp = Math.random() > 0.5;
+      const p1 = randomInt(isChallenge ? 5 : 6, isChallenge ? 20 : 16);
+      const p2 = priceUp
+        ? p1 + randomInt(1, isChallenge ? 7 : 5)
+        : Math.max(2, p1 - randomInt(1, isChallenge ? 4 : 3));
+      const q1 = randomInt(isChallenge ? 120 : 90, isChallenge ? 520 : 340);
+      const q2 = priceUp
+        ? Math.max(20, q1 - randomInt(18, isChallenge ? 180 : 110))
+        : q1 + randomInt(18, isChallenge ? 180 : 110);
+      const pctQ = (q2 - q1) / ((q2 + q1) / 2);
+      const pctP = (p2 - p1) / ((p2 + p1) / 2);
+      const epsilon = pctQ / pctP;
+      return {
+        type: "elasticity",
+        answer: epsilon,
+        tolerance: isChallenge ? 0.03 : 0.05,
+        answerDisplay: epsilon.toFixed(2),
+        promptHtml: `<h3>Midpoint Demand Elasticity</h3><p>Price moves from \\(${p1}\\) to \\(${p2}\\), quantity demanded moves from \\(${q1}\\) to \\(${q2}\\). Compute \\(\\varepsilon_D\\) using midpoint method.</p>`,
+        solutionHtml: `<p>\\(\\%\\Delta Q=\\frac{${q2}-${q1}}{(${q2}+${q1})/2}=${pctQ.toFixed(4)}\\)</p><p>\\(\\%\\Delta P=\\frac{${p2}-${p1}}{(${p2}+${p1})/2}=${pctP.toFixed(4)}\\)</p><p>\\(\\varepsilon_D=\\frac{\\%\\Delta Q}{\\%\\Delta P}=${epsilon.toFixed(2)}\\)</p>`
+      };
+    }
+
+    function generateArenaChallenge() {
+      if (!arenaPrompt || !arenaSolution || !arenaAnswer) return;
+      const selectedType = typeForArena();
+      const isChallenge = arenaDifficulty && arenaDifficulty.value === "challenge";
+      let challenge = null;
+
+      if (selectedType === "gdp") challenge = generateGDPChallenge(isChallenge);
+      else if (selectedType === "deflator") challenge = generateDeflatorChallenge(isChallenge);
+      else if (selectedType === "labor") challenge = generateLaborChallenge(isChallenge);
+      else if (selectedType === "saving") challenge = generateSavingChallenge(isChallenge);
+      else if (selectedType === "real_rate") challenge = generateRealRateChallenge(isChallenge);
+      else challenge = generateElasticityChallenge(isChallenge);
+
+      arenaChallenge = {
+        ...challenge,
+        graded: false
+      };
+
+      arenaPrompt.innerHTML = challenge.promptHtml;
+      arenaSolution.innerHTML = challenge.solutionHtml;
+      arenaSolution.classList.remove("show");
+      arenaAnswer.value = "";
+      arenaAnswer.focus();
+      setArenaFeedback(`Challenge live: ${ARENA_TYPE_LABELS[challenge.type]}. Submit one numeric answer.`, "");
+      typesetMath(arenaPrompt);
+      typesetMath(arenaSolution);
+
+      const roundSeconds = isChallenge ? 90 : 120;
+      startArenaTimer(roundSeconds);
+      persistArenaPrefs();
+    }
+
+    function checkArenaAnswer() {
+      if (!arenaChallenge) {
+        setArenaFeedback("Generate a challenge first.", "error");
+        return;
+      }
+      if (arenaChallenge.graded) {
+        setArenaFeedback("This challenge is already graded. Generate the next one.", "");
+        return;
+      }
+      const user = Number.parseFloat(arenaAnswer.value);
+      if (!Number.isFinite(user)) {
+        setArenaFeedback("Enter a numeric answer before grading.", "error");
+        return;
+      }
+
+      const correct = Math.abs(user - arenaChallenge.answer) <= arenaChallenge.tolerance;
+      if (correct) {
+        markArenaOutcome(
+          true,
+          `Correct. Expected ${arenaChallenge.answerDisplay} and your answer was within tolerance.`,
+          "success"
+        );
+      } else {
+        markArenaOutcome(
+          false,
+          `Incorrect. Your value ${user.toFixed(2)} is outside tolerance from ${arenaChallenge.answerDisplay}.`,
+          "error"
+        );
+      }
+    }
+
+    function revealArenaSolution() {
+      if (!arenaChallenge) {
+        setArenaFeedback("Generate a challenge first.", "error");
+        return;
+      }
+      if (!arenaChallenge.graded) {
+        markArenaOutcome(
+          false,
+          `Solution revealed. Correct value: ${arenaChallenge.answerDisplay}.`,
+          "error"
+        );
+      }
+      arenaSolution.classList.add("show");
+      typesetMath(arenaSolution);
+    }
+
+    function resetArena() {
+      stopArenaTimer();
+      arenaChallenge = null;
+      arenaSeconds = 120;
+      renderArenaTimer();
+      arenaStats = defaultArenaStats();
+      persistArenaStats();
+      updateArenaStatsUI();
+      safeWrite(STORAGE.arenaPrefs, {
+        type: "mixed",
+        difficulty: "standard"
+      });
+      if (arenaType) arenaType.value = "mixed";
+      if (arenaDifficulty) arenaDifficulty.value = "standard";
+      if (arenaPrompt) {
+        arenaPrompt.innerHTML = "<h3>Challenge Ready</h3><p>Press <strong>Generate Challenge</strong> to start a timed quantitative problem.</p>";
+      }
+      if (arenaSolution) {
+        arenaSolution.innerHTML = "";
+        arenaSolution.classList.remove("show");
+      }
+      if (arenaAnswer) arenaAnswer.value = "";
+      setArenaFeedback("Arena reset. Generate a fresh challenge.", "");
+      typesetMath(arenaPrompt);
+    }
+
+    function initArena() {
+      if (!arenaType || !arenaDifficulty || !arenaGenerateBtn || !arenaCheckBtn || !arenaRevealBtn || !arenaNextBtn || !arenaResetBtn || !arenaAnswer || !arenaPrompt || !arenaFeedback || !arenaSolution) return;
+      arenaStats = sanitizeArenaStats(safeRead(STORAGE.arenaStats, null));
+      const prefs = safeRead(STORAGE.arenaPrefs, null);
+      if (prefs && typeof prefs === "object") {
+        if (typeof prefs.type === "string" && (prefs.type === "mixed" || ARENA_TYPES.includes(prefs.type))) {
+          arenaType.value = prefs.type;
+        }
+        if (prefs.difficulty === "challenge" || prefs.difficulty === "standard") {
+          arenaDifficulty.value = prefs.difficulty;
+        }
+      }
+
+      updateArenaStatsUI();
+      renderArenaTimer();
+      typesetMath(arenaPrompt);
+
+      arenaType.addEventListener("change", persistArenaPrefs);
+      arenaDifficulty.addEventListener("change", persistArenaPrefs);
+      arenaGenerateBtn.addEventListener("click", generateArenaChallenge);
+      arenaCheckBtn.addEventListener("click", checkArenaAnswer);
+      arenaRevealBtn.addEventListener("click", revealArenaSolution);
+      arenaNextBtn.addEventListener("click", generateArenaChallenge);
+      arenaResetBtn.addEventListener("click", resetArena);
+      arenaAnswer.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          checkArenaAnswer();
+        }
+      });
+    }
+
+    function scrollToSection(id) {
+      const target = document.getElementById(id);
+      if (!target) return;
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function buildCommandItems() {
+      commandItems = [
+        {
+          title: "Jump to Topic Architecture",
+          meta: "Navigate",
+          keywords: "topic architecture lecture map",
+          run: () => scrollToSection("topicArchitecture")
+        },
+        {
+          title: "Jump to Formula Engine",
+          meta: "Navigate",
+          keywords: "formula equations math",
+          run: () => scrollToSection("formulaEngine")
+        },
+        {
+          title: "Jump to Graphing Playbook",
+          meta: "Navigate",
+          keywords: "graph supply demand playbook",
+          run: () => scrollToSection("graphPlaybook")
+        },
+        {
+          title: "Jump to Market Dynamics Lab",
+          meta: "Navigate",
+          keywords: "market lab ceiling floor shortage surplus",
+          run: () => scrollToSection("marketLab")
+        },
+        {
+          title: "Jump to Quant Arena",
+          meta: "Navigate",
+          keywords: "quant arena numbers practice",
+          run: () => scrollToSection("quantArena")
+        },
+        {
+          title: "Jump to Recall Trainer",
+          meta: "Navigate",
+          keywords: "flashcards recall trainer",
+          run: () => scrollToSection("recallTrainer")
+        },
+        {
+          title: "Jump to Resource Dock",
+          meta: "Navigate",
+          keywords: "resource dock pdf mock",
+          run: () => scrollToSection("resourceDock")
+        },
+        {
+          title: "Start 75-Minute Exam Timer",
+          meta: "Action",
+          keywords: "timer start exam 75",
+          run: () => {
+            timerMinutes.value = "75";
+            resetTimerFromInput();
+            startTimer();
+          }
+        },
+        {
+          title: "Pause Exam Timer",
+          meta: "Action",
+          keywords: "timer pause",
+          run: () => pauseTimer()
+        },
+        {
+          title: "New Recall Prompt",
+          meta: "Action",
+          keywords: "recall prompt flashcard next",
+          run: () => pickPrompt()
+        },
+        {
+          title: "Reveal Recall Answer",
+          meta: "Action",
+          keywords: "recall reveal answer",
+          run: () => revealAnswer()
+        },
+        {
+          title: "Generate Quant Challenge",
+          meta: "Action",
+          keywords: "quant arena generate challenge",
+          run: () => generateArenaChallenge()
+        },
+        {
+          title: "Check Quant Answer",
+          meta: "Action",
+          keywords: "quant check answer grade",
+          run: () => checkArenaAnswer()
+        },
+        {
+          title: "Reveal Quant Solution",
+          meta: "Action",
+          keywords: "quant reveal solution",
+          run: () => revealArenaSolution()
+        },
+        {
+          title: "Market Preset: Demand Surge",
+          meta: "Scenario",
+          keywords: "market demand surge preset",
+          run: () => applyMarketPreset("demand_surge")
+        },
+        {
+          title: "Market Preset: Supply Shock",
+          meta: "Scenario",
+          keywords: "market supply shock preset",
+          run: () => applyMarketPreset("supply_shock")
+        },
+        {
+          title: "Market Preset: Binding Ceiling",
+          meta: "Scenario",
+          keywords: "market ceiling binding shortage",
+          run: () => applyMarketPreset("ceiling_bind")
+        },
+        {
+          title: "Market Preset: Binding Floor",
+          meta: "Scenario",
+          keywords: "market floor binding surplus",
+          run: () => applyMarketPreset("floor_bind")
+        },
+        {
+          title: "Focus Resource Filter",
+          meta: "Action",
+          keywords: "resources filter search",
+          run: () => resourceFilter.focus()
+        },
+        {
+          title: "Print Layout",
+          meta: "Action",
+          keywords: "print pdf export",
+          run: () => window.print()
+        }
+      ];
+      filteredCommandItems = commandItems.slice();
+      commandActiveIndex = 0;
+    }
+
+    function renderCommandList() {
+      if (!commandList) return;
+      commandList.innerHTML = "";
+
+      if (!filteredCommandItems.length) {
+        const empty = document.createElement("div");
+        empty.className = "command-item";
+        empty.innerHTML = "<span class=\"title\">No matching actions</span><span class=\"meta\">Try keywords like graph, timer, arena, recall</span>";
+        commandList.appendChild(empty);
+        return;
+      }
+
+      filteredCommandItems.forEach((item, idx) => {
+        const row = document.createElement("button");
+        row.type = "button";
+        row.className = `command-item${idx === commandActiveIndex ? " active" : ""}`;
+        row.innerHTML = `<span class="title">${item.title}</span><span class="meta">${item.meta}</span>`;
+        row.addEventListener("mouseenter", () => {
+          commandActiveIndex = idx;
+          renderCommandList();
+        });
+        row.addEventListener("click", () => {
+          closeCommandPalette();
+          item.run();
+        });
+        commandList.appendChild(row);
+      });
+    }
+
+    function filterCommandItems() {
+      if (!commandInput) return;
+      const query = commandInput.value.trim().toLowerCase();
+      filteredCommandItems = commandItems.filter((item) => {
+        const hay = `${item.title} ${item.meta} ${item.keywords}`.toLowerCase();
+        return !query || hay.includes(query);
+      });
+      commandActiveIndex = 0;
+      renderCommandList();
+    }
+
+    function openCommandPalette() {
+      if (!commandShell || !commandInput) return;
+      if (document.body.classList.contains("auth-locked")) return;
+      commandOpen = true;
+      commandShell.classList.add("open");
+      commandShell.setAttribute("aria-hidden", "false");
+      commandInput.value = "";
+      filterCommandItems();
+      window.setTimeout(() => commandInput.focus(), 0);
+    }
+
+    function closeCommandPalette() {
+      if (!commandShell) return;
+      commandOpen = false;
+      commandShell.classList.remove("open");
+      commandShell.setAttribute("aria-hidden", "true");
+    }
+
+    function toggleCommandPalette() {
+      if (commandOpen) {
+        closeCommandPalette();
+      } else {
+        openCommandPalette();
+      }
+    }
+
+    function moveCommandSelection(delta) {
+      if (!filteredCommandItems.length) return;
+      const size = filteredCommandItems.length;
+      commandActiveIndex = (commandActiveIndex + delta + size) % size;
+      renderCommandList();
+      const activeRow = commandList.querySelector(".command-item.active");
+      if (activeRow && typeof activeRow.scrollIntoView === "function") {
+        activeRow.scrollIntoView({ block: "nearest" });
+      }
+    }
+
+    function runActiveCommand() {
+      if (!filteredCommandItems.length) return;
+      const item = filteredCommandItems[commandActiveIndex];
+      closeCommandPalette();
+      item.run();
+    }
+
+    function initCommandPalette() {
+      if (!commandBtn || !commandShell || !commandBackdrop || !commandInput || !commandList) return;
+      buildCommandItems();
+      renderCommandList();
+
+      commandBtn.addEventListener("click", toggleCommandPalette);
+      commandBackdrop.addEventListener("click", closeCommandPalette);
+      commandInput.addEventListener("input", filterCommandItems);
+      commandInput.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowDown") {
+          event.preventDefault();
+          moveCommandSelection(1);
+        } else if (event.key === "ArrowUp") {
+          event.preventDefault();
+          moveCommandSelection(-1);
+        } else if (event.key === "Enter") {
+          event.preventDefault();
+          runActiveCommand();
+        } else if (event.key === "Escape") {
+          event.preventDefault();
+          closeCommandPalette();
+        }
+      });
+    }
+
+    function runInternalDiagnostics() {
+      const issues = [];
+      const currentMarketState = { ...marketLabState };
+
+      for (let i = 0; i < 60; i += 1) {
+        marketLabState = {
+          demandShift: randomInt(-40, 40),
+          supplyShift: randomInt(-40, 40),
+          policy: randomChoice(["none", "ceiling", "floor"]),
+          controlPrice: randomInt(2, 46)
+        };
+        const state = computeMarketState();
+        const values = [state.pStar, state.qStar, state.qdAtPc, state.qsAtPc, state.gap];
+        if (!values.every(Number.isFinite)) {
+          issues.push(`market-state-${i}`);
+        }
+        if (state.gap < 0) {
+          issues.push(`market-gap-${i}`);
+        }
+      }
+      marketLabState = currentMarketState;
+
+      const generators = [
+        generateGDPChallenge,
+        generateDeflatorChallenge,
+        generateLaborChallenge,
+        generateSavingChallenge,
+        generateRealRateChallenge,
+        generateElasticityChallenge
+      ];
+
+      generators.forEach((generator, gIdx) => {
+        [false, true].forEach((isChallenge, modeIdx) => {
+          for (let i = 0; i < 20; i += 1) {
+            const sample = generator(isChallenge);
+            if (!sample || typeof sample !== "object") {
+              issues.push(`arena-shape-${gIdx}-${modeIdx}-${i}`);
+              continue;
+            }
+            if (!Number.isFinite(sample.answer) || !Number.isFinite(sample.tolerance) || sample.tolerance <= 0) {
+              issues.push(`arena-number-${gIdx}-${modeIdx}-${i}`);
+            }
+            if (!sample.promptHtml || !sample.solutionHtml || !sample.type) {
+              issues.push(`arena-content-${gIdx}-${modeIdx}-${i}`);
+            }
+          }
+        });
+      });
+
+      if (issues.length) {
+        console.warn("Internal diagnostics failed", issues.slice(0, 8));
+        if (diagnosticsChip) {
+          diagnosticsChip.textContent = `Diagnostics: ${issues.length} issue(s)`;
+          diagnosticsChip.classList.remove("chip-status-ok");
+          diagnosticsChip.classList.add("chip-status-warn");
+        }
+        showStatus(`Diagnostics flagged ${issues.length} issue(s).`);
+      } else {
+        console.info("Internal diagnostics passed.");
+        if (diagnosticsChip) {
+          diagnosticsChip.textContent = "Diagnostics: passed";
+          diagnosticsChip.classList.remove("chip-status-warn");
+          diagnosticsChip.classList.add("chip-status-ok");
+        }
+      }
+      if (adminModeMeta && activeAuth && activeAuth.role === "admin") {
+        adminModeMeta.textContent = issues.length
+          ? `Admin mode active. Diagnostics: ${issues.length} issue(s) detected.`
+          : "Admin mode active. Diagnostics passed.";
+      }
+      return issues.length;
+    }
+
+    function exportLocalStateSnapshot() {
+      if (!activeAuth || activeAuth.role !== "admin") return;
+      const payload = {
+        exportedAt: new Date().toISOString(),
+        user: activeAuth,
+        state: {
+          checks: safeRead(STORAGE.checks, null),
+          mastered: safeRead(STORAGE.mastered, null),
+          minutes: safeRead(STORAGE.minutes, null),
+          cards: safeRead(STORAGE.cards, null),
+          marketLab: safeRead(STORAGE.marketLab, null),
+          arenaStats: safeRead(STORAGE.arenaStats, null),
+          arenaPrefs: safeRead(STORAGE.arenaPrefs, null)
+        }
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+      const href = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = href;
+      a.download = `econ205_state_${Date.now()}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(href);
+      showStatus("Admin state export generated.");
+    }
+
+    function initAdminControls() {
+      if (adminDiagnosticsBtn) {
+        adminDiagnosticsBtn.addEventListener("click", () => {
+          if (!activeAuth || activeAuth.role !== "admin") return;
+          runInternalDiagnostics();
+        });
+      }
+      if (adminRunDiagnosticsBtn) {
+        adminRunDiagnosticsBtn.addEventListener("click", () => {
+          if (!activeAuth || activeAuth.role !== "admin") return;
+          runInternalDiagnostics();
+        });
+      }
+      if (adminExportStateBtn) {
+        adminExportStateBtn.addEventListener("click", exportLocalStateSnapshot);
+      }
+      if (adminHardResetBtn) {
+        adminHardResetBtn.addEventListener("click", resetAllProgress);
+      }
+    }
+
+    function resetAllProgress() {
+      if (!window.confirm("Reset checklist, flashcard mastery, timer settings, graph lab state, and quant arena stats?")) {
+        return;
+      }
+      try {
+        localStorage.removeItem(STORAGE.checks);
+        localStorage.removeItem(STORAGE.mastered);
+        localStorage.removeItem(STORAGE.minutes);
+        localStorage.removeItem(STORAGE.cards);
+        localStorage.removeItem(STORAGE.marketLab);
+        localStorage.removeItem(STORAGE.arenaStats);
+        localStorage.removeItem(STORAGE.arenaPrefs);
+      } catch {
+        // Ignore storage failures.
+      }
+
+      masteredSet = new Set();
+      cardStats = prompts.map(() => defaultCard());
+      checks = Array(dailyChecks.length).fill(false);
+      resourceFilter.value = "";
+      applyResourceFilter();
+      renderChecks();
+      resetTimerFromInput();
+      marketLabState = { ...LAB_DEFAULT_STATE };
+      if (labDemandShift && labSupplyShift && labPolicyType && labControlPrice) {
+        labDemandShift.value = String(marketLabState.demandShift);
+        labSupplyShift.value = String(marketLabState.supplyShift);
+        labPolicyType.value = marketLabState.policy;
+        labControlPrice.value = String(marketLabState.controlPrice);
+        updateMarketLab();
+      }
+      stopArenaTimer();
+      arenaChallenge = null;
+      arenaStats = defaultArenaStats();
+      updateArenaStatsUI();
+      if (arenaType && arenaDifficulty) {
+        arenaType.value = "mixed";
+        arenaDifficulty.value = "standard";
+      }
+      arenaSeconds = 120;
+      renderArenaTimer();
+      if (arenaPrompt) {
+        arenaPrompt.innerHTML = "<h3>Challenge Ready</h3><p>Press <strong>Generate Challenge</strong> to start a timed quantitative problem.</p>";
+        typesetMath(arenaPrompt);
+      }
+      if (arenaSolution) {
+        arenaSolution.innerHTML = "";
+        arenaSolution.classList.remove("show");
+      }
+      if (arenaAnswer) arenaAnswer.value = "";
+      setArenaFeedback("Arena reset. Generate a fresh challenge.", "");
+      pickPrompt();
+      showStatus("All interactive progress reset, including graph and quant arenas.");
+    }
+
+    function initRevealEffects() {
+      if (!revealTargets.length) return;
+      revealTargets.forEach((node) => node.classList.add("reveal"));
+
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        revealTargets.forEach((node) => node.classList.add("is-visible"));
+        return;
+      }
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.16,
+        rootMargin: "0px 0px -8% 0px"
+      });
+
+      revealTargets.forEach((node) => observer.observe(node));
+    }
+
+    function initParallax() {
+      if (!parallaxLayers.length) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      let ticking = false;
+
+      const render = () => {
+        const y = window.scrollY || window.pageYOffset || 0;
+        parallaxLayers.forEach((layer) => {
+          const speed = Number.parseFloat(layer.dataset.parallax);
+          const delta = Number.isFinite(speed) ? y * speed : 0;
+          layer.style.setProperty("--parallax-y", `${delta.toFixed(2)}px`);
+        });
+        ticking = false;
+      };
+
+      const requestRender = () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(render);
+      };
+
+      window.addEventListener("scroll", requestRender, { passive: true });
+      window.addEventListener("resize", requestRender);
+      render();
+    }
+
+    function initHeroPointerMotion() {
+      if (!hero) return;
+      if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+      hero.addEventListener("pointermove", (event) => {
+        const rect = hero.getBoundingClientRect();
+        if (!rect.width || !rect.height) return;
+        const x = ((event.clientX - rect.left) / rect.width) - 0.5;
+        const y = ((event.clientY - rect.top) / rect.height) - 0.5;
+        hero.style.setProperty("--hero-shift-x", `${(x * 18).toFixed(2)}px`);
+        hero.style.setProperty("--hero-shift-y", `${(y * 14).toFixed(2)}px`);
+      });
+
+      hero.addEventListener("pointerleave", () => {
+        hero.style.setProperty("--hero-shift-x", "0px");
+        hero.style.setProperty("--hero-shift-y", "0px");
+      });
+    }
+
+    function bootstrapMath() {
+      if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
+        typesetMath(document.body);
+        return;
+      }
+
+      let checksRemaining = 60;
+      const intervalId = window.setInterval(() => {
+        checksRemaining -= 1;
+        if (window.MathJax && typeof window.MathJax.typesetPromise === "function") {
+          window.clearInterval(intervalId);
+          typesetMath(document.body);
+        } else if (checksRemaining <= 0) {
+          window.clearInterval(intervalId);
+        }
+      }, 120);
+    }
+
+    function isTypingTarget(target) {
+      if (!target) return false;
+      const tag = target.tagName;
+      return tag === "INPUT" || tag === "TEXTAREA" || target.isContentEditable;
+    }
+
+    document.addEventListener("keydown", (event) => {
+      const key = event.key.toLowerCase();
+      if (document.body.classList.contains("auth-locked")) return;
+      if ((event.metaKey || event.ctrlKey) && key === "k") {
+        event.preventDefault();
+        toggleCommandPalette();
+        return;
+      }
+      if (commandOpen) {
+        if (key === "escape") {
+          event.preventDefault();
+          closeCommandPalette();
+        }
+        return;
+      }
+      if (isTypingTarget(document.activeElement)) return;
+
+      if (key === "n") {
+        event.preventDefault();
+        pickPrompt();
+      } else if (key === "r") {
+        event.preventDefault();
+        revealAnswer();
+      } else if (key === "m") {
+        event.preventDefault();
+        markCurrentMastered();
+      } else if (key === "1") {
+        event.preventDefault();
+        rateCurrent("again");
+      } else if (key === "2") {
+        event.preventDefault();
+        rateCurrent("hard");
+      } else if (key === "3") {
+        event.preventDefault();
+        rateCurrent("good");
+      } else if (key === "4") {
+        event.preventDefault();
+        rateCurrent("easy");
+      } else if (key === "g") {
+        event.preventDefault();
+        generateArenaChallenge();
+      } else if (key === "k") {
+        event.preventDefault();
+        checkArenaAnswer();
+      } else if (key === "v") {
+        event.preventDefault();
+        revealArenaSolution();
+      } else if (key === "/") {
+        event.preventDefault();
+        resourceFilter.focus();
+      }
+    });
+
+    newCardBtn.addEventListener("click", pickPrompt);
+    showAnswerBtn.addEventListener("click", revealAnswer);
+    markMasteredBtn.addEventListener("click", markCurrentMastered);
+    clearMasteredBtn.addEventListener("click", resetDeck);
+    rateAgainBtn.addEventListener("click", () => rateCurrent("again"));
+    rateHardBtn.addEventListener("click", () => rateCurrent("hard"));
+    rateGoodBtn.addEventListener("click", () => rateCurrent("good"));
+    rateEasyBtn.addEventListener("click", () => rateCurrent("easy"));
+    resetChecklistBtn.addEventListener("click", resetChecklist);
+    resourceFilter.addEventListener("input", applyResourceFilter);
+    timerMinutes.addEventListener("change", resetTimerFromInput);
+    startTimerBtn.addEventListener("click", startTimer);
+    pauseTimerBtn.addEventListener("click", pauseTimer);
+    resetTimerBtn.addEventListener("click", resetTimerFromInput);
+    printBtn.addEventListener("click", () => window.print());
+    resetAllBtn.addEventListener("click", resetAllProgress);
+
+    const savedMinutes = safeRead(STORAGE.minutes, 75);
+    timerMinutes.value = String(
+      Number.isFinite(savedMinutes) ? Math.min(240, Math.max(1, savedMinutes)) : 75
+    );
+    resetTimerFromInput();
+    renderChecks();
+    applyResourceFilter();
+    initMarketLab();
+    initArena();
+    initAdminControls();
+    initCommandPalette();
+    initAccessGate();
+    initRevealEffects();
+    initParallax();
+    initHeroPointerMotion();
+    pickPrompt();
+    bootstrapMath();
+    runInternalDiagnostics();
+    showStatus("Interactive mode ready. Shortcuts: N/R/M/1/2/3/4 + G/K/V + Cmd/Ctrl+K.");
+  </script>
+</body>
+</html>
