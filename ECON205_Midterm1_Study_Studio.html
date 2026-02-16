@@ -263,6 +263,17 @@
       text-transform: uppercase;
       font-weight: 700;
     }
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
 
     .auth-message {
       min-height: 1.2em;
@@ -1564,8 +1575,9 @@
       <h2>ECON 205 Access</h2>
       <p>Enter your name to unlock this instructional studio.</p>
       <div class="auth-row">
-        <input id="authNameInput" class="auth-input" type="text" autocomplete="name" placeholder="Name" />
-        <button class="btn btn-primary" id="authUnlockBtn" type="button">Unlock</button>
+        <label class="sr-only" for="authNameInput">Authorized name</label>
+        <input id="authNameInput" class="auth-input" type="text" autocomplete="name" placeholder="Name" aria-label="Authorized name" spellcheck="false" />
+        <button class="btn btn-primary" id="authUnlockBtn" type="button" aria-label="Unlock access">Unlock</button>
       </div>
       <div class="auth-help">Use your authorized course name.</div>
       <div class="auth-message" id="authMessage">Access is name-gated for current enrolled use.</div>
@@ -2339,6 +2351,7 @@
     let filteredCommandItems = [];
     let commandActiveIndex = 0;
     let commandOpen = false;
+    let commandReturnFocus = null;
     let activeAuth = null;
     let authFailedAttempts = 0;
     let authLockedUntil = 0;
@@ -2396,11 +2409,17 @@
       authCooldownId = null;
     }
 
+    function resetAuthThrottle() {
+      authFailedAttempts = 0;
+      authLockedUntil = 0;
+      clearAuthCooldownTimer();
+    }
+
     function setAuthLockedState(locked, message = "") {
       if (authUnlockBtn) authUnlockBtn.disabled = locked;
       if (authNameInput) authNameInput.disabled = locked;
       if (!locked) {
-        clearAuthCooldownTimer();
+        resetAuthThrottle();
         if (message) setAuthMessage(message);
         return;
       }
@@ -2420,16 +2439,18 @@
 
     function isAuthTemporarilyLocked() {
       const now = Date.now();
-      if (authLockedUntil <= now) return false;
+      if (!authLockedUntil) return false;
+      if (authLockedUntil <= now) {
+        resetAuthThrottle();
+        return false;
+      }
       setAuthLockedState(true, `Too many attempts. Try again in ${Math.ceil((authLockedUntil - now) / 1000)}s.`);
       return true;
     }
 
     function lockAccess(message = "Access is name-gated for current enrolled use.") {
       activeAuth = null;
-      authFailedAttempts = 0;
-      authLockedUntil = 0;
-      clearAuthCooldownTimer();
+      resetAuthThrottle();
       document.body.classList.add("auth-locked");
       document.body.dataset.role = "locked";
       if (authGate) authGate.classList.remove("hidden");
@@ -2447,8 +2468,6 @@
 
     function applyAccess(user) {
       activeAuth = user;
-      authFailedAttempts = 0;
-      authLockedUntil = 0;
       setAuthLockedState(false);
       document.body.classList.remove("auth-locked");
       document.body.dataset.role = user.role;
@@ -2465,7 +2484,12 @@
     function unlockByName() {
       if (!authNameInput) return;
       if (isAuthTemporarilyLocked()) return;
-      const user = resolveAuthorizedUser(authNameInput.value);
+      const normalized = normalizeName(authNameInput.value);
+      if (!normalized) {
+        setAuthMessage("Enter your authorized name.", "error");
+        return;
+      }
+      const user = resolveAuthorizedUser(normalized);
       if (!user) {
         authFailedAttempts += 1;
         const remaining = Math.max(0, AUTH_THROTTLE.maxAttempts - authFailedAttempts);
@@ -3812,6 +3836,9 @@
     function openCommandPalette() {
       if (!commandShell || !commandInput) return;
       if (document.body.classList.contains("auth-locked")) return;
+      commandReturnFocus = document.activeElement instanceof HTMLElement
+        ? document.activeElement
+        : null;
       commandOpen = true;
       commandShell.classList.add("open");
       commandShell.setAttribute("aria-hidden", "false");
@@ -3822,9 +3849,18 @@
 
     function closeCommandPalette() {
       if (!commandShell) return;
+      if (!commandOpen && !commandShell.classList.contains("open")) return;
       commandOpen = false;
       commandShell.classList.remove("open");
       commandShell.setAttribute("aria-hidden", "true");
+      const fallbackTarget = commandBtn && document.body.contains(commandBtn) ? commandBtn : null;
+      const focusTarget = commandReturnFocus && document.body.contains(commandReturnFocus)
+        ? commandReturnFocus
+        : fallbackTarget;
+      commandReturnFocus = null;
+      if (focusTarget && typeof focusTarget.focus === "function") {
+        window.setTimeout(() => focusTarget.focus(), 0);
+      }
     }
 
     function toggleCommandPalette() {
