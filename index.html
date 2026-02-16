@@ -315,6 +315,14 @@
       box-shadow: 0 8px 18px rgba(0, 0, 0, 0.14);
     }
 
+    .btn:disabled,
+    .btn:disabled:hover {
+      cursor: not-allowed;
+      opacity: 0.56;
+      box-shadow: none;
+      transform: none;
+    }
+
     .btn-primary {
       color: #fff;
       background: linear-gradient(140deg, var(--usc-cardinal), var(--usc-cardinal-deep));
@@ -833,6 +841,95 @@
       min-height: 2.5em;
     }
 
+    .flash-mode {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .flash-mode-help {
+      font-size: 0.82rem;
+      color: #5f5348;
+      border: 1px solid #e2d2bf;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      line-height: 1.4;
+    }
+
+    .recall-options {
+      display: grid;
+      gap: 8px;
+    }
+
+    .recall-option {
+      border: 1px solid #decab4;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      display: grid;
+      grid-template-columns: auto auto 1fr;
+      align-items: center;
+      gap: 9px;
+      cursor: pointer;
+      transition: transform 0.12s ease, box-shadow 0.12s ease, border-color 0.12s ease;
+    }
+
+    .recall-option:hover {
+      transform: translateY(-1px);
+      border-color: rgba(153, 0, 0, 0.3);
+      box-shadow: 0 8px 16px rgba(44, 27, 15, 0.09);
+    }
+
+    .recall-option input {
+      width: 17px;
+      height: 17px;
+      margin: 0;
+      accent-color: var(--usc-cardinal);
+    }
+
+    .recall-option .choice-key {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.76rem;
+      color: #4e4339;
+      border: 1px solid #ddc8b1;
+      border-radius: 999px;
+      background: #fff9ef;
+      padding: 2px 7px;
+      font-weight: 700;
+      min-width: 28px;
+      text-align: center;
+    }
+
+    .recall-option .choice-text {
+      font-size: 0.86rem;
+      color: #3b2f26;
+      line-height: 1.35;
+    }
+
+    .recall-option.selected {
+      border-color: rgba(153, 0, 0, 0.4);
+      background: linear-gradient(180deg, #fffdf9 0%, #fff6ea 100%);
+    }
+
+    .recall-option.correct {
+      border-color: rgba(20, 124, 74, 0.35);
+      background: linear-gradient(180deg, #f4fff8 0%, #effcf3 100%);
+    }
+
+    .recall-option.wrong {
+      border-color: rgba(155, 18, 18, 0.33);
+      background: linear-gradient(180deg, #fff8f7 0%, #fff2f1 100%);
+    }
+
+    .recall-submit-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
     .flash-actions {
       display: flex;
       gap: 8px;
@@ -866,20 +963,7 @@
       flex-wrap: wrap;
     }
 
-    .self-answer {
-      width: 100%;
-      min-height: 90px;
-      resize: vertical;
-      border: 1px solid #d8c4ad;
-      border-radius: 10px;
-      padding: 10px 12px;
-      font-family: "Sora", system-ui, sans-serif;
-      font-size: 0.9rem;
-      color: #2f2924;
-      background: #fff;
-    }
-
-    .self-answer:focus-visible,
+    .recall-option input:focus-visible,
     .resource-filter-input:focus-visible,
     .timer-minutes:focus-visible,
     .lab-select:focus-visible,
@@ -2566,7 +2650,7 @@
 
     <section class="section" id="recallTrainer">
       <h2>Interactive Recall Trainer</h2>
-      <p class="lead">Run adaptive retrieval rounds with spaced repetition. Keyboard: <code>N</code> next, <code>R</code> reveal, <code>M</code> mark mastered.</p>
+      <p class="lead">Run adaptive retrieval rounds with explicit answer flow: choose an option, click <strong>Submit Answer</strong>, then rate recall quality. No MathTeX typing is required.</p>
       <div class="flash-wrap">
         <div class="flash-head">
           <div class="flash-meta" id="flashMeta">Prompt 1 / 10</div>
@@ -2574,7 +2658,17 @@
         </div>
         <div class="flash-meta" id="flashAdaptiveMeta">Due now: 10 • Recall score: 0%</div>
         <div class="flash-q" id="flashQ">Click “New Prompt” to start.</div>
-        <textarea class="self-answer" id="selfAnswer" placeholder="Type your answer first, then reveal and compare."></textarea>
+        <div class="flash-mode">
+          <div class="flash-meta" id="flashModeMeta">Format: Multiple Choice</div>
+          <div class="flash-meta" id="flashAttemptMeta">Status: Awaiting submission</div>
+        </div>
+        <div class="flash-mode-help" id="flashModeHelp">Select one option below and press <strong>Submit Answer</strong>. Then use Again/Hard/Good/Easy to schedule the next review.</div>
+        <div class="recall-options" id="recallOptions"></div>
+        <div class="recall-submit-row">
+          <button type="button" class="btn btn-primary" id="submitAnswerBtn">Submit Answer</button>
+          <button type="button" class="btn btn-ghost" id="clearAnswerBtn">Clear Selection</button>
+        </div>
+        <div class="arena-feedback" id="recallFeedback">No response submitted yet.</div>
         <div class="flash-a" id="flashA"></div>
         <div class="study-stats">
           <span class="stat-pill">Seen: <span id="seenCount">0</span></span>
@@ -2674,44 +2768,134 @@
   <script>
     const prompts = [
       {
-        q: "Write the spending identity and define each term.",
-        a: "\\(Y = C + I + G + NX\\), where \\(C\\) is consumption, \\(I\\) is investment, \\(G\\) is government purchases, and \\(NX\\) is net exports."
+        id: "spending_identity",
+        q: "Which equation is the expenditure identity for GDP?",
+        choices: [
+          "\\(Y = C + I + G + NX\\)",
+          "\\(Y = C + G + T + M\\)",
+          "\\(Y = W + r + T + NX\\)",
+          "\\(Y = C + I + G - NX\\)"
+        ],
+        correctChoice: 0,
+        guidance: "No formula typing needed. Pick the identity with consumption, investment, government purchases, and net exports.",
+        a: "Correct: \\(Y = C + I + G + NX\\). It decomposes total output into final spending components."
       },
       {
-        q: "How do you compute unemployment rate and labor force?",
-        a: "\\(\\text{LF} = E + U\\) and \\(u = \\frac{U}{\\text{LF}}\\)."
+        id: "unemployment_formula",
+        q: "Which pair correctly defines labor force and unemployment rate?",
+        choices: [
+          "\\(LF = E + U\\), \\(u = \\frac{U}{LF}\\)",
+          "\\(LF = E + U\\), \\(u = \\frac{U}{Population}\\)",
+          "\\(LF = Population - E\\), \\(u = \\frac{E}{LF}\\)",
+          "\\(LF = E\\), \\(u = \\frac{U}{E}\\)"
+        ],
+        correctChoice: 0,
+        guidance: "Focus on denominator discipline: unemployment rate uses labor force, not total population.",
+        a: "Correct: \\(LF = E + U\\) and \\(u = U/LF\\)."
       },
       {
-        q: "A binding price ceiling causes what market outcome and why?",
-        a: "It causes a shortage because at the controlled low price, quantity demanded exceeds quantity supplied."
+        id: "binding_ceiling_outcome",
+        q: "A binding price ceiling (below equilibrium) causes:",
+        choices: [
+          "A surplus because quantity supplied exceeds quantity demanded.",
+          "A shortage because quantity demanded exceeds quantity supplied.",
+          "No market gap because price controls only affect producers.",
+          "Higher equilibrium price and higher equilibrium quantity."
+        ],
+        correctChoice: 1,
+        guidance: "Ceiling below equilibrium pushes price down. At low price, demand rises and supply falls.",
+        a: "Correct: binding ceiling -> shortage, because \\(Q_D > Q_S\\) at the controlled price."
       },
       {
-        q: "What is the midpoint formula for demand elasticity?",
-        a: "\\[\\varepsilon_D = \\frac{\\frac{Q_2 - Q_1}{(Q_2 + Q_1)/2}}{\\frac{P_2 - P_1}{(P_2 + P_1)/2}}\\]"
+        id: "midpoint_elasticity",
+        q: "Which expression is the midpoint formula for demand elasticity?",
+        choices: [
+          "\\(\\varepsilon_D = \\frac{\\Delta Q}{\\Delta P}\\)",
+          "\\(\\varepsilon_D = \\frac{\\frac{Q_2-Q_1}{Q_1}}{\\frac{P_2-P_1}{P_1}}\\)",
+          "\\(\\varepsilon_D = \\frac{\\frac{Q_2-Q_1}{(Q_2+Q_1)/2}}{\\frac{P_2-P_1}{(P_2+P_1)/2}}\\)",
+          "\\(\\varepsilon_D = \\frac{P_2-P_1}{Q_2-Q_1}\\)"
+        ],
+        correctChoice: 2,
+        guidance: "Choose the version using averages in both denominator terms.",
+        a: "Correct midpoint elasticity: \\(\\varepsilon_D = \\frac{\\frac{Q_2-Q_1}{(Q_2+Q_1)/2}}{\\frac{P_2-P_1}{(P_2+P_1)/2}}\\)."
       },
       {
-        q: "Difference between nominal and real GDP in one sentence.",
-        a: "Nominal uses current prices; real uses base-year prices to isolate quantity changes."
+        id: "nominal_real_gdp",
+        q: "What best distinguishes nominal GDP from real GDP?",
+        choices: [
+          "Nominal GDP uses base-year prices; real GDP uses current prices.",
+          "Nominal GDP excludes services; real GDP includes services.",
+          "Nominal GDP uses current prices; real GDP uses base-year prices.",
+          "Nominal GDP is always smaller than real GDP."
+        ],
+        correctChoice: 2,
+        guidance: "Real GDP fixes prices to isolate quantity changes.",
+        a: "Correct: nominal GDP uses current prices, real GDP uses base-year prices."
       },
       {
-        q: "If S = 800 and I = 950, what is NX?",
-        a: "\\(NX = S - I = 800 - 950 = -150\\), so the economy runs a trade deficit."
+        id: "saving_nx_numeric",
+        q: "If national saving \\(S = 800\\) and investment \\(I = 950\\), what is \\(NX\\)?",
+        choices: [
+          "\\(+150\\)",
+          "\\(-150\\)",
+          "\\(+1750\\)",
+          "\\(-1750\\)"
+        ],
+        correctChoice: 1,
+        guidance: "Use \\(NX = S - I\\). Keep the sign.",
+        a: "Correct: \\(NX = S - I = 800 - 950 = -150\\), a trade deficit."
       },
       {
-        q: "For \\(Y = A K^{0.5}L^{0.5}\\), what happens if \\(K\\) and \\(L\\) both double?",
-        a: "\\(Y' = A(2K)^{0.5}(2L)^{0.5} = 2Y\\). Output doubles, so returns to scale are constant."
+        id: "returns_to_scale",
+        q: "For \\(Y = A K^{0.5}L^{0.5}\\), if both \\(K\\) and \\(L\\) double, output:",
+        choices: [
+          "Stays unchanged.",
+          "Increases by 50%.",
+          "Doubles.",
+          "Quadruples."
+        ],
+        correctChoice: 2,
+        guidance: "Exponents sum to 1 -> constant returns to scale.",
+        a: "Correct: output doubles. With constant returns to scale, scaling all inputs by 2 scales output by 2."
       },
       {
-        q: "How does higher real interest typically affect current C and I?",
-        a: "Both tend to decrease: consuming today is costlier and borrowing for investment is costlier."
+        id: "real_rate_effects",
+        q: "Holding other factors fixed, a higher real interest rate usually causes current:",
+        choices: [
+          "Consumption and investment to increase.",
+          "Consumption and investment to decrease.",
+          "Consumption to increase and investment to decrease.",
+          "No change in either consumption or investment."
+        ],
+        correctChoice: 1,
+        guidance: "Higher real rates reward waiting and raise borrowing cost.",
+        a: "Correct: both current consumption and investment tend to decrease when real rates rise."
       },
       {
-        q: "What is the GDP deflator and what does its growth measure?",
-        a: "\\(\\text{GDP Deflator} = \\frac{\\text{Nominal GDP}}{\\text{Real GDP}} \\times 100\\). Its growth rate measures inflation for domestic final output."
+        id: "gdp_deflator_meaning",
+        q: "Which statement about the GDP deflator is correct?",
+        choices: [
+          "It equals CPI by construction in every year.",
+          "It is \\(\\frac{\\text{Nominal GDP}}{\\text{Real GDP}}\\times100\\), and its growth measures inflation in domestic final output.",
+          "It tracks unemployment in the labor force.",
+          "It includes only imported goods."
+        ],
+        correctChoice: 1,
+        guidance: "Remember: deflator is a price index for domestically produced final goods/services.",
+        a: "Correct: \\(\\text{Deflator} = \\frac{Nominal}{Real} \\times 100\\), and its growth rate is GDP inflation."
       },
       {
-        q: "Name the four unemployment types.",
-        a: "Frictional, structural, cyclical, and seasonal."
+        id: "unemployment_types",
+        q: "Which set correctly lists the four unemployment types used in this course?",
+        choices: [
+          "Natural, cyclical, imported, and seasonal",
+          "Frictional, structural, cyclical, and seasonal",
+          "Voluntary, involuntary, nominal, and real",
+          "Structural, demographic, frictional, and monetary"
+        ],
+        correctChoice: 1,
+        guidance: "Memorize this list exactly for concept questions.",
+        a: "Correct set: frictional, structural, cyclical, and seasonal unemployment."
       }
     ];
 
@@ -3077,7 +3261,13 @@
     const seenCount = document.getElementById("seenCount");
     const remainingCount = document.getElementById("remainingCount");
     const recallScore = document.getElementById("recallScore");
-    const selfAnswer = document.getElementById("selfAnswer");
+    const flashModeMeta = document.getElementById("flashModeMeta");
+    const flashAttemptMeta = document.getElementById("flashAttemptMeta");
+    const flashModeHelp = document.getElementById("flashModeHelp");
+    const recallOptions = document.getElementById("recallOptions");
+    const submitAnswerBtn = document.getElementById("submitAnswerBtn");
+    const clearAnswerBtn = document.getElementById("clearAnswerBtn");
+    const recallFeedback = document.getElementById("recallFeedback");
     const heroRecallCount = document.getElementById("heroRecallCount");
     const newCardBtn = document.getElementById("newCardBtn");
     const showAnswerBtn = document.getElementById("showAnswerBtn");
@@ -3214,6 +3404,8 @@
     const questProgressFill = document.getElementById("questProgressFill");
 
     let currentIdx = null;
+    let recallSubmitted = false;
+    let recallLastCorrect = false;
     let timerSeconds = 75 * 60;
     let timerId = null;
 
@@ -3782,19 +3974,97 @@
       updateMissionControl();
     }
 
-    function clearAnswerBox() {
-      if (selfAnswer) selfAnswer.value = "";
+    function choiceKey(index) {
+      return String.fromCharCode(65 + index);
+    }
+
+    function setRecallFeedback(message, tone = "") {
+      if (!recallFeedback) return;
+      recallFeedback.innerHTML = message;
+      recallFeedback.className = `arena-feedback${tone ? ` ${tone}` : ""}`;
+      typesetMath(recallFeedback);
+    }
+
+    function setRatingControlsEnabled(enabled) {
+      [rateAgainBtn, rateHardBtn, rateGoodBtn, rateEasyBtn].forEach((btn) => {
+        if (!btn) return;
+        btn.disabled = !enabled;
+      });
+    }
+
+    function resetRecallSubmissionState() {
+      recallSubmitted = false;
+      recallLastCorrect = false;
+      if (flashAttemptMeta) flashAttemptMeta.textContent = "Status: Awaiting submission";
+      setRatingControlsEnabled(false);
+      setRecallFeedback("No response submitted yet.");
+    }
+
+    function getSelectedRecallChoice() {
+      if (!recallOptions) return null;
+      const selected = recallOptions.querySelector("input[name='recallChoice']:checked");
+      if (!selected) return null;
+      const value = Number.parseInt(selected.value, 10);
+      return Number.isInteger(value) ? value : null;
+    }
+
+    function renderRecallOptions(prompt) {
+      if (!recallOptions) return;
+      recallOptions.innerHTML = "";
+      prompt.choices.forEach((choice, idx) => {
+        const option = document.createElement("label");
+        option.className = "recall-option";
+        option.innerHTML = `
+          <input type="radio" name="recallChoice" value="${idx}" />
+          <span class="choice-key">${choiceKey(idx)}</span>
+          <span class="choice-text">${choice}</span>
+        `;
+        const input = option.querySelector("input");
+        if (input) {
+          input.addEventListener("change", () => {
+            recallOptions.querySelectorAll(".recall-option").forEach((node) => {
+              node.classList.toggle("selected", Boolean(node.querySelector("input:checked")));
+            });
+          });
+        }
+        recallOptions.appendChild(option);
+      });
+      typesetMath(recallOptions);
+    }
+
+    function clearAnswerBox(silent = false) {
+      if (!recallOptions) return;
+      if (recallSubmitted) {
+        setRecallFeedback("Answer already submitted. Use New Prompt to attempt another question.");
+        return;
+      }
+      recallOptions.querySelectorAll("input[name='recallChoice']").forEach((input) => {
+        input.disabled = false;
+        input.checked = false;
+      });
+      recallOptions.querySelectorAll(".recall-option").forEach((row) => {
+        row.classList.remove("selected", "correct", "wrong");
+      });
+      if (!silent && !recallSubmitted) {
+        setRecallFeedback("Selection cleared. Choose one option, then submit.");
+      }
     }
 
     function setCardByIndex(idx) {
       currentIdx = idx;
-      flashQ.innerHTML = prompts[idx].q;
-      flashA.innerHTML = prompts[idx].a;
+      const prompt = prompts[idx];
+      flashQ.innerHTML = prompt.q;
+      flashA.innerHTML = prompt.a;
       flashA.style.display = "none";
-      clearAnswerBox();
+      if (flashModeMeta) flashModeMeta.textContent = "Format: Multiple Choice";
+      if (flashModeHelp) flashModeHelp.innerHTML = prompt.guidance || "Select one option and press Submit Answer.";
+      renderRecallOptions(prompt);
+      resetRecallSubmissionState();
+      clearAnswerBox(true);
       updateFlashStats();
       typesetMath(flashQ);
       typesetMath(flashA);
+      typesetMath(flashModeHelp);
     }
 
     function pickPrompt() {
@@ -3803,7 +4073,12 @@
         flashQ.textContent = "All prompts are marked mastered. Click “Reset Deck” to practice again.";
         flashA.textContent = "";
         flashA.style.display = "none";
-        clearAnswerBox();
+        if (recallOptions) recallOptions.innerHTML = "";
+        if (flashModeMeta) flashModeMeta.textContent = "Format: -";
+        if (flashModeHelp) flashModeHelp.textContent = "Reset the deck to continue.";
+        if (flashAttemptMeta) flashAttemptMeta.textContent = "Status: Deck complete";
+        setRecallFeedback("All prompts mastered in current deck.", "success");
+        setRatingControlsEnabled(false);
         updateFlashStats();
         return;
       }
@@ -3815,11 +4090,55 @@
       setCardByIndex(next);
     }
 
+    function submitRecallAnswer() {
+      if (currentIdx === null) {
+        pickPrompt();
+        return;
+      }
+      const prompt = prompts[currentIdx];
+      const selected = getSelectedRecallChoice();
+      if (selected === null) {
+        setRecallFeedback("Select an option before submitting.", "error");
+        if (flashAttemptMeta) flashAttemptMeta.textContent = "Status: Missing selection";
+        return;
+      }
+
+      const correct = selected === prompt.correctChoice;
+      recallSubmitted = true;
+      recallLastCorrect = correct;
+
+      recallOptions.querySelectorAll(".recall-option").forEach((row, idx) => {
+        row.classList.remove("selected", "correct", "wrong");
+        if (idx === prompt.correctChoice) row.classList.add("correct");
+        if (idx === selected && idx !== prompt.correctChoice) row.classList.add("wrong");
+        const input = row.querySelector("input[name='recallChoice']");
+        if (input) input.disabled = true;
+      });
+
+      if (flashAttemptMeta) {
+        flashAttemptMeta.textContent = correct
+          ? "Status: Submitted • Correct"
+          : "Status: Submitted • Needs review";
+      }
+
+      if (correct) {
+        setRecallFeedback("Correct. Now choose Again/Hard/Good/Easy to schedule the next review.", "success");
+      } else {
+        setRecallFeedback("Not quite. Review the highlighted correct option, then choose a rating for spaced repetition.", "error");
+      }
+      setRatingControlsEnabled(true);
+    }
+
     function revealAnswer() {
       if (currentIdx === null) pickPrompt();
       if (currentIdx !== null) {
         flashA.style.display = "block";
         typesetMath(flashA);
+        if (flashAttemptMeta && !recallSubmitted) {
+          flashAttemptMeta.textContent = "Status: Answer revealed";
+          setRecallFeedback("Answer revealed. Choose Again/Hard/Good/Easy based on how hard this felt.");
+          setRatingControlsEnabled(true);
+        }
       }
     }
 
@@ -3870,6 +4189,11 @@
     function rateCurrent(grade) {
       if (currentIdx === null) {
         showStatus("No active prompt to rate.");
+        return;
+      }
+      const answerRevealed = flashA && flashA.style.display === "block";
+      if (!recallSubmitted && !answerRevealed) {
+        showStatus("Submit an answer (or reveal it) before rating.");
         return;
       }
       applyRating(currentIdx, grade);
@@ -5753,6 +6077,18 @@
           run: () => pickPrompt()
         },
         {
+          title: "Submit Recall Answer",
+          meta: "Action",
+          keywords: "recall submit answer multiple choice",
+          run: () => submitRecallAnswer()
+        },
+        {
+          title: "Clear Recall Selection",
+          meta: "Action",
+          keywords: "recall clear choice",
+          run: () => clearAnswerBox()
+        },
+        {
           title: "Reveal Recall Answer",
           meta: "Action",
           keywords: "recall reveal answer",
@@ -5974,6 +6310,10 @@
         ["commandShell", commandShell],
         ["marketSvg", marketSvg],
         ["arenaPrompt", arenaPrompt],
+        ["flashQ", flashQ],
+        ["recallOptions", recallOptions],
+        ["submitAnswerBtn", submitAnswerBtn],
+        ["recallFeedback", recallFeedback],
         ["intuitionScenarioCards", intuitionScenarioCards],
         ["intuitionVars", intuitionVars],
         ["intuitionFeedback", intuitionFeedback],
@@ -6053,6 +6393,27 @@
           }
         });
       });
+
+      if (!Array.isArray(prompts) || prompts.length < 6) {
+        issues.push("recall-prompts-missing");
+      } else {
+        prompts.forEach((prompt, pIdx) => {
+          if (!prompt || typeof prompt !== "object") {
+            issues.push(`recall-prompt-shape-${pIdx}`);
+            return;
+          }
+          if (!prompt.q || !prompt.a || !Array.isArray(prompt.choices)) {
+            issues.push(`recall-prompt-content-${pIdx}`);
+            return;
+          }
+          if (prompt.choices.length < 2) {
+            issues.push(`recall-prompt-choices-${pIdx}`);
+          }
+          if (!Number.isInteger(prompt.correctChoice) || prompt.correctChoice < 0 || prompt.correctChoice >= prompt.choices.length) {
+            issues.push(`recall-prompt-correct-${pIdx}`);
+          }
+        });
+      }
 
       if (!arenaStats.byType || typeof arenaStats.byType !== "object") {
         issues.push("arena-by-type-missing");
@@ -6380,6 +6741,9 @@
       if (key === "n") {
         event.preventDefault();
         pickPrompt();
+      } else if (key === "s") {
+        event.preventDefault();
+        submitRecallAnswer();
       } else if (key === "r") {
         event.preventDefault();
         revealAnswer();
@@ -6429,6 +6793,8 @@
     });
 
     newCardBtn.addEventListener("click", pickPrompt);
+    submitAnswerBtn.addEventListener("click", submitRecallAnswer);
+    clearAnswerBtn.addEventListener("click", clearAnswerBox);
     showAnswerBtn.addEventListener("click", revealAnswer);
     markMasteredBtn.addEventListener("click", markCurrentMastered);
     clearMasteredBtn.addEventListener("click", resetDeck);
@@ -6466,7 +6832,7 @@
     pickPrompt();
     bootstrapMath();
     runInternalDiagnostics();
-    showStatus("Interactive mode ready. Shortcuts: N/R/M/1/2/3/4 + I/Y/H + Q/X + G/K/V + Cmd/Ctrl+K.");
+    showStatus("Interactive mode ready. Shortcuts: N/S/R/M/1/2/3/4 + I/Y/H + Q/X + G/K/V + Cmd/Ctrl+K.");
   </script>
 </body>
 </html>
