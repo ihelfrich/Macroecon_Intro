@@ -47,6 +47,8 @@ const requiredSnippets = [
   "function lockSessionNow(",
   "function initSessionSecurity(",
   "SESSION_SECURITY",
+  "sessionGuardChip",
+  "function persistIdleMinutesPolicy(",
   "commandReturnFocus"
 ];
 

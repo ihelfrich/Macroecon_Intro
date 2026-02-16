@@ -168,6 +168,16 @@
       display: inline-flex;
       align-items: center;
     }
+    .auth-chip.warn {
+      border-color: rgba(143, 63, 0, 0.34);
+      color: #7a3600;
+      background: #fff7ec;
+    }
+    .auth-chip.danger {
+      border-color: rgba(155, 18, 18, 0.34);
+      color: #7f1010;
+      background: #fff1f1;
+    }
 
     .admin-inline {
       display: none;
@@ -1595,6 +1605,7 @@
       </div>
       <div class="top-actions">
         <span class="auth-chip" id="authBadge">Locked</span>
+        <span class="auth-chip" id="sessionGuardChip">Session Guard: Locked</span>
         <button class="btn btn-ghost" id="commandBtn" type="button">Command</button>
         <button class="btn btn-ghost admin-inline" id="adminDiagnosticsBtn" type="button">Run Diag</button>
         <a class="btn btn-ghost" href="#marketLab">Graph Lab</a>
@@ -1655,6 +1666,14 @@
           <button class="btn btn-ghost" id="adminExportStateBtn" type="button">Export Local State</button>
           <button class="btn btn-ghost" id="adminHardResetBtn" type="button">Hard Reset</button>
         </div>
+        <div class="flash-actions">
+          <label class="timer-label" for="adminIdleMinutes">Idle Lock
+            <input id="adminIdleMinutes" class="timer-minutes" type="number" min="5" max="180" step="1" value="30" />
+          </label>
+          <button class="btn btn-ghost" id="adminSaveIdleBtn" type="button">Save Idle Policy</button>
+          <button class="btn btn-ghost" id="adminLockNowBtn" type="button">Lock Now</button>
+        </div>
+        <div class="flash-meta" id="adminSecurityMeta">Idle lock: 30 minutes.</div>
         <div class="flash-meta" id="adminModeMeta">Admin mode active.</div>
       </div>
     </section>
@@ -2165,7 +2184,8 @@
       marketLab: "econ205_midterm1_market_lab_v1",
       arenaStats: "econ205_midterm1_arena_stats_v1",
       arenaPrefs: "econ205_midterm1_arena_prefs_v1",
-      authSession: "econ205_midterm1_auth_session_v1"
+      authSession: "econ205_midterm1_auth_session_v1",
+      idleMinutes: "econ205_midterm1_idle_minutes_v1"
     };
 
     const AUTH_USERS = {
@@ -2186,7 +2206,9 @@
     };
 
     const SESSION_SECURITY = {
-      idleLockMs: 30 * 60 * 1000,
+      defaultIdleMinutes: 30,
+      minIdleMinutes: 5,
+      maxIdleMinutes: 180,
       warningMs: 60 * 1000,
       pollMs: 1000,
       warningPulseMs: 10000
@@ -2223,6 +2245,7 @@
     const authUnlockBtn = document.getElementById("authUnlockBtn");
     const authMessage = document.getElementById("authMessage");
     const authBadge = document.getElementById("authBadge");
+    const sessionGuardChip = document.getElementById("sessionGuardChip");
     const printBtn = document.getElementById("printBtn");
     const resetAllBtn = document.getElementById("resetAllBtn");
     const switchUserBtn = document.getElementById("switchUserBtn");
@@ -2267,6 +2290,10 @@
     const adminExportStateBtn = document.getElementById("adminExportStateBtn");
     const adminHardResetBtn = document.getElementById("adminHardResetBtn");
     const adminModeMeta = document.getElementById("adminModeMeta");
+    const adminIdleMinutes = document.getElementById("adminIdleMinutes");
+    const adminSaveIdleBtn = document.getElementById("adminSaveIdleBtn");
+    const adminLockNowBtn = document.getElementById("adminLockNowBtn");
+    const adminSecurityMeta = document.getElementById("adminSecurityMeta");
 
     const labDemandShift = document.getElementById("labDemandShift");
     const labSupplyShift = document.getElementById("labSupplyShift");
@@ -2366,6 +2393,7 @@
     let lastActivityTs = Date.now();
     let lastIdleWarningTs = 0;
     let idleMonitorId = null;
+    let sessionIdleMinutes = SESSION_SECURITY.defaultIdleMinutes;
 
     function safeRead(key, fallback) {
       try {
@@ -2413,6 +2441,59 @@
       authMessage.className = `auth-message${tone ? ` ${tone}` : ""}`;
     }
 
+    function sanitizeIdleMinutes(value) {
+      const n = Number.parseInt(value, 10);
+      if (!Number.isFinite(n)) return SESSION_SECURITY.defaultIdleMinutes;
+      return clamp(n, SESSION_SECURITY.minIdleMinutes, SESSION_SECURITY.maxIdleMinutes);
+    }
+
+    function loadIdleMinutesPolicy() {
+      const stored = safeRead(STORAGE.idleMinutes, SESSION_SECURITY.defaultIdleMinutes);
+      sessionIdleMinutes = sanitizeIdleMinutes(stored);
+      if (adminIdleMinutes) adminIdleMinutes.value = String(sessionIdleMinutes);
+    }
+
+    function persistIdleMinutesPolicy(value) {
+      sessionIdleMinutes = sanitizeIdleMinutes(value);
+      safeWrite(STORAGE.idleMinutes, sessionIdleMinutes);
+      if (adminIdleMinutes) adminIdleMinutes.value = String(sessionIdleMinutes);
+    }
+
+    function getIdleLockMs() {
+      return sessionIdleMinutes * 60 * 1000;
+    }
+
+    function formatClock(totalSeconds) {
+      const secs = Math.max(0, totalSeconds | 0);
+      const minutesPart = Math.floor(secs / 60);
+      const secondsPart = secs % 60;
+      return `${String(minutesPart).padStart(2, "0")}:${String(secondsPart).padStart(2, "0")}`;
+    }
+
+    function updateSessionSecurityUI(remainingMs = null) {
+      const policyText = `Idle lock: ${sessionIdleMinutes} minute${sessionIdleMinutes === 1 ? "" : "s"}.`;
+      if (adminSecurityMeta) {
+        adminSecurityMeta.textContent = `${policyText} Warning in final ${Math.round(SESSION_SECURITY.warningMs / 1000)}s.`;
+      }
+      if (!sessionGuardChip) return;
+      if (!activeAuth || document.body.classList.contains("auth-locked")) {
+        sessionGuardChip.textContent = "Session Guard: Locked";
+        sessionGuardChip.classList.remove("warn", "danger");
+        return;
+      }
+      const msLeft = Number.isFinite(remainingMs)
+        ? Math.max(0, remainingMs)
+        : Math.max(0, getIdleLockMs() - (Date.now() - lastActivityTs));
+      const secondsLeft = Math.ceil(msLeft / 1000);
+      sessionGuardChip.textContent = `Auto-lock ${formatClock(secondsLeft)}`;
+      sessionGuardChip.classList.remove("warn", "danger");
+      if (msLeft <= 15000) {
+        sessionGuardChip.classList.add("danger");
+      } else if (msLeft <= SESSION_SECURITY.warningMs) {
+        sessionGuardChip.classList.add("warn");
+      }
+    }
+
     function clearAuthCooldownTimer() {
       if (!authCooldownId) return;
       clearInterval(authCooldownId);
@@ -2433,6 +2514,7 @@
       if (!force && now - lastActivityTs < 600) return;
       lastActivityTs = now;
       clearSessionWarning();
+      updateSessionSecurityUI(getIdleLockMs());
     }
 
     function lockSessionNow(message = "Session locked.") {
@@ -2501,6 +2583,7 @@
       if (adminModeMeta) adminModeMeta.textContent = "Admin mode unavailable.";
       closeCommandPalette();
       setAuthMessage(message);
+      updateSessionSecurityUI();
     }
 
     function applyAccess(user) {
@@ -2518,6 +2601,7 @@
           : "Student mode active.";
       }
       setAuthMessage("");
+      updateSessionSecurityUI(getIdleLockMs());
     }
 
     function unlockByName() {
@@ -2547,6 +2631,7 @@
     }
 
     function initAccessGate() {
+      loadIdleMinutesPolicy();
       const stored = safeRead(STORAGE.authSession, null);
       const mapped = resolveAuthorizedUser(stored && stored.name);
       if (mapped && mapped.role === stored.role) {
@@ -2571,6 +2656,7 @@
           lockSessionNow("Session cleared. Enter an authorized name.");
         });
       }
+      updateSessionSecurityUI();
     }
 
     function initSessionSecurity() {
@@ -2588,16 +2674,22 @@
       if (idleMonitorId) {
         clearInterval(idleMonitorId);
       }
+      updateSessionSecurityUI();
       idleMonitorId = window.setInterval(() => {
-        if (!activeAuth || document.body.classList.contains("auth-locked")) return;
+        if (!activeAuth || document.body.classList.contains("auth-locked")) {
+          updateSessionSecurityUI();
+          return;
+        }
         const now = Date.now();
         const idleMs = now - lastActivityTs;
-        const remainingMs = SESSION_SECURITY.idleLockMs - idleMs;
+        const remainingMs = getIdleLockMs() - idleMs;
 
         if (remainingMs <= 0) {
           lockSessionNow("Session timed out due to inactivity.");
           return;
         }
+
+        updateSessionSecurityUI(remainingMs);
 
         if (remainingMs <= SESSION_SECURITY.warningMs) {
           if (now - lastIdleWarningTs >= SESSION_SECURITY.warningPulseMs) {
@@ -3998,6 +4090,7 @@
         ["authGate", authGate],
         ["authNameInput", authNameInput],
         ["authUnlockBtn", authUnlockBtn],
+        ["sessionGuardChip", sessionGuardChip],
         ["resourceGrid", resourceGrid],
         ["commandShell", commandShell],
         ["marketSvg", marketSvg],
@@ -4015,6 +4108,12 @@
       }
       if (AUTH_THROTTLE.maxAttempts < 3 || AUTH_THROTTLE.lockMs < 5000) {
         issues.push("auth-throttle-unsafe");
+      }
+      if (
+        sessionIdleMinutes < SESSION_SECURITY.minIdleMinutes
+        || sessionIdleMinutes > SESSION_SECURITY.maxIdleMinutes
+      ) {
+        issues.push("session-idle-policy-out-of-range");
       }
 
       for (let i = 0; i < 60; i += 1) {
@@ -4132,6 +4231,21 @@
       if (adminHardResetBtn) {
         adminHardResetBtn.addEventListener("click", resetAllProgress);
       }
+      if (adminSaveIdleBtn) {
+        adminSaveIdleBtn.addEventListener("click", () => {
+          if (!activeAuth || activeAuth.role !== "admin") return;
+          persistIdleMinutesPolicy(adminIdleMinutes ? adminIdleMinutes.value : sessionIdleMinutes);
+          markSessionActivity(true);
+          updateSessionSecurityUI(getIdleLockMs());
+          showStatus(`Idle lock policy saved: ${sessionIdleMinutes} minute${sessionIdleMinutes === 1 ? "" : "s"}.`);
+        });
+      }
+      if (adminLockNowBtn) {
+        adminLockNowBtn.addEventListener("click", () => {
+          if (!activeAuth || activeAuth.role !== "admin") return;
+          lockSessionNow("Session locked by admin.");
+        });
+      }
     }
 
     function resetAllProgress() {
@@ -4146,6 +4260,7 @@
         localStorage.removeItem(STORAGE.marketLab);
         localStorage.removeItem(STORAGE.arenaStats);
         localStorage.removeItem(STORAGE.arenaPrefs);
+        localStorage.removeItem(STORAGE.idleMinutes);
       } catch {
         // Ignore storage failures.
       }
@@ -4168,6 +4283,9 @@
       stopArenaTimer();
       arenaChallenge = null;
       arenaStats = defaultArenaStats();
+      sessionIdleMinutes = SESSION_SECURITY.defaultIdleMinutes;
+      if (adminIdleMinutes) adminIdleMinutes.value = String(sessionIdleMinutes);
+      updateSessionSecurityUI();
       updateArenaStatsUI();
       if (arenaType && arenaDifficulty) {
         arenaType.value = "mixed";
