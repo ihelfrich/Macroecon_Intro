@@ -1770,6 +1770,42 @@
       padding: 6px 10px;
     }
 
+    .macro-action-row {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .macro-action-row .btn {
+      padding: 6px 10px;
+      font-size: 0.76rem;
+      letter-spacing: 0.02em;
+    }
+
+    .macro-action-row .btn[aria-pressed="true"] {
+      border-color: rgba(31, 90, 103, 0.55);
+      background: rgba(31, 90, 103, 0.12);
+      color: #1f5a67;
+    }
+
+    .macro-action-row .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .macro-preset-hint {
+      border: 1px dashed #e0ccb4;
+      border-radius: 10px;
+      background: #fff;
+      padding: 8px 10px;
+      font-size: 0.78rem;
+      color: #5d4f43;
+      line-height: 1.45;
+      min-height: 44px;
+    }
+
     .macro-control-grid {
       display: grid;
       gap: 8px;
@@ -1856,6 +1892,71 @@
       font-size: 0.84rem;
       line-height: 1.46;
       min-height: 92px;
+    }
+
+    .macro-delta-board {
+      border: 1px solid #dfccb5;
+      border-radius: 10px;
+      background: #fff;
+      padding: 9px 10px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .macro-delta-board h3 {
+      margin: 0;
+      font-size: 0.82rem;
+      color: #4c3a2d;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .macro-delta-grid {
+      display: grid;
+      gap: 6px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .macro-delta-item {
+      border: 1px solid #e2d0b9;
+      border-radius: 8px;
+      padding: 6px 8px;
+      background: #fffaf2;
+      display: grid;
+      gap: 3px;
+    }
+
+    .macro-delta-item span {
+      font-size: 0.7rem;
+      color: #6b5d4f;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .macro-delta-item strong {
+      font-family: "JetBrains Mono", monospace;
+      font-size: 0.8rem;
+      color: #3b2e24;
+      line-height: 1.2;
+    }
+
+    .macro-delta-item strong.pos {
+      color: #0f6e3d;
+    }
+
+    .macro-delta-item strong.neg {
+      color: #9d1a1a;
+    }
+
+    .macro-delta-item strong.flat {
+      color: #3b2e24;
+    }
+
+    .macro-delta-summary {
+      font-size: 0.79rem;
+      color: #5b4d41;
+      line-height: 1.45;
     }
 
     .macro-metrics {
@@ -2787,6 +2888,9 @@
       .macro-metrics {
         grid-template-columns: 1fr;
       }
+      .macro-delta-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
       .intuition-tools {
         flex-direction: column;
         align-items: stretch;
@@ -3343,6 +3447,15 @@
             <button type="button" class="btn btn-ghost macro-preset" data-macro-preset="uncertainty_shock">Uncertainty Shock</button>
           </div>
 
+          <div class="macro-action-row">
+            <button type="button" class="btn btn-ghost" id="macroUndoBtn" disabled>Undo</button>
+            <button type="button" class="btn btn-ghost" id="macroRedoBtn" disabled>Redo</button>
+            <button type="button" class="btn btn-ghost" id="macroResetViewBtn">Reset Baseline</button>
+            <button type="button" class="btn btn-ghost" id="macroEffectsBtn" aria-pressed="true">Effects On</button>
+          </div>
+
+          <div class="macro-preset-hint" id="macroPresetHint">Tip: pick a preset, then adjust one slider at a time and use Undo/Redo to compare channels quickly.</div>
+
           <div class="macro-inline-controls">
             <div class="field">
               <label for="macroLayoutMode">Panel layout</label>
@@ -3403,6 +3516,19 @@
           </div>
 
           <div class="macro-narrative" id="macroNarrative">Run a preset or move sliders to see one shock transmit across all connected macro markets.</div>
+
+          <div class="macro-delta-board">
+            <h3>What Changed vs Baseline</h3>
+            <div class="macro-delta-grid">
+              <div class="macro-delta-item"><span>\(\Delta Y\)</span><strong id="macroDeltaY">+0.00</strong></div>
+              <div class="macro-delta-item"><span>\(\Delta P\)</span><strong id="macroDeltaP">+0.00</strong></div>
+              <div class="macro-delta-item"><span>\(\Delta i\)</span><strong id="macroDeltaI">+0.00pp</strong></div>
+              <div class="macro-delta-item"><span>\(\Delta r\)</span><strong id="macroDeltaR">+0.00pp</strong></div>
+              <div class="macro-delta-item"><span>\(\Delta u\)</span><strong id="macroDeltaU">+0.00pp</strong></div>
+              <div class="macro-delta-item"><span>\(\Delta \pi\)</span><strong id="macroDeltaPi">+0.00pp</strong></div>
+            </div>
+            <div class="macro-delta-summary" id="macroDeltaSummary">Changes are small. Use a preset for a stronger transmission pattern.</div>
+          </div>
         </div>
 
         <div class="macro-panel">
@@ -5088,6 +5214,7 @@
       formulaApi: "econ205_midterm1_formula_api_v1",
       marketLab: "econ205_midterm1_market_lab_v1",
       macroLink: "econ205_midterm1_macro_link_v1",
+      macroPrefs: "econ205_midterm1_macro_prefs_v1",
       arenaStats: "econ205_midterm1_arena_stats_v1",
       arenaPrefs: "econ205_midterm1_arena_prefs_v1",
       intuitionState: "econ205_midterm1_intuition_state_v1",
@@ -5250,6 +5377,18 @@
     const macroRateGap = document.getElementById("macroRateGap");
     const macroRegimeTag = document.getElementById("macroRegimeTag");
     const macroNarrative = document.getElementById("macroNarrative");
+    const macroPresetHint = document.getElementById("macroPresetHint");
+    const macroUndoBtn = document.getElementById("macroUndoBtn");
+    const macroRedoBtn = document.getElementById("macroRedoBtn");
+    const macroResetViewBtn = document.getElementById("macroResetViewBtn");
+    const macroEffectsBtn = document.getElementById("macroEffectsBtn");
+    const macroDeltaY = document.getElementById("macroDeltaY");
+    const macroDeltaP = document.getElementById("macroDeltaP");
+    const macroDeltaI = document.getElementById("macroDeltaI");
+    const macroDeltaR = document.getElementById("macroDeltaR");
+    const macroDeltaU = document.getElementById("macroDeltaU");
+    const macroDeltaPi = document.getElementById("macroDeltaPi");
+    const macroDeltaSummary = document.getElementById("macroDeltaSummary");
     const macroChartGrid = document.getElementById("macroChartGrid");
     const macroParticleCanvas = document.getElementById("macroParticleCanvas");
     const macroChartCards = [...document.querySelectorAll(".macro-chart-card")];
@@ -5471,6 +5610,17 @@
       emphasisThreshold: 20
     };
 
+    const MACRO_PRESET_HINTS = {
+      reset: "Reset to baseline equilibrium and clear all discretionary shifts.",
+      monetary_easing: "Expands liquidity and AD: watch nominal rates, output gap, and inflation move together.",
+      fiscal_expansion: "Boosts AD through public demand: compare crowding-out pressure in loanable funds.",
+      productivity_boom: "Supply-side improvement: stronger output with lower inflation pressure.",
+      stagflation_shock: "Negative SRAS shock: weaker output with higher inflation risk.",
+      uncertainty_shock: "Risk-off private sector response: weaker demand and investment with precautionary saving."
+    };
+
+    const MACRO_HISTORY_LIMIT = 120;
+
     let macroLinkState = { ...MACRO_LINK_DEFAULT_STATE };
     let macroLastInputState = { ...MACRO_LINK_DEFAULT_STATE };
     let macroRenderedState = null;
@@ -5480,6 +5630,9 @@
     let macroParticles = [];
     let macroParticleFrame = null;
     let macroParticleLastTs = 0;
+    let macroUseEffects = true;
+    let macroUndoStack = [];
+    let macroRedoStack = [];
 
     const ARENA_TYPES = ["gdp", "deflator", "labor", "saving", "real_rate", "elasticity"];
     const ARENA_TYPE_LABELS = {
@@ -7543,6 +7696,170 @@
       safeWrite(STORAGE.macroLink, macroLinkState);
     }
 
+    function sanitizeMacroPrefs(raw) {
+      if (!raw || typeof raw !== "object") {
+        return { effects: true };
+      }
+      return {
+        effects: raw.effects !== false
+      };
+    }
+
+    function persistMacroPrefs() {
+      safeWrite(STORAGE.macroPrefs, { effects: macroUseEffects });
+    }
+
+    function macroScenarioAtBaseline(state) {
+      const safe = sanitizeMacroLinkState(state);
+      return MACRO_INPUT_NUMERIC_KEYS.every((key) => {
+        const current = Number(safe[key]) || 0;
+        const base = Number(MACRO_LINK_DEFAULT_STATE[key]) || 0;
+        return Math.abs(current - base) < 0.00001;
+      });
+    }
+
+    function macroStatesEqual(a, b) {
+      const one = sanitizeMacroLinkState(a);
+      const two = sanitizeMacroLinkState(b);
+      return (
+        one.demandShift === two.demandShift
+        && one.supplyShift === two.supplyShift
+        && one.moneySupplyShift === two.moneySupplyShift
+        && one.moneyDemandShift === two.moneyDemandShift
+        && one.savingShift === two.savingShift
+        && one.investmentShift === two.investmentShift
+        && one.expectedInflation === two.expectedInflation
+        && one.layoutMode === two.layoutMode
+        && one.pairMode === two.pairMode
+      );
+    }
+
+    function updateMacroActionButtons() {
+      if (macroUndoBtn) macroUndoBtn.disabled = !macroUndoStack.length;
+      if (macroRedoBtn) macroRedoBtn.disabled = !macroRedoStack.length;
+      if (macroEffectsBtn) {
+        macroEffectsBtn.textContent = macroUseEffects ? "Effects On" : "Effects Off";
+        macroEffectsBtn.setAttribute("aria-pressed", macroUseEffects ? "true" : "false");
+      }
+    }
+
+    function setMacroPresetHint(presetName = "", customMessage = "") {
+      if (!macroPresetHint) return;
+      if (customMessage) {
+        macroPresetHint.textContent = customMessage;
+        return;
+      }
+      if (presetName && MACRO_PRESET_HINTS[presetName]) {
+        macroPresetHint.textContent = MACRO_PRESET_HINTS[presetName];
+        return;
+      }
+      macroPresetHint.textContent = "Custom mix active. Move one slider at a time, then use Undo/Redo to isolate transmission channels.";
+    }
+
+    function pushMacroHistory(previousInput, nextInput) {
+      const prev = sanitizeMacroLinkState(previousInput);
+      const next = sanitizeMacroLinkState(nextInput);
+      if (macroStatesEqual(prev, next)) return;
+      macroUndoStack.push(prev);
+      if (macroUndoStack.length > MACRO_HISTORY_LIMIT) {
+        macroUndoStack.shift();
+      }
+      macroRedoStack = [];
+      updateMacroActionButtons();
+    }
+
+    function applyMacroStateFromHistory(targetState, actionLabel) {
+      macroLinkState = sanitizeMacroLinkState(targetState);
+      writeMacroLinkStateToControls();
+      updateMacroLinkStudio(false, {
+        animate: true,
+        burst: false,
+        skipHistory: true,
+        fromHistory: true
+      });
+      showStatus(actionLabel);
+    }
+
+    function undoMacroChange() {
+      if (!macroUndoStack.length) return;
+      const current = sanitizeMacroLinkState(macroLinkState);
+      const previous = macroUndoStack.pop();
+      macroRedoStack.push(current);
+      if (macroRedoStack.length > MACRO_HISTORY_LIMIT) {
+        macroRedoStack.shift();
+      }
+      updateMacroActionButtons();
+      applyMacroStateFromHistory(previous, "Macro studio: undo applied.");
+    }
+
+    function redoMacroChange() {
+      if (!macroRedoStack.length) return;
+      const current = sanitizeMacroLinkState(macroLinkState);
+      const next = macroRedoStack.pop();
+      macroUndoStack.push(current);
+      if (macroUndoStack.length > MACRO_HISTORY_LIMIT) {
+        macroUndoStack.shift();
+      }
+      updateMacroActionButtons();
+      applyMacroStateFromHistory(next, "Macro studio: redo applied.");
+    }
+
+    function formatMacroDelta(value, digits = 2, suffix = "") {
+      const safe = Number.isFinite(value) ? value : 0;
+      const rounded = Number(safe.toFixed(digits));
+      const prefix = rounded > 0 ? "+" : "";
+      return `${prefix}${rounded.toFixed(digits)}${suffix}`;
+    }
+
+    function setMacroDeltaNode(node, value, digits = 2, suffix = "") {
+      if (!node) return;
+      const safe = Number.isFinite(value) ? value : 0;
+      node.textContent = formatMacroDelta(safe, digits, suffix);
+      node.classList.remove("pos", "neg", "flat");
+      if (Math.abs(safe) < 0.005) {
+        node.classList.add("flat");
+      } else if (safe > 0) {
+        node.classList.add("pos");
+      } else {
+        node.classList.add("neg");
+      }
+    }
+
+    function buildMacroDeltaSummary(state) {
+      const moves = [
+        { label: "output", value: state.current.yEq - state.baseline.yEq },
+        { label: "price level", value: state.current.pEq - state.baseline.pEq },
+        { label: "nominal rate", value: state.current.iEq - state.baseline.iEq },
+        { label: "real rate", value: state.current.rEq - state.baseline.rEq },
+        { label: "unemployment", value: state.current.unemployment - state.baseline.unemployment },
+        { label: "inflation", value: state.current.piActual - state.baseline.piActual }
+      ].sort((a, b) => Math.abs(b.value) - Math.abs(a.value));
+      const strongest = moves[0];
+      const second = moves[1];
+      if (!strongest || Math.abs(strongest.value) < 0.2) {
+        return "Minimal movement from baseline. Increase at least one shift to visualize transmission clearly.";
+      }
+      const strongestDir = strongest.value > 0 ? "up" : "down";
+      const secondDir = second && second.value > 0 ? "up" : "down";
+      if (!second || Math.abs(second.value) < 0.2) {
+        return `Largest movement: ${strongest.label} moved ${strongestDir}. Keep other sliders fixed to isolate this channel.`;
+      }
+      return `Largest movements: ${strongest.label} (${strongestDir}) and ${second.label} (${secondDir}). Compare AD-AS with Money and Loanable panels for consistency.`;
+    }
+
+    function renderMacroDeltaBoard(state) {
+      setMacroDeltaNode(macroDeltaY, state.current.yEq - state.baseline.yEq, 2);
+      setMacroDeltaNode(macroDeltaP, state.current.pEq - state.baseline.pEq, 2);
+      setMacroDeltaNode(macroDeltaI, state.current.iEq - state.baseline.iEq, 2, "pp");
+      setMacroDeltaNode(macroDeltaR, state.current.rEq - state.baseline.rEq, 2, "pp");
+      setMacroDeltaNode(macroDeltaU, state.current.unemployment - state.baseline.unemployment, 2, "pp");
+      setMacroDeltaNode(macroDeltaPi, state.current.piActual - state.baseline.piActual, 2, "pp");
+      if (macroDeltaSummary) {
+        macroDeltaSummary.textContent = buildMacroDeltaSummary(state);
+      }
+      typesetMath(macroDeltaSummary);
+    }
+
     function macroMotionReduced() {
       return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     }
@@ -7679,7 +7996,7 @@
     }
 
     function spawnMacroParticles(fromState, toState, intensity = 0) {
-      if (!macroParticleCanvas || macroMotionReduced() || intensity < MACRO_ANIMATION.particleThreshold) return;
+      if (!macroUseEffects || !macroParticleCanvas || macroMotionReduced() || intensity < MACRO_ANIMATION.particleThreshold) return;
       resizeMacroParticleCanvas();
       if (!macroParticleCtx) return;
 
@@ -7727,7 +8044,7 @@
     }
 
     function flashMacroShiftCards(intensity = 0) {
-      if (!macroChartCards.length || macroMotionReduced() || intensity < MACRO_ANIMATION.particleThreshold) return;
+      if (!macroUseEffects || !macroChartCards.length || macroMotionReduced() || intensity < MACRO_ANIMATION.particleThreshold) return;
       macroChartCards.forEach((card) => {
         if (!card.classList.contains("hidden")) {
           card.classList.add("shift-active");
@@ -8176,6 +8493,7 @@
       renderMacroLoanable(state);
       renderMacroPhillips(state);
       renderMacroMetrics(state);
+      renderMacroDeltaBoard(state);
       if (macroNarrative) {
         macroNarrative.textContent = buildMacroNarrative(state);
       }
@@ -8185,9 +8503,13 @@
       const animate = options.animate !== false;
       const shockMagnitude = Number.isFinite(options.shockMagnitude) ? options.shockMagnitude : 0;
       const burst = options.burst === true || shockMagnitude >= MACRO_ANIMATION.emphasisThreshold;
-      const canAnimate = animate && !macroMotionReduced() && !!macroRenderedState;
+      const effectsEnabled = macroUseEffects && !macroMotionReduced();
+      const canAnimate = animate && effectsEnabled && !!macroRenderedState;
 
       cancelMacroTransitionAnimation();
+      if (!effectsEnabled) {
+        stopMacroParticleLoop(true);
+      }
 
       if (!canAnimate) {
         macroRenderedState = nextState;
@@ -8219,12 +8541,12 @@
         macroTransitionFrame = window.requestAnimationFrame(draw);
       }
 
-      if (shockMagnitude >= MACRO_ANIMATION.particleThreshold) {
+      if (effectsEnabled && shockMagnitude >= MACRO_ANIMATION.particleThreshold) {
         flashMacroShiftCards(shockMagnitude);
       }
-      if (burst) {
+      if (effectsEnabled && burst) {
         spawnMacroParticles(macroRenderedState || nextState, nextState, Math.max(shockMagnitude, MACRO_ANIMATION.emphasisThreshold));
-      } else {
+      } else if (effectsEnabled) {
         spawnMacroParticles(macroRenderedState || nextState, nextState, shockMagnitude);
       }
     }
@@ -8241,8 +8563,19 @@
       persistMacroLinkState();
 
       const nextInput = { ...macroLinkState };
+      if (!options.skipHistory) {
+        pushMacroHistory(prevInput, nextInput);
+      }
+      if (options.presetName) {
+        setMacroPresetHint(options.presetName);
+      } else if (macroScenarioAtBaseline(nextInput)) {
+        setMacroPresetHint("reset");
+      } else if (readControls || options.fromHistory) {
+        setMacroPresetHint("", "Custom mix active. Move one slider, observe deltas, then use Undo/Redo to isolate channels.");
+      }
       const shockMagnitude = macroInputDeltaMagnitude(prevInput, nextInput);
       macroLastInputState = nextInput;
+      updateMacroActionButtons();
       const state = computeMacroLinkState(nextInput);
       animateMacroScene(state, {
         animate: options.animate !== false,
@@ -8298,7 +8631,11 @@
       }
       macroLinkState = sanitizeMacroLinkState(next);
       writeMacroLinkStateToControls();
-      updateMacroLinkStudio(false, { animate: true, burst: true });
+      updateMacroLinkStudio(false, {
+        animate: true,
+        burst: true,
+        presetName: name
+      });
       showStatus("Macro transmission preset applied.");
     }
 
@@ -8320,11 +8657,21 @@
       }
 
       macroLinkState = sanitizeMacroLinkState(safeRead(STORAGE.macroLink, null));
+      const macroPrefs = sanitizeMacroPrefs(safeRead(STORAGE.macroPrefs, null));
+      macroUseEffects = macroPrefs.effects;
       macroLastInputState = { ...macroLinkState };
+      macroUndoStack = [];
+      macroRedoStack = [];
       writeMacroLinkStateToControls();
       resizeMacroParticleCanvas();
       stopMacroParticleLoop(true);
       window.addEventListener("resize", resizeMacroParticleCanvas);
+      updateMacroActionButtons();
+      if (macroScenarioAtBaseline(macroLinkState)) {
+        setMacroPresetHint("reset");
+      } else {
+        setMacroPresetHint("", "Custom mix active. Move one slider, observe deltas, then use Undo/Redo to isolate channels.");
+      }
 
       [
         macroDemandShift,
@@ -8339,12 +8686,41 @@
       macroLayoutMode.addEventListener("change", () => updateMacroLinkStudio(true, { animate: false }));
       macroPairMode.addEventListener("change", () => updateMacroLinkStudio(true, { animate: false }));
       macroPresetBtns.forEach((btn) => {
+        const presetKey = btn.dataset.macroPreset || "";
+        if (presetKey && MACRO_PRESET_HINTS[presetKey]) {
+          btn.title = MACRO_PRESET_HINTS[presetKey];
+        }
         btn.addEventListener("click", () => {
-          applyMacroPreset(btn.dataset.macroPreset || "reset");
+          applyMacroPreset(presetKey || "reset");
         });
       });
+      if (macroUndoBtn) {
+        macroUndoBtn.addEventListener("click", undoMacroChange);
+      }
+      if (macroRedoBtn) {
+        macroRedoBtn.addEventListener("click", redoMacroChange);
+      }
+      if (macroResetViewBtn) {
+        macroResetViewBtn.addEventListener("click", () => applyMacroPreset("reset"));
+      }
+      if (macroEffectsBtn) {
+        macroEffectsBtn.addEventListener("click", () => {
+          macroUseEffects = !macroUseEffects;
+          persistMacroPrefs();
+          if (!macroUseEffects) {
+            stopMacroParticleLoop(true);
+          }
+          updateMacroActionButtons();
+          updateMacroLinkStudio(false, {
+            animate: false,
+            burst: false,
+            skipHistory: true
+          });
+          showStatus(macroUseEffects ? "Macro visual effects enabled." : "Macro visual effects disabled.");
+        });
+      }
 
-      updateMacroLinkStudio(false, { animate: false });
+      updateMacroLinkStudio(false, { animate: false, skipHistory: true });
     }
 
     function sanitizeArenaStats(raw) {
@@ -10186,6 +10562,35 @@
           run: () => applyMacroPreset("stagflation_shock")
         },
         {
+          title: "Macro Studio: Undo Last Change",
+          meta: "Action",
+          keywords: "macro undo previous state",
+          run: () => undoMacroChange()
+        },
+        {
+          title: "Macro Studio: Redo Change",
+          meta: "Action",
+          keywords: "macro redo next state",
+          run: () => redoMacroChange()
+        },
+        {
+          title: "Macro Studio: Toggle Effects",
+          meta: "Action",
+          keywords: "macro particles animation effects toggle",
+          run: () => {
+            macroUseEffects = !macroUseEffects;
+            persistMacroPrefs();
+            if (!macroUseEffects) stopMacroParticleLoop(true);
+            updateMacroActionButtons();
+            updateMacroLinkStudio(false, {
+              animate: false,
+              burst: false,
+              skipHistory: true
+            });
+            showStatus(macroUseEffects ? "Macro visual effects enabled." : "Macro visual effects disabled.");
+          }
+        },
+        {
           title: "Focus Resource Filter",
           meta: "Action",
           keywords: "resources filter search",
@@ -10348,6 +10753,12 @@
         ["macroDemandShift", macroDemandShift],
         ["macroExpectedInflation", macroExpectedInflation],
         ["macroNarrative", macroNarrative],
+        ["macroPresetHint", macroPresetHint],
+        ["macroUndoBtn", macroUndoBtn],
+        ["macroRedoBtn", macroRedoBtn],
+        ["macroEffectsBtn", macroEffectsBtn],
+        ["macroDeltaY", macroDeltaY],
+        ["macroDeltaSummary", macroDeltaSummary],
         ["macroAdPath", macroAdPath],
         ["macroMoneyDemand", macroMoneyDemand],
         ["macroLfSupply", macroLfSupply],
@@ -10683,6 +11094,7 @@
           },
           marketLab: safeRead(STORAGE.marketLab, null),
           macroLink: safeRead(STORAGE.macroLink, null),
+          macroPrefs: safeRead(STORAGE.macroPrefs, null),
           arenaStats: safeRead(STORAGE.arenaStats, null),
           arenaPrefs: safeRead(STORAGE.arenaPrefs, null),
           intuitionState: safeRead(STORAGE.intuitionState, null),
@@ -10750,6 +11162,7 @@
         localStorage.removeItem(STORAGE.formulaApi);
         localStorage.removeItem(STORAGE.marketLab);
         localStorage.removeItem(STORAGE.macroLink);
+        localStorage.removeItem(STORAGE.macroPrefs);
         localStorage.removeItem(STORAGE.arenaStats);
         localStorage.removeItem(STORAGE.arenaPrefs);
         localStorage.removeItem(STORAGE.intuitionState);
@@ -10775,7 +11188,12 @@
         updateMarketLab();
       }
       macroLinkState = { ...MACRO_LINK_DEFAULT_STATE };
-      updateMacroLinkStudio(false, { animate: false, burst: false });
+      macroLastInputState = { ...MACRO_LINK_DEFAULT_STATE };
+      macroUndoStack = [];
+      macroRedoStack = [];
+      macroUseEffects = true;
+      updateMacroActionButtons();
+      updateMacroLinkStudio(false, { animate: false, burst: false, skipHistory: true });
       stopMacroParticleLoop(true);
       resetFormulaLabState(false, true);
       stopArenaTimer();
